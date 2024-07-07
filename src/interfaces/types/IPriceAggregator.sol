@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {IUniswapV3Pool} from "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
+import {LinkTokenInterface} from "src/libraries/LinkTokenInterface.sol";
 
 import "./ITradingStorage.sol";
 import "../IChainlinkFeed.sol";
