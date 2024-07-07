@@ -2,7 +2,6 @@
 pragma solidity 0.8.23;
 
 /**
- * @custom:version 8
  * @dev Contains the types for the GNSPriceImpact facet
  */
 interface IPriceImpact {
@@ -10,7 +9,8 @@ interface IPriceImpact {
         OiWindowsSettings oiWindowsSettings;
         mapping(uint48 => mapping(uint256 => mapping(uint256 => PairOi))) windows; // duration => pairIndex => windowId => Oi
         mapping(uint256 => PairDepth) pairDepths; // pairIndex => depth (USD)
-        uint256[47] __gap;
+        mapping(address => mapping(uint32 => TradePriceImpactInfo)) tradePriceImpactInfos;
+        uint256[46] __gap;
     }
 
     struct OiWindowsSettings {
@@ -25,6 +25,8 @@ interface IPriceImpact {
     }
 
     struct OiWindowUpdate {
+        address trader;
+        uint32 index;
         uint48 windowsDuration;
         uint256 pairIndex;
         uint256 windowId;
@@ -35,5 +37,10 @@ interface IPriceImpact {
     struct PairDepth {
         uint128 onePercentDepthAboveUsd; // USD
         uint128 onePercentDepthBelowUsd; // USD
+    }
+
+    struct TradePriceImpactInfo {
+        uint128 lastWindowOiUsd; // 1e18 USD
+        uint128 __placeholder;
     }
 }

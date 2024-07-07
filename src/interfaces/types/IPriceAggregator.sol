@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.23;
 
-import {IUniswapV3Pool} from "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import {LinkTokenInterface} from "src/libraries/LinkTokenInterface.sol";
+import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol";
 
 import "./ITradingStorage.sol";
 import "../IChainlinkFeed.sol";
+import "../ILiquidityPool.sol";
 
 /**
- * @custom:version 8
  * @dev Contains the types for the GNSPriceAggregator facet
  */
 interface IPriceAggregator {
@@ -20,7 +19,7 @@ interface IPriceAggregator {
         bytes32[2] jobIds; // 64 bits
         // slot 2, 3, 4, 5, 6
         address[] oracles;
-        mapping(uint8 => UniV3PoolInfo) collateralGnsUniV3Pools;
+        mapping(uint8 => LiquidityPoolInfo) collateralGnsLiquidityPools;
         mapping(uint8 => IChainlinkFeed) collateralUsdPriceFeed;
         mapping(bytes32 => Order) orders;
         mapping(address => mapping(uint32 => OrderAnswer[])) orderAnswers;
@@ -32,10 +31,11 @@ interface IPriceAggregator {
         uint256[41] __gap;
     }
 
-    struct UniV3PoolInfo {
-        IUniswapV3Pool pool; // 160 bits
+    struct LiquidityPoolInfo {
+        ILiquidityPool pool; // 160 bits
         bool isGnsToken0InLp; // 8 bits
-        uint88 __placeholder; // 88 bits
+        PoolType poolType; // 8 bits
+        uint80 __placeholder; // 80 bits
     }
 
     struct Order {
@@ -52,5 +52,15 @@ interface IPriceAggregator {
         uint64 high;
         uint64 low;
         uint64 ts;
+    }
+
+    struct LiquidityPoolInput {
+        ILiquidityPool pool;
+        PoolType poolType;
+    }
+
+    enum PoolType {
+        UNISWAP_V3,
+        ALGEBRA_v1_9
     }
 }

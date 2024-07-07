@@ -23,15 +23,19 @@ interface ITradingStorage {
         uint256[39] __gap;
     }
 
-    enum PendingOrderType {
+     enum PendingOrderType {
         MARKET_OPEN,
         MARKET_CLOSE,
         LIMIT_OPEN,
         STOP_OPEN,
         TP_CLOSE,
         SL_CLOSE,
-        LIQ_CLOSE
+        LIQ_CLOSE,
+        UPDATE_LEVERAGE,
+        MARKET_PARTIAL_OPEN,
+        MARKET_PARTIAL_CLOSE
     }
+
 
     enum CounterType {
         TRADE,
