@@ -108,15 +108,16 @@ interface ITradingCallbacksUtils is
      * @param amountSentToTrader the final amount of collateral sent to the trader
      * @param collateralPriceUsd the price of the collateral in USD (1e8 precision)
      */
-    event MarketExecuted(
+    // 1e8
+    event MarketExecuted( // before fees
         ITradingStorage.Id orderId,
         ITradingStorage.Trade t,
         bool open,
         uint64 price,
         uint256 priceImpactP,
-        int256 percentProfit, // before fees
+        int256 percentProfit,
         uint256 amountSentToTrader,
-        uint256 collateralPriceUsd // 1e8
+        uint256 collateralPriceUsd
     );
 
     /**
@@ -132,7 +133,7 @@ interface ITradingCallbacksUtils is
      * @param collateralPriceUsd the price of the collateral in USD (1e8 precision)
      * @param exactExecution true if guaranteed execution was used
      */
-    event LimitExecuted(
+    event LimitExecuted( // 1e8
         ITradingStorage.Id orderId,
         ITradingStorage.Trade t,
         address indexed triggerCaller,
@@ -141,7 +142,7 @@ interface ITradingCallbacksUtils is
         uint256 priceImpactP,
         int256 percentProfit,
         uint256 amountSentToTrader,
-        uint256 collateralPriceUsd, // 1e8
+        uint256 collateralPriceUsd,
         bool exactExecution
     );
 
@@ -153,10 +154,7 @@ interface ITradingCallbacksUtils is
      * @param cancelReason reason for the cancelation
      */
     event MarketOpenCanceled(
-        ITradingStorage.Id orderId,
-        address indexed trader,
-        uint256 indexed pairIndex,
-        CancelReason cancelReason
+        ITradingStorage.Id orderId, address indexed trader, uint256 indexed pairIndex, CancelReason cancelReason
     );
 
     /**

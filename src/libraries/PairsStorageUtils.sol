@@ -225,9 +225,11 @@ library PairsStorageUtils {
     /**
      * @dev Check IPairsStorageUtils interface for documentation
      */
-    function pairsBackend(
-        uint256 _index
-    ) internal view returns (IPairsStorage.Pair memory, IPairsStorage.Group memory, IPairsStorage.Fee memory) {
+    function pairsBackend(uint256 _index)
+        internal
+        view
+        returns (IPairsStorage.Pair memory, IPairsStorage.Group memory, IPairsStorage.Fee memory)
+    {
         IPairsStorage.Pair memory p = pairs(_index);
         return (p, PairsStorageUtils.groups(p.groupIndex), PairsStorageUtils.fees(p.feeIndex));
     }
@@ -303,9 +305,8 @@ library PairsStorageUtils {
      */
     modifier groupOk(IPairsStorage.Group calldata _group) {
         if (
-            _group.minLeverage < MIN_LEVERAGE ||
-            _group.maxLeverage > MAX_LEVERAGE ||
-            _group.minLeverage >= _group.maxLeverage
+            _group.minLeverage < MIN_LEVERAGE || _group.maxLeverage > MAX_LEVERAGE
+                || _group.minLeverage >= _group.maxLeverage
         ) revert IPairsStorageUtils.WrongLeverages();
         _;
     }
@@ -316,11 +317,8 @@ library PairsStorageUtils {
      */
     modifier feeOk(IPairsStorage.Fee calldata _fee) {
         if (
-            _fee.openFeeP == 0 ||
-            _fee.closeFeeP == 0 ||
-            _fee.oracleFeeP == 0 ||
-            _fee.triggerOrderFeeP == 0 ||
-            _fee.minPositionSizeUsd == 0
+            _fee.openFeeP == 0 || _fee.closeFeeP == 0 || _fee.oracleFeeP == 0 || _fee.triggerOrderFeeP == 0
+                || _fee.minPositionSizeUsd == 0
         ) revert IPairsStorageUtils.WrongFees();
         _;
     }
@@ -329,9 +327,11 @@ library PairsStorageUtils {
      * @dev Adds a new trading pair
      * @param _pair pair to add
      */
-    function _addPair(
-        IPairsStorage.Pair calldata _pair
-    ) internal groupListed(_pair.groupIndex) feeListed(_pair.feeIndex) {
+    function _addPair(IPairsStorage.Pair calldata _pair)
+        internal
+        groupListed(_pair.groupIndex)
+        feeListed(_pair.feeIndex)
+    {
         IPairsStorage.PairsStorage storage s = _getStorage();
         if (s.isPairListed[_pair.from][_pair.to]) revert IPairsStorageUtils.PairAlreadyListed();
 
@@ -346,10 +346,11 @@ library PairsStorageUtils {
      * @param _pairIndex index of pair to update
      * @param _pair new pair value
      */
-    function _updatePair(
-        uint256 _pairIndex,
-        IPairsStorage.Pair calldata _pair
-    ) internal groupListed(_pair.groupIndex) feeListed(_pair.feeIndex) {
+    function _updatePair(uint256 _pairIndex, IPairsStorage.Pair calldata _pair)
+        internal
+        groupListed(_pair.groupIndex)
+        feeListed(_pair.feeIndex)
+    {
         IPairsStorage.PairsStorage storage s = _getStorage();
 
         IPairsStorage.Pair storage p = s.pairs[_pairIndex];

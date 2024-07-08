@@ -27,63 +27,54 @@ library IncreasePositionSizeUtils {
         IUpdatePositionSizeUtils.IncreasePositionSizeInput memory _input
     ) internal view returns (uint256 positionSizeCollateralDelta) {
         // 1. Zero values checks
-        if (_input.leverageDelta == 0 || _input.expectedPrice == 0 || _input.maxSlippageP == 0)
+        if (_input.leverageDelta == 0 || _input.expectedPrice == 0 || _input.maxSlippageP == 0) {
             revert IUpdatePositionSizeUtils.InvalidIncreasePositionSizeInput();
+        }
 
         // 2. Revert if new leverage is below min leverage or above max leverage
         bool isLeverageUpdate = _input.collateralDelta == 0;
         {
-            uint24 leverageToValidate = isLeverageUpdate
-                ? _trade.leverage + _input.leverageDelta
-                : _input.leverageDelta;
+            uint24 leverageToValidate = isLeverageUpdate ? _trade.leverage + _input.leverageDelta : _input.leverageDelta;
             if (
-                leverageToValidate > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3 ||
-                leverageToValidate < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
+                leverageToValidate > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3
+                    || leverageToValidate < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
             ) revert ITradingInteractionsUtils.WrongLeverage();
         }
 
         // 3. Make sure new position size is bigger than existing one after paying borrowing and opening fees
         positionSizeCollateralDelta = TradingCommonUtils.getPositionSizeCollateral(
-            isLeverageUpdate ? _trade.collateralAmount : _input.collateralDelta,
-            _input.leverageDelta
+            isLeverageUpdate ? _trade.collateralAmount : _input.collateralDelta, _input.leverageDelta
         );
-        uint256 existingPositionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(
-            _trade.collateralAmount,
-            _trade.leverage
-        );
+        uint256 existingPositionSizeCollateral =
+            TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
         uint256 newCollateralAmount = _trade.collateralAmount + _input.collateralDelta;
         uint256 newLeverage = isLeverageUpdate
             ? _trade.leverage + _input.leverageDelta
             : ((existingPositionSizeCollateral + positionSizeCollateralDelta) * 1e3) / newCollateralAmount;
         {
             uint256 borrowingFeeCollateral = TradingCommonUtils.getTradeBorrowingFeeCollateral(_trade);
-            uint256 openingFeesCollateral = ((_getMultiCollatDiamond().pairOpenFeeP(_trade.pairIndex) *
-                2 +
-                _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) *
-                TradingCommonUtils.getPositionSizeCollateralBasis(
-                    _trade.collateralIndex,
-                    _trade.pairIndex,
-                    positionSizeCollateralDelta
-                )) /
-                ConstantsUtils.P_10 /
-                100;
+            uint256 openingFeesCollateral = (
+                (
+                    _getMultiCollatDiamond().pairOpenFeeP(_trade.pairIndex) * 2
+                        + _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)
+                )
+                    * TradingCommonUtils.getPositionSizeCollateralBasis(
+                        _trade.collateralIndex, _trade.pairIndex, positionSizeCollateralDelta
+                    )
+            ) / ConstantsUtils.P_10 / 100;
 
-            uint256 newPositionSizeCollateral = existingPositionSizeCollateral +
-                positionSizeCollateralDelta -
-                ((borrowingFeeCollateral + openingFeesCollateral) * newLeverage) /
-                1e3;
+            uint256 newPositionSizeCollateral = existingPositionSizeCollateral + positionSizeCollateralDelta
+                - ((borrowingFeeCollateral + openingFeesCollateral) * newLeverage) / 1e3;
 
-            if (newPositionSizeCollateral <= existingPositionSizeCollateral)
+            if (newPositionSizeCollateral <= existingPositionSizeCollateral) {
                 revert IUpdatePositionSizeUtils.NewPositionSizeSmaller();
+            }
         }
 
         // 4. Make sure trade stays within exposure limits
         if (
             !TradingCommonUtils.isWithinExposureLimits(
-                _trade.collateralIndex,
-                _trade.pairIndex,
-                _trade.long,
-                positionSizeCollateralDelta
+                _trade.collateralIndex, _trade.pairIndex, _trade.long, positionSizeCollateralDelta
             )
         ) revert ITradingInteractionsUtils.AboveExposureLimits();
     }
@@ -103,13 +94,10 @@ library IncreasePositionSizeUtils {
 
         // 1. Calculate position size values
         values.positionSizeCollateralDelta = TradingCommonUtils.getPositionSizeCollateral(
-            isLeverageUpdate ? _existingTrade.collateralAmount : _partialTrade.collateralAmount,
-            _partialTrade.leverage
+            isLeverageUpdate ? _existingTrade.collateralAmount : _partialTrade.collateralAmount, _partialTrade.leverage
         );
-        values.existingPositionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(
-            _existingTrade.collateralAmount,
-            _existingTrade.leverage
-        );
+        values.existingPositionSizeCollateral =
+            TradingCommonUtils.getPositionSizeCollateral(_existingTrade.collateralAmount, _existingTrade.leverage);
         values.newPositionSizeCollateral = values.existingPositionSizeCollateral + values.positionSizeCollateralDelta;
 
         // 2. Calculate new collateral amount and leverage
@@ -124,21 +112,16 @@ library IncreasePositionSizeUtils {
             _existingTrade.pairIndex,
             _existingTrade.long,
             _getMultiCollatDiamond().getUsdNormalizedValue(
-                _existingTrade.collateralIndex,
-                values.positionSizeCollateralDelta
+                _existingTrade.collateralIndex, values.positionSizeCollateralDelta
             )
         );
 
         // 4. Calculate existing trade pnl
-        values.existingPnlCollateral =
-            (TradingCommonUtils.getPnlPercent(
-                _existingTrade.openPrice,
-                _answer.price,
-                _existingTrade.long,
-                _existingTrade.leverage
-            ) * int256(uint256(_existingTrade.collateralAmount))) /
-            100 /
-            int256(ConstantsUtils.P_10);
+        values.existingPnlCollateral = (
+            TradingCommonUtils.getPnlPercent(
+                _existingTrade.openPrice, _answer.price, _existingTrade.long, _existingTrade.leverage
+            ) * int256(uint256(_existingTrade.collateralAmount))
+        ) / 100 / int256(ConstantsUtils.P_10);
 
         // 5. Calculate existing trade borrowing fee
         values.borrowingFeeCollateral = TradingCommonUtils.getTradeBorrowingFeeCollateral(_existingTrade);
@@ -147,24 +130,19 @@ library IncreasePositionSizeUtils {
 
         // 6.1 Apply fee tiers
         uint256 pairOpenFeeP = _getMultiCollatDiamond().calculateFeeAmount(
-            _existingTrade.user,
-            _getMultiCollatDiamond().pairOpenFeeP(_existingTrade.pairIndex)
+            _existingTrade.user, _getMultiCollatDiamond().pairOpenFeeP(_existingTrade.pairIndex)
         );
         uint256 pairTriggerFeeP = _getMultiCollatDiamond().calculateFeeAmount(
-            _existingTrade.user,
-            _getMultiCollatDiamond().pairTriggerOrderFeeP(_existingTrade.pairIndex)
+            _existingTrade.user, _getMultiCollatDiamond().pairTriggerOrderFeeP(_existingTrade.pairIndex)
         );
 
         // 6.2 Calculate opening fees on on max(positionSizeCollateralDelta, minPositionSizeCollateral)
-        values.openingFeesCollateral =
-            ((pairOpenFeeP * 2 + pairTriggerFeeP) *
-                TradingCommonUtils.getPositionSizeCollateralBasis(
-                    _existingTrade.collateralIndex,
-                    _existingTrade.pairIndex,
-                    values.positionSizeCollateralDelta
-                )) /
-            100 /
-            ConstantsUtils.P_10;
+        values.openingFeesCollateral = (
+            (pairOpenFeeP * 2 + pairTriggerFeeP)
+                * TradingCommonUtils.getPositionSizeCollateralBasis(
+                    _existingTrade.collateralIndex, _existingTrade.pairIndex, values.positionSizeCollateralDelta
+                )
+        ) / 100 / ConstantsUtils.P_10;
 
         // 7. Charge opening fees and borrowing fees on new trade collateral amount
         values.newCollateralAmount -= values.borrowingFeeCollateral + values.openingFeesCollateral;
@@ -177,12 +155,10 @@ library IncreasePositionSizeUtils {
             ? values.existingPositionSizeCollateral - uint256(values.existingPnlCollateral * -1)
             : values.existingPositionSizeCollateral + uint256(values.existingPnlCollateral);
 
-        values.newOpenPrice =
-            (positionSizePlusPnlCollateral *
-                uint256(_existingTrade.openPrice) +
-                values.positionSizeCollateralDelta *
-                values.priceAfterImpact) /
-            (positionSizePlusPnlCollateral + values.positionSizeCollateralDelta);
+        values.newOpenPrice = (
+            positionSizePlusPnlCollateral * uint256(_existingTrade.openPrice)
+                + values.positionSizeCollateralDelta * values.priceAfterImpact
+        ) / (positionSizePlusPnlCollateral + values.positionSizeCollateralDelta);
 
         // 8. Calculate existing and new liq price
         values.existingLiqPrice = TradingCommonUtils.getTradeLiquidationPrice(_existingTrade, true);
@@ -223,28 +199,28 @@ library IncreasePositionSizeUtils {
                 : _values.priceAfterImpact < _expectedPrice - maxSlippage
         )
             ? ITradingCallbacks.CancelReason.SLIPPAGE // 1. Check price after impact is within slippage limits
-            : _existingTrade.tp > 0 &&
-                (_existingTrade.long ? _answer.price >= _existingTrade.tp : _answer.price <= _existingTrade.tp)
-            ? ITradingCallbacks.CancelReason.TP_REACHED // 2. Check TP has not been reached
-            : _existingTrade.sl > 0 &&
-                (_existingTrade.long ? _answer.price <= _existingTrade.sl : _answer.price >= _existingTrade.sl)
-            ? ITradingCallbacks.CancelReason.SL_REACHED // 3. Check SL has not been reached
-            : (
-                _existingTrade.long
-                    ? (_answer.price <= _values.existingLiqPrice || _answer.price <= _values.newLiqPrice)
-                    : (_answer.price >= _values.existingLiqPrice || _answer.price >= _values.newLiqPrice)
-            )
-            ? ITradingCallbacks.CancelReason.LIQ_REACHED // 4. Check current and new LIQ price not reached
-            : !TradingCommonUtils.isWithinExposureLimits(
-                _existingTrade.collateralIndex,
-                _existingTrade.pairIndex,
-                _existingTrade.long,
-                _values.positionSizeCollateralDelta
-            )
-            ? ITradingCallbacks.CancelReason.EXPOSURE_LIMITS // 5. Check trade still within exposure limits
-            : _values.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(_existingTrade.pairIndex) * 1e3
-            ? ITradingCallbacks.CancelReason.MAX_LEVERAGE
-            : ITradingCallbacks.CancelReason.NONE;
+            : _existingTrade.tp > 0
+                && (_existingTrade.long ? _answer.price >= _existingTrade.tp : _answer.price <= _existingTrade.tp)
+                ? ITradingCallbacks.CancelReason.TP_REACHED // 2. Check TP has not been reached
+                : _existingTrade.sl > 0
+                    && (_existingTrade.long ? _answer.price <= _existingTrade.sl : _answer.price >= _existingTrade.sl)
+                    ? ITradingCallbacks.CancelReason.SL_REACHED // 3. Check SL has not been reached
+                    : (
+                        _existingTrade.long
+                            ? (_answer.price <= _values.existingLiqPrice || _answer.price <= _values.newLiqPrice)
+                            : (_answer.price >= _values.existingLiqPrice || _answer.price >= _values.newLiqPrice)
+                    )
+                        ? ITradingCallbacks.CancelReason.LIQ_REACHED // 4. Check current and new LIQ price not reached
+                        : !TradingCommonUtils.isWithinExposureLimits(
+                            _existingTrade.collateralIndex,
+                            _existingTrade.pairIndex,
+                            _existingTrade.long,
+                            _values.positionSizeCollateralDelta
+                        )
+                            ? ITradingCallbacks.CancelReason.EXPOSURE_LIMITS // 5. Check trade still within exposure limits
+                            : _values.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(_existingTrade.pairIndex) * 1e3
+                                ? ITradingCallbacks.CancelReason.MAX_LEVERAGE
+                                : ITradingCallbacks.CancelReason.NONE;
     }
 
     /**
@@ -301,8 +277,7 @@ library IncreasePositionSizeUtils {
                 _existingTrade.user,
                 _existingTrade.pairIndex,
                 TradingCommonUtils.getMinPositionSizeCollateral(
-                    _existingTrade.collateralIndex,
-                    _existingTrade.pairIndex
+                    _existingTrade.collateralIndex, _existingTrade.pairIndex
                 ) / 2, // use min fee / 2
                 0
             );
@@ -316,9 +291,7 @@ library IncreasePositionSizeUtils {
 
         // 2. Send back partial collateral to trader
         TradingCommonUtils.transferCollateralTo(
-            _existingTrade.collateralIndex,
-            _existingTrade.user,
-            _partialTrade.collateralAmount
+            _existingTrade.collateralIndex, _existingTrade.user, _partialTrade.collateralAmount
         );
     }
 

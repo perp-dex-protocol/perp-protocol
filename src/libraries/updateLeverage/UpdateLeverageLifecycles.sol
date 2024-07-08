@@ -26,12 +26,7 @@ library UpdateLeverageLifecycles {
         ITradingStorage.Id memory orderId = _initiateRequest(trade, _input.newLeverage, collateralDelta);
 
         emit IUpdateLeverageUtils.LeverageUpdateInitiated(
-            orderId,
-            _input.user,
-            trade.pairIndex,
-            _input.index,
-            isIncrease,
-            _input.newLeverage
+            orderId, _input.user, trade.pairIndex, _input.index, isIncrease, _input.newLeverage
         );
     }
 
@@ -46,26 +41,18 @@ library UpdateLeverageLifecycles {
     ) external {
         // 1. Prepare values
         ITradingStorage.Trade memory pendingTrade = _order.trade;
-        ITradingStorage.Trade memory existingTrade = _getMultiCollatDiamond().getTrade(
-            pendingTrade.user,
-            pendingTrade.index
-        );
+        ITradingStorage.Trade memory existingTrade =
+            _getMultiCollatDiamond().getTrade(pendingTrade.user, pendingTrade.index);
         bool isIncrease = pendingTrade.leverage > existingTrade.leverage;
 
         // 2. Refresh trader fee tier cache
         TradingCommonUtils.updateFeeTierPoints(
-            existingTrade.collateralIndex,
-            existingTrade.user,
-            existingTrade.pairIndex,
-            0
+            existingTrade.collateralIndex, existingTrade.user, existingTrade.pairIndex, 0
         );
 
         // 3. Prepare useful values
-        IUpdateLeverageUtils.UpdateLeverageValues memory values = _prepareCallbackValues(
-            existingTrade,
-            pendingTrade,
-            isIncrease
-        );
+        IUpdateLeverageUtils.UpdateLeverageValues memory values =
+            _prepareCallbackValues(existingTrade, pendingTrade, isIncrease);
 
         // 4. Callback validation
         ITradingCallbacks.CancelReason cancelReason = _validateCallback(existingTrade, values, _answer);
@@ -113,11 +100,11 @@ library UpdateLeverageLifecycles {
      * @param _existingLeverage existing trade leverage (1e3)
      * @param _newLeverage new trade leverage (1e3)
      */
-    function _getNewCollateralAmount(
-        uint256 _existingCollateralAmount,
-        uint256 _existingLeverage,
-        uint256 _newLeverage
-    ) internal pure returns (uint120) {
+    function _getNewCollateralAmount(uint256 _existingCollateralAmount, uint256 _existingLeverage, uint256 _newLeverage)
+        internal
+        pure
+        returns (uint120)
+    {
         return uint120((_existingCollateralAmount * _existingLeverage) / _newLeverage);
     }
 
@@ -125,9 +112,11 @@ library UpdateLeverageLifecycles {
      * @dev Fetches trade, does validation for update leverage request, and returns useful data
      * @param _input request input struct
      */
-    function _validateRequest(
-        IUpdateLeverageUtils.UpdateLeverageInput memory _input
-    ) internal view returns (ITradingStorage.Trade memory trade, bool isIncrease, uint256 collateralDelta) {
+    function _validateRequest(IUpdateLeverageUtils.UpdateLeverageInput memory _input)
+        internal
+        view
+        returns (ITradingStorage.Trade memory trade, bool isIncrease, uint256 collateralDelta)
+    {
         trade = _getMultiCollatDiamond().getTrade(_input.user, _input.index);
         isIncrease = _input.newLeverage > trade.leverage;
 
@@ -138,17 +127,18 @@ library UpdateLeverageLifecycles {
         TradingCommonUtils.revertIfTradeHasPendingMarketOrder(_input.user, _input.index);
 
         // 3. Revert if collateral not active
-        if (!_getMultiCollatDiamond().isCollateralActive(trade.collateralIndex))
+        if (!_getMultiCollatDiamond().isCollateralActive(trade.collateralIndex)) {
             revert IGeneralErrors.InvalidCollateralIndex();
+        }
 
         // 4. Validate leverage update
         if (
-            _input.newLeverage == trade.leverage ||
-            (
-                isIncrease
-                    ? _input.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(trade.pairIndex) * 1e3
-                    : _input.newLeverage < _getMultiCollatDiamond().pairMinLeverage(trade.pairIndex) * 1e3
-            )
+            _input.newLeverage == trade.leverage
+                || (
+                    isIncrease
+                        ? _input.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(trade.pairIndex) * 1e3
+                        : _input.newLeverage < _getMultiCollatDiamond().pairMinLeverage(trade.pairIndex) * 1e3
+                )
         ) revert ITradingInteractionsUtils.WrongLeverage();
 
         // 5. Check trade remaining collateral is enough to pay gov fee
@@ -157,14 +147,10 @@ library UpdateLeverageLifecycles {
             trade.pairIndex,
             TradingCommonUtils.getMinPositionSizeCollateral(trade.collateralIndex, trade.pairIndex) / 2
         );
-        uint256 newCollateralAmount = _getNewCollateralAmount(
-            trade.collateralAmount,
-            trade.leverage,
-            _input.newLeverage
-        );
-        collateralDelta = isIncrease
-            ? trade.collateralAmount - newCollateralAmount
-            : newCollateralAmount - trade.collateralAmount;
+        uint256 newCollateralAmount =
+            _getNewCollateralAmount(trade.collateralAmount, trade.leverage, _input.newLeverage);
+        collateralDelta =
+            isIncrease ? trade.collateralAmount - newCollateralAmount : newCollateralAmount - trade.collateralAmount;
 
         if (newCollateralAmount <= govFeeCollateral) revert ITradingInteractionsUtils.InsufficientCollateral();
     }
@@ -175,11 +161,10 @@ library UpdateLeverageLifecycles {
      * @param _newLeverage new leverage (1e3)
      * @param _collateralDelta trade collateral delta (collateral precision)
      */
-    function _initiateRequest(
-        ITradingStorage.Trade memory _trade,
-        uint24 _newLeverage,
-        uint256 _collateralDelta
-    ) internal returns (ITradingStorage.Id memory orderId) {
+    function _initiateRequest(ITradingStorage.Trade memory _trade, uint24 _newLeverage, uint256 _collateralDelta)
+        internal
+        returns (ITradingStorage.Id memory orderId)
+    {
         // 1. Store pending order
         ITradingStorage.Trade memory pendingOrderTrade;
         pendingOrderTrade.user = _trade.user;
@@ -223,16 +208,14 @@ library UpdateLeverageLifecycles {
         values.govFeeCollateral = TradingCommonUtils.getGovFeeCollateral(
             _existingTrade.user,
             _existingTrade.pairIndex,
-            TradingCommonUtils.getMinPositionSizeCollateral(_existingTrade.collateralIndex, _existingTrade.pairIndex) /
-                2 // use min fee / 2
+            TradingCommonUtils.getMinPositionSizeCollateral(_existingTrade.collateralIndex, _existingTrade.pairIndex)
+                / 2 // use min fee / 2
         );
-        values.newCollateralAmount =
-            (
-                _isIncrease
-                    ? _existingTrade.collateralAmount - _pendingTrade.collateralAmount
-                    : _existingTrade.collateralAmount + _pendingTrade.collateralAmount
-            ) -
-            values.govFeeCollateral;
+        values.newCollateralAmount = (
+            _isIncrease
+                ? _existingTrade.collateralAmount - _pendingTrade.collateralAmount
+                : _existingTrade.collateralAmount + _pendingTrade.collateralAmount
+        ) - values.govFeeCollateral;
         values.liqPrice = _getMultiCollatDiamond().getTradeLiquidationPrice(
             IBorrowingFees.LiqPriceInput(
                 _existingTrade.collateralIndex,
@@ -259,14 +242,15 @@ library UpdateLeverageLifecycles {
         IUpdateLeverage.UpdateLeverageValues memory _values,
         ITradingCallbacks.AggregatorAnswer memory _answer
     ) internal view returns (ITradingCallbacks.CancelReason) {
-        return
-            !_existingTrade.isOpen ? ITradingCallbacks.CancelReason.NO_TRADE : _answer.price == 0
+        return !_existingTrade.isOpen
+            ? ITradingCallbacks.CancelReason.NO_TRADE
+            : _answer.price == 0
                 ? ITradingCallbacks.CancelReason.MARKET_CLOSED
                 : (_existingTrade.long ? _answer.price <= _values.liqPrice : _answer.price >= _values.liqPrice)
-                ? ITradingCallbacks.CancelReason.LIQ_REACHED
-                : _values.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(_existingTrade.pairIndex) * 1e3
-                ? ITradingCallbacks.CancelReason.MAX_LEVERAGE
-                : ITradingCallbacks.CancelReason.NONE;
+                    ? ITradingCallbacks.CancelReason.LIQ_REACHED
+                    : _values.newLeverage > _getMultiCollatDiamond().pairMaxLeverage(_existingTrade.pairIndex) * 1e3
+                        ? ITradingCallbacks.CancelReason.MAX_LEVERAGE
+                        : ITradingCallbacks.CancelReason.NONE;
     }
 
     /**
@@ -296,12 +280,11 @@ library UpdateLeverageLifecycles {
             );
 
             // 1.2 If leverage increase, transfer collateral delta to trader
-            if (_isIncrease)
+            if (_isIncrease) {
                 TradingCommonUtils.transferCollateralTo(
-                    _trade.collateralIndex,
-                    _trade.user,
-                    _pendingTrade.collateralAmount
+                    _trade.collateralIndex, _trade.user, _pendingTrade.collateralAmount
                 );
+            }
         } else {
             // 2. Request canceled
             // 2.1 Remove gov fee from trade collateral
@@ -310,12 +293,11 @@ library UpdateLeverageLifecycles {
                 _trade.collateralAmount - uint120(_values.govFeeCollateral)
             );
             // 2.2 If leverage decrease, send back collateral delta to trader
-            if (!_isIncrease)
+            if (!_isIncrease) {
                 TradingCommonUtils.transferCollateralTo(
-                    _trade.collateralIndex,
-                    _trade.user,
-                    _pendingTrade.collateralAmount
+                    _trade.collateralIndex, _trade.user, _pendingTrade.collateralAmount
                 );
+            }
         }
     }
 }

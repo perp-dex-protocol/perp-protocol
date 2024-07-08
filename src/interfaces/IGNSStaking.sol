@@ -56,11 +56,7 @@ interface IGNSStaking {
 
     event RewardHarvested(address indexed staker, address indexed token, uint128 amountToken);
     event RewardHarvestedFromUnlock(
-        address indexed staker,
-        address indexed token,
-        bool isOldDai,
-        uint256[] ids,
-        uint128 amountToken
+        address indexed staker, address indexed token, bool isOldDai, uint256[] ids, uint128 amountToken
     );
     event RewardDistributed(address indexed token, uint256 amount);
 

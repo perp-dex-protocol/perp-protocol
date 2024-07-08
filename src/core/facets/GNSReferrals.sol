@@ -63,7 +63,10 @@ contract GNSReferrals is GNSAddressStore, IReferralsUtils {
     }
 
     /// @inheritdoc IReferralsUtils
-    function whitelistReferrers(address[] calldata _referrers, address[] calldata _allies) external onlyRole(Role.GOV) {
+    function whitelistReferrers(address[] calldata _referrers, address[] calldata _allies)
+        external
+        onlyRole(Role.GOV)
+    {
         ReferralsUtils.whitelistReferrers(_referrers, _allies);
     }
 
@@ -80,12 +83,12 @@ contract GNSReferrals is GNSAddressStore, IReferralsUtils {
     }
 
     /// @inheritdoc IReferralsUtils
-    function distributeReferralReward(
-        address _trader,
-        uint256 _volumeUsd,
-        uint256 _pairOpenFeeP,
-        uint256 _gnsPriceUsd
-    ) external virtual onlySelf returns (uint256) {
+    function distributeReferralReward(address _trader, uint256 _volumeUsd, uint256 _pairOpenFeeP, uint256 _gnsPriceUsd)
+        external
+        virtual
+        onlySelf
+        returns (uint256)
+    {
         return ReferralsUtils.distributeReferralReward(_trader, _volumeUsd, _pairOpenFeeP, _gnsPriceUsd);
     }
 

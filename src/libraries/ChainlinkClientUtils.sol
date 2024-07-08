@@ -52,11 +52,11 @@ library ChainlinkClientUtils {
      * @param callbackFunctionSignature function signature to use for the callback
      * @return A Chainlink Request struct in memory
      */
-    function buildChainlinkRequest(
-        bytes32 specId,
-        address callbackAddr,
-        bytes4 callbackFunctionSignature
-    ) internal pure returns (Chainlink.Request memory) {
+    function buildChainlinkRequest(bytes32 specId, address callbackAddr, bytes4 callbackFunctionSignature)
+        internal
+        pure
+        returns (Chainlink.Request memory)
+    {
         Chainlink.Request memory req;
         return req.initialize(specId, callbackAddr, callbackFunctionSignature);
     }
@@ -71,11 +71,10 @@ library ChainlinkClientUtils {
      * @param payment The amount of LINK to send for the request
      * @return requestId The request ID
      */
-    function sendChainlinkRequestTo(
-        address oracleAddress,
-        Chainlink.Request memory req,
-        uint256 payment
-    ) internal returns (bytes32 requestId) {
+    function sendChainlinkRequestTo(address oracleAddress, Chainlink.Request memory req, uint256 payment)
+        internal
+        returns (bytes32 requestId)
+    {
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
         uint256 nonce = s.requestCount;
         s.requestCount = nonce + 1;
@@ -101,18 +100,17 @@ library ChainlinkClientUtils {
      * @param encodedRequest data encoded for request type specific format
      * @return requestId The request ID
      */
-    function _rawRequest(
-        address oracleAddress,
-        uint256 nonce,
-        uint256 payment,
-        bytes memory encodedRequest
-    ) private returns (bytes32 requestId) {
+    function _rawRequest(address oracleAddress, uint256 nonce, uint256 payment, bytes memory encodedRequest)
+        private
+        returns (bytes32 requestId)
+    {
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
         requestId = keccak256(abi.encodePacked(this, nonce));
         s.pendingRequests[requestId] = oracleAddress;
         emit ChainlinkRequested(requestId);
-        if (!s.linkErc677.transferAndCall(oracleAddress, payment, encodedRequest))
+        if (!s.linkErc677.transferAndCall(oracleAddress, payment, encodedRequest)) {
             revert IPriceAggregatorUtils.TransferAndCallToOracleFailed();
+        }
     }
 
     /**
@@ -129,9 +127,7 @@ library ChainlinkClientUtils {
      * @dev Use if the contract developer prefers methods instead of modifiers for validation
      * @param requestId The request ID for fulfillment
      */
-    function validateChainlinkCallback(
-        bytes32 requestId
-    )
+    function validateChainlinkCallback(bytes32 requestId)
         internal
         recordChainlinkFulfillment(requestId) // solhint-disable-next-line no-empty-blocks
     {}

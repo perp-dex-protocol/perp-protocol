@@ -12,7 +12,8 @@ interface IPairsStorage {
         mapping(uint256 => Fee) fees;
         mapping(string => mapping(string => bool)) isPairListed;
         mapping(uint256 => uint256) pairCustomMaxLeverage; // 0 decimal precision
-        uint256 currentOrderId; /// @custom:deprecated
+        uint256 currentOrderId;
+        /// @custom:deprecated
         uint256 pairsCount;
         uint256 groupsCount;
         uint256 feesCount;
@@ -23,18 +24,22 @@ interface IPairsStorage {
         DEFAULT,
         INVERT,
         COMBINE
-    } /// @custom:deprecated
+    }
+    /// @custom:deprecated
+
     struct Feed {
         address feed1;
         address feed2;
         FeedCalculation feedCalculation;
         uint256 maxDeviationP;
-    } /// @custom:deprecated
+    }
+    /// @custom:deprecated
 
     struct Pair {
         string from;
         string to;
-        Feed feed; /// @custom:deprecated
+        Feed feed;
+        /// @custom:deprecated
         uint256 spreadP; // PRECISION
         uint256 groupIndex;
         uint256 feeIndex;
@@ -46,6 +51,7 @@ interface IPairsStorage {
         uint256 minLeverage; // 0 decimal precision
         uint256 maxLeverage; // 0 decimal precision
     }
+
     struct Fee {
         string name;
         uint256 openFeeP; // PRECISION (% of position size)

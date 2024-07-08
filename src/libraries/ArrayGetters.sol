@@ -6,7 +6,6 @@ import "./TradingStorageUtils.sol";
 /**
  * @dev External library for array getters to save bytecode size in facet libraries
  */
-
 library ArrayGetters {
     /**
      * @dev Check ITradingStorageUtils interface for documentation
@@ -25,8 +24,8 @@ library ArrayGetters {
         for (uint32 i = _offset; i <= _limit; ++i) {
             address trader = s.traders[i];
             if (
-                s.userCounters[trader][ITradingStorage.CounterType.TRADE].openCount > 0 ||
-                s.userCounters[trader][ITradingStorage.CounterType.PENDING_ORDER].openCount > 0
+                s.userCounters[trader][ITradingStorage.CounterType.TRADE].openCount > 0
+                    || s.userCounters[trader][ITradingStorage.CounterType.PENDING_ORDER].openCount > 0
             ) {
                 traders[currentIndex++] = trader;
             }
@@ -103,10 +102,11 @@ library ArrayGetters {
     /**
      * @dev Check ITradingStorageUtils interface for documentation
      */
-    function getAllTradeInfos(
-        uint256 _offset,
-        uint256 _limit
-    ) external view returns (ITradingStorage.TradeInfo[] memory) {
+    function getAllTradeInfos(uint256 _offset, uint256 _limit)
+        external
+        view
+        returns (ITradingStorage.TradeInfo[] memory)
+    {
         // Fetch all traders with open trades (no pagination, return size is not an issue here)
         address[] memory traders = getTraders(0, 0);
 
@@ -136,12 +136,10 @@ library ArrayGetters {
      */
     function getPendingOrders(address _trader) public view returns (ITradingStorage.PendingOrder[] memory) {
         ITradingStorage.TradingStorage storage s = TradingStorageUtils._getStorage();
-        ITradingStorage.Counter memory traderCounter = s.userCounters[_trader][
-            ITradingStorage.CounterType.PENDING_ORDER
-        ];
-        ITradingStorage.PendingOrder[] memory pendingOrders = new ITradingStorage.PendingOrder[](
-            traderCounter.openCount
-        );
+        ITradingStorage.Counter memory traderCounter =
+            s.userCounters[_trader][ITradingStorage.CounterType.PENDING_ORDER];
+        ITradingStorage.PendingOrder[] memory pendingOrders =
+            new ITradingStorage.PendingOrder[](traderCounter.openCount);
 
         uint32 currentIndex;
         for (uint32 i; i < traderCounter.currentIndex; ++i) {
@@ -156,10 +154,11 @@ library ArrayGetters {
     /**
      * @dev Check ITradingStorageUtils interface for documentation
      */
-    function getAllPendingOrders(
-        uint256 _offset,
-        uint256 _limit
-    ) external view returns (ITradingStorage.PendingOrder[] memory) {
+    function getAllPendingOrders(uint256 _offset, uint256 _limit)
+        external
+        view
+        returns (ITradingStorage.PendingOrder[] memory)
+    {
         // Fetch all traders with open trades (no pagination, return size is not an issue here)
         address[] memory traders = getTraders(0, 0);
 

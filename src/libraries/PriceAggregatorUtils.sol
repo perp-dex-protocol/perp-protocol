@@ -47,8 +47,8 @@ library PriceAggregatorUtils {
         IChainlinkFeed[] memory _collateralUsdPriceFeeds
     ) internal {
         if (
-            _collateralIndices.length != _gnsCollateralLiquidityPools.length ||
-            _collateralIndices.length != _collateralUsdPriceFeeds.length
+            _collateralIndices.length != _gnsCollateralLiquidityPools.length
+                || _collateralIndices.length != _collateralUsdPriceFeeds.length
         ) revert IGeneralErrors.WrongLength();
 
         ChainlinkClientUtils.setChainlinkToken(_linkErc677);
@@ -83,10 +83,10 @@ library PriceAggregatorUtils {
     /**
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
-    function updateCollateralUsdPriceFeed(
-        uint8 _collateralIndex,
-        IChainlinkFeed _value
-    ) internal validCollateralIndex(_collateralIndex) {
+    function updateCollateralUsdPriceFeed(uint8 _collateralIndex, IChainlinkFeed _value)
+        internal
+        validCollateralIndex(_collateralIndex)
+    {
         if (address(_value) == address(0)) revert IGeneralErrors.ZeroValue();
         if (_value.decimals() != 8) revert IPriceAggregatorUtils.WrongCollateralUsdDecimals();
 
@@ -224,11 +224,8 @@ library PriceAggregatorUtils {
 
         bytes32 job = isLookback ? s.jobIds[1] : s.jobIds[0];
 
-        Chainlink.Request memory linkRequest = ChainlinkClientUtils.buildChainlinkRequest(
-            job,
-            address(this),
-            IPriceAggregatorUtils.fulfill.selector
-        );
+        Chainlink.Request memory linkRequest =
+            ChainlinkClientUtils.buildChainlinkRequest(job, address(this), IPriceAggregatorUtils.fulfill.selector);
 
         {
             (string memory from, string memory to) = _getMultiCollatDiamond().pairJob(_pairIndex);
@@ -255,11 +252,8 @@ library PriceAggregatorUtils {
             });
 
             for (uint256 i; i < s.oracles.length; ++i) {
-                bytes32 requestId = ChainlinkClientUtils.sendChainlinkRequestTo(
-                    s.oracles[i],
-                    linkRequest,
-                    linkFeePerNode
-                );
+                bytes32 requestId =
+                    ChainlinkClientUtils.sendChainlinkRequestTo(s.oracles[i], linkRequest, linkFeePerNode);
                 s.orders[requestId] = order;
             }
         }
@@ -296,9 +290,11 @@ library PriceAggregatorUtils {
             IPriceAggregator.OrderAnswer memory newAnswer;
             (newAnswer.open, newAnswer.high, newAnswer.low, newAnswer.ts) = _priceData.unpack256To64();
             if (
-                order.isLookback &&
-                ((newAnswer.high > 0 || newAnswer.low > 0) &&
-                    (newAnswer.high < newAnswer.open || newAnswer.low > newAnswer.open || newAnswer.low == 0))
+                order.isLookback
+                    && (
+                        (newAnswer.high > 0 || newAnswer.low > 0)
+                            && (newAnswer.high < newAnswer.open || newAnswer.low > newAnswer.open || newAnswer.low == 0)
+                    )
             ) revert IPriceAggregatorUtils.InvalidCandle();
 
             orderAnswers.push(newAnswer);
@@ -320,14 +316,14 @@ library PriceAggregatorUtils {
                 } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_CLOSE) {
                     _getMultiCollatDiamond().closeTradeMarketCallback(finalAnswer);
                 } else if (
-                    order.orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN ||
-                    order.orderType == ITradingStorage.PendingOrderType.STOP_OPEN
+                    order.orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN
+                        || order.orderType == ITradingStorage.PendingOrderType.STOP_OPEN
                 ) {
                     _getMultiCollatDiamond().executeTriggerOpenOrderCallback(finalAnswer);
                 } else if (
-                    order.orderType == ITradingStorage.PendingOrderType.TP_CLOSE ||
-                    order.orderType == ITradingStorage.PendingOrderType.SL_CLOSE ||
-                    order.orderType == ITradingStorage.PendingOrderType.LIQ_CLOSE
+                    order.orderType == ITradingStorage.PendingOrderType.TP_CLOSE
+                        || order.orderType == ITradingStorage.PendingOrderType.SL_CLOSE
+                        || order.orderType == ITradingStorage.PendingOrderType.LIQ_CLOSE
                 ) {
                     _getMultiCollatDiamond().executeTriggerCloseOrderCallback(finalAnswer);
                 } else if (order.orderType == ITradingStorage.PendingOrderType.UPDATE_LEVERAGE) {
@@ -343,12 +339,7 @@ library PriceAggregatorUtils {
         }
 
         emit IPriceAggregatorUtils.PriceReceived(
-            orderId,
-            order.pairIndex,
-            _requestId,
-            _priceData,
-            order.isLookback,
-            usedInMedian
+            orderId, order.pairIndex, _requestId, _priceData, order.isLookback, usedInMedian
         );
     }
 
@@ -372,33 +363,29 @@ library PriceAggregatorUtils {
         uint16 _pairIndex,
         uint256 _positionSizeCollateral // collateral precision
     ) internal view returns (uint256) {
-        (, int256 linkPriceUsd, , , ) = _getStorage().linkUsdPriceFeed.latestRoundData();
+        (, int256 linkPriceUsd,,,) = _getStorage().linkUsdPriceFeed.latestRoundData();
 
         // NOTE: all [token / USD] feeds are 8 decimals
-        return
-            (getUsdNormalizedValue(
+        return (
+            getUsdNormalizedValue(
                 _collateralIndex,
-                _getMultiCollatDiamond().pairOracleFeeP(_pairIndex) *
-                    (
+                _getMultiCollatDiamond().pairOracleFeeP(_pairIndex)
+                    * (
                         _positionSizeCollateral > 0
                             ? TradingCommonUtils.getPositionSizeCollateralBasis(
-                                _collateralIndex,
-                                _pairIndex,
-                                _positionSizeCollateral
+                                _collateralIndex, _pairIndex, _positionSizeCollateral
                             )
                             : 0
                     )
-            ) * 1e8) /
-            uint256(linkPriceUsd) /
-            ConstantsUtils.P_10 /
-            100;
+            ) * 1e8
+        ) / uint256(linkPriceUsd) / ConstantsUtils.P_10 / 100;
     }
 
     /**
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
     function getCollateralPriceUsd(uint8 _collateralIndex) internal view returns (uint256) {
-        (, int256 collateralPriceUsd, , , ) = _getStorage().collateralUsdPriceFeed[_collateralIndex].latestRoundData();
+        (, int256 collateralPriceUsd,,,) = _getStorage().collateralUsdPriceFeed[_collateralIndex].latestRoundData();
 
         return uint256(collateralPriceUsd);
     }
@@ -407,23 +394,21 @@ library PriceAggregatorUtils {
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
     function getUsdNormalizedValue(uint8 _collateralIndex, uint256 _collateralValue) internal view returns (uint256) {
-        return
-            (_collateralValue *
-                _getCollateralPrecisionDelta(_collateralIndex) *
-                getCollateralPriceUsd(_collateralIndex)) / 1e8;
+        return (
+            _collateralValue * _getCollateralPrecisionDelta(_collateralIndex) * getCollateralPriceUsd(_collateralIndex)
+        ) / 1e8;
     }
 
     /**
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
-    function getCollateralFromUsdNormalizedValue(
-        uint8 _collateralIndex,
-        uint256 _normalizedValue
-    ) internal view returns (uint256) {
-        return
-            (_normalizedValue * 1e8) /
-            getCollateralPriceUsd(_collateralIndex) /
-            _getCollateralPrecisionDelta(_collateralIndex);
+    function getCollateralFromUsdNormalizedValue(uint8 _collateralIndex, uint256 _normalizedValue)
+        internal
+        view
+        returns (uint256)
+    {
+        return (_normalizedValue * 1e8) / getCollateralPriceUsd(_collateralIndex)
+            / _getCollateralPrecisionDelta(_collateralIndex);
     }
 
     /**
@@ -454,11 +439,9 @@ library PriceAggregatorUtils {
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
         uint32 twapInterval = uint32(s.twapInterval);
 
-        return
-            s.collateralGnsLiquidityPools[_collateralIndex].getTimeWeightedAveragePrice(
-                twapInterval,
-                _getCollateralPrecisionDelta(_collateralIndex)
-            );
+        return s.collateralGnsLiquidityPools[_collateralIndex].getTimeWeightedAveragePrice(
+            twapInterval, _getCollateralPrecisionDelta(_collateralIndex)
+        );
     }
 
     /**
@@ -513,9 +496,11 @@ library PriceAggregatorUtils {
     /**
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
-    function getCollateralGnsLiquidityPool(
-        uint8 _collateralIndex
-    ) internal view returns (IPriceAggregator.LiquidityPoolInfo memory) {
+    function getCollateralGnsLiquidityPool(uint8 _collateralIndex)
+        internal
+        view
+        returns (IPriceAggregator.LiquidityPoolInfo memory)
+    {
         return _getStorage().collateralGnsLiquidityPools[_collateralIndex];
     }
 
@@ -536,9 +521,11 @@ library PriceAggregatorUtils {
     /**
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
-    function getPriceAggregatorOrderAnswers(
-        ITradingStorage.Id calldata _orderId
-    ) internal view returns (IPriceAggregator.OrderAnswer[] memory) {
+    function getPriceAggregatorOrderAnswers(ITradingStorage.Id calldata _orderId)
+        internal
+        view
+        returns (IPriceAggregator.OrderAnswer[] memory)
+    {
         return _getStorage().orderAnswers[_orderId.user][_orderId.index];
     }
 
@@ -619,9 +606,11 @@ library PriceAggregatorUtils {
      * @dev returns median prices of array (open, high, low)
      * @param _array array of values
      */
-    function _medianLookbacks(
-        IPriceAggregator.OrderAnswer[] memory _array
-    ) internal pure returns (uint64 open, uint64 high, uint64 low) {
+    function _medianLookbacks(IPriceAggregator.OrderAnswer[] memory _array)
+        internal
+        pure
+        returns (uint64 open, uint64 high, uint64 low)
+    {
         uint256 length = _array.length;
 
         uint256[] memory opens = new uint256[](length);

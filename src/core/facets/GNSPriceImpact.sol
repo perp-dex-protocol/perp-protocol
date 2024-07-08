@@ -48,20 +48,20 @@ contract GNSPriceImpact is GNSAddressStore, IPriceImpactUtils {
     // Interactions
 
     /// @inheritdoc IPriceImpactUtils
-    function addPriceImpactOpenInterest(
-        address _trader,
-        uint32 _index,
-        uint256 _oiDeltaCollateral
-    ) external virtual onlySelf {
+    function addPriceImpactOpenInterest(address _trader, uint32 _index, uint256 _oiDeltaCollateral)
+        external
+        virtual
+        onlySelf
+    {
         PriceImpactUtils.addPriceImpactOpenInterest(_trader, _index, _oiDeltaCollateral);
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function removePriceImpactOpenInterest(
-        address _trader,
-        uint32 _index,
-        uint256 _oiDeltaCollateral
-    ) external virtual onlySelf {
+    function removePriceImpactOpenInterest(address _trader, uint32 _index, uint256 _oiDeltaCollateral)
+        external
+        virtual
+        onlySelf
+    {
         PriceImpactUtils.removePriceImpactOpenInterest(_trader, _index, _oiDeltaCollateral);
     }
 
@@ -78,18 +78,13 @@ contract GNSPriceImpact is GNSAddressStore, IPriceImpactUtils {
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function getTradePriceImpact(
-        uint256 _openPrice,
-        uint256 _pairIndex,
-        bool _long,
-        uint256 _tradeOpenInterestUsd
-    ) external view returns (uint256 priceImpactP, uint256 priceAfterImpact) {
-        (priceImpactP, priceAfterImpact) = PriceImpactUtils.getTradePriceImpact(
-            _openPrice,
-            _pairIndex,
-            _long,
-            _tradeOpenInterestUsd
-        );
+    function getTradePriceImpact(uint256 _openPrice, uint256 _pairIndex, bool _long, uint256 _tradeOpenInterestUsd)
+        external
+        view
+        returns (uint256 priceImpactP, uint256 priceAfterImpact)
+    {
+        (priceImpactP, priceAfterImpact) =
+            PriceImpactUtils.getTradePriceImpact(_openPrice, _pairIndex, _long, _tradeOpenInterestUsd);
     }
 
     /// @inheritdoc IPriceImpactUtils
@@ -103,20 +98,20 @@ contract GNSPriceImpact is GNSAddressStore, IPriceImpactUtils {
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function getOiWindow(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256 _windowId
-    ) external view returns (PairOi memory) {
+    function getOiWindow(uint48 _windowsDuration, uint256 _pairIndex, uint256 _windowId)
+        external
+        view
+        returns (PairOi memory)
+    {
         return PriceImpactUtils.getOiWindow(_windowsDuration, _pairIndex, _windowId);
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function getOiWindows(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256[] calldata _windowIds
-    ) external view returns (PairOi[] memory) {
+    function getOiWindows(uint48 _windowsDuration, uint256 _pairIndex, uint256[] calldata _windowIds)
+        external
+        view
+        returns (PairOi[] memory)
+    {
         return PriceImpactUtils.getOiWindows(_windowsDuration, _pairIndex, _windowIds);
     }
 
@@ -126,10 +121,11 @@ contract GNSPriceImpact is GNSAddressStore, IPriceImpactUtils {
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function getTradePriceImpactInfo(
-        address _trader,
-        uint32 _index
-    ) external view returns (IPriceImpact.TradePriceImpactInfo memory) {
+    function getTradePriceImpactInfo(address _trader, uint32 _index)
+        external
+        view
+        returns (IPriceImpact.TradePriceImpactInfo memory)
+    {
         return PriceImpactUtils.getTradePriceImpactInfo(_trader, _index);
     }
 }

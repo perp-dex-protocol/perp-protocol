@@ -28,18 +28,19 @@ library PriceImpactUtils {
      * @dev Validates new windowsDuration value
      */
     modifier validWindowsDuration(uint48 _windowsDuration) {
-        if (_windowsDuration < MIN_WINDOWS_DURATION || _windowsDuration > MAX_WINDOWS_DURATION)
+        if (_windowsDuration < MIN_WINDOWS_DURATION || _windowsDuration > MAX_WINDOWS_DURATION) {
             revert IPriceImpactUtils.WrongWindowsDuration();
+        }
         _;
     }
 
     /**
      * @dev Check IPriceImpactUtils interface for documentation
      */
-    function initializePriceImpact(
-        uint48 _windowsDuration,
-        uint48 _windowsCount
-    ) internal validWindowsDuration(_windowsDuration) {
+    function initializePriceImpact(uint48 _windowsDuration, uint48 _windowsCount)
+        internal
+        validWindowsDuration(_windowsDuration)
+    {
         if (_windowsCount > MAX_WINDOWS_COUNT) revert IGeneralErrors.AboveMax();
 
         _getStorage().oiWindowsSettings = IPriceImpact.OiWindowsSettings({
@@ -67,10 +68,10 @@ library PriceImpactUtils {
     /**
      * @dev Check IPriceImpactUtils interface for documentation
      */
-    function setPriceImpactWindowsDuration(
-        uint48 _newWindowsDuration,
-        uint256 _pairsCount
-    ) internal validWindowsDuration(_newWindowsDuration) {
+    function setPriceImpactWindowsDuration(uint48 _newWindowsDuration, uint256 _pairsCount)
+        internal
+        validWindowsDuration(_newWindowsDuration)
+    {
         IPriceImpact.PriceImpactStorage storage priceImpactStorage = _getStorage();
         IPriceImpact.OiWindowsSettings storage settings = priceImpactStorage.oiWindowsSettings;
 
@@ -97,8 +98,9 @@ library PriceImpactUtils {
         uint128[] calldata _depthsAboveUsd,
         uint128[] calldata _depthsBelowUsd
     ) internal {
-        if (_indices.length != _depthsAboveUsd.length || _depthsAboveUsd.length != _depthsBelowUsd.length)
+        if (_indices.length != _depthsAboveUsd.length || _depthsAboveUsd.length != _depthsBelowUsd.length) {
             revert IGeneralErrors.WrongLength();
+        }
 
         IPriceImpact.PriceImpactStorage storage s = _getStorage();
 
@@ -120,9 +122,8 @@ library PriceImpactUtils {
         IPriceImpact.OiWindowsSettings storage settings = _getStorage().oiWindowsSettings;
         ITradingStorage.Trade memory trade = _getMultiCollatDiamond().getTrade(_trader, _index);
         ITradingStorage.TradeInfo storage tradeInfo = TradingStorageUtils._getStorage().tradeInfos[_trader][_index];
-        IPriceImpact.TradePriceImpactInfo storage tradePriceImpactInfo = _getStorage().tradePriceImpactInfos[_trader][
-            _index
-        ];
+        IPriceImpact.TradePriceImpactInfo storage tradePriceImpactInfo =
+            _getStorage().tradePriceImpactInfos[_trader][_index];
 
         uint256 currentWindowId = _getCurrentWindowId(settings);
         uint256 currentCollateralPriceUsd = _getMultiCollatDiamond().getCollateralPriceUsd(trade.collateralIndex);
@@ -137,9 +138,9 @@ library PriceImpactUtils {
         // 2. Handle logic for partials when last OI delta is still in an active window
         bool isPartial = tradeInfo.lastOiUpdateTs > 0;
         if (
-            isPartial &&
-            _getWindowId(tradeInfo.lastOiUpdateTs, settings) >=
-            _getEarliestActiveWindowId(currentWindowId, settings.windowsCount)
+            isPartial
+                && _getWindowId(tradeInfo.lastOiUpdateTs, settings)
+                    >= _getEarliestActiveWindowId(currentWindowId, settings.windowsCount)
         ) {
             // 2.1 Fetch last OI delta for trade
             uint128 lastWindowOiUsd = getTradeLastWindowOiUsd(_trader, _index);
@@ -152,9 +153,8 @@ library PriceImpactUtils {
         }
 
         // 3. Add OI to current window
-        IPriceImpact.PairOi storage currentWindow = _getStorage().windows[settings.windowsDuration][trade.pairIndex][
-            currentWindowId
-        ];
+        IPriceImpact.PairOi storage currentWindow =
+            _getStorage().windows[settings.windowsDuration][trade.pairIndex][currentWindowId];
         if (trade.long) {
             currentWindow.oiLongUsd += oiDeltaUsd;
         } else {
@@ -168,13 +168,7 @@ library PriceImpactUtils {
 
         emit IPriceImpactUtils.PriceImpactOpenInterestAdded(
             IPriceImpact.OiWindowUpdate(
-                _trader,
-                _index,
-                settings.windowsDuration,
-                trade.pairIndex,
-                currentWindowId,
-                trade.long,
-                oiDeltaUsd
+                _trader, _index, settings.windowsDuration, trade.pairIndex, currentWindowId, trade.long, oiDeltaUsd
             ),
             isPartial
         );
@@ -188,9 +182,8 @@ library PriceImpactUtils {
         ITradingStorage.Trade memory trade = _getMultiCollatDiamond().getTrade(_trader, _index);
         ITradingStorage.TradeInfo memory tradeInfo = _getMultiCollatDiamond().getTradeInfo(_trader, _index);
         IPriceImpact.OiWindowsSettings storage settings = _getStorage().oiWindowsSettings;
-        IPriceImpact.TradePriceImpactInfo storage tradePriceImpactInfo = _getStorage().tradePriceImpactInfos[_trader][
-            _index
-        ];
+        IPriceImpact.TradePriceImpactInfo storage tradePriceImpactInfo =
+            _getStorage().tradePriceImpactInfos[_trader][_index];
 
         // If trade OI wasn't stored in any window we return early
         if (_oiDeltaCollateral == 0 || tradeInfo.lastOiUpdateTs == 0) {
@@ -211,9 +204,8 @@ library PriceImpactUtils {
 
         // 2. Remove OI if window where OI was added isn't outdated
         if (notOutdated) {
-            IPriceImpact.PairOi storage window = _getStorage().windows[settings.windowsDuration][trade.pairIndex][
-                addWindowId
-            ];
+            IPriceImpact.PairOi storage window =
+                _getStorage().windows[settings.windowsDuration][trade.pairIndex][addWindowId];
 
             // 2.1 Prevent removing trade OI that was already expired by capping delta at active OI
             uint128 lastWindowOiUsd = getTradeLastWindowOiUsd(_trader, _index);
@@ -232,13 +224,7 @@ library PriceImpactUtils {
 
         emit IPriceImpactUtils.PriceImpactOpenInterestRemoved(
             IPriceImpact.OiWindowUpdate(
-                _trader,
-                _index,
-                settings.windowsDuration,
-                trade.pairIndex,
-                addWindowId,
-                trade.long,
-                oiDeltaUsd
+                _trader, _index, settings.windowsDuration, trade.pairIndex, addWindowId, trade.long, oiDeltaUsd
             ),
             notOutdated
         );
@@ -250,16 +236,15 @@ library PriceImpactUtils {
     function getTradeLastWindowOiUsd(address _trader, uint32 _index) internal view returns (uint128) {
         uint128 lastWindowOiUsd = _getStorage().tradePriceImpactInfos[_trader][_index].lastWindowOiUsd;
         ITradingStorage.Trade memory trade = _getMultiCollatDiamond().getTrade(_trader, _index);
-        return
-            lastWindowOiUsd > 0
-                ? lastWindowOiUsd
-                : uint128( // if lastWindowOiUsd = 0 for trade, it was opened before partials => pos size USD using tradeInfo.collateralPriceUsd
-                    TradingCommonUtils.convertCollateralToUsd(
-                        TradingCommonUtils.getPositionSizeCollateral(trade.collateralAmount, trade.leverage),
-                        _getMultiCollatDiamond().getCollateral(trade.collateralIndex).precisionDelta,
-                        _getMultiCollatDiamond().getTradeInfo(_trader, _index).collateralPriceUsd
-                    )
-                );
+        return lastWindowOiUsd > 0
+            ? lastWindowOiUsd
+            : uint128( // if lastWindowOiUsd = 0 for trade, it was opened before partials => pos size USD using tradeInfo.collateralPriceUsd
+                TradingCommonUtils.convertCollateralToUsd(
+                    TradingCommonUtils.getPositionSizeCollateral(trade.collateralAmount, trade.leverage),
+                    _getMultiCollatDiamond().getCollateral(trade.collateralIndex).precisionDelta,
+                    _getMultiCollatDiamond().getTradeInfo(_trader, _index).collateralPriceUsd
+                )
+            );
     }
 
     /**
@@ -328,25 +313,22 @@ library PriceImpactUtils {
     /**
      * @dev Check IPriceImpactUtils interface for documentation
      */
-    function getOiWindow(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256 _windowId
-    ) internal view returns (IPriceImpact.PairOi memory) {
-        return
-            _getStorage().windows[_windowsDuration > 0 ? _windowsDuration : getOiWindowsSettings().windowsDuration][
-                _pairIndex
-            ][_windowId];
+    function getOiWindow(uint48 _windowsDuration, uint256 _pairIndex, uint256 _windowId)
+        internal
+        view
+        returns (IPriceImpact.PairOi memory)
+    {
+        return _getStorage().windows[_windowsDuration > 0 ? _windowsDuration : getOiWindowsSettings().windowsDuration][_pairIndex][_windowId];
     }
 
     /**
      * @dev Check IPriceImpactUtils interface for documentation
      */
-    function getOiWindows(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256[] calldata _windowIds
-    ) internal view returns (IPriceImpact.PairOi[] memory) {
+    function getOiWindows(uint48 _windowsDuration, uint256 _pairIndex, uint256[] calldata _windowIds)
+        internal
+        view
+        returns (IPriceImpact.PairOi[] memory)
+    {
         IPriceImpact.PairOi[] memory _pairOis = new IPriceImpact.PairOi[](_windowIds.length);
 
         for (uint256 i; i < _windowIds.length; ++i) {
@@ -372,10 +354,11 @@ library PriceImpactUtils {
     /**
      * @dev Check IPriceImpactUtils interface for documentation
      */
-    function getTradePriceImpactInfo(
-        address _trader,
-        uint32 _index
-    ) internal view returns (IPriceImpact.TradePriceImpactInfo memory) {
+    function getTradePriceImpactInfo(address _trader, uint32 _index)
+        internal
+        view
+        returns (IPriceImpact.TradePriceImpactInfo memory)
+    {
         return _getStorage().tradePriceImpactInfos[_trader][_index];
     }
 
@@ -440,10 +423,7 @@ library PriceImpactUtils {
         }
 
         emit IPriceImpactUtils.PriceImpactOiTransferredPairs(
-            _pairsCount,
-            prevCurrentWindowId,
-            prevEarliestWindowId,
-            newCurrentWindowId
+            _pairsCount, prevCurrentWindowId, prevEarliestWindowId, newCurrentWindowId
         );
     }
 
@@ -501,10 +481,11 @@ library PriceImpactUtils {
      * @param _timestamp timestamp
      * @param _settings OI windows settings
      */
-    function _getWindowId(
-        uint48 _timestamp,
-        IPriceImpact.OiWindowsSettings memory _settings
-    ) internal pure returns (uint256) {
+    function _getWindowId(uint48 _timestamp, IPriceImpact.OiWindowsSettings memory _settings)
+        internal
+        pure
+        returns (uint256)
+    {
         return (_timestamp - _settings.startTs) / _settings.windowsDuration;
     }
 
@@ -521,10 +502,11 @@ library PriceImpactUtils {
      * @param _currentWindowId current window id
      * @param _windowsCount active windows count
      */
-    function _getEarliestActiveWindowId(
-        uint256 _currentWindowId,
-        uint48 _windowsCount
-    ) internal pure returns (uint256) {
+    function _getEarliestActiveWindowId(uint256 _currentWindowId, uint48 _windowsCount)
+        internal
+        pure
+        returns (uint256)
+    {
         uint256 windowNegativeDelta = _windowsCount - 1; // -1 because we include current window
         return _currentWindowId > windowNegativeDelta ? _currentWindowId - windowNegativeDelta : 0;
     }
@@ -565,9 +547,7 @@ library PriceImpactUtils {
         }
 
         priceImpactP =
-            ((_startOpenInterestUsd + _tradeOpenInterestUsd / 2) * ConstantsUtils.P_10) /
-            _onePercentDepthUsd /
-            1e18;
+            ((_startOpenInterestUsd + _tradeOpenInterestUsd / 2) * ConstantsUtils.P_10) / _onePercentDepthUsd / 1e18;
 
         uint256 priceImpact = (priceImpactP * _openPrice) / ConstantsUtils.P_10 / 100;
         priceAfterImpact = _long ? _openPrice + priceImpact : _openPrice - priceImpact;

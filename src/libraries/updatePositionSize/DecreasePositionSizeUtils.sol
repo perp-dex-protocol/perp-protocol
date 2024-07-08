@@ -28,15 +28,15 @@ library DecreasePositionSizeUtils {
     ) internal view returns (uint256 positionSizeCollateralDelta) {
         // 1. Revert if both collateral and leverage are zero or if both are non-zero
         if (
-            (_input.collateralDelta == 0 && _input.leverageDelta == 0) ||
-            (_input.collateralDelta > 0 && _input.leverageDelta > 0)
+            (_input.collateralDelta == 0 && _input.leverageDelta == 0)
+                || (_input.collateralDelta > 0 && _input.leverageDelta > 0)
         ) revert IUpdatePositionSizeUtils.InvalidDecreasePositionSizeInput();
 
         // 2. If we update the leverage, check new leverage is above the minimum
         bool isLeverageUpdate = _input.leverageDelta > 0;
         if (
-            isLeverageUpdate &&
-            _trade.leverage - _input.leverageDelta < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
+            isLeverageUpdate
+                && _trade.leverage - _input.leverageDelta < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
         ) revert ITradingInteractionsUtils.WrongLeverage();
 
         // 3. Make sure new trade collateral is enough to pay borrowing fees and closing fees
@@ -47,18 +47,19 @@ library DecreasePositionSizeUtils {
 
         uint256 newCollateralAmount = _trade.collateralAmount - _input.collateralDelta;
         uint256 borrowingFeeCollateral = TradingCommonUtils.getTradeBorrowingFeeCollateral(_trade);
-        uint256 closingFeesCollateral = ((_getMultiCollatDiamond().pairCloseFeeP(_trade.pairIndex) +
-            _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) *
-            TradingCommonUtils.getPositionSizeCollateralBasis(
-                _trade.collateralIndex,
-                _trade.pairIndex,
-                positionSizeCollateralDelta
-            )) /
-            ConstantsUtils.P_10 /
-            100;
+        uint256 closingFeesCollateral = (
+            (
+                _getMultiCollatDiamond().pairCloseFeeP(_trade.pairIndex)
+                    + _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)
+            )
+                * TradingCommonUtils.getPositionSizeCollateralBasis(
+                    _trade.collateralIndex, _trade.pairIndex, positionSizeCollateralDelta
+                )
+        ) / ConstantsUtils.P_10 / 100;
 
-        if (newCollateralAmount <= borrowingFeeCollateral + closingFeesCollateral)
+        if (newCollateralAmount <= borrowingFeeCollateral + closingFeesCollateral) {
             revert ITradingInteractionsUtils.InsufficientCollateral();
+        }
     }
 
     /**
@@ -78,24 +79,18 @@ library DecreasePositionSizeUtils {
             isLeverageUpdate ? _existingTrade.collateralAmount : _partialTrade.collateralAmount,
             isLeverageUpdate ? _partialTrade.leverage : _existingTrade.leverage
         );
-        values.existingPositionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(
-            _existingTrade.collateralAmount,
-            _existingTrade.leverage
-        );
+        values.existingPositionSizeCollateral =
+            TradingCommonUtils.getPositionSizeCollateral(_existingTrade.collateralAmount, _existingTrade.leverage);
 
         // 2. Calculate existing trade liquidation price
         values.existingLiqPrice = TradingCommonUtils.getTradeLiquidationPrice(_existingTrade, true);
 
         // 3. Calculate existing trade pnl
-        values.existingPnlCollateral =
-            (TradingCommonUtils.getPnlPercent(
-                _existingTrade.openPrice,
-                _answer.price,
-                _existingTrade.long,
-                _existingTrade.leverage
-            ) * int256(uint256(_existingTrade.collateralAmount))) /
-            100 /
-            int256(ConstantsUtils.P_10);
+        values.existingPnlCollateral = (
+            TradingCommonUtils.getPnlPercent(
+                _existingTrade.openPrice, _answer.price, _existingTrade.long, _existingTrade.leverage
+            ) * int256(uint256(_existingTrade.collateralAmount))
+        ) / 100 / int256(ConstantsUtils.P_10);
 
         // 4. Calculate existing trade borrowing fee
         values.borrowingFeeCollateral = TradingCommonUtils.getTradeBorrowingFeeCollateral(_existingTrade);
@@ -104,19 +99,15 @@ library DecreasePositionSizeUtils {
 
         // 5.1 Apply fee tiers
         uint256 pairCloseFeeP = _getMultiCollatDiamond().calculateFeeAmount(
-            _existingTrade.user,
-            _getMultiCollatDiamond().pairCloseFeeP(_existingTrade.pairIndex)
+            _existingTrade.user, _getMultiCollatDiamond().pairCloseFeeP(_existingTrade.pairIndex)
         );
         uint256 pairTriggerFeeP = _getMultiCollatDiamond().calculateFeeAmount(
-            _existingTrade.user,
-            _getMultiCollatDiamond().pairTriggerOrderFeeP(_existingTrade.pairIndex)
+            _existingTrade.user, _getMultiCollatDiamond().pairTriggerOrderFeeP(_existingTrade.pairIndex)
         );
 
         // 5.2 Calculate closing fees on on max(positionSizeCollateralDelta, minPositionSizeCollateral)
         uint256 feePositionSizeCollateralBasis = TradingCommonUtils.getPositionSizeCollateralBasis(
-            _existingTrade.collateralIndex,
-            _existingTrade.pairIndex,
-            values.positionSizeCollateralDelta
+            _existingTrade.collateralIndex, _existingTrade.pairIndex, values.positionSizeCollateralDelta
         );
         (values.vaultFeeCollateral, values.gnsStakingFeeCollateral) = TradingCommonUtils.getClosingFeesCollateral(
             (feePositionSizeCollateralBasis * pairCloseFeeP) / 100 / ConstantsUtils.P_10,
@@ -126,18 +117,14 @@ library DecreasePositionSizeUtils {
 
         // 6. Calculate final collateral delta
         // Collateral delta = value to send to trader after position size is decreased
-        int256 partialTradePnlCollateral = (values.existingPnlCollateral * int256(values.positionSizeCollateralDelta)) /
-            int256(values.existingPositionSizeCollateral);
+        int256 partialTradePnlCollateral = (values.existingPnlCollateral * int256(values.positionSizeCollateralDelta))
+            / int256(values.existingPositionSizeCollateral);
 
-        values.availableCollateralInDiamond =
-            int256(uint256(_partialTrade.collateralAmount)) -
-            int256(values.vaultFeeCollateral) -
-            int256(values.gnsStakingFeeCollateral);
+        values.availableCollateralInDiamond = int256(uint256(_partialTrade.collateralAmount))
+            - int256(values.vaultFeeCollateral) - int256(values.gnsStakingFeeCollateral);
 
         values.collateralSentToTrader =
-            values.availableCollateralInDiamond +
-            partialTradePnlCollateral -
-            int256(values.borrowingFeeCollateral);
+            values.availableCollateralInDiamond + partialTradePnlCollateral - int256(values.borrowingFeeCollateral);
 
         // 7. Calculate new collateral amount and leverage
         values.newCollateralAmount = _existingTrade.collateralAmount - _partialTrade.collateralAmount;
@@ -153,14 +140,9 @@ library DecreasePositionSizeUtils {
         IUpdatePositionSizeUtils.DecreasePositionSizeValues memory _values,
         ITradingCallbacks.AggregatorAnswer memory _answer
     ) internal pure returns (ITradingCallbacks.CancelReason) {
-        return
-            (
-                _existingTrade.long
-                    ? _answer.price <= _values.existingLiqPrice
-                    : _answer.price >= _values.existingLiqPrice
-            )
-                ? ITradingCallbacks.CancelReason.LIQ_REACHED
-                : ITradingCallbacks.CancelReason.NONE;
+        return (
+            _existingTrade.long ? _answer.price <= _values.existingLiqPrice : _answer.price >= _values.existingLiqPrice
+        ) ? ITradingCallbacks.CancelReason.LIQ_REACHED : ITradingCallbacks.CancelReason.NONE;
     }
 
     /**
@@ -204,10 +186,9 @@ library DecreasePositionSizeUtils {
      * @param _existingTrade trade to update
      * @param _cancelReason cancel reason
      */
-    function handleCanceled(
-        ITradingStorage.Trade memory _existingTrade,
-        ITradingCallbacks.CancelReason _cancelReason
-    ) internal {
+    function handleCanceled(ITradingStorage.Trade memory _existingTrade, ITradingCallbacks.CancelReason _cancelReason)
+        internal
+    {
         if (_cancelReason != ITradingCallbacks.CancelReason.NO_TRADE) {
             // 1. Distribute gov fee
             uint256 govFeeCollateral = TradingCommonUtils.distributeGovFeeCollateral(
@@ -215,8 +196,7 @@ library DecreasePositionSizeUtils {
                 _existingTrade.user,
                 _existingTrade.pairIndex,
                 TradingCommonUtils.getMinPositionSizeCollateral(
-                    _existingTrade.collateralIndex,
-                    _existingTrade.pairIndex
+                    _existingTrade.collateralIndex, _existingTrade.pairIndex
                 ) / 2, // use min fee / 2
                 0
             );

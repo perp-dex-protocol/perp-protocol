@@ -17,7 +17,6 @@ import "./updatePositionSize/UpdatePositionSizeLifecycles.sol";
 /**
  * @dev GNSTradingInteractions facet internal library
  */
-
 library TradingInteractionsUtils {
     using PackingUtils for uint256;
     using SafeERC20 for IERC20;
@@ -26,8 +25,9 @@ library TradingInteractionsUtils {
      * @dev Modifier to only allow trading action when trading is activated (= revert if not activated)
      */
     modifier tradingActivated() {
-        if (_getMultiCollatDiamond().getTradingActivated() != ITradingStorage.TradingActivated.ACTIVATED)
+        if (_getMultiCollatDiamond().getTradingActivated() != ITradingStorage.TradingActivated.ACTIVATED) {
             revert IGeneralErrors.Paused();
+        }
         _;
     }
 
@@ -35,8 +35,9 @@ library TradingInteractionsUtils {
      * @dev Modifier to only allow trading action when trading is activated or close only (= revert if paused)
      */
     modifier tradingActivatedOrCloseOnly() {
-        if (_getMultiCollatDiamond().getTradingActivated() == ITradingStorage.TradingActivated.PAUSED)
+        if (_getMultiCollatDiamond().getTradingActivated() == ITradingStorage.TradingActivated.PAUSED) {
             revert IGeneralErrors.Paused();
+        }
         _;
     }
 
@@ -108,10 +109,11 @@ library TradingInteractionsUtils {
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */
-    function delegatedTradingAction(
-        address _trader,
-        bytes calldata _callData
-    ) internal notDelegatedAction returns (bytes memory) {
+    function delegatedTradingAction(address _trader, bytes calldata _callData)
+        internal
+        notDelegatedAction
+        returns (bytes memory)
+    {
         ITradingInteractions.TradingInteractionsStorage storage s = _getStorage();
 
         if (s.delegations[_trader] != msg.sender) revert ITradingInteractionsUtils.DelegateNotApproved();
@@ -136,22 +138,21 @@ library TradingInteractionsUtils {
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */
-    function openTrade(
-        ITradingStorage.Trade memory _trade,
-        uint16 _maxSlippageP,
-        address _referrer
-    ) internal tradingActivated {
+    function openTrade(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer)
+        internal
+        tradingActivated
+    {
         _openTrade(_trade, _maxSlippageP, _referrer, false);
     }
 
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */
-    function openTradeNative(
-        ITradingStorage.Trade memory _trade,
-        uint16 _maxSlippageP,
-        address _referrer
-    ) internal tradingActivated notDelegatedAction {
+    function openTradeNative(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer)
+        internal
+        tradingActivated
+        notDelegatedAction
+    {
         _trade.collateralAmount = _wrapNativeToken(_trade.collateralIndex);
 
         _openTrade(_trade, _maxSlippageP, _referrer, true);
@@ -191,37 +192,23 @@ library TradingInteractionsUtils {
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */
-    function updateOpenOrder(
-        uint32 _index,
-        uint64 _openPrice,
-        uint64 _tp,
-        uint64 _sl,
-        uint16 _maxSlippageP
-    ) internal tradingActivated {
+    function updateOpenOrder(uint32 _index, uint64 _openPrice, uint64 _tp, uint64 _sl, uint16 _maxSlippageP)
+        internal
+        tradingActivated
+    {
         address sender = _msgSender();
         ITradingStorage.Trade memory o = _getMultiCollatDiamond().getTrade(sender, _index);
 
         _checkNoPendingTrigger(
-            ITradingStorage.Id({user: o.user, index: o.index}),
-            ConstantsUtils.getPendingOpenOrderType(o.tradeType)
+            ITradingStorage.Id({user: o.user, index: o.index}), ConstantsUtils.getPendingOpenOrderType(o.tradeType)
         );
 
         _getMultiCollatDiamond().updateOpenOrderDetails(
-            ITradingStorage.Id({user: o.user, index: o.index}),
-            _openPrice,
-            _tp,
-            _sl,
-            _maxSlippageP
+            ITradingStorage.Id({user: o.user, index: o.index}), _openPrice, _tp, _sl, _maxSlippageP
         );
 
         emit ITradingInteractionsUtils.OpenLimitUpdated(
-            sender,
-            o.pairIndex,
-            _index,
-            _openPrice,
-            _tp,
-            _sl,
-            _maxSlippageP
+            sender, o.pairIndex, _index, _openPrice, _tp, _sl, _maxSlippageP
         );
     }
 
@@ -293,12 +280,7 @@ library TradingInteractionsUtils {
     ) internal tradingActivated {
         UpdatePositionSizeLifecycles.requestIncreasePositionSize(
             IUpdatePositionSize.IncreasePositionSizeInput(
-                _msgSender(),
-                _index,
-                _collateralDelta,
-                _leverageDelta,
-                _expectedPrice,
-                _maxSlippageP
+                _msgSender(), _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP
             )
         );
     }
@@ -306,11 +288,10 @@ library TradingInteractionsUtils {
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */
-    function decreasePositionSize(
-        uint32 _index,
-        uint120 _collateralDelta,
-        uint24 _leverageDelta
-    ) internal tradingActivatedOrCloseOnly {
+    function decreasePositionSize(uint32 _index, uint120 _collateralDelta, uint24 _leverageDelta)
+        internal
+        tradingActivatedOrCloseOnly
+    {
         UpdatePositionSizeLifecycles.requestDecreasePositionSize(
             IUpdatePositionSize.DecreasePositionSizeInput(_msgSender(), _index, _collateralDelta, _leverageDelta)
         );
@@ -326,13 +307,13 @@ library TradingInteractionsUtils {
 
         if (ConstantsUtils.isOrderTypeMarket(orderType)) revert ITradingInteractionsUtils.WrongOrderType();
 
-        bool isOpenLimit = orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN ||
-            orderType == ITradingStorage.PendingOrderType.STOP_OPEN;
+        bool isOpenLimit = orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN
+            || orderType == ITradingStorage.PendingOrderType.STOP_OPEN;
 
         ITradingStorage.TradingActivated activated = _getMultiCollatDiamond().getTradingActivated();
         if (
-            (isOpenLimit && activated != ITradingStorage.TradingActivated.ACTIVATED) ||
-            (!isOpenLimit && activated == ITradingStorage.TradingActivated.PAUSED)
+            (isOpenLimit && activated != ITradingStorage.TradingActivated.ACTIVATED)
+                || (!isOpenLimit && activated == ITradingStorage.TradingActivated.PAUSED)
         ) {
             revert IGeneralErrors.Paused();
         }
@@ -357,19 +338,14 @@ library TradingInteractionsUtils {
         uint256 positionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(t.collateralAmount, t.leverage);
 
         if (isOpenLimit) {
-            uint256 leveragedPosUsd = _getMultiCollatDiamond().getUsdNormalizedValue(
-                t.collateralIndex,
-                positionSizeCollateral
-            );
-            (uint256 priceImpactP, ) = _getMultiCollatDiamond().getTradePriceImpact(
-                0,
-                t.pairIndex,
-                t.long,
-                leveragedPosUsd
-            );
+            uint256 leveragedPosUsd =
+                _getMultiCollatDiamond().getUsdNormalizedValue(t.collateralIndex, positionSizeCollateral);
+            (uint256 priceImpactP,) =
+                _getMultiCollatDiamond().getTradePriceImpact(0, t.pairIndex, t.long, leveragedPosUsd);
 
-            if ((priceImpactP * t.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P)
+            if ((priceImpactP * t.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P) {
                 revert ITradingInteractionsUtils.PriceImpactTooHigh();
+            }
         }
 
         if (!byPassesLinkCost) {
@@ -411,20 +387,19 @@ library TradingInteractionsUtils {
 
         if (!ConstantsUtils.isOrderTypeMarket(order.orderType)) revert ITradingInteractionsUtils.WrongOrderType();
 
-        if (ChainUtils.getBlockNumber() < order.createdBlock + _getStorage().marketOrdersTimeoutBlocks)
+        if (ChainUtils.getBlockNumber() < order.createdBlock + _getStorage().marketOrdersTimeoutBlocks) {
             revert ITradingInteractionsUtils.WaitTimeout();
+        }
 
         _getMultiCollatDiamond().closePendingOrder(orderId);
 
         if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {
             TradingCommonUtils.transferCollateralTo(
-                pendingTrade.collateralIndex,
-                pendingTrade.user,
-                pendingTrade.collateralAmount
+                pendingTrade.collateralIndex, pendingTrade.user, pendingTrade.collateralAmount
             ); // send back collateral amount to user when cancelling market open
         } else if (
-            order.orderType == ITradingStorage.PendingOrderType.UPDATE_LEVERAGE &&
-            pendingTrade.leverage < trade.leverage
+            order.orderType == ITradingStorage.PendingOrderType.UPDATE_LEVERAGE
+                && pendingTrade.leverage < trade.leverage
         ) {
             TradingCommonUtils.transferCollateralTo(
                 trade.collateralIndex,
@@ -511,55 +486,44 @@ library TradingInteractionsUtils {
      * @param _referrer referrer address
      * @param _isNative if true we skip the collateral transfer from user to contract
      */
-    function _openTrade(
-        ITradingStorage.Trade memory _trade,
-        uint16 _maxSlippageP,
-        address _referrer,
-        bool _isNative
-    ) internal {
+    function _openTrade(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer, bool _isNative)
+        internal
+    {
         address sender = _msgSender();
         _trade.user = sender;
         _trade.__placeholder = 0;
 
-        uint256 positionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(
-            _trade.collateralAmount,
-            _trade.leverage
-        );
-        uint256 positionSizeUsd = _getMultiCollatDiamond().getUsdNormalizedValue(
-            _trade.collateralIndex,
-            positionSizeCollateral
-        );
+        uint256 positionSizeCollateral =
+            TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
+        uint256 positionSizeUsd =
+            _getMultiCollatDiamond().getUsdNormalizedValue(_trade.collateralIndex, positionSizeCollateral);
 
         if (
             !TradingCommonUtils.isWithinExposureLimits(
-                _trade.collateralIndex,
-                _trade.pairIndex,
-                _trade.long,
-                positionSizeCollateral
+                _trade.collateralIndex, _trade.pairIndex, _trade.long, positionSizeCollateral
             )
         ) revert ITradingInteractionsUtils.AboveExposureLimits();
 
         // Trade collateral usd value needs to be >= 5x min trade fee usd (collateral left after trade opened >= 80%)
-        if ((positionSizeUsd * 1e3) / _trade.leverage < 5 * _getMultiCollatDiamond().pairMinFeeUsd(_trade.pairIndex))
+        if ((positionSizeUsd * 1e3) / _trade.leverage < 5 * _getMultiCollatDiamond().pairMinFeeUsd(_trade.pairIndex)) {
             revert ITradingInteractionsUtils.InsufficientCollateral();
+        }
 
         if (
-            _trade.leverage < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3 ||
-            _trade.leverage > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3
+            _trade.leverage < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
+                || _trade.leverage > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3
         ) revert ITradingInteractionsUtils.WrongLeverage();
 
-        (uint256 priceImpactP, ) = _getMultiCollatDiamond().getTradePriceImpact(
-            0,
-            _trade.pairIndex,
-            _trade.long,
-            positionSizeUsd
-        );
+        (uint256 priceImpactP,) =
+            _getMultiCollatDiamond().getTradePriceImpact(0, _trade.pairIndex, _trade.long, positionSizeUsd);
 
-        if ((priceImpactP * _trade.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P)
+        if ((priceImpactP * _trade.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P) {
             revert ITradingInteractionsUtils.PriceImpactTooHigh();
+        }
 
-        if (!_isNative)
+        if (!_isNative) {
             TradingCommonUtils.transferCollateralFrom(_trade.collateralIndex, sender, _trade.collateralAmount);
+        }
 
         if (_trade.tradeType != ITradingStorage.TradeType.TRADE) {
             ITradingStorage.TradeInfo memory tradeInfo;
@@ -577,10 +541,7 @@ library TradingInteractionsUtils {
 
             pendingOrder = _getMultiCollatDiamond().storePendingOrder(pendingOrder);
 
-            ITradingStorage.Id memory orderId = ITradingStorage.Id({
-                user: pendingOrder.user,
-                index: pendingOrder.index
-            });
+            ITradingStorage.Id memory orderId = ITradingStorage.Id({user: pendingOrder.user, index: pendingOrder.index});
 
             _getMultiCollatDiamond().getPrice(
                 _trade.collateralIndex,
@@ -604,10 +565,10 @@ library TradingInteractionsUtils {
      * @param _tradeId trade id
      * @param _orderType order type
      */
-    function _checkNoPendingTrigger(
-        ITradingStorage.Id memory _tradeId,
-        ITradingStorage.PendingOrderType _orderType
-    ) internal view {
+    function _checkNoPendingTrigger(ITradingStorage.Id memory _tradeId, ITradingStorage.PendingOrderType _orderType)
+        internal
+        view
+    {
         if (
             _getMultiCollatDiamond().hasActiveOrder(
                 _getMultiCollatDiamond().getTradePendingOrderBlock(_tradeId, _orderType)
@@ -639,8 +600,8 @@ library TradingInteractionsUtils {
             _orderType == ITradingStorage.PendingOrderType.SL_CLOSE
                 ? tradeInfo.slLastUpdatedBlock
                 : _orderType == ITradingStorage.PendingOrderType.TP_CLOSE
-                ? tradeInfo.tpLastUpdatedBlock
-                : tradeInfo.createdBlock
+                    ? tradeInfo.tpLastUpdatedBlock
+                    : tradeInfo.createdBlock
         );
     }
 

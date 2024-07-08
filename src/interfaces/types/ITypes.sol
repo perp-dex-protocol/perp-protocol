@@ -28,6 +28,4 @@ interface ITypes is
     ITradingCallbacks,
     IBorrowingFees,
     IPriceAggregator
-{
-
-}
+{}

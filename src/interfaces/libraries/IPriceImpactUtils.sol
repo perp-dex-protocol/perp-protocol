@@ -75,12 +75,10 @@ interface IPriceImpactUtils is IPriceImpact {
      * @param _long true for long, false for short
      * @param _tradeOpenInterestUsd open interest of trade in USD (1e18 precision)
      */
-    function getTradePriceImpact(
-        uint256 _openPrice,
-        uint256 _pairIndex,
-        bool _long,
-        uint256 _tradeOpenInterestUsd
-    ) external view returns (uint256 priceImpactP, uint256 priceAfterImpact);
+    function getTradePriceImpact(uint256 _openPrice, uint256 _pairIndex, bool _long, uint256 _tradeOpenInterestUsd)
+        external
+        view
+        returns (uint256 priceImpactP, uint256 priceAfterImpact);
 
     /**
      * @dev Returns a pair's depths above and below the price
@@ -99,11 +97,10 @@ interface IPriceImpactUtils is IPriceImpact {
      * @param _pairIndex index of pair
      * @param _windowId id of window
      */
-    function getOiWindow(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256 _windowId
-    ) external view returns (PairOi memory);
+    function getOiWindow(uint48 _windowsDuration, uint256 _pairIndex, uint256 _windowId)
+        external
+        view
+        returns (PairOi memory);
 
     /**
      * @dev Returns multiple OI windows details (long/short OI)
@@ -111,11 +108,10 @@ interface IPriceImpactUtils is IPriceImpact {
      * @param _pairIndex index of pair
      * @param _windowIds ids of windows
      */
-    function getOiWindows(
-        uint48 _windowsDuration,
-        uint256 _pairIndex,
-        uint256[] calldata _windowIds
-    ) external view returns (PairOi[] memory);
+    function getOiWindows(uint48 _windowsDuration, uint256 _pairIndex, uint256[] calldata _windowIds)
+        external
+        view
+        returns (PairOi[] memory);
 
     /**
      * @dev Returns depths above and below the price for multiple pairs
@@ -128,10 +124,10 @@ interface IPriceImpactUtils is IPriceImpact {
      * @param _trader trader address
      * @param _index trade index
      */
-    function getTradePriceImpactInfo(
-        address _trader,
-        uint32 _index
-    ) external view returns (IPriceImpact.TradePriceImpactInfo memory);
+    function getTradePriceImpactInfo(address _trader, uint32 _index)
+        external
+        view
+        returns (IPriceImpact.TradePriceImpactInfo memory);
 
     /**
      * @dev Triggered when OiWindowsSettings is initialized (once)
@@ -174,10 +170,7 @@ interface IPriceImpactUtils is IPriceImpact {
      * @param newCurrentWindowId new current window ID corresponding to new window duration
      */
     event PriceImpactOiTransferredPairs(
-        uint256 pairsCount,
-        uint256 prevCurrentWindowId,
-        uint256 prevEarliestWindowId,
-        uint256 newCurrentWindowId
+        uint256 pairsCount, uint256 prevCurrentWindowId, uint256 prevEarliestWindowId, uint256 newCurrentWindowId
     );
 
     /**

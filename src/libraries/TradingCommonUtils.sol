@@ -27,12 +27,11 @@ library TradingCommonUtils {
      * @param _long true for long, false for short
      * @param _leverage trade leverage (1e3 precision)
      */
-    function getPnlPercent(
-        uint64 _openPrice,
-        uint64 _currentPrice,
-        bool _long,
-        uint24 _leverage
-    ) public pure returns (int256 p) {
+    function getPnlPercent(uint64 _openPrice, uint64 _currentPrice, bool _long, uint24 _leverage)
+        public
+        pure
+        returns (int256 p)
+    {
         int256 pricePrecision = int256(ConstantsUtils.P_10);
         int256 maxPnlP = int256(ConstantsUtils.MAX_PNL_P) * pricePrecision;
         int256 minPnlP = -100 * int256(ConstantsUtils.P_10);
@@ -42,9 +41,8 @@ library TradingCommonUtils {
         int256 leverage = int256(uint256(_leverage));
 
         p = _openPrice > 0
-            ? ((_long ? currentPrice - openPrice : openPrice - currentPrice) * 100 * pricePrecision * leverage) /
-                openPrice /
-                1e3
+            ? ((_long ? currentPrice - openPrice : openPrice - currentPrice) * 100 * pricePrecision * leverage) / openPrice
+                / 1e3
             : int256(0);
 
         p = p > maxPnlP ? maxPnlP : p < minPnlP ? minPnlP : p;
@@ -120,14 +118,10 @@ library TradingCommonUtils {
         int256 precisionDelta = int256(uint256(_collateralPrecisionDelta));
 
         // Multiply collateral by precisionDelta so we don't lose precision for low decimals
-        int256 value = (int256(_collateral) *
-            precisionDelta +
-            (int256(_collateral) * precisionDelta * _percentProfit) /
-            int256(ConstantsUtils.P_10) /
-            100) /
-            precisionDelta -
-            int256(_borrowingFeeCollateral) -
-            int256(_closingFeeCollateral);
+        int256 value = (
+            int256(_collateral) * precisionDelta
+                + (int256(_collateral) * precisionDelta * _percentProfit) / int256(ConstantsUtils.P_10) / 100
+        ) / precisionDelta - int256(_borrowingFeeCollateral) - int256(_closingFeeCollateral);
 
         int256 collateralLiqThreshold = (int256(_collateral) * int256(100 - ConstantsUtils.LIQ_THRESHOLD_P)) / 100;
 
@@ -142,11 +136,9 @@ library TradingCommonUtils {
      * @param _pairIndex pair index
      */
     function getMinPositionSizeCollateral(uint8 _collateralIndex, uint256 _pairIndex) public view returns (uint256) {
-        return
-            _getMultiCollatDiamond().getCollateralFromUsdNormalizedValue(
-                _collateralIndex,
-                _getMultiCollatDiamond().pairMinPositionSizeUsd(_pairIndex)
-            );
+        return _getMultiCollatDiamond().getCollateralFromUsdNormalizedValue(
+            _collateralIndex, _getMultiCollatDiamond().pairMinPositionSizeUsd(_pairIndex)
+        );
     }
 
     /**
@@ -155,14 +147,13 @@ library TradingCommonUtils {
      * @param _pairIndex pair index
      * @param _positionSizeCollateral trade position size in collateral tokens (collateral precision)
      */
-    function getPositionSizeCollateralBasis(
-        uint8 _collateralIndex,
-        uint256 _pairIndex,
-        uint256 _positionSizeCollateral
-    ) public view returns (uint256) {
+    function getPositionSizeCollateralBasis(uint8 _collateralIndex, uint256 _pairIndex, uint256 _positionSizeCollateral)
+        public
+        view
+        returns (uint256)
+    {
         uint256 minPositionSizeCollateral = getMinPositionSizeCollateral(_collateralIndex, _pairIndex);
-        return
-            _positionSizeCollateral > minPositionSizeCollateral ? _positionSizeCollateral : minPositionSizeCollateral;
+        return _positionSizeCollateral > minPositionSizeCollateral ? _positionSizeCollateral : minPositionSizeCollateral;
     }
 
     /**
@@ -178,15 +169,10 @@ library TradingCommonUtils {
         bool _long,
         uint256 _positionSizeCollateralDelta
     ) external view returns (bool) {
-        return
-            _getMultiCollatDiamond().getPairOiCollateral(_collateralIndex, _pairIndex, _long) +
-                _positionSizeCollateralDelta <=
-            _getMultiCollatDiamond().getPairMaxOiCollateral(_collateralIndex, _pairIndex) &&
-            _getMultiCollatDiamond().withinMaxBorrowingGroupOi(
-                _collateralIndex,
-                _pairIndex,
-                _long,
-                _positionSizeCollateralDelta
+        return _getMultiCollatDiamond().getPairOiCollateral(_collateralIndex, _pairIndex, _long)
+            + _positionSizeCollateralDelta <= _getMultiCollatDiamond().getPairMaxOiCollateral(_collateralIndex, _pairIndex)
+            && _getMultiCollatDiamond().withinMaxBorrowingGroupOi(
+                _collateralIndex, _pairIndex, _long, _positionSizeCollateralDelta
             );
     }
 
@@ -195,42 +181,41 @@ library TradingCommonUtils {
      * @param _trade trade input
      */
     function getTradeBorrowingFeeCollateral(ITradingStorage.Trade memory _trade) public view returns (uint256) {
-        return
-            _getMultiCollatDiamond().getTradeBorrowingFee(
-                IBorrowingFees.BorrowingFeeInput(
-                    _trade.collateralIndex,
-                    _trade.user,
-                    _trade.pairIndex,
-                    _trade.index,
-                    _trade.long,
-                    _trade.collateralAmount,
-                    _trade.leverage
-                )
-            );
+        return _getMultiCollatDiamond().getTradeBorrowingFee(
+            IBorrowingFees.BorrowingFeeInput(
+                _trade.collateralIndex,
+                _trade.user,
+                _trade.pairIndex,
+                _trade.index,
+                _trade.long,
+                _trade.collateralAmount,
+                _trade.leverage
+            )
+        );
     }
 
     /**
      * @dev Convenient wrapper to return trade liquidation price (1e10)
      * @param _trade trade input
      */
-    function getTradeLiquidationPrice(
-        ITradingStorage.Trade memory _trade,
-        bool _useBorrowingFees
-    ) public view returns (uint256) {
-        return
-            _getMultiCollatDiamond().getTradeLiquidationPrice(
-                IBorrowingFees.LiqPriceInput(
-                    _trade.collateralIndex,
-                    _trade.user,
-                    _trade.pairIndex,
-                    _trade.index,
-                    _trade.openPrice,
-                    _trade.long,
-                    _trade.collateralAmount,
-                    _trade.leverage,
-                    _useBorrowingFees
-                )
-            );
+    function getTradeLiquidationPrice(ITradingStorage.Trade memory _trade, bool _useBorrowingFees)
+        public
+        view
+        returns (uint256)
+    {
+        return _getMultiCollatDiamond().getTradeLiquidationPrice(
+            IBorrowingFees.LiqPriceInput(
+                _trade.collateralIndex,
+                _trade.user,
+                _trade.pairIndex,
+                _trade.index,
+                _trade.openPrice,
+                _trade.long,
+                _trade.collateralAmount,
+                _trade.leverage,
+                _useBorrowingFees
+            )
+        );
     }
 
     /**
@@ -266,18 +251,15 @@ library TradingCommonUtils {
      * @param _pairIndex index of pair
      * @param _positionSizeCollateral position size in collateral tokens (collateral precision)
      */
-    function getGovFeeCollateral(
-        address _trader,
-        uint32 _pairIndex,
-        uint256 _positionSizeCollateral
-    ) public view returns (uint256) {
-        return
-            _getMultiCollatDiamond().calculateFeeAmount(
-                _trader,
-                (_positionSizeCollateral * _getMultiCollatDiamond().pairOpenFeeP(_pairIndex)) /
-                    ConstantsUtils.P_10 /
-                    100
-            );
+    function getGovFeeCollateral(address _trader, uint32 _pairIndex, uint256 _positionSizeCollateral)
+        public
+        view
+        returns (uint256)
+    {
+        return _getMultiCollatDiamond().calculateFeeAmount(
+            _trader,
+            (_positionSizeCollateral * _getMultiCollatDiamond().pairOpenFeeP(_pairIndex)) / ConstantsUtils.P_10 / 100
+        );
     }
 
     /**
@@ -294,10 +276,9 @@ library TradingCommonUtils {
         uint256 vaultClosingFeeP = uint256(TradingCallbacksUtils._getStorage().vaultClosingFeeP);
         vaultClosingFeeCollateral = (_closingFeeCollateral * vaultClosingFeeP) / 100;
 
-        gnsStakingFeeCollateral =
-            (ConstantsUtils.isOrderTypeMarket(_orderType) ? _triggerFeeCollateral : (_triggerFeeCollateral * 8) / 10) +
-            (_closingFeeCollateral * (100 - vaultClosingFeeP)) /
-            100;
+        gnsStakingFeeCollateral = (
+            ConstantsUtils.isOrderTypeMarket(_orderType) ? _triggerFeeCollateral : (_triggerFeeCollateral * 8) / 10
+        ) + (_closingFeeCollateral * (100 - vaultClosingFeeP)) / 100;
     }
 
     /**
@@ -312,8 +293,9 @@ library TradingCommonUtils {
         for (uint256 i; i < pendingOrderTypes.length; ++i) {
             ITradingStorage.PendingOrderType orderType = pendingOrderTypes[i];
 
-            if (_getMultiCollatDiamond().getTradePendingOrderBlock(tradeId, orderType) > 0)
+            if (_getMultiCollatDiamond().getTradePendingOrderBlock(tradeId, orderType) > 0) {
                 revert ITradingInteractionsUtils.ConflictingPendingOrder(orderType);
+            }
         }
     }
 
@@ -336,9 +318,7 @@ library TradingCommonUtils {
     function transferCollateralFrom(uint8 _collateralIndex, address _from, uint256 _amountCollateral) public {
         if (_amountCollateral > 0) {
             IERC20(_getMultiCollatDiamond().getCollateral(_collateralIndex).collateral).safeTransferFrom(
-                _from,
-                address(this),
-                _amountCollateral
+                _from, address(this), _amountCollateral
             );
         }
     }
@@ -352,8 +332,7 @@ library TradingCommonUtils {
     function transferCollateralTo(uint8 _collateralIndex, address _to, uint256 _amountCollateral) public {
         if (_amountCollateral > 0) {
             IERC20(_getMultiCollatDiamond().getCollateral(_collateralIndex).collateral).safeTransfer(
-                _to,
-                _amountCollateral
+                _to, _amountCollateral
             );
         }
     }
@@ -382,8 +361,7 @@ library TradingCommonUtils {
     ) external returns (uint256 traderDebt) {
         if (_collateralSentToTrader > _availableCollateralInDiamond) {
             getGToken(_trade.collateralIndex).sendAssets(
-                uint256(_collateralSentToTrader - _availableCollateralInDiamond),
-                _trade.user
+                uint256(_collateralSentToTrader - _availableCollateralInDiamond), _trade.user
             );
             if (_availableCollateralInDiamond >= 0) {
                 transferCollateralTo(_trade.collateralIndex, _trade.user, uint256(_availableCollateralInDiamond));
@@ -392,8 +370,7 @@ library TradingCommonUtils {
             }
         } else {
             getGToken(_trade.collateralIndex).receiveAssets(
-                uint256(_availableCollateralInDiamond - _collateralSentToTrader),
-                _trade.user
+                uint256(_availableCollateralInDiamond - _collateralSentToTrader), _trade.user
             );
             if (_collateralSentToTrader >= 0) {
                 transferCollateralTo(_trade.collateralIndex, _trade.user, uint256(_collateralSentToTrader));
@@ -420,10 +397,8 @@ library TradingCommonUtils {
         uint256 _pairIndex,
         uint256 _positionSizeCollateral
     ) public {
-        uint256 usdNormalizedPositionSize = _getMultiCollatDiamond().getUsdNormalizedValue(
-            _collateralIndex,
-            _positionSizeCollateral
-        );
+        uint256 usdNormalizedPositionSize =
+            _getMultiCollatDiamond().getUsdNormalizedValue(_collateralIndex, _positionSizeCollateral);
         _getMultiCollatDiamond().updateTraderPoints(_trader, usdNormalizedPositionSize, _pairIndex);
     }
 
@@ -463,11 +438,9 @@ library TradingCommonUtils {
      * @param _trader address of trader
      * @param _govFeeCollateral position size in collateral tokens (collateral precision)
      */
-    function distributeExactGovFeeCollateral(
-        uint8 _collateralIndex,
-        address _trader,
-        uint256 _govFeeCollateral
-    ) public {
+    function distributeExactGovFeeCollateral(uint8 _collateralIndex, address _trader, uint256 _govFeeCollateral)
+        public
+    {
         TradingCallbacksUtils._getStorage().pendingGovFees[_collateralIndex] += _govFeeCollateral;
         emit ITradingCommonUtils.GovFeeCharged(_trader, _collateralIndex, _govFeeCollateral);
     }
@@ -478,14 +451,11 @@ library TradingCommonUtils {
      * @param _trader trader address
      * @param _amountCollateral amount of collateral tokens to distribute (collateral precision)
      */
-    function distributeGnsStakingFeeCollateral(
-        uint8 _collateralIndex,
-        address _trader,
-        uint256 _amountCollateral
-    ) public {
+    function distributeGnsStakingFeeCollateral(uint8 _collateralIndex, address _trader, uint256 _amountCollateral)
+        public
+    {
         IGNSStaking(AddressStoreUtils.getAddresses().gnsStaking).distributeReward(
-            _getMultiCollatDiamond().getCollateral(_collateralIndex).collateral,
-            _amountCollateral
+            _getMultiCollatDiamond().getCollateral(_collateralIndex).collateral, _amountCollateral
         );
         emit ITradingCommonUtils.GnsStakingFeeCharged(_trader, _collateralIndex, _amountCollateral);
     }
@@ -505,11 +475,8 @@ library TradingCommonUtils {
         uint256 _gnsPriceCollateral,
         uint128 _collateralPrecisionDelta
     ) public {
-        uint256 triggerFeeGns = convertCollateralToGns(
-            _triggerFeeCollateral,
-            _collateralPrecisionDelta,
-            _gnsPriceCollateral
-        );
+        uint256 triggerFeeGns =
+            convertCollateralToGns(_triggerFeeCollateral, _collateralPrecisionDelta, _gnsPriceCollateral);
         _getMultiCollatDiamond().distributeTriggerReward(triggerFeeGns);
 
         emit ITradingCommonUtils.TriggerFeeCharged(_trader, _collateralIndex, _triggerFeeCollateral);
@@ -529,11 +496,8 @@ library TradingCommonUtils {
         ITradingCallbacks.Values memory v;
         v.collateralPrecisionDelta = _getMultiCollatDiamond().getCollateral(_trade.collateralIndex).precisionDelta;
         v.gnsPriceCollateral = _getMultiCollatDiamond().getGnsPriceCollateralIndex(_trade.collateralIndex);
-        v.positionSizeCollateral = getPositionSizeCollateralBasis(
-            _trade.collateralIndex,
-            _trade.pairIndex,
-            _positionSizeCollateral
-        ); // Charge fees on max(min position size, trade position size)
+        v.positionSizeCollateral =
+            getPositionSizeCollateralBasis(_trade.collateralIndex, _trade.pairIndex, _positionSizeCollateral); // Charge fees on max(min position size, trade position size)
 
         // 1. Before charging any fee, re-calculate current trader fee tier cache
         updateFeeTierPoints(_trade.collateralIndex, _trade.user, _trade.pairIndex, _positionSizeCollateral);
@@ -566,9 +530,8 @@ library TradingCommonUtils {
         // 4. Calculate Market/Limit fee
         v.reward2 = _getMultiCollatDiamond().calculateFeeAmount(
             _trade.user,
-            (v.positionSizeCollateral * _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) /
-                100 /
-                ConstantsUtils.P_10
+            (v.positionSizeCollateral * _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) / 100
+                / ConstantsUtils.P_10
         );
 
         // 5. Deduct gov fee, GNS staking fee (previously dev fee), Market/Limit fee
@@ -580,20 +543,12 @@ library TradingCommonUtils {
             sendCollateralToVault(_trade.collateralIndex, v.reward3, _trade.user);
 
             distributeTriggerFeeGns(
-                _trade.user,
-                _trade.collateralIndex,
-                v.reward3,
-                v.gnsPriceCollateral,
-                v.collateralPrecisionDelta
+                _trade.user, _trade.collateralIndex, v.reward3, v.gnsPriceCollateral, v.collateralPrecisionDelta
             );
         }
 
         // 7. Distribute GNS staking fee (previous dev fee + market/limit fee - oracle reward)
-        distributeGnsStakingFeeCollateral(
-            _trade.collateralIndex,
-            _trade.user,
-            govFeeCollateral + v.reward2 - v.reward3
-        );
+        distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, govFeeCollateral + v.reward2 - v.reward3);
     }
 
     /**
@@ -608,43 +563,31 @@ library TradingCommonUtils {
         ITradingStorage.PendingOrderType _orderType
     ) external returns (ITradingCallbacks.Values memory values) {
         // 1. Calculate closing fees
-        values.positionSizeCollateral = getPositionSizeCollateralBasis(
-            _trade.collateralIndex,
-            _trade.pairIndex,
-            _positionSizeCollateral
-        ); // Charge fees on max(min position size, trade position size)
+        values.positionSizeCollateral =
+            getPositionSizeCollateralBasis(_trade.collateralIndex, _trade.pairIndex, _positionSizeCollateral); // Charge fees on max(min position size, trade position size)
 
         values.closingFeeCollateral = _orderType != ITradingStorage.PendingOrderType.LIQ_CLOSE
-            ? (values.positionSizeCollateral * _getMultiCollatDiamond().pairCloseFeeP(_trade.pairIndex)) /
-                100 /
-                ConstantsUtils.P_10
+            ? (values.positionSizeCollateral * _getMultiCollatDiamond().pairCloseFeeP(_trade.pairIndex)) / 100
+                / ConstantsUtils.P_10
             : (_trade.collateralAmount * 5) / 100;
 
         values.triggerFeeCollateral = _orderType != ITradingStorage.PendingOrderType.LIQ_CLOSE
-            ? (values.positionSizeCollateral * _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) /
-                100 /
-                ConstantsUtils.P_10
+            ? (values.positionSizeCollateral * _getMultiCollatDiamond().pairTriggerOrderFeeP(_trade.pairIndex)) / 100
+                / ConstantsUtils.P_10
             : values.closingFeeCollateral;
 
         // 2. Re-calculate current trader fee tier and apply it to closing fees
         updateFeeTierPoints(_trade.collateralIndex, _trade.user, _trade.pairIndex, _positionSizeCollateral);
         if (_orderType != ITradingStorage.PendingOrderType.LIQ_CLOSE) {
-            values.closingFeeCollateral = _getMultiCollatDiamond().calculateFeeAmount(
-                _trade.user,
-                values.closingFeeCollateral
-            );
-            values.triggerFeeCollateral = _getMultiCollatDiamond().calculateFeeAmount(
-                _trade.user,
-                values.triggerFeeCollateral
-            );
+            values.closingFeeCollateral =
+                _getMultiCollatDiamond().calculateFeeAmount(_trade.user, values.closingFeeCollateral);
+            values.triggerFeeCollateral =
+                _getMultiCollatDiamond().calculateFeeAmount(_trade.user, values.triggerFeeCollateral);
         }
 
         // 3. Calculate vault fee and GNS staking fee
-        (values.reward2, values.reward3) = getClosingFeesCollateral(
-            values.closingFeeCollateral,
-            values.triggerFeeCollateral,
-            _orderType
-        );
+        (values.reward2, values.reward3) =
+            getClosingFeesCollateral(values.closingFeeCollateral, values.triggerFeeCollateral, _orderType);
 
         // 4. If trade collateral is enough to pay min fee, distribute closing fees (otherwise charged as negative PnL)
         values.collateralLeftInStorage = _trade.collateralAmount;
@@ -684,16 +627,15 @@ library TradingCommonUtils {
         uint256 _pairOpenFeeP,
         uint256 _gnsPriceCollateral
     ) public returns (uint256 rewardCollateral) {
-        return
-            _getMultiCollatDiamond().getCollateralFromUsdNormalizedValue(
-                _collateralIndex,
-                _getMultiCollatDiamond().distributeReferralReward(
-                    _trader,
-                    _getMultiCollatDiamond().getUsdNormalizedValue(_collateralIndex, _positionSizeCollateral),
-                    _pairOpenFeeP,
-                    _getMultiCollatDiamond().getGnsPriceUsd(_collateralIndex, _gnsPriceCollateral)
-                )
-            );
+        return _getMultiCollatDiamond().getCollateralFromUsdNormalizedValue(
+            _collateralIndex,
+            _getMultiCollatDiamond().distributeReferralReward(
+                _trader,
+                _getMultiCollatDiamond().getUsdNormalizedValue(_collateralIndex, _positionSizeCollateral),
+                _pairOpenFeeP,
+                _getMultiCollatDiamond().getGnsPriceUsd(_collateralIndex, _gnsPriceCollateral)
+            )
+        );
     }
 
     // Open interests

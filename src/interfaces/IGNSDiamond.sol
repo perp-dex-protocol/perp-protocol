@@ -10,7 +10,4 @@ import "./types/ITypes.sol";
  * @custom:version 8
  * @dev the non-expanded interface for multi-collat diamond, only contains types/structs/enums
  */
-
-interface IGNSDiamond is IGNSAddressStore, IGNSDiamondCut, IGNSDiamondLoupe, ITypes {
-
-}
+interface IGNSDiamond is IGNSAddressStore, IGNSDiamondCut, IGNSDiamondLoupe, ITypes {}

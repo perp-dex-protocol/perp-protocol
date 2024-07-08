@@ -73,7 +73,7 @@ interface IBorrowingFees {
         uint256 leverage; // 1e3
     }
 
-   struct LiqPriceInput {
+    struct LiqPriceInput {
         uint8 collateralIndex;
         address trader;
         uint16 pairIndex;

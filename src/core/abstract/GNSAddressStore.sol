@@ -47,11 +47,10 @@ abstract contract GNSAddressStore is Initializable, IGNSAddressStore {
     }
 
     /// @inheritdoc IGNSAddressStore
-    function setRoles(
-        address[] calldata _accounts,
-        Role[] calldata _roles,
-        bool[] calldata _values
-    ) external onlyRole(Role.ROLES_MANAGER) {
+    function setRoles(address[] calldata _accounts, Role[] calldata _roles, bool[] calldata _values)
+        external
+        onlyRole(Role.ROLES_MANAGER)
+    {
         if (_accounts.length != _roles.length || _accounts.length != _values.length) {
             revert IGeneralErrors.InvalidInputLength();
         }

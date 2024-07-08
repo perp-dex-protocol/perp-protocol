@@ -21,11 +21,10 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     // Management Setters
 
     /// @inheritdoc IBorrowingFeesUtils
-    function setBorrowingPairParams(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        BorrowingPairParams calldata _value
-    ) external onlyRole(Role.MANAGER) {
+    function setBorrowingPairParams(uint8 _collateralIndex, uint16 _pairIndex, BorrowingPairParams calldata _value)
+        external
+        onlyRole(Role.MANAGER)
+    {
         BorrowingFeesUtils.setBorrowingPairParams(_collateralIndex, _pairIndex, _value);
     }
 
@@ -39,11 +38,10 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function setBorrowingGroupParams(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        BorrowingGroupParams calldata _value
-    ) external onlyRole(Role.MANAGER) {
+    function setBorrowingGroupParams(uint8 _collateralIndex, uint16 _groupIndex, BorrowingGroupParams calldata _value)
+        external
+        onlyRole(Role.MANAGER)
+    {
         BorrowingFeesUtils.setBorrowingGroupParams(_collateralIndex, _groupIndex, _value);
     }
 
@@ -69,13 +67,7 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
         bool _long
     ) external virtual onlySelf {
         BorrowingFeesUtils.handleTradeBorrowingCallback(
-            _collateralIndex,
-            _trader,
-            _pairIndex,
-            _index,
-            _positionSizeCollateral,
-            _open,
-            _long
+            _collateralIndex, _trader, _pairIndex, _index, _positionSizeCollateral, _open, _long
         );
     }
 
@@ -93,20 +85,20 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     // Getters
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingPairPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _currentBlock
-    ) public view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta) {
+    function getBorrowingPairPendingAccFees(uint8 _collateralIndex, uint16 _pairIndex, uint256 _currentBlock)
+        public
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta)
+    {
         return BorrowingFeesUtils.getBorrowingPairPendingAccFees(_collateralIndex, _pairIndex, _currentBlock);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingGroupPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        uint256 _currentBlock
-    ) public view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta) {
+    function getBorrowingGroupPendingAccFees(uint8 _collateralIndex, uint16 _groupIndex, uint256 _currentBlock)
+        public
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta)
+    {
         return BorrowingFeesUtils.getBorrowingGroupPendingAccFees(_collateralIndex, _groupIndex, _currentBlock);
     }
 
@@ -121,27 +113,29 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getPairOisCollateral(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) public view returns (uint256 longOi, uint256 shortOi) {
+    function getPairOisCollateral(uint8 _collateralIndex, uint16 _pairIndex)
+        public
+        view
+        returns (uint256 longOi, uint256 shortOi)
+    {
         return BorrowingFeesUtils.getPairOisCollateral(_collateralIndex, _pairIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingPairGroupIndex(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) public view returns (uint16 groupIndex) {
+    function getBorrowingPairGroupIndex(uint8 _collateralIndex, uint16 _pairIndex)
+        public
+        view
+        returns (uint16 groupIndex)
+    {
         return BorrowingFeesUtils.getBorrowingPairGroupIndex(_collateralIndex, _pairIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getPairOiCollateral(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        bool _long
-    ) external view returns (uint256) {
+    function getPairOiCollateral(uint8 _collateralIndex, uint16 _pairIndex, bool _long)
+        external
+        view
+        returns (uint256)
+    {
         return BorrowingFeesUtils.getPairOiCollateral(_collateralIndex, _pairIndex, _long);
     }
 
@@ -157,18 +151,20 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingGroup(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) external view returns (BorrowingData memory) {
+    function getBorrowingGroup(uint8 _collateralIndex, uint16 _groupIndex)
+        external
+        view
+        returns (BorrowingData memory)
+    {
         return BorrowingFeesUtils.getBorrowingGroup(_collateralIndex, _groupIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingGroupOi(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) external view returns (OpenInterest memory) {
+    function getBorrowingGroupOi(uint8 _collateralIndex, uint16 _groupIndex)
+        external
+        view
+        returns (OpenInterest memory)
+    {
         return BorrowingFeesUtils.getBorrowingGroupOi(_collateralIndex, _groupIndex);
     }
 
@@ -178,39 +174,47 @@ contract GNSBorrowingFees is GNSAddressStore, IBorrowingFeesUtils {
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingPairOi(uint8 _collateralIndex, uint16 _pairIndex) external view returns (OpenInterest memory) {
+    function getBorrowingPairOi(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (OpenInterest memory)
+    {
         return BorrowingFeesUtils.getBorrowingPairOi(_collateralIndex, _pairIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingPairGroups(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) external view returns (BorrowingPairGroup[] memory) {
+    function getBorrowingPairGroups(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (BorrowingPairGroup[] memory)
+    {
         return BorrowingFeesUtils.getBorrowingPairGroups(_collateralIndex, _pairIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getAllBorrowingPairs(
-        uint8 _collateralIndex
-    ) external view returns (BorrowingData[] memory, OpenInterest[] memory, BorrowingPairGroup[][] memory) {
+    function getAllBorrowingPairs(uint8 _collateralIndex)
+        external
+        view
+        returns (BorrowingData[] memory, OpenInterest[] memory, BorrowingPairGroup[][] memory)
+    {
         return BorrowingFeesUtils.getAllBorrowingPairs(_collateralIndex);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingGroups(
-        uint8 _collateralIndex,
-        uint16[] calldata _indices
-    ) external view returns (BorrowingData[] memory, OpenInterest[] memory) {
+    function getBorrowingGroups(uint8 _collateralIndex, uint16[] calldata _indices)
+        external
+        view
+        returns (BorrowingData[] memory, OpenInterest[] memory)
+    {
         return BorrowingFeesUtils.getBorrowingGroups(_collateralIndex, _indices);
     }
 
     /// @inheritdoc IBorrowingFeesUtils
-    function getBorrowingInitialAccFees(
-        uint8 _collateralIndex,
-        address _trader,
-        uint32 _index
-    ) external view returns (BorrowingInitialAccFees memory) {
+    function getBorrowingInitialAccFees(uint8 _collateralIndex, address _trader, uint32 _index)
+        external
+        view
+        returns (BorrowingInitialAccFees memory)
+    {
         return BorrowingFeesUtils.getBorrowingInitialAccFees(_collateralIndex, _trader, _index);
     }
 

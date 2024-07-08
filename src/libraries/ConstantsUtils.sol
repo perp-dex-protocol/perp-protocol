@@ -28,13 +28,14 @@ library ConstantsUtils {
      * @dev Returns pending order type (market open/limit open/stop open) for a trade type (trade/limit/stop)
      * @param _tradeType the trade type
      */
-    function getPendingOpenOrderType(
-        ITradingStorage.TradeType _tradeType
-    ) internal pure returns (ITradingStorage.PendingOrderType) {
-        return
-            _tradeType == ITradingStorage.TradeType.TRADE
-                ? ITradingStorage.PendingOrderType.MARKET_OPEN
-                : _tradeType == ITradingStorage.TradeType.LIMIT
+    function getPendingOpenOrderType(ITradingStorage.TradeType _tradeType)
+        internal
+        pure
+        returns (ITradingStorage.PendingOrderType)
+    {
+        return _tradeType == ITradingStorage.TradeType.TRADE
+            ? ITradingStorage.PendingOrderType.MARKET_OPEN
+            : _tradeType == ITradingStorage.TradeType.LIMIT
                 ? ITradingStorage.PendingOrderType.LIMIT_OPEN
                 : ITradingStorage.PendingOrderType.STOP_OPEN;
     }

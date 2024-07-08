@@ -56,10 +56,10 @@ contract GNSPriceAggregator is GNSAddressStore, IPriceAggregatorUtils {
     }
 
     /// @inheritdoc IPriceAggregatorUtils
-    function updateCollateralGnsLiquidityPool(
-        uint8 _collateralIndex,
-        LiquidityPoolInput calldata _liquidityPoolInput
-    ) external onlyRole(Role.GOV) {
+    function updateCollateralGnsLiquidityPool(uint8 _collateralIndex, LiquidityPoolInput calldata _liquidityPoolInput)
+        external
+        onlyRole(Role.GOV)
+    {
         PriceAggregatorUtils.updateCollateralGnsLiquidityPool(_collateralIndex, _liquidityPoolInput);
     }
 
@@ -110,12 +110,7 @@ contract GNSPriceAggregator is GNSAddressStore, IPriceAggregatorUtils {
         uint256 _fromBlock
     ) external virtual onlySelf {
         PriceAggregatorUtils.getPrice(
-            _collateralIndex,
-            _pairIndex,
-            _orderId,
-            _orderType,
-            _positionSizeCollateral,
-            _fromBlock
+            _collateralIndex, _pairIndex, _orderId, _orderType, _positionSizeCollateral, _fromBlock
         );
     }
 
@@ -132,11 +127,11 @@ contract GNSPriceAggregator is GNSAddressStore, IPriceAggregatorUtils {
     // Getters
 
     /// @inheritdoc IPriceAggregatorUtils
-    function getLinkFee(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _positionSizeCollateral
-    ) external view returns (uint256) {
+    function getLinkFee(uint8 _collateralIndex, uint16 _pairIndex, uint256 _positionSizeCollateral)
+        external
+        view
+        returns (uint256)
+    {
         return PriceAggregatorUtils.getLinkFee(_collateralIndex, _pairIndex, _positionSizeCollateral);
     }
 
@@ -151,10 +146,11 @@ contract GNSPriceAggregator is GNSAddressStore, IPriceAggregatorUtils {
     }
 
     /// @inheritdoc IPriceAggregatorUtils
-    function getCollateralFromUsdNormalizedValue(
-        uint8 _collateralIndex,
-        uint256 _normalizedValue
-    ) external view returns (uint256) {
+    function getCollateralFromUsdNormalizedValue(uint8 _collateralIndex, uint256 _normalizedValue)
+        external
+        view
+        returns (uint256)
+    {
         return PriceAggregatorUtils.getCollateralFromUsdNormalizedValue(_collateralIndex, _normalizedValue);
     }
 
@@ -229,9 +225,11 @@ contract GNSPriceAggregator is GNSAddressStore, IPriceAggregatorUtils {
     }
 
     /// @inheritdoc IPriceAggregatorUtils
-    function getPriceAggregatorOrderAnswers(
-        ITradingStorage.Id calldata _orderId
-    ) external view returns (OrderAnswer[] memory) {
+    function getPriceAggregatorOrderAnswers(ITradingStorage.Id calldata _orderId)
+        external
+        view
+        returns (OrderAnswer[] memory)
+    {
         return PriceAggregatorUtils.getPriceAggregatorOrderAnswers(_orderId);
     }
 

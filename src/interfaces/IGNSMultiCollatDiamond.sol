@@ -30,6 +30,4 @@ interface IGNSMultiCollatDiamond is
     ITradingCallbacksUtils,
     IBorrowingFeesUtils,
     IPriceAggregatorUtils
-{
-
-}
+{}

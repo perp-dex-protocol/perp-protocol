@@ -14,7 +14,6 @@ import "./StorageUtils.sol";
  * @custom:version 8
  * @dev GNSTriggerRewards facet internal library
  */
-
 library TriggerRewardsUtils {
     using SafeERC20 for IERC20;
 
@@ -61,8 +60,9 @@ library TriggerRewardsUtils {
         ITriggerRewards.TriggerRewardsStorage storage s = _getStorage();
 
         IChainlinkOracle oracle = IChainlinkOracle(_oracle);
-        if (oracle.owner() != msg.sender && !oracle.getAuthorizationStatus(msg.sender))
+        if (oracle.owner() != msg.sender && !oracle.getAuthorizationStatus(msg.sender)) {
             revert IGeneralErrors.NotAuthorized();
+        }
 
         uint256 pendingRewardsGns = s.pendingRewardsGns[_oracle];
         if (pendingRewardsGns == 0) revert ITriggerRewardsUtils.NoPendingTriggerRewards();

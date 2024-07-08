@@ -66,12 +66,8 @@ interface ITradingStorageUtils is ITradingStorage {
      * @param _leverage new leverage value
      * @param _openPrice new open price value
      */
-    function updateTradePosition(
-        Id memory _tradeId,
-        uint120 _collateralAmount,
-        uint24 _leverage,
-        uint64 _openPrice
-    ) external;
+    function updateTradePosition(Id memory _tradeId, uint120 _collateralAmount, uint24 _leverage, uint64 _openPrice)
+        external;
 
     /**
      * @dev Updates an open order details (limit/stop)
@@ -81,13 +77,8 @@ interface ITradingStorageUtils is ITradingStorage {
      * @param _sl new stop loss price (1e10)
      * @param _maxSlippageP new max slippage % value (1e3)
      */
-    function updateOpenOrderDetails(
-        Id memory _tradeId,
-        uint64 _openPrice,
-        uint64 _tp,
-        uint64 _sl,
-        uint16 _maxSlippageP
-    ) external;
+    function updateOpenOrderDetails(Id memory _tradeId, uint64 _openPrice, uint64 _tp, uint64 _sl, uint16 _maxSlippageP)
+        external;
 
     /**
      * @dev Updates the take profit of an open trade
@@ -237,7 +228,10 @@ interface ITradingStorageUtils is ITradingStorage {
      * @param _tradeId id of the trade
      * @param _orderType pending order type to check
      */
-    function getTradePendingOrderBlock(Id memory _tradeId, PendingOrderType _orderType) external view returns (uint256);
+    function getTradePendingOrderBlock(Id memory _tradeId, PendingOrderType _orderType)
+        external
+        view
+        returns (uint256);
 
     /**
      * @dev Returns the counters of a trader (currentIndex / open count for trades/tradeInfos and pendingOrders mappings)
@@ -309,12 +303,7 @@ interface ITradingStorageUtils is ITradingStorage {
      * @param openPrice new open price value if present
      */
     event TradePositionUpdated(
-        Id tradeId,
-        uint120 collateralAmount,
-        uint24 leverage,
-        uint64 openPrice,
-        uint64 newTp,
-        uint64 newSl
+        Id tradeId, uint120 collateralAmount, uint24 leverage, uint64 openPrice, uint64 newTp, uint64 newSl
     );
 
     /**

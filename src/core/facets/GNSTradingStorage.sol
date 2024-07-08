@@ -53,18 +53,21 @@ contract GNSTradingStorage is GNSAddressStore, ITradingStorageUtils {
     // Interactions
 
     /// @inheritdoc ITradingStorageUtils
-    function storeTrade(
-        Trade memory _trade,
-        TradeInfo memory _tradeInfo
-    ) external virtual onlySelf returns (Trade memory) {
+    function storeTrade(Trade memory _trade, TradeInfo memory _tradeInfo)
+        external
+        virtual
+        onlySelf
+        returns (Trade memory)
+    {
         return TradingStorageUtils.storeTrade(_trade, _tradeInfo);
     }
 
     /// @inheritdoc ITradingStorageUtils
-    function updateTradeCollateralAmount(
-        ITradingStorage.Id memory _tradeId,
-        uint120 _collateralAmount
-    ) external virtual onlySelf {
+    function updateTradeCollateralAmount(ITradingStorage.Id memory _tradeId, uint120 _collateralAmount)
+        external
+        virtual
+        onlySelf
+    {
         TradingStorageUtils.updateTradeCollateralAmount(_tradeId, _collateralAmount);
     }
 
@@ -105,9 +108,12 @@ contract GNSTradingStorage is GNSAddressStore, ITradingStorageUtils {
     }
 
     /// @inheritdoc ITradingStorageUtils
-    function storePendingOrder(
-        PendingOrder memory _pendingOrder
-    ) external virtual onlySelf returns (PendingOrder memory) {
+    function storePendingOrder(PendingOrder memory _pendingOrder)
+        external
+        virtual
+        onlySelf
+        returns (PendingOrder memory)
+    {
         return TradingStorageUtils.storePendingOrder(_pendingOrder);
     }
 
@@ -209,10 +215,11 @@ contract GNSTradingStorage is GNSAddressStore, ITradingStorageUtils {
     }
 
     /// @inheritdoc ITradingStorageUtils
-    function getTradePendingOrderBlock(
-        Id memory _tradeId,
-        PendingOrderType _orderType
-    ) external view returns (uint256) {
+    function getTradePendingOrderBlock(Id memory _tradeId, PendingOrderType _orderType)
+        external
+        view
+        returns (uint256)
+    {
         return TradingStorageUtils.getTradePendingOrderBlock(_tradeId, _orderType);
     }
 

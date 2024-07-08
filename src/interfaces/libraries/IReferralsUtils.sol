@@ -228,11 +228,7 @@ interface IReferralsUtils is IReferrals {
      * @param amountValueUsd USD value of GNS reward (1e18 precision)
      */
     event AllyRewardDistributed(
-        address indexed ally,
-        address indexed trader,
-        uint256 volumeUsd,
-        uint256 amountGns,
-        uint256 amountValueUsd
+        address indexed ally, address indexed trader, uint256 volumeUsd, uint256 amountGns, uint256 amountValueUsd
     );
 
     /**
@@ -244,11 +240,7 @@ interface IReferralsUtils is IReferrals {
      * @param amountValueUsd USD value of GNS reward (1e18 precision)
      */
     event ReferrerRewardDistributed(
-        address indexed referrer,
-        address indexed trader,
-        uint256 volumeUsd,
-        uint256 amountGns,
-        uint256 amountValueUsd
+        address indexed referrer, address indexed trader, uint256 volumeUsd, uint256 amountGns, uint256 amountValueUsd
     );
 
     /**

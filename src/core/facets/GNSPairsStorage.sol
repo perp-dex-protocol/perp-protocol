@@ -51,10 +51,10 @@ contract GNSPairsStorage is GNSAddressStore, IPairsStorageUtils {
     }
 
     /// @inheritdoc IPairsStorageUtils
-    function setPairCustomMaxLeverages(
-        uint256[] calldata _indices,
-        uint256[] calldata _values
-    ) external onlyRole(Role.MANAGER) {
+    function setPairCustomMaxLeverages(uint256[] calldata _indices, uint256[] calldata _values)
+        external
+        onlyRole(Role.MANAGER)
+    {
         PairsStorageUtils.setPairCustomMaxLeverages(_indices, _values);
     }
 

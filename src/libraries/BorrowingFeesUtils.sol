@@ -97,13 +97,7 @@ library BorrowingFeesUtils {
         if (_open) resetTradeBorrowingFees(_collateralIndex, _trader, _pairIndex, _index, _long);
 
         emit IBorrowingFeesUtils.TradeBorrowingCallbackHandled(
-            _collateralIndex,
-            _trader,
-            _pairIndex,
-            _index,
-            _open,
-            _long,
-            _positionSizeCollateral
+            _collateralIndex, _trader, _pairIndex, _index, _open, _long, _positionSizeCollateral
         );
     }
 
@@ -119,15 +113,10 @@ library BorrowingFeesUtils {
     ) internal validCollateralIndex(_collateralIndex) {
         uint256 currentBlock = ChainUtils.getBlockNumber();
 
-        (uint64 pairAccFeeLong, uint64 pairAccFeeShort, ) = getBorrowingPairPendingAccFees(
-            _collateralIndex,
-            _pairIndex,
-            currentBlock
-        );
-        (uint64 groupAccFeeLong, uint64 groupAccFeeShort, ) = getBorrowingGroupPendingAccFees(
-            _collateralIndex,
-            getBorrowingPairGroupIndex(_collateralIndex, _pairIndex),
-            currentBlock
+        (uint64 pairAccFeeLong, uint64 pairAccFeeShort,) =
+            getBorrowingPairPendingAccFees(_collateralIndex, _pairIndex, currentBlock);
+        (uint64 groupAccFeeLong, uint64 groupAccFeeShort,) = getBorrowingGroupPendingAccFees(
+            _collateralIndex, getBorrowingPairGroupIndex(_collateralIndex, _pairIndex), currentBlock
         );
 
         IBorrowingFees.BorrowingInitialAccFees memory initialFees = IBorrowingFees.BorrowingInitialAccFees(
@@ -140,24 +129,18 @@ library BorrowingFeesUtils {
         _getStorage().initialAccFees[_collateralIndex][_trader][_index] = initialFees;
 
         emit IBorrowingFeesUtils.BorrowingInitialAccFeesStored(
-            _collateralIndex,
-            _trader,
-            _pairIndex,
-            _index,
-            _long,
-            initialFees.accPairFee,
-            initialFees.accGroupFee
+            _collateralIndex, _trader, _pairIndex, _index, _long, initialFees.accPairFee, initialFees.accGroupFee
         );
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingPairPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _currentBlock
-    ) internal view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta) {
+    function getBorrowingPairPendingAccFees(uint8 _collateralIndex, uint16 _pairIndex, uint256 _currentBlock)
+        internal
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta)
+    {
         IBorrowingFees.BorrowingFeesStorage storage s = _getStorage();
         IBorrowingFees.BorrowingData memory pair = s.pairs[_collateralIndex][_pairIndex];
 
@@ -182,11 +165,11 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingGroupPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        uint256 _currentBlock
-    ) internal view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta) {
+    function getBorrowingGroupPendingAccFees(uint8 _collateralIndex, uint16 _groupIndex, uint256 _currentBlock)
+        internal
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta)
+    {
         IBorrowingFees.BorrowingFeesStorage storage s = _getStorage();
 
         IBorrowingFees.BorrowingData memory group = s.groups[_collateralIndex][_groupIndex];
@@ -213,15 +196,15 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getTradeBorrowingFee(
-        IBorrowingFees.BorrowingFeeInput memory _input
-    ) internal view returns (uint256 feeAmountCollateral) {
-        IBorrowingFees.BorrowingInitialAccFees memory initialFees = _getStorage().initialAccFees[
-            _input.collateralIndex
-        ][_input.trader][_input.index];
-        IBorrowingFees.BorrowingPairGroup[] memory pairGroups = _getStorage().pairGroups[_input.collateralIndex][
-            _input.pairIndex
-        ];
+    function getTradeBorrowingFee(IBorrowingFees.BorrowingFeeInput memory _input)
+        internal
+        view
+        returns (uint256 feeAmountCollateral)
+    {
+        IBorrowingFees.BorrowingInitialAccFees memory initialFees =
+            _getStorage().initialAccFees[_input.collateralIndex][_input.trader][_input.index];
+        IBorrowingFees.BorrowingPairGroup[] memory pairGroups =
+            _getStorage().pairGroups[_input.collateralIndex][_input.pairIndex];
 
         IBorrowingFees.BorrowingPairGroup memory firstPairGroup;
         if (pairGroups.length > 0) {
@@ -232,16 +215,15 @@ library BorrowingFeesUtils {
 
         // If pair has had no group after trade was opened, initialize with pair borrowing fee
         if (pairGroups.length == 0 || firstPairGroup.block > initialFees.block) {
-            borrowingFeeP = ((
-                pairGroups.length == 0
-                    ? _getBorrowingPairPendingAccFee(
-                        _input.collateralIndex,
-                        _input.pairIndex,
-                        ChainUtils.getBlockNumber(),
-                        _input.long
-                    )
-                    : (_input.long ? firstPairGroup.pairAccFeeLong : firstPairGroup.pairAccFeeShort)
-            ) - initialFees.accPairFee);
+            borrowingFeeP = (
+                (
+                    pairGroups.length == 0
+                        ? _getBorrowingPairPendingAccFee(
+                            _input.collateralIndex, _input.pairIndex, ChainUtils.getBlockNumber(), _input.long
+                        )
+                        : (_input.long ? firstPairGroup.pairAccFeeLong : firstPairGroup.pairAccFeeShort)
+                ) - initialFees.accPairFee
+            );
         }
 
         // Sum of max(pair fee, group fee) for all groups the pair was in while trade was open
@@ -269,15 +251,15 @@ library BorrowingFeesUtils {
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
     function getTradeLiquidationPrice(IBorrowingFees.LiqPriceInput calldata _input) internal view returns (uint256) {
-        uint256 closingFeesCollateral = (TradingCommonUtils.getPositionSizeCollateralBasis(
-            _input.collateralIndex,
-            _input.pairIndex,
-            (_input.collateral * _input.leverage) / 1e3
-        ) *
-            (_getMultiCollatDiamond().pairCloseFeeP(_input.pairIndex) +
-                _getMultiCollatDiamond().pairTriggerOrderFeeP(_input.pairIndex))) /
-            ConstantsUtils.P_10 /
-            100;
+        uint256 closingFeesCollateral = (
+            TradingCommonUtils.getPositionSizeCollateralBasis(
+                _input.collateralIndex, _input.pairIndex, (_input.collateral * _input.leverage) / 1e3
+            )
+                * (
+                    _getMultiCollatDiamond().pairCloseFeeP(_input.pairIndex)
+                        + _getMultiCollatDiamond().pairTriggerOrderFeeP(_input.pairIndex)
+                )
+        ) / ConstantsUtils.P_10 / 100;
 
         uint256 borrowingFeesCollateral = _input.useBorrowingFees
             ? getTradeBorrowingFee(
@@ -293,28 +275,27 @@ library BorrowingFeesUtils {
             )
             : 0;
 
-        return
-            _getTradeLiquidationPrice(
-                _input.openPrice,
-                _input.long,
-                _input.collateral,
-                _input.leverage,
-                borrowingFeesCollateral + closingFeesCollateral,
-                _getMultiCollatDiamond().getCollateral(_input.collateralIndex).precisionDelta
-            );
+        return _getTradeLiquidationPrice(
+            _input.openPrice,
+            _input.long,
+            _input.collateral,
+            _input.leverage,
+            borrowingFeesCollateral + closingFeesCollateral,
+            _getMultiCollatDiamond().getCollateral(_input.collateralIndex).precisionDelta
+        );
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getPairOisCollateral(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) internal view returns (uint256 longOiCollateral, uint256 shortOiCollateral) {
+    function getPairOisCollateral(uint8 _collateralIndex, uint16 _pairIndex)
+        internal
+        view
+        returns (uint256 longOiCollateral, uint256 shortOiCollateral)
+    {
         IBorrowingFees.OpenInterest storage pairOi = _getStorage().pairOis[_collateralIndex][_pairIndex];
-        ITradingStorageUtils.Collateral memory collateralConfig = _getMultiCollatDiamond().getCollateral(
-            _collateralIndex
-        );
+        ITradingStorageUtils.Collateral memory collateralConfig =
+            _getMultiCollatDiamond().getCollateral(_collateralIndex);
         return (
             (pairOi.long * collateralConfig.precision) / ConstantsUtils.P_10,
             (pairOi.short * collateralConfig.precision) / ConstantsUtils.P_10
@@ -324,10 +305,11 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingPairGroupIndex(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) internal view returns (uint16 groupIndex) {
+    function getBorrowingPairGroupIndex(uint8 _collateralIndex, uint16 _pairIndex)
+        internal
+        view
+        returns (uint16 groupIndex)
+    {
         IBorrowingFees.BorrowingPairGroup[] memory pairGroups = _getStorage().pairGroups[_collateralIndex][_pairIndex];
         return pairGroups.length == 0 ? 0 : pairGroups[pairGroups.length - 1].groupIndex;
     }
@@ -335,11 +317,11 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getPairOiCollateral(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        bool _long
-    ) internal view returns (uint256) {
+    function getPairOiCollateral(uint8 _collateralIndex, uint16 _pairIndex, bool _long)
+        internal
+        view
+        returns (uint256)
+    {
         (uint256 longOiCollateral, uint256 shortOiCollateral) = getPairOisCollateral(_collateralIndex, _pairIndex);
         return _long ? longOiCollateral : shortOiCollateral;
     }
@@ -353,74 +335,76 @@ library BorrowingFeesUtils {
         bool _long,
         uint256 _positionSizeCollateral
     ) internal view returns (bool) {
-        IBorrowingFees.OpenInterest memory groupOi = _getStorage().groupOis[_collateralIndex][
-            getBorrowingPairGroupIndex(_collateralIndex, _pairIndex)
-        ];
+        IBorrowingFees.OpenInterest memory groupOi =
+            _getStorage().groupOis[_collateralIndex][getBorrowingPairGroupIndex(_collateralIndex, _pairIndex)];
 
-        return
-            (groupOi.max == 0) ||
-            ((_long ? groupOi.long : groupOi.short) +
-                (_positionSizeCollateral * ConstantsUtils.P_10) /
-                _getMultiCollatDiamond().getCollateral(_collateralIndex).precision <=
-                groupOi.max);
+        return (groupOi.max == 0)
+            || (
+                (_long ? groupOi.long : groupOi.short)
+                    + (_positionSizeCollateral * ConstantsUtils.P_10)
+                        / _getMultiCollatDiamond().getCollateral(_collateralIndex).precision <= groupOi.max
+            );
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingGroup(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) internal view returns (IBorrowingFees.BorrowingData memory) {
+    function getBorrowingGroup(uint8 _collateralIndex, uint16 _groupIndex)
+        internal
+        view
+        returns (IBorrowingFees.BorrowingData memory)
+    {
         return _getStorage().groups[_collateralIndex][_groupIndex];
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingGroupOi(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) internal view returns (IBorrowingFees.OpenInterest memory) {
+    function getBorrowingGroupOi(uint8 _collateralIndex, uint16 _groupIndex)
+        internal
+        view
+        returns (IBorrowingFees.OpenInterest memory)
+    {
         return _getStorage().groupOis[_collateralIndex][_groupIndex];
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingPair(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) internal view returns (IBorrowingFees.BorrowingData memory) {
+    function getBorrowingPair(uint8 _collateralIndex, uint16 _pairIndex)
+        internal
+        view
+        returns (IBorrowingFees.BorrowingData memory)
+    {
         return _getStorage().pairs[_collateralIndex][_pairIndex];
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingPairOi(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) internal view returns (IBorrowingFees.OpenInterest memory) {
+    function getBorrowingPairOi(uint8 _collateralIndex, uint16 _pairIndex)
+        internal
+        view
+        returns (IBorrowingFees.OpenInterest memory)
+    {
         return _getStorage().pairOis[_collateralIndex][_pairIndex];
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingPairGroups(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) internal view returns (IBorrowingFees.BorrowingPairGroup[] memory) {
+    function getBorrowingPairGroups(uint8 _collateralIndex, uint16 _pairIndex)
+        internal
+        view
+        returns (IBorrowingFees.BorrowingPairGroup[] memory)
+    {
         return _getStorage().pairGroups[_collateralIndex][_pairIndex];
     }
 
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getAllBorrowingPairs(
-        uint8 _collateralIndex
-    )
+    function getAllBorrowingPairs(uint8 _collateralIndex)
         internal
         view
         returns (
@@ -448,10 +432,11 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingGroups(
-        uint8 _collateralIndex,
-        uint16[] calldata _indices
-    ) internal view returns (IBorrowingFees.BorrowingData[] memory, IBorrowingFees.OpenInterest[] memory) {
+    function getBorrowingGroups(uint8 _collateralIndex, uint16[] calldata _indices)
+        internal
+        view
+        returns (IBorrowingFees.BorrowingData[] memory, IBorrowingFees.OpenInterest[] memory)
+    {
         IBorrowingFees.BorrowingFeesStorage storage s = _getStorage();
 
         uint256 len = _indices.length;
@@ -469,11 +454,11 @@ library BorrowingFeesUtils {
     /**
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
-    function getBorrowingInitialAccFees(
-        uint8 _collateralIndex,
-        address _trader,
-        uint32 _index
-    ) internal view returns (IBorrowingFees.BorrowingInitialAccFees memory) {
+    function getBorrowingInitialAccFees(uint8 _collateralIndex, address _trader, uint32 _index)
+        internal
+        view
+        returns (IBorrowingFees.BorrowingInitialAccFees memory)
+    {
         return _getStorage().initialAccFees[_collateralIndex][_trader][_index];
     }
 
@@ -488,9 +473,10 @@ library BorrowingFeesUtils {
      * @dev Check IBorrowingFeesUtils interface for documentation
      */
     function getPairMaxOiCollateral(uint8 _collateralIndex, uint16 _pairIndex) internal view returns (uint256) {
-        return
-            (uint256(_getMultiCollatDiamond().getCollateral(_collateralIndex).precision) *
-                _getStorage().pairOis[_collateralIndex][_pairIndex].max) / ConstantsUtils.P_10;
+        return (
+            uint256(_getMultiCollatDiamond().getCollateral(_collateralIndex).precision)
+                * _getStorage().pairOis[_collateralIndex][_pairIndex].max
+        ) / ConstantsUtils.P_10;
     }
 
     /**
@@ -541,11 +527,8 @@ library BorrowingFeesUtils {
         uint256 _currentBlock,
         bool _long
     ) internal view returns (uint64 accFee) {
-        (uint64 accFeeLong, uint64 accFeeShort, ) = getBorrowingPairPendingAccFees(
-            _collateralIndex,
-            _pairIndex,
-            _currentBlock
-        );
+        (uint64 accFeeLong, uint64 accFeeShort,) =
+            getBorrowingPairPendingAccFees(_collateralIndex, _pairIndex, _currentBlock);
         return _long ? accFeeLong : accFeeShort;
     }
 
@@ -563,11 +546,8 @@ library BorrowingFeesUtils {
         uint256 _currentBlock,
         bool _long
     ) internal view returns (uint64 accFee) {
-        (uint64 accFeeLong, uint64 accFeeShort, ) = getBorrowingGroupPendingAccFees(
-            _collateralIndex,
-            _groupIndex,
-            _currentBlock
-        );
+        (uint64 accFeeLong, uint64 accFeeShort,) =
+            getBorrowingGroupPendingAccFees(_collateralIndex, _groupIndex, _currentBlock);
         return _long ? accFeeLong : accFeeShort;
     }
 
@@ -578,9 +558,11 @@ library BorrowingFeesUtils {
      * @return newAccFeeShort new acc borrowing fee on short side
      * @return delta delta with current acc borrowing fee (for side that changed)
      */
-    function _getBorrowingPendingAccFees(
-        IBorrowingFees.PendingBorrowingAccFeesInput memory _input
-    ) internal pure returns (uint64 newAccFeeLong, uint64 newAccFeeShort, uint64 delta) {
+    function _getBorrowingPendingAccFees(IBorrowingFees.PendingBorrowingAccFeesInput memory _input)
+        internal
+        pure
+        returns (uint64 newAccFeeLong, uint64 newAccFeeShort, uint64 delta)
+    {
         if (_input.currentBlock < _input.accLastUpdatedBlock) {
             revert IGeneralErrors.BlockOrder();
         }
@@ -589,10 +571,10 @@ library BorrowingFeesUtils {
         uint256 netOi = moreShorts ? _input.oiShort - _input.oiLong : _input.oiLong - _input.oiShort;
 
         uint256 _delta = _input.maxOi > 0 && _input.feeExponent > 0
-            ? ((_input.currentBlock - _input.accLastUpdatedBlock) *
-                _input.feePerBlock *
-                ((netOi * 1e10) / _input.maxOi) ** _input.feeExponent) /
-                (uint256(_input.collateralPrecision) ** _input.feeExponent)
+            ? (
+                (_input.currentBlock - _input.accLastUpdatedBlock) * _input.feePerBlock
+                    * ((netOi * 1e10) / _input.maxOi) ** _input.feeExponent
+            ) / (uint256(_input.collateralPrecision) ** _input.feeExponent)
             : 0; // 1e10 (%)
 
         if (_delta > type(uint64).max) {
@@ -624,16 +606,13 @@ library BorrowingFeesUtils {
         uint256 precisionDeltaUint = uint256(_collateralPrecisionDelta);
 
         int256 openPriceInt = int256(_openPrice);
-        int256 collateralLiqNegativePnlInt = int256(
-            (_collateral * ConstantsUtils.LIQ_THRESHOLD_P * precisionDeltaUint * 1e3) / 100
-        ); // 1e18 * 1e3
+        int256 collateralLiqNegativePnlInt =
+            int256((_collateral * ConstantsUtils.LIQ_THRESHOLD_P * precisionDeltaUint * 1e3) / 100); // 1e18 * 1e3
         int256 feesInt = int256(_feesCollateral * precisionDeltaUint * 1e3); // 1e18 * 1e3
 
         // 1e10
-        int256 liqPriceDistance = (openPriceInt * (collateralLiqNegativePnlInt - feesInt)) / // 1e10 * 1e18 * 1e3
-            int256(_collateral) /
-            int256(_leverage) /
-            int256(precisionDeltaUint); // 1e10
+        int256 liqPriceDistance = (openPriceInt * (collateralLiqNegativePnlInt - feesInt)) // 1e10 * 1e18 * 1e3
+            / int256(_collateral) / int256(_leverage) / int256(precisionDeltaUint); // 1e10
 
         int256 liqPrice = _long ? openPriceInt - liqPriceDistance : openPriceInt + liqPriceDistance; // 1e10
 
@@ -697,10 +676,7 @@ library BorrowingFeesUtils {
             );
 
             emit IBorrowingFeesUtils.BorrowingPairGroupUpdated(
-                _collateralIndex,
-                _pairIndex,
-                prevGroupIndex,
-                _value.groupIndex
+                _collateralIndex, _pairIndex, prevGroupIndex, _value.groupIndex
             );
         }
 
@@ -709,12 +685,7 @@ library BorrowingFeesUtils {
         s.pairOis[_collateralIndex][_pairIndex].max = _value.maxOi;
 
         emit IBorrowingFeesUtils.BorrowingPairParamsUpdated(
-            _collateralIndex,
-            _pairIndex,
-            _value.groupIndex,
-            _value.feePerBlock,
-            _value.feeExponent,
-            _value.maxOi
+            _collateralIndex, _pairIndex, _value.groupIndex, _value.feePerBlock, _value.feeExponent, _value.maxOi
         );
     }
 
@@ -746,11 +717,7 @@ library BorrowingFeesUtils {
         s.groupOis[_collateralIndex][_groupIndex].max = _value.maxOi;
 
         emit IBorrowingFeesUtils.BorrowingGroupUpdated(
-            _collateralIndex,
-            _groupIndex,
-            _value.feePerBlock,
-            _value.maxOi,
-            _value.feeExponent
+            _collateralIndex, _groupIndex, _value.feePerBlock, _value.maxOi, _value.feeExponent
         );
     }
 
@@ -817,13 +784,7 @@ library BorrowingFeesUtils {
         );
 
         emit IBorrowingFeesUtils.BorrowingPairOiUpdated(
-            _collateralIndex,
-            _pairIndex,
-            _long,
-            _increase,
-            delta,
-            newOiLong,
-            newOiShort
+            _collateralIndex, _pairIndex, _long, _increase, delta, newOiLong, newOiShort
         );
     }
 
@@ -852,13 +813,7 @@ library BorrowingFeesUtils {
             );
 
             emit IBorrowingFeesUtils.BorrowingGroupOiUpdated(
-                _collateralIndex,
-                _groupIndex,
-                _long,
-                _increase,
-                delta,
-                newOiLong,
-                newOiShort
+                _collateralIndex, _groupIndex, _long, _increase, delta, newOiLong, newOiShort
             );
         }
     }
@@ -923,12 +878,11 @@ library BorrowingFeesUtils {
      * @return accFeeLong new pair acc borrowing fee on long side (1e10 precision)
      * @return accFeeShort new pair acc borrowing fee on short side (1e10 precision)
      */
-    function _setPairPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _currentBlock
-    ) internal returns (uint64 accFeeLong, uint64 accFeeShort) {
-        (accFeeLong, accFeeShort, ) = getBorrowingPairPendingAccFees(_collateralIndex, _pairIndex, _currentBlock);
+    function _setPairPendingAccFees(uint8 _collateralIndex, uint16 _pairIndex, uint256 _currentBlock)
+        internal
+        returns (uint64 accFeeLong, uint64 accFeeShort)
+    {
+        (accFeeLong, accFeeShort,) = getBorrowingPairPendingAccFees(_collateralIndex, _pairIndex, _currentBlock);
 
         IBorrowingFees.BorrowingData storage pair = _getStorage().pairs[_collateralIndex][_pairIndex];
 
@@ -936,11 +890,7 @@ library BorrowingFeesUtils {
         pair.accLastUpdatedBlock = ChainUtils.getUint48BlockNumber(_currentBlock);
 
         emit IBorrowingFeesUtils.BorrowingPairAccFeesUpdated(
-            _collateralIndex,
-            _pairIndex,
-            _currentBlock,
-            pair.accFeeLong,
-            pair.accFeeShort
+            _collateralIndex, _pairIndex, _currentBlock, pair.accFeeLong, pair.accFeeShort
         );
     }
 
@@ -952,12 +902,11 @@ library BorrowingFeesUtils {
      * @return accFeeLong new group acc borrowing fee on long side (1e10 precision)
      * @return accFeeShort new group acc borrowing fee on short side (1e10 precision)
      */
-    function _setGroupPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        uint256 _currentBlock
-    ) internal returns (uint64 accFeeLong, uint64 accFeeShort) {
-        (accFeeLong, accFeeShort, ) = getBorrowingGroupPendingAccFees(_collateralIndex, _groupIndex, _currentBlock);
+    function _setGroupPendingAccFees(uint8 _collateralIndex, uint16 _groupIndex, uint256 _currentBlock)
+        internal
+        returns (uint64 accFeeLong, uint64 accFeeShort)
+    {
+        (accFeeLong, accFeeShort,) = getBorrowingGroupPendingAccFees(_collateralIndex, _groupIndex, _currentBlock);
 
         IBorrowingFees.BorrowingData storage group = _getStorage().groups[_collateralIndex][_groupIndex];
 
@@ -965,11 +914,7 @@ library BorrowingFeesUtils {
         group.accLastUpdatedBlock = ChainUtils.getUint48BlockNumber(_currentBlock);
 
         emit IBorrowingFeesUtils.BorrowingGroupAccFeesUpdated(
-            _collateralIndex,
-            _groupIndex,
-            _currentBlock,
-            group.accFeeLong,
-            group.accFeeShort
+            _collateralIndex, _groupIndex, _currentBlock, group.accFeeLong, group.accFeeShort
         );
     }
 }

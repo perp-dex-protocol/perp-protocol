@@ -20,16 +20,17 @@ library LiquidityPoolUtils {
      * @dev Returns a `LiquidityPoolInfo` struct for LiquidityPoolInput `_input`
      * @param _input LiquidityPoolInput struct with pool address and type
      */
-    function getLiquidityPoolInfo(
-        IPriceAggregator.LiquidityPoolInput calldata _input
-    ) internal view returns (IPriceAggregator.LiquidityPoolInfo memory) {
-        return
-            IPriceAggregator.LiquidityPoolInfo({
-                poolType: _input.poolType,
-                pool: _input.pool,
-                isGnsToken0InLp: _input.pool.token0() == AddressStoreUtils.getAddresses().gns,
-                __placeholder: 0
-            });
+    function getLiquidityPoolInfo(IPriceAggregator.LiquidityPoolInput calldata _input)
+        internal
+        view
+        returns (IPriceAggregator.LiquidityPoolInfo memory)
+    {
+        return IPriceAggregator.LiquidityPoolInfo({
+            poolType: _input.poolType,
+            pool: _input.pool,
+            isGnsToken0InLp: _input.pool.token0() == AddressStoreUtils.getAddresses().gns,
+            __placeholder: 0
+        });
     }
 
     /**
@@ -52,10 +53,11 @@ library LiquidityPoolUtils {
      * @param _poolInfo Liquidity pool info
      * @param _twapInterval TWAP interval
      */
-    function _getPoolTickCumulatives(
-        IPriceAggregator.LiquidityPoolInfo memory _poolInfo,
-        uint32 _twapInterval
-    ) internal view returns (int56[] memory) {
+    function _getPoolTickCumulatives(IPriceAggregator.LiquidityPoolInfo memory _poolInfo, uint32 _twapInterval)
+        internal
+        view
+        returns (int56[] memory)
+    {
         int56[] memory tickCumulatives;
         uint32[] memory secondsAgos = new uint32[](2);
 
@@ -64,11 +66,11 @@ library LiquidityPoolUtils {
 
         // If pool is Uniswap V3 call `observe` function
         if (_poolInfo.poolType == IPriceAggregator.PoolType.UNISWAP_V3) {
-            (tickCumulatives, ) = _poolInfo.pool.observe(secondsAgos);
+            (tickCumulatives,) = _poolInfo.pool.observe(secondsAgos);
         }
         // If pool is Algebra V1.9 call `getTimepoints` function
         else if (_poolInfo.poolType == IPriceAggregator.PoolType.ALGEBRA_v1_9) {
-            (tickCumulatives, , , ) = _poolInfo.pool.getTimepoints(secondsAgos);
+            (tickCumulatives,,,) = _poolInfo.pool.getTimepoints(secondsAgos);
         }
         // If pool is anything else, revert with InvalidPoolType error (this should never happen)
         else {
@@ -105,9 +107,8 @@ library LiquidityPoolUtils {
         uint160 sqrtPriceX96 = TickMath.getSqrtRatioAtTick(arithmeticMeanTick); // sqrt(token1/token0*2^96)
         uint256 priceX96 = (FullMath.mulDiv(sqrtPriceX96, sqrtPriceX96, FixedPoint96.Q96) * ConstantsUtils.P_10); // token1/token0*2^96*1e10
 
-        return
-            _isGnsToken0InLp
-                ? (priceX96 * _precisionDelta) / 2 ** 96 // 1e6/1e18*2^96*1e10 * 1e12 / 2^96 = 1e18/1e18*1e10
-                : (ConstantsUtils.P_10 ** 2) / (priceX96 / _precisionDelta / 2 ** 96); // 1e10^2 / (1e18/1e6*2^96*1e10 / 1e12 / 2^96) = 1e10^2 / (1e18/1e18*1e10) = 1e18/1e18*1e10
+        return _isGnsToken0InLp
+            ? (priceX96 * _precisionDelta) / 2 ** 96 // 1e6/1e18*2^96*1e10 * 1e12 / 2^96 = 1e18/1e18*1e10
+            : (ConstantsUtils.P_10 ** 2) / (priceX96 / _precisionDelta / 2 ** 96); // 1e10^2 / (1e18/1e6*2^96*1e10 / 1e12 / 2^96) = 1e10^2 / (1e18/1e18*1e10) = 1e18/1e18*1e10
     }
 }

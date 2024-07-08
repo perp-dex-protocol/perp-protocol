@@ -20,10 +20,10 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
-    function initializeTrading(
-        uint16 _marketOrdersTimeoutBlocks,
-        address[] memory _usersByPassTriggerLink
-    ) external reinitializer(8) {
+    function initializeTrading(uint16 _marketOrdersTimeoutBlocks, address[] memory _usersByPassTriggerLink)
+        external
+        reinitializer(8)
+    {
         TradingInteractionsUtils.initializeTrading(_marketOrdersTimeoutBlocks, _usersByPassTriggerLink);
     }
 
@@ -35,7 +35,10 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
-    function updateByPassTriggerLink(address[] memory _users, bool[] memory _shouldByPass) external onlyRole(Role.GOV) {
+    function updateByPassTriggerLink(address[] memory _users, bool[] memory _shouldByPass)
+        external
+        onlyRole(Role.GOV)
+    {
         TradingInteractionsUtils.updateByPassTriggerLink(_users, _shouldByPass);
     }
 
@@ -62,11 +65,10 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
-    function openTradeNative(
-        ITradingStorage.Trade memory _trade,
-        uint16 _maxSlippageP,
-        address _referrer
-    ) external payable {
+    function openTradeNative(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer)
+        external
+        payable
+    {
         TradingInteractionsUtils.openTradeNative(_trade, _maxSlippageP, _referrer);
     }
 
@@ -76,13 +78,9 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
-    function updateOpenOrder(
-        uint32 _index,
-        uint64 _triggerPrice,
-        uint64 _tp,
-        uint64 _sl,
-        uint16 _maxSlippageP
-    ) external {
+    function updateOpenOrder(uint32 _index, uint64 _triggerPrice, uint64 _tp, uint64 _sl, uint16 _maxSlippageP)
+        external
+    {
         TradingInteractionsUtils.updateOpenOrder(_index, _triggerPrice, _tp, _sl, _maxSlippageP);
     }
 
@@ -115,11 +113,7 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
         uint16 _maxSlippageP
     ) external {
         TradingInteractionsUtils.increasePositionSize(
-            _index,
-            _collateralDelta,
-            _leverageDelta,
-            _expectedPrice,
-            _maxSlippageP
+            _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP
         );
     }
 

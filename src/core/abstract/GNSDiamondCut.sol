@@ -37,12 +37,8 @@ abstract contract GNSDiamondCut is GNSAddressStore, IGNSDiamondCut {
             returndatacopy(0, 0, returndatasize())
             // return any return value or error back to the caller
             switch result
-            case 0 {
-                revert(0, returndatasize())
-            }
-            default {
-                return(0, returndatasize())
-            }
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
         }
     }
 
@@ -52,11 +48,10 @@ abstract contract GNSDiamondCut is GNSAddressStore, IGNSDiamondCut {
     receive() external payable {}
 
     /// @inheritdoc IGNSDiamondCut
-    function diamondCut(
-        FacetCut[] calldata _faceCut,
-        address _init,
-        bytes calldata _calldata
-    ) external onlyRole(Role.ROLES_MANAGER) {
+    function diamondCut(FacetCut[] calldata _faceCut, address _init, bytes calldata _calldata)
+        external
+        onlyRole(Role.ROLES_MANAGER)
+    {
         _diamondCut(_faceCut, _init, _calldata);
     }
 
@@ -171,12 +166,9 @@ abstract contract GNSDiamondCut is GNSAddressStore, IGNSDiamondCut {
      * @param _selectorPosition position of the function selector in the facet selectors array
      * @param _facetAddress address of the facet contract
      */
-    function _addFunction(
-        DiamondStorage storage s,
-        bytes4 _selector,
-        uint96 _selectorPosition,
-        address _facetAddress
-    ) internal {
+    function _addFunction(DiamondStorage storage s, bytes4 _selector, uint96 _selectorPosition, address _facetAddress)
+        internal
+    {
         s.selectorToFacetAndPosition[_selector].functionSelectorPosition = _selectorPosition;
         s.facetFunctionSelectors[_facetAddress].functionSelectors.push(_selector);
         s.selectorToFacetAndPosition[_selector].facetAddress = _facetAddress;

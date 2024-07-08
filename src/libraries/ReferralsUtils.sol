@@ -31,10 +31,8 @@ library ReferralsUtils {
         uint256 _targetVolumeUsd
     ) internal {
         if (
-            _allyFeeP > MAX_ALLY_FEE_P ||
-            _startReferrerFeeP > MAX_START_REFERRER_FEE_P ||
-            _openFeeP > MAX_OPEN_FEE_P ||
-            _targetVolumeUsd == 0
+            _allyFeeP > MAX_ALLY_FEE_P || _startReferrerFeeP > MAX_START_REFERRER_FEE_P || _openFeeP > MAX_OPEN_FEE_P
+                || _targetVolumeUsd == 0
         ) revert IGeneralErrors.WrongParams();
 
         IReferralsUtils.ReferralsStorage storage s = _getStorage();
@@ -162,9 +160,8 @@ library ReferralsUtils {
             return 0;
         }
 
-        uint256 referrerRewardValueUsd = (_volumeUsd * getReferrerFeeP(_pairOpenFeeP, r.volumeReferredUsd)) /
-            ConstantsUtils.P_10 /
-            100;
+        uint256 referrerRewardValueUsd =
+            (_volumeUsd * getReferrerFeeP(_pairOpenFeeP, r.volumeReferredUsd)) / ConstantsUtils.P_10 / 100;
 
         uint256 referrerRewardGns = (referrerRewardValueUsd * ConstantsUtils.P_10) / _gnsPriceUsd;
 
@@ -198,11 +195,7 @@ library ReferralsUtils {
         r.totalRewardsValueUsd += referrerRewardValueUsd;
 
         emit IReferralsUtils.ReferrerRewardDistributed(
-            referrer,
-            _trader,
-            _volumeUsd,
-            referrerRewardGns,
-            referrerRewardValueUsd
+            referrer, _trader, _volumeUsd, referrerRewardGns, referrerRewardValueUsd
         );
 
         return referrerRewardValueUsd + allyRewardValueUsd;

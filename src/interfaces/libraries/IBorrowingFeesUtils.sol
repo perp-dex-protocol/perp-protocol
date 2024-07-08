@@ -13,11 +13,8 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _pairIndex index of the pair
      * @param _value new value
      */
-    function setBorrowingPairParams(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        BorrowingPairParams calldata _value
-    ) external;
+    function setBorrowingPairParams(uint8 _collateralIndex, uint16 _pairIndex, BorrowingPairParams calldata _value)
+        external;
 
     /**
      * @dev Updates borrowing pair params of multiple pairs
@@ -37,11 +34,8 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _groupIndex index of the borrowing group
      * @param _value new value
      */
-    function setBorrowingGroupParams(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        BorrowingGroupParams calldata _value
-    ) external;
+    function setBorrowingGroupParams(uint8 _collateralIndex, uint16 _groupIndex, BorrowingGroupParams calldata _value)
+        external;
 
     /**
      * @dev Updates borrowing group params of multiple groups
@@ -100,11 +94,10 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @return accFeeShort new pair acc borrowing fee on short side
      * @return pairAccFeeDelta  pair acc borrowing fee delta (for side that changed)
      */
-    function getBorrowingPairPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _currentBlock
-    ) external view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta);
+    function getBorrowingPairPendingAccFees(uint8 _collateralIndex, uint16 _pairIndex, uint256 _currentBlock)
+        external
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 pairAccFeeDelta);
 
     /**
      * @dev Returns the pending acc borrowing fees for a borrowing group on both sides
@@ -115,18 +108,20 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @return accFeeShort new group acc borrowing fee on short side
      * @return groupAccFeeDelta  group acc borrowing fee delta (for side that changed)
      */
-    function getBorrowingGroupPendingAccFees(
-        uint8 _collateralIndex,
-        uint16 _groupIndex,
-        uint256 _currentBlock
-    ) external view returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta);
+    function getBorrowingGroupPendingAccFees(uint8 _collateralIndex, uint16 _groupIndex, uint256 _currentBlock)
+        external
+        view
+        returns (uint64 accFeeLong, uint64 accFeeShort, uint64 groupAccFeeDelta);
 
     /**
      * @dev Returns the borrowing fee for a trade
      * @param _input input data (collateralIndex, trader, pairIndex, index, long, collateral, leverage)
      * @return feeAmountCollateral borrowing fee (collateral precision)
      */
-    function getTradeBorrowingFee(BorrowingFeeInput memory _input) external view returns (uint256 feeAmountCollateral);
+    function getTradeBorrowingFee(BorrowingFeeInput memory _input)
+        external
+        view
+        returns (uint256 feeAmountCollateral);
 
     /**
      * @dev Returns the liquidation price for a trade
@@ -141,10 +136,10 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @return longOi open interest on long side
      * @return shortOi open interest on short side
      */
-    function getPairOisCollateral(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) external view returns (uint256 longOi, uint256 shortOi);
+    function getPairOisCollateral(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (uint256 longOi, uint256 shortOi);
 
     /**
      * @dev Returns the borrowing group index for a pair
@@ -152,10 +147,10 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _pairIndex index of the pair
      * @return groupIndex borrowing group index
      */
-    function getBorrowingPairGroupIndex(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) external view returns (uint16 groupIndex);
+    function getBorrowingPairGroupIndex(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (uint16 groupIndex);
 
     /**
      * @dev Returns the open interest in collateral tokens for a pair on one side
@@ -163,7 +158,10 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _pairIndex index of the pair
      * @param _long true if long side
      */
-    function getPairOiCollateral(uint8 _collateralIndex, uint16 _pairIndex, bool _long) external view returns (uint256);
+    function getPairOiCollateral(uint8 _collateralIndex, uint16 _pairIndex, bool _long)
+        external
+        view
+        returns (uint256);
 
     /**
      * @dev Returns whether a trade is within the max group borrowing open interest
@@ -184,20 +182,20 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _collateralIndex index of the collateral
      * @param _groupIndex index of the borrowing group
      */
-    function getBorrowingGroup(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) external view returns (BorrowingData memory group);
+    function getBorrowingGroup(uint8 _collateralIndex, uint16 _groupIndex)
+        external
+        view
+        returns (BorrowingData memory group);
 
     /**
      * @dev Returns a borrowing group's oi data
      * @param _collateralIndex index of the collateral
      * @param _groupIndex index of the borrowing group
      */
-    function getBorrowingGroupOi(
-        uint8 _collateralIndex,
-        uint16 _groupIndex
-    ) external view returns (OpenInterest memory group);
+    function getBorrowingGroupOi(uint8 _collateralIndex, uint16 _groupIndex)
+        external
+        view
+        returns (OpenInterest memory group);
 
     /**
      * @dev Returns a borrowing pair's data
@@ -211,35 +209,39 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _collateralIndex index of the collateral
      * @param _pairIndex index of the pair
      */
-    function getBorrowingPairOi(uint8 _collateralIndex, uint16 _pairIndex) external view returns (OpenInterest memory);
+    function getBorrowingPairOi(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (OpenInterest memory);
 
     /**
      * @dev Returns a borrowing pair's oi data
      * @param _collateralIndex index of the collateral
      * @param _pairIndex index of the pair
      */
-    function getBorrowingPairGroups(
-        uint8 _collateralIndex,
-        uint16 _pairIndex
-    ) external view returns (BorrowingPairGroup[] memory);
+    function getBorrowingPairGroups(uint8 _collateralIndex, uint16 _pairIndex)
+        external
+        view
+        returns (BorrowingPairGroup[] memory);
 
     /**
      * @dev Returns all borrowing pairs' borrowing data, oi data, and pair groups data
      * @param _collateralIndex index of the collateral
      */
-    function getAllBorrowingPairs(
-        uint8 _collateralIndex
-    ) external view returns (BorrowingData[] memory, OpenInterest[] memory, BorrowingPairGroup[][] memory);
+    function getAllBorrowingPairs(uint8 _collateralIndex)
+        external
+        view
+        returns (BorrowingData[] memory, OpenInterest[] memory, BorrowingPairGroup[][] memory);
 
     /**
      * @dev Returns borrowing groups' data and oi data
      * @param _collateralIndex index of the collateral
      * @param _indices indices of the groups
      */
-    function getBorrowingGroups(
-        uint8 _collateralIndex,
-        uint16[] calldata _indices
-    ) external view returns (BorrowingData[] memory, OpenInterest[] memory);
+    function getBorrowingGroups(uint8 _collateralIndex, uint16[] calldata _indices)
+        external
+        view
+        returns (BorrowingData[] memory, OpenInterest[] memory);
 
     /**
      * @dev Returns borrowing groups' data
@@ -247,11 +249,10 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param _trader address of trader
      * @param _index index of trade
      */
-    function getBorrowingInitialAccFees(
-        uint8 _collateralIndex,
-        address _trader,
-        uint32 _index
-    ) external view returns (BorrowingInitialAccFees memory);
+    function getBorrowingInitialAccFees(uint8 _collateralIndex, address _trader, uint32 _index)
+        external
+        view
+        returns (BorrowingInitialAccFees memory);
 
     /**
      * @dev Returns the max open interest for a pair
@@ -291,10 +292,7 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param newGroupIndex new borrowing group index
      */
     event BorrowingPairGroupUpdated(
-        uint8 indexed collateralIndex,
-        uint16 indexed pairIndex,
-        uint16 prevGroupIndex,
-        uint16 newGroupIndex
+        uint8 indexed collateralIndex, uint16 indexed pairIndex, uint16 prevGroupIndex, uint16 newGroupIndex
     );
 
     /**
@@ -305,11 +303,7 @@ interface IBorrowingFeesUtils is IBorrowingFees {
      * @param feeExponent new fee exponent
      */
     event BorrowingGroupUpdated(
-        uint8 indexed collateralIndex,
-        uint16 indexed groupIndex,
-        uint32 feePerBlock,
-        uint72 maxOi,
-        uint48 feeExponent
+        uint8 indexed collateralIndex, uint16 indexed groupIndex, uint32 feePerBlock, uint72 maxOi, uint48 feeExponent
     );
 
     /**

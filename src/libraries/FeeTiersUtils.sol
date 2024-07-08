@@ -37,10 +37,9 @@ library FeeTiersUtils {
     /**
      * @dev Check IFeeTiersUtils interface for documentation
      */
-    function setGroupVolumeMultipliers(
-        uint256[] calldata _groupIndices,
-        uint256[] calldata _groupVolumeMultipliers
-    ) internal {
+    function setGroupVolumeMultipliers(uint256[] calldata _groupIndices, uint256[] calldata _groupVolumeMultipliers)
+        internal
+    {
         if (_groupIndices.length != _groupVolumeMultipliers.length) {
             revert IGeneralErrors.WrongLength();
         }
@@ -133,10 +132,7 @@ library FeeTiersUtils {
                 curTrailingPoints -= expiredTrailingPoints;
 
                 emit IFeeTiersUtils.TraderTrailingPointsExpired(
-                    _trader,
-                    earliestOutdatedDay,
-                    lastOutdatedDay,
-                    expiredTrailingPoints
+                    _trader, earliestOutdatedDay, lastOutdatedDay, expiredTrailingPoints
                 );
             }
 
@@ -169,10 +165,9 @@ library FeeTiersUtils {
      */
     function calculateFeeAmount(address _trader, uint256 _normalFeeAmountCollateral) internal view returns (uint256) {
         uint32 feeMultiplier = _getStorage().traderDailyInfos[_trader][_getCurrentDay()].feeMultiplierCache;
-        return
-            feeMultiplier == 0
-                ? _normalFeeAmountCollateral
-                : (uint256(feeMultiplier) * _normalFeeAmountCollateral) / uint256(FEE_MULTIPLIER_SCALE);
+        return feeMultiplier == 0
+            ? _normalFeeAmountCollateral
+            : (uint256(feeMultiplier) * _normalFeeAmountCollateral) / uint256(FEE_MULTIPLIER_SCALE);
     }
 
     /**
@@ -214,10 +209,11 @@ library FeeTiersUtils {
     /**
      * @dev Check IFeeTiersUtils interface for documentation
      */
-    function getFeeTiersTraderDailyInfo(
-        address _trader,
-        uint32 _day
-    ) internal view returns (IFeeTiers.TraderDailyInfo memory) {
+    function getFeeTiersTraderDailyInfo(address _trader, uint32 _day)
+        internal
+        view
+        returns (IFeeTiers.TraderDailyInfo memory)
+    {
         return _getStorage().traderDailyInfos[_trader][_day];
     }
 
@@ -254,10 +250,11 @@ library FeeTiersUtils {
         // Either both feeMultiplier and pointsThreshold are 0 or none
         // And make sure feeMultiplier < 1 otherwise useless
         if (
-            !isDisabled &&
-            (_feeTier.feeMultiplier >= FEE_MULTIPLIER_SCALE ||
-                _feeTier.feeMultiplier == 0 ||
-                _feeTier.pointsThreshold == 0)
+            !isDisabled
+                && (
+                    _feeTier.feeMultiplier >= FEE_MULTIPLIER_SCALE || _feeTier.feeMultiplier == 0
+                        || _feeTier.pointsThreshold == 0
+                )
         ) {
             revert IFeeTiersUtils.WrongFeeTier();
         }
@@ -274,9 +271,11 @@ library FeeTiersUtils {
             if (hasNextValue) {
                 IFeeTiers.FeeTier memory feeTier = _feeTiers[_index + 1];
                 if (
-                    feeTier.feeMultiplier != 0 &&
-                    (feeTier.feeMultiplier >= _feeTier.feeMultiplier ||
-                        feeTier.pointsThreshold <= _feeTier.pointsThreshold)
+                    feeTier.feeMultiplier != 0
+                        && (
+                            feeTier.feeMultiplier >= _feeTier.feeMultiplier
+                                || feeTier.pointsThreshold <= _feeTier.pointsThreshold
+                        )
                 ) {
                     revert IGeneralErrors.WrongOrder();
                 }
@@ -286,8 +285,8 @@ library FeeTiersUtils {
             if (_index > 0) {
                 IFeeTiers.FeeTier memory feeTier = _feeTiers[_index - 1];
                 if (
-                    feeTier.feeMultiplier <= _feeTier.feeMultiplier ||
-                    feeTier.pointsThreshold >= _feeTier.pointsThreshold
+                    feeTier.feeMultiplier <= _feeTier.feeMultiplier
+                        || feeTier.pointsThreshold >= _feeTier.pointsThreshold
                 ) {
                     revert IGeneralErrors.WrongOrder();
                 }

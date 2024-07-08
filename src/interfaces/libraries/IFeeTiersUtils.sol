@@ -26,10 +26,8 @@ interface IFeeTiersUtils is IFeeTiers {
      * @param _groupIndices indices of groups to update
      * @param _groupVolumeMultipliers corresponding new volume multipliers (1e3)
      */
-    function setGroupVolumeMultipliers(
-        uint256[] calldata _groupIndices,
-        uint256[] calldata _groupVolumeMultipliers
-    ) external;
+    function setGroupVolumeMultipliers(uint256[] calldata _groupIndices, uint256[] calldata _groupVolumeMultipliers)
+        external;
 
     /**
      * @dev Updates fee tiers
@@ -81,10 +79,10 @@ interface IFeeTiersUtils is IFeeTiers {
      * @param _trader trader address
      * @param _day day
      */
-    function getFeeTiersTraderDailyInfo(
-        address _trader,
-        uint32 _day
-    ) external view returns (IFeeTiersUtils.TraderDailyInfo memory);
+    function getFeeTiersTraderDailyInfo(address _trader, uint32 _day)
+        external
+        view
+        returns (IFeeTiersUtils.TraderDailyInfo memory);
 
     /**
      * @dev Emitted when group volume multipliers are updated

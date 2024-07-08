@@ -61,11 +61,9 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      * @param _maxSlippageP the maximum allowed slippage % when open the trade (1e3 precision)
      * @param _referrer the address of the referrer (can only be set once for a trader)
      */
-    function openTradeNative(
-        ITradingStorage.Trade memory _trade,
-        uint16 _maxSlippageP,
-        address _referrer
-    ) external payable;
+    function openTradeNative(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer)
+        external
+        payable;
 
     /**
      * @dev Closes an open trade (market order) for caller
@@ -81,13 +79,8 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      * @param _sl new sl of limit/stop order (1e10 precision)
      * @param _maxSlippageP new max slippage % of limit/stop order (1e3 precision)
      */
-    function updateOpenOrder(
-        uint32 _index,
-        uint64 _triggerPrice,
-        uint64 _tp,
-        uint64 _sl,
-        uint16 _maxSlippageP
-    ) external;
+    function updateOpenOrder(uint32 _index, uint64 _triggerPrice, uint64 _tp, uint64 _sl, uint16 _maxSlippageP)
+        external;
 
     /**
      * @dev Cancels an open limit/stop order for caller
@@ -247,10 +240,7 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      * @param byPassesLinkCost whether the caller bypasses the link cost
      */
     event TriggerOrderInitiated(
-        ITradingStorage.Id orderId,
-        address indexed trader,
-        uint16 indexed pairIndex,
-        bool byPassesLinkCost
+        ITradingStorage.Id orderId, address indexed trader, uint16 indexed pairIndex, bool byPassesLinkCost
     );
 
     /**

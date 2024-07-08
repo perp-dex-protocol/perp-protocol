@@ -33,18 +33,18 @@ contract GNSFeeTiers is GNSAddressStore, IFeeTiersUtils {
     // Management Setters
 
     /// @inheritdoc IFeeTiersUtils
-    function setGroupVolumeMultipliers(
-        uint256[] calldata _groupIndices,
-        uint256[] calldata _groupVolumeMultipliers
-    ) external onlyRole(Role.GOV) {
+    function setGroupVolumeMultipliers(uint256[] calldata _groupIndices, uint256[] calldata _groupVolumeMultipliers)
+        external
+        onlyRole(Role.GOV)
+    {
         FeeTiersUtils.setGroupVolumeMultipliers(_groupIndices, _groupVolumeMultipliers);
     }
 
     /// @inheritdoc IFeeTiersUtils
-    function setFeeTiers(
-        uint256[] calldata _feeTiersIndices,
-        IFeeTiersUtils.FeeTier[] calldata _feeTiers
-    ) external onlyRole(Role.GOV) {
+    function setFeeTiers(uint256[] calldata _feeTiersIndices, IFeeTiersUtils.FeeTier[] calldata _feeTiers)
+        external
+        onlyRole(Role.GOV)
+    {
         FeeTiersUtils.setFeeTiers(_feeTiersIndices, _feeTiers);
     }
 
@@ -83,10 +83,11 @@ contract GNSFeeTiers is GNSAddressStore, IFeeTiersUtils {
     }
 
     /// @inheritdoc IFeeTiersUtils
-    function getFeeTiersTraderDailyInfo(
-        address _trader,
-        uint32 _day
-    ) external view returns (IFeeTiersUtils.TraderDailyInfo memory) {
+    function getFeeTiersTraderDailyInfo(address _trader, uint32 _day)
+        external
+        view
+        returns (IFeeTiersUtils.TraderDailyInfo memory)
+    {
         return FeeTiersUtils.getFeeTiersTraderDailyInfo(_trader, _day);
     }
 }

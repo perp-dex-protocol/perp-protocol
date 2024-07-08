@@ -53,10 +53,8 @@ interface IPriceAggregatorUtils is IPriceAggregator {
      * @param _collateralIndex collateral index
      * @param _liquidityPoolInput new values
      */
-    function updateCollateralGnsLiquidityPool(
-        uint8 _collateralIndex,
-        LiquidityPoolInput calldata _liquidityPoolInput
-    ) external;
+    function updateCollateralGnsLiquidityPool(uint8 _collateralIndex, LiquidityPoolInput calldata _liquidityPoolInput)
+        external;
 
     /**
      * @dev Updates TWAP interval
@@ -137,11 +135,10 @@ interface IPriceAggregatorUtils is IPriceAggregator {
      * @param _pairIndex pair index
      * @param _positionSizeCollateral position size in collateral tokens (collateral precision)
      */
-    function getLinkFee(
-        uint8 _collateralIndex,
-        uint16 _pairIndex,
-        uint256 _positionSizeCollateral
-    ) external view returns (uint256);
+    function getLinkFee(uint8 _collateralIndex, uint16 _pairIndex, uint256 _positionSizeCollateral)
+        external
+        view
+        returns (uint256);
 
     /**
      * @dev Returns collateral/USD price
@@ -161,10 +158,10 @@ interface IPriceAggregatorUtils is IPriceAggregator {
      * @param _collateralIndex index of collateral
      * @param _normalizedValue normalized value (1e18 USD)
      */
-    function getCollateralFromUsdNormalizedValue(
-        uint8 _collateralIndex,
-        uint256 _normalizedValue
-    ) external view returns (uint256);
+    function getCollateralFromUsdNormalizedValue(uint8 _collateralIndex, uint256 _normalizedValue)
+        external
+        view
+        returns (uint256);
 
     /**
      * @dev Returns GNS/USD price based on GNS/collateral price
@@ -249,9 +246,10 @@ interface IPriceAggregatorUtils is IPriceAggregator {
      * @dev Returns order data
      * @param _orderId order id
      */
-    function getPriceAggregatorOrderAnswers(
-        ITradingStorage.Id calldata _orderId
-    ) external view returns (OrderAnswer[] memory);
+    function getPriceAggregatorOrderAnswers(ITradingStorage.Id calldata _orderId)
+        external
+        view
+        returns (OrderAnswer[] memory);
 
     /**
      * @dev Returns chainlink token address

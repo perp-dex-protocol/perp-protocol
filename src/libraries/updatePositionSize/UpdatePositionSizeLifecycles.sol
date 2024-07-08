@@ -42,13 +42,7 @@ library UpdatePositionSizeLifecycles {
         );
 
         emit IUpdatePositionSizeUtils.PositionSizeUpdateInitiated(
-            orderId,
-            trade.user,
-            trade.pairIndex,
-            trade.index,
-            true,
-            _input.collateralDelta,
-            _input.leverageDelta
+            orderId, trade.user, trade.pairIndex, trade.index, true, _input.collateralDelta, _input.leverageDelta
         );
     }
 
@@ -65,23 +59,11 @@ library UpdatePositionSizeLifecycles {
 
         // 3. Store pending order and make price aggregator request
         ITradingStorage.Id memory orderId = _initiateRequest(
-            trade,
-            false,
-            _input.collateralDelta,
-            _input.leverageDelta,
-            positionSizeCollateralDelta,
-            0,
-            0
+            trade, false, _input.collateralDelta, _input.leverageDelta, positionSizeCollateralDelta, 0, 0
         );
 
         emit IUpdatePositionSizeUtils.PositionSizeUpdateInitiated(
-            orderId,
-            trade.user,
-            trade.pairIndex,
-            trade.index,
-            false,
-            _input.collateralDelta,
-            _input.leverageDelta
+            orderId, trade.user, trade.pairIndex, trade.index, false, _input.collateralDelta, _input.leverageDelta
         );
     }
 
@@ -96,18 +78,13 @@ library UpdatePositionSizeLifecycles {
     ) external {
         // 1. Prepare vars
         ITradingStorage.Trade memory partialTrade = _order.trade;
-        ITradingStorage.Trade memory existingTrade = _getMultiCollatDiamond().getTrade(
-            partialTrade.user,
-            partialTrade.index
-        );
+        ITradingStorage.Trade memory existingTrade =
+            _getMultiCollatDiamond().getTrade(partialTrade.user, partialTrade.index);
         IUpdatePositionSizeUtils.IncreasePositionSizeValues memory values;
 
         // 2. Refresh trader fee tier cache
         TradingCommonUtils.updateFeeTierPoints(
-            existingTrade.collateralIndex,
-            existingTrade.user,
-            existingTrade.pairIndex,
-            0
+            existingTrade.collateralIndex, existingTrade.user, existingTrade.pairIndex, 0
         );
 
         // 3. Base validation (trade open, market open)
@@ -120,11 +97,7 @@ library UpdatePositionSizeLifecycles {
 
             // 4.2 Further validation
             cancelReason = IncreasePositionSizeUtils.validateCallback(
-                existingTrade,
-                values,
-                _answer,
-                partialTrade.openPrice,
-                _order.maxSlippageP
+                existingTrade, values, _answer, partialTrade.openPrice, _order.maxSlippageP
             );
 
             // 5. If passes further validation, execute callback
@@ -134,16 +107,15 @@ library UpdatePositionSizeLifecycles {
 
                 // 5.2 Distribute opening fees and store fee tier points for position size delta
                 TradingCommonUtils.processOpeningFees(
-                    existingTrade,
-                    values.positionSizeCollateralDelta,
-                    _order.orderType
+                    existingTrade, values.positionSizeCollateralDelta, _order.orderType
                 );
             }
         }
 
         // 6. If didn't pass validation, charge gov fee (if trade exists) and return partial collateral (if any)
-        if (cancelReason != ITradingCallbacks.CancelReason.NONE)
+        if (cancelReason != ITradingCallbacks.CancelReason.NONE) {
             IncreasePositionSizeUtils.handleCanceled(existingTrade, partialTrade, cancelReason);
+        }
 
         // 7. Close pending increase position size order
         _getMultiCollatDiamond().closePendingOrder(_answer.orderId);
@@ -173,18 +145,13 @@ library UpdatePositionSizeLifecycles {
     ) external {
         // 1. Prepare vars
         ITradingStorage.Trade memory partialTrade = _order.trade;
-        ITradingStorage.Trade memory existingTrade = _getMultiCollatDiamond().getTrade(
-            partialTrade.user,
-            partialTrade.index
-        );
+        ITradingStorage.Trade memory existingTrade =
+            _getMultiCollatDiamond().getTrade(partialTrade.user, partialTrade.index);
         IUpdatePositionSizeUtils.DecreasePositionSizeValues memory values;
 
         // 2. Refresh trader fee tier cache
         TradingCommonUtils.updateFeeTierPoints(
-            existingTrade.collateralIndex,
-            existingTrade.user,
-            existingTrade.pairIndex,
-            0
+            existingTrade.collateralIndex, existingTrade.user, existingTrade.pairIndex, 0
         );
 
         // 3. Base validation (trade open, market open)
@@ -206,14 +173,10 @@ library UpdatePositionSizeLifecycles {
 
                 // 5.2 Distribute closing fees
                 TradingCommonUtils.distributeGnsStakingFeeCollateral(
-                    existingTrade.collateralIndex,
-                    existingTrade.user,
-                    values.gnsStakingFeeCollateral
+                    existingTrade.collateralIndex, existingTrade.user, values.gnsStakingFeeCollateral
                 );
                 TradingCommonUtils.distributeVaultFeeCollateral(
-                    existingTrade.collateralIndex,
-                    existingTrade.user,
-                    values.vaultFeeCollateral
+                    existingTrade.collateralIndex, existingTrade.user, values.vaultFeeCollateral
                 );
 
                 // 5.3 Store trader fee tier points for position size delta
@@ -227,8 +190,9 @@ library UpdatePositionSizeLifecycles {
         }
 
         // 6. If didn't pass validation and trade exists, charge gov fee and remove corresponding OI
-        if (cancelReason != ITradingCallbacks.CancelReason.NONE)
+        if (cancelReason != ITradingCallbacks.CancelReason.NONE) {
             DecreasePositionSizeUtils.handleCanceled(existingTrade, cancelReason);
+        }
 
         // 7. Close pending decrease position size order
         _getMultiCollatDiamond().closePendingOrder(_answer.orderId);
@@ -259,10 +223,11 @@ library UpdatePositionSizeLifecycles {
      * @param _trader trader address
      * @param _index trade index
      */
-    function _baseValidateRequest(
-        address _trader,
-        uint32 _index
-    ) internal view returns (ITradingStorage.Trade memory trade) {
+    function _baseValidateRequest(address _trader, uint32 _index)
+        internal
+        view
+        returns (ITradingStorage.Trade memory trade)
+    {
         trade = _getMultiCollatDiamond().getTrade(_trader, _index);
 
         // 1. Check trade exists
@@ -272,8 +237,9 @@ library UpdatePositionSizeLifecycles {
         TradingCommonUtils.revertIfTradeHasPendingMarketOrder(_trader, _index);
 
         // 3. Revert if collateral not active
-        if (!_getMultiCollatDiamond().isCollateralActive(trade.collateralIndex))
+        if (!_getMultiCollatDiamond().isCollateralActive(trade.collateralIndex)) {
             revert IGeneralErrors.InvalidCollateralIndex();
+        }
     }
 
     /**
@@ -317,12 +283,7 @@ library UpdatePositionSizeLifecycles {
 
         // 3. Make price aggregator request
         _getMultiCollatDiamond().getPrice(
-            _trade.collateralIndex,
-            _trade.pairIndex,
-            orderId,
-            pendingOrder.orderType,
-            _positionSizeCollateralDelta,
-            0
+            _trade.collateralIndex, _trade.pairIndex, orderId, pendingOrder.orderType, _positionSizeCollateralDelta, 0
         );
     }
 
@@ -335,9 +296,8 @@ library UpdatePositionSizeLifecycles {
         ITradingStorage.Trade memory _trade,
         ITradingCallbacks.AggregatorAnswer memory _answer
     ) internal pure returns (ITradingCallbacks.CancelReason) {
-        return
-            !_trade.isOpen ? ITradingCallbacks.CancelReason.NO_TRADE : _answer.price == 0
-                ? ITradingCallbacks.CancelReason.MARKET_CLOSED
-                : ITradingCallbacks.CancelReason.NONE;
+        return !_trade.isOpen
+            ? ITradingCallbacks.CancelReason.NO_TRADE
+            : _answer.price == 0 ? ITradingCallbacks.CancelReason.MARKET_CLOSED : ITradingCallbacks.CancelReason.NONE;
     }
 }

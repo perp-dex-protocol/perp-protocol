@@ -69,7 +69,11 @@ library PackingUtils {
      * @return trader trader address
      * @return index trade index
      */
-    function unpackTriggerOrder(uint256 _packed) external pure returns (uint8 orderType, address trader, uint32 index) {
+    function unpackTriggerOrder(uint256 _packed)
+        external
+        pure
+        returns (uint8 orderType, address trader, uint32 index)
+    {
         orderType = uint8(_packed & 0xFF); // 8 bits
         trader = address(uint160(_packed >> 8)); // 160 bits
         index = uint32((_packed >> 168)); // 32 bits
