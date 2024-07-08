@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {Chainlink} from "@chainlink/contracts/src/v0.8/Chainlink.sol";
-import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol";
+import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import {ChainlinkRequestInterface} from "@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol";
 
 import "../interfaces/libraries/IPriceAggregatorUtils.sol";

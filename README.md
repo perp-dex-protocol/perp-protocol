@@ -12,3 +12,8 @@ Diamond Proxy
 8. GNSTradingCallbacks
 9. GNSBorrowingFees
 10. GNSPriceAggregator
+
+---
+1. v3-core  version - 0.8
+2. oz-contracts   version 
+3. Chainlink  v2.0.0
