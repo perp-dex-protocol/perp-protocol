@@ -31,3 +31,9 @@ Sei Mainnet
 1. chainId         1329
 2. chain rpc       https://evm-rpc.sei-apis.com
 3. chain explorer  https://seistream.app/
+
+---
+Refer
+1. https://github.com/mudgen/diamond-1-hardhat
+2. https://github.com/mudgen/diamond-3
+3. https://medium.com/@MarqyMarq/how-to-implement-the-diamond-standard-69e87dae44e6
