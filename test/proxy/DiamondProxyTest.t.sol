@@ -3,12 +3,19 @@ pragma solidity ^0.8.23;
 
 import {Test, console2} from "forge-std/Test.sol";
 import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
+import {IAddressStore} from "src/interfaces/types/IAddressStore.sol";
 
 contract DiamondProxyTest is Test {
-    function setUp() public {}
+    GNSMultiCollatDiamond diamond;
+
+    function setUp() public {
+        vm.createSelectFork("https://evm-rpc.sei-apis.com");
+        diamond = new GNSMultiCollatDiamond();
+    }
 
     function testDeployDiamondProxy() public {
-        GNSMultiCollatDiamond diamond = new GNSMultiCollatDiamond();
-        console2.log("diamond address  ", address(diamond));
+        IAddressStore.Addresses memory addresses = diamond.getAddresses();
+        console2.log("addresses.gns", addresses.gns);
+        console2.log("addresses.gnsStaking", addresses.gnsStaking);
     }
 }
