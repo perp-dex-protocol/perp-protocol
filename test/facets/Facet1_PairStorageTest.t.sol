@@ -23,15 +23,14 @@ contract Facet1_PairStorageTest is Test {
         vm.stopPrank();
     }
 
-
     function test() public {
         vm.startPrank(Alice, Alice);
         bytes memory data = abi.encodeWithSelector(GNSAddressStore.initialize.selector, Alice);
 
-        GNSPairsStorage pairsStorageProxy = GNSPairsStorage(address( new TransparentUpgradeableProxy(address(pairsStorage), address(proxyAdmin), data) ));
+        GNSPairsStorage pairsStorageProxy =
+            GNSPairsStorage(address(new TransparentUpgradeableProxy(address(pairsStorage), address(proxyAdmin), data)));
 
         console2.log("pairsStorageProxy", address(pairsStorageProxy));
-
 
         address[] memory accounts = new address[](1);
         accounts[0] = Alice;
@@ -42,7 +41,6 @@ contract Facet1_PairStorageTest is Test {
         bool[] memory values = new bool[](1);
 
         pairsStorageProxy.setRoles(accounts, roles, values);
-
 
         // IPairsStorage.Pair[] memory pairs = new IPairsStorage.Pair[](1);
         // pairs[0] = IPairsStorage.Pair(
