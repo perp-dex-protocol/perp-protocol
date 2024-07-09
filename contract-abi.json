@@ -32,3 +32,4 @@
   "updateGroups(uint256[],(string,bytes32,uint256,uint256)[])": "11d79ef5",
   "updatePairs(uint256[],(string,string,(address,address,uint8,uint256),uint256,uint256,uint256)[])": "10efa5d5"
 }
+

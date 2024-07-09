@@ -7,6 +7,9 @@
 3. Facet1 PairStorage  0xdfb881d25c9716ab4ea7c721136d11e71c4f0028
    
 4. Facet2 Referral System 0xECa90C0866032FFfAE15b10631c7Cad887Cd2E97
+   
+5. Facet3 Fee Tier 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA
 
+6. Facet4 PriceImpact
 
  

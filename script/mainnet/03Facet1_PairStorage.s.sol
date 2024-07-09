@@ -85,7 +85,6 @@ contract PairStorageScript is BaseScriptDeployer {
         // _groups[0] = IPairsStorage.Group("default", bytes32(0), 3, 1000);
         // pairStorage.addGroups(_groups);
 
-
         // GNSPairsStorage.Pair[] memory _pairs = new GNSPairsStorage.Pair[](1);
         // _pairs[0] = IPairsStorage.Pair(
         //     "ETH", "USD", IPairsStorage.Feed(address(0), address(0), IPairsStorage.FeedCalculation.DEFAULT, 0), 0, 0, 0
