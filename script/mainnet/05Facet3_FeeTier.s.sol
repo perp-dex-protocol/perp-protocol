@@ -4,6 +4,8 @@ pragma solidity ^0.8.23;
 import {Script, console2} from "forge-std/Script.sol";
 import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSFeeTiers} from "src/core/facets/GNSFeeTiers.sol";
+import {GNSPriceImpact} from "src/core/facets/GNSPriceImpact.sol";
+
 import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
@@ -36,10 +38,9 @@ contract GNSFeeTierScript is BaseScriptDeployer {
         bytes memory _calldata = new bytes(0);
         // diamond.diamondCut(_faceCut, _init, _calldata);
 
-         address[] memory facets = diamond.facetAddresses();
+        address[] memory facets = diamond.facetAddresses();
         console2.log("facets0 ", facets[0]);
         console2.log("facets1 ", facets[1]);
         console2.log("facets2 ", facets[2]);
-
     }
 }
