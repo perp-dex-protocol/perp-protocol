@@ -1,3 +1,12 @@
 1. ProxyAdmin 0xDe1D7C9f36A0d36e24f8F7D923237616c0FB5B09
 
-2. 
+2. diamondProxyImpl 0x734fb391bc277dfa17c62afeb1d98c9787a47767
+
+3. diamondProxy 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6
+
+3. Facet1 PairStorage  0xdfb881d25c9716ab4ea7c721136d11e71c4f0028
+   
+4. Facet2 Referral System 0xECa90C0866032FFfAE15b10631c7Cad887Cd2E97
+
+
+ 
