@@ -42,5 +42,6 @@ contract GNSFeeTierScript is BaseScriptDeployer {
         console2.log("facets0 ", facets[0]);
         console2.log("facets1 ", facets[1]);
         console2.log("facets2 ", facets[2]);
+        console2.log("facets3 ", facets[3]);
     }
 }
