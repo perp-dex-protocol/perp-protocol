@@ -1,3 +1,5 @@
+
+Facet1 PairStorage
 {
   "addFees((string,uint256,uint256,uint256,uint256,uint256)[])": "0c00b94a",
   "addGroups((string,bytes32,uint256,uint256)[])": "60283cba",
@@ -33,3 +35,262 @@
   "updatePairs(uint256[],(string,string,(address,address,uint8,uint256),uint256,uint256,uint256)[])": "10efa5d5"
 }
 
+Facet2 Referrals
+{
+  "claimAllyRewards()": "ee6cf884",
+  "claimReferrerRewards()": "65cbd307",
+  "distributeReferralReward(address,uint256,uint256,uint256)": "fa3c8dbf",
+  "getAddresses()": "a39fac12",
+  "getAllyDetails(address)": "92e67406",
+  "getReferralsAllyFeeP()": "97436b5f",
+  "getReferralsOpenFeeP()": "06350917",
+  "getReferralsStartReferrerFeeP()": "843b9e5d",
+  "getReferralsTargetVolumeUsd()": "71159fd1",
+  "getReferrerDetails(address)": "cbe0f32e",
+  "getReferrerFeeP(uint256,uint256)": "4e583b31",
+  "getReferrersReferred(address)": "a73a3e35",
+  "getTraderActiveReferrer(address)": "036787e5",
+  "getTraderLastReferrer(address)": "46dbf572",
+  "getTradersReferred(address)": "32a7b732",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializeReferrals(uint256,uint256,uint256,uint256)": "c8b0d710",
+  "registerPotentialReferrer(address,address)": "9b8ab684",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "unwhitelistAllies(address[])": "3450191e",
+  "unwhitelistReferrers(address[])": "92b2bbae",
+  "updateAllyFeeP(uint256)": "97365b74",
+  "updateReferralsOpenFeeP(uint256)": "dfed4fcb",
+  "updateReferralsTargetVolumeUsd(uint256)": "66ddd309",
+  "updateStartReferrerFeeP(uint256)": "03e37464",
+  "whitelistAllies(address[])": "c72d02e3",
+  "whitelistReferrers(address[],address[])": "507cd8de"
+}
+
+
+Facet3 FeeTiers
+{
+  "calculateFeeAmount(address,uint256)": "4f09a236",
+  "getAddresses()": "a39fac12",
+  "getFeeTier(uint256)": "eccea3e2",
+  "getFeeTiersCount()": "a89db8e5",
+  "getFeeTiersTraderDailyInfo(address,uint32)": "794d8520",
+  "getFeeTiersTraderInfo(address)": "acbaaf33",
+  "getGroupVolumeMultiplier(uint256)": "31ca4887",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializeFeeTiers(uint256[],uint256[],uint256[],(uint32,uint32)[])": "33534de2",
+  "setFeeTiers(uint256[],(uint32,uint32)[])": "eced5249",
+  "setGroupVolumeMultipliers(uint256[],uint256[])": "944f577a",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "updateTraderPoints(address,uint256,uint256)": "fed8a190"
+}
+
+Facet4 PriceImpact
+{
+  "addPriceImpactOpenInterest(address,uint32,uint256)": "4c8a7602",
+  "getAddresses()": "a39fac12",
+  "getOiWindow(uint48,uint256,uint256)": "823ef2ac",
+  "getOiWindows(uint48,uint256,uint256[])": "0d12f7cb",
+  "getOiWindowsSettings()": "b56df676",
+  "getPairDepth(uint256)": "375bb2bb",
+  "getPairDepths(uint256[])": "0d569f27",
+  "getPriceImpactOi(uint256,bool)": "b6d92b02",
+  "getTradeLastWindowOiUsd(address,uint32)": "273064f2",
+  "getTradePriceImpact(uint256,uint256,bool,uint256)": "7ea95f32",
+  "getTradePriceImpactInfo(address,uint32)": "c3248367",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializePriceImpact(uint48,uint48)": "01d5664a",
+  "removePriceImpactOpenInterest(address,uint32,uint256)": "2f29a9e8",
+  "setPairDepths(uint256[],uint128[],uint128[])": "6474b399",
+  "setPriceImpactWindowsCount(uint48)": "10751b4f",
+  "setPriceImpactWindowsDuration(uint48)": "39b0fc82",
+  "setRoles(address[],uint8[],bool[])": "101e6503"
+}
+
+Facet5 TradingStorage
+{
+  "addCollateral(address,address)": "c6783af1",
+  "closePendingOrder((address,uint32))": "4fb70bba",
+  "closeTrade((address,uint32))": "8583909b",
+  "getAddresses()": "a39fac12",
+  "getAllPendingOrders(uint256,uint256)": "2d11445f",
+  "getAllTradeInfos(uint256,uint256)": "eb50287f",
+  "getAllTrades(uint256,uint256)": "dffd8a1f",
+  "getCollateral(uint8)": "bb33a55b",
+  "getCollateralIndex(address)": "5c3ed7c3",
+  "getCollaterals()": "78b92636",
+  "getCollateralsCount()": "a3e15d09",
+  "getCounters(address,uint8)": "0212f0d6",
+  "getGToken(uint8)": "6a0aff41",
+  "getPendingOrder((address,uint32))": "c6e729bb",
+  "getPendingOrders(address)": "4c73cb25",
+  "getTrade(address,uint32)": "15878e07",
+  "getTradeInfo(address,uint32)": "75cd812d",
+  "getTradeInfos(address)": "0d1e3c94",
+  "getTradePendingOrderBlock((address,uint32),uint8)": "067e84dd",
+  "getTraderStored(address)": "bed8d2da",
+  "getTraders(uint32,uint32)": "0e503724",
+  "getTrades(address)": "4bfad7c0",
+  "getTradingActivated()": "4115c122",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializeTradingStorage(address,address,address[],address[])": "1b7d88e5",
+  "isCollateralActive(uint8)": "4d140218",
+  "isCollateralListed(uint8)": "1d2ffb42",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "storePendingOrder(((address,uint32,uint16,uint24,bool,bool,uint8,uint8,uint120,uint64,uint64,uint64,uint192),address,uint32,bool,uint8,uint32,uint16))": "93f9384e",
+  "storeTrade((address,uint32,uint16,uint24,bool,bool,uint8,uint8,uint120,uint64,uint64,uint64,uint192),(uint32,uint32,uint32,uint16,uint48,uint48,uint48))": "9f30b640",
+  "toggleCollateralActiveState(uint8)": "49f7895b",
+  "updateGToken(address,address)": "63450d74",
+  "updateOpenOrderDetails((address,uint32),uint64,uint64,uint64,uint16)": "eb2dfde8",
+  "updateTradeCollateralAmount((address,uint32),uint120)": "5a68200d",
+  "updateTradePosition((address,uint32),uint120,uint24,uint64)": "7281d8f8",
+  "updateTradeSl((address,uint32),uint64)": "1053c279",
+  "updateTradeTp((address,uint32),uint64)": "b8f741d4",
+  "updateTradingActivated(uint8)": "b78f4b36"
+}
+
+Facet6 TriggerRewards
+{
+  "claimPendingTriggerRewards(address)": "63790a1b",
+  "distributeTriggerReward(uint256)": "69f5395e",
+  "getAddresses()": "a39fac12",
+  "getTriggerPendingRewardsGns(address)": "9fd0bdad",
+  "getTriggerTimeoutBlocks()": "1187f9bd",
+  "hasActiveOrder(uint256)": "8765f772",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializeTriggerRewards(uint16)": "e2c3542b",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "updateTriggerTimeoutBlocks(uint16)": "9e353611"
+}
+
+Facet7 TradingInteractions 
+{
+  "cancelOpenOrder(uint32)": "85886333",
+  "cancelOrderAfterTimeout(uint32)": "b6919540",
+  "closeTradeMarket(uint32)": "bdb340cd",
+  "decreasePositionSize(uint32,uint120,uint24)": "69f6bde1",
+  "delegatedTradingAction(address,bytes)": "737b84cd",
+  "getAddresses()": "a39fac12",
+  "getByPassTriggerLink(address)": "85898e08",
+  "getMarketOrdersTimeoutBlocks()": "a4bdee80",
+  "getTradingDelegate(address)": "4aac6480",
+  "getWrappedNativeToken()": "1d9478b6",
+  "hasRole(address,uint8)": "95a8c58d",
+  "increasePositionSize(uint32,uint120,uint24,uint64,uint16)": "24058ad3",
+  "initialize(address)": "c4d66de8",
+  "initializeTrading(uint16,address[])": "5179cecf",
+  "isWrappedNativeToken(address)": "84e93347",
+  "openTrade((address,uint32,uint16,uint24,bool,bool,uint8,uint8,uint120,uint64,uint64,uint64,uint192),uint16,address)": "4465c3e4",
+  "openTradeNative((address,uint32,uint16,uint24,bool,bool,uint8,uint8,uint120,uint64,uint64,uint64,uint192),uint16,address)": "080e83e1",
+  "removeTradingDelegate()": "031c722b",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "setTradingDelegate(address)": "604755cf",
+  "triggerOrder(uint256)": "eb9359aa",
+  "updateByPassTriggerLink(address[],bool[])": "9bf1584e",
+  "updateLeverage(uint32,uint24)": "0bce9aaa",
+  "updateMarketOrdersTimeoutBlocks(uint16)": "52d029d2",
+  "updateOpenOrder(uint32,uint64,uint64,uint64,uint16)": "a4bb127e",
+  "updateSl(uint32,uint64)": "b5d9e9d0",
+  "updateTp(uint32,uint64)": "f401f2bb"
+}
+
+Facet8 TradingCallbacks
+{
+  "claimPendingGovFees()": "36c3dba2",
+  "closeTradeMarketCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "4b0b5629",
+  "decreasePositionSizeMarketCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "e1d88718",
+  "executeTriggerCloseOrderCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "c61a7ad4",
+  "executeTriggerOpenOrderCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "3b0c5938",
+  "getAddresses()": "a39fac12",
+  "getPendingGovFeesCollateral(uint8)": "2c6fe6d1",
+  "getVaultClosingFeeP()": "a5b26e46",
+  "hasRole(address,uint8)": "95a8c58d",
+  "increasePositionSizeMarketCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "10d8e754",
+  "initialize(address)": "c4d66de8",
+  "initializeCallbacks(uint8)": "ec98ec83",
+  "openTradeMarketCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "13ebc2c6",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "updateLeverageCallback(((address,uint32),uint256,uint64,uint64,uint64,uint64))": "92dd2940",
+  "updateVaultClosingFeeP(uint8)": "cbc8e6f2"
+}
+
+Facet9 GNSBorrowingFees
+{
+  "getAddresses()": "a39fac12",
+  "getAllBorrowingPairs(uint8)": "48da5b38",
+  "getBorrowingGroup(uint8,uint16)": "fff24740",
+  "getBorrowingGroupOi(uint8,uint16)": "13a9baae",
+  "getBorrowingGroupPendingAccFees(uint8,uint16,uint256)": "d2b9099a",
+  "getBorrowingGroups(uint8,uint16[])": "fbbf9740",
+  "getBorrowingInitialAccFees(uint8,address,uint32)": "ab6192ed",
+  "getBorrowingPair(uint8,uint16)": "5d5bf24d",
+  "getBorrowingPairGroupIndex(uint8,uint16)": "e6a6633f",
+  "getBorrowingPairGroups(uint8,uint16)": "fd03e048",
+  "getBorrowingPairOi(uint8,uint16)": "0077b57e",
+  "getBorrowingPairPendingAccFees(uint8,uint16,uint256)": "0c7be6ca",
+  "getPairMaxOi(uint8,uint16)": "5667b5c0",
+  "getPairMaxOiCollateral(uint8,uint16)": "274d1278",
+  "getPairOiCollateral(uint8,uint16,bool)": "eb2ea3a2",
+  "getPairOisCollateral(uint8,uint16)": "f6f7c948",
+  "getTradeBorrowingFee((uint8,address,uint16,uint32,bool,uint256,uint256))": "0804db93",
+  "getTradeLiquidationPrice((uint8,address,uint16,uint32,uint64,bool,uint256,uint256,bool))": "ea122fd8",
+  "handleTradeBorrowingCallback(uint8,address,uint16,uint32,uint256,bool,bool)": "fc79e929",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "resetTradeBorrowingFees(uint8,address,uint16,uint32,bool)": "4fa72788",
+  "setBorrowingGroupParams(uint8,uint16,(uint32,uint72,uint48))": "9fed9481",
+  "setBorrowingGroupParamsArray(uint8,uint16[],(uint32,uint72,uint48)[])": "02c4e7c1",
+  "setBorrowingPairParams(uint8,uint16,(uint16,uint32,uint48,uint72))": "33b516cf",
+  "setBorrowingPairParamsArray(uint8,uint16[],(uint16,uint32,uint48,uint72)[])": "eb1802f8",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "withinMaxBorrowingGroupOi(uint8,uint16,bool,uint256)": "801c7961"
+}
+
+Facet10 PriceAggregator
+
+{
+  "addOracle(address)": "df5dd1a5",
+  "claimBackLink()": "6f37d263",
+  "fulfill(bytes32,uint256)": "4357855e",
+  "getAddresses()": "a39fac12",
+  "getChainlinkToken()": "165d35e1",
+  "getCollateralFromUsdNormalizedValue(uint8,uint256)": "36f6def7",
+  "getCollateralGnsLiquidityPool(uint8)": "6a43c9ad",
+  "getCollateralPriceUsd(uint8)": "bbb4e3f9",
+  "getCollateralUsdPriceFeed(uint8)": "9641c1f5",
+  "getGnsPriceCollateralAddress(address)": "1de109d2",
+  "getGnsPriceCollateralIndex(uint8)": "a91fa361",
+  "getGnsPriceUsd(uint8)": "891e656c",
+  "getGnsPriceUsd(uint8,uint256)": "6e27030b",
+  "getLimitJobId()": "f4b0664d",
+  "getLinkFee(uint8,uint16,uint256)": "9cf0cc0e",
+  "getLinkUsdPriceFeed()": "b144bbf0",
+  "getMarketJobId()": "8e667ac8",
+  "getMinAnswers()": "69b53230",
+  "getOracle(uint256)": "10a9de60",
+  "getOracles()": "40884c52",
+  "getPendingRequest(bytes32)": "88b12d55",
+  "getPrice(uint8,uint16,(address,uint32),uint8,uint256,uint256)": "f51d0dc0",
+  "getPriceAggregatorOrder(bytes32)": "7d0fcd1e",
+  "getPriceAggregatorOrderAnswers((address,uint32))": "9f62038f",
+  "getRequestCount()": "3fad1834",
+  "getTwapInterval()": "3e742e3b",
+  "getUsdNormalizedValue(uint8,uint256)": "bbad411a",
+  "hasRole(address,uint8)": "95a8c58d",
+  "initialize(address)": "c4d66de8",
+  "initializePriceAggregator(address,address,uint24,uint8,address[],bytes32[2],uint8[],(address,uint8)[],address[])": "f1dd8b66",
+  "removeOracle(uint256)": "80935dbf",
+  "replaceOracle(uint256,address)": "25e589cd",
+  "setLimitJobId(bytes32)": "e0bb91c2",
+  "setMarketJobId(bytes32)": "85f276b8",
+  "setRoles(address[],uint8[],bool[])": "101e6503",
+  "updateCollateralGnsLiquidityPool(uint8,(address,uint8))": "2caa6f8a",
+  "updateCollateralUsdPriceFeed(uint8,address)": "c07d2844",
+  "updateLinkUsdPriceFeed(address)": "5beda778",
+  "updateMinAnswers(uint8)": "44eb8ba6",
+  "updateTwapInterval(uint24)": "b166a495"
+}
