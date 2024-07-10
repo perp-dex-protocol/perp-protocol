@@ -14,4 +14,14 @@
    
 7. Facet5 TradingStorage 0xf929cb41812e2fb358b5026d91f076ed27296907
 
+8. Facet6 TriggerRewards 0xE814cddB960a618ed352F3532A18501061545071
+
+9. Facet7 TradingInteractions 0x11d151Fae95A8C4d2f14eD9c146E0b577Fa024B0
+    
+10. Facet8 TradingCallbacks   0x9E7804e1192A22C62e90a30FeFe4EF0fAe37C4c8
+    
+11. Facet9 BorrowingFees 0xab8b877D14aF9C02241E47EfFDC90A2f1e762AE3
+    
+12. Facet10 PriceAggregator 0xb697aa6488d5ed45379469C401dcA812913838Ba
+
  
