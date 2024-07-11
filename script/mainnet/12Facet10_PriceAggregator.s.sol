@@ -25,7 +25,7 @@ contract PriceAggregatorScript is BaseScriptDeployer {
         selectors[1] = bytes4(0x6f37d263);
         selectors[2] = bytes4(0x4357855e);
         selectors[3] = bytes4(0x165d35e1);
-        selectors[4] = bytes4(0x36f6def7);  
+        selectors[4] = bytes4(0x36f6def7);
         selectors[5] = bytes4(0xbbb4e3f9);
         selectors[6] = bytes4(0x9641c1f5);
         selectors[7] = bytes4(0x1de109d2);
@@ -78,13 +78,9 @@ contract PriceAggregatorScript is BaseScriptDeployer {
         console2.log("facets8 ", facets[8]);
         console2.log("facets9 ", facets[9]);
 
-
-
-
         // 0xdf5dd1a5,0x6f37d263,0x4357855e,0x165d35e1,0x36f6def7,0xbbb4e3f9,0x9641c1f5,0x1de109d2,0xa91fa361,0x6e27030b,
         // 0x891e656c,0xf4b0664d,0x9cf0cc0e,0xb144bbf0,0x8e667ac8,0x69b53230,0x10a9de60,0x40884c52,0x88b12d55,0xf51d0dc0,
         // 0x7d0fcd1e,0x9f62038f,0x3fad1834,0x3e742e3b,0xbbad411a,0x80935dbf,0x25e589cd,0xe0bb91c2,0x85f276b8,0xc07d2844,
         // 0x5beda778,0x44eb8ba6,0xb166a495,0x6a43c9ad,0xf1dd8b66,0x2caa6f8a
-
     }
 }

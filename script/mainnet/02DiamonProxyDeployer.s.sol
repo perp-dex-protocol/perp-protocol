@@ -5,6 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {GNSAddressStore} from "src/core/abstract/GNSAddressStore.sol";
+import {IGNSDiamondLoupe} from "src/interfaces/IGNSDiamondLoupe.sol";
 import {TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
 contract DiamondProxyDeployer is BaseScriptDeployer {
@@ -17,13 +18,26 @@ contract DiamondProxyDeployer is BaseScriptDeployer {
 
         bytes memory data = abi.encodeWithSelector(GNSAddressStore.initialize.selector, user_address);
 
-        GNSMultiCollatDiamond diamondProxy = GNSMultiCollatDiamond(
-            payable(
-                address(
-                    new TransparentUpgradeableProxy(address(new GNSMultiCollatDiamond()), address(proxyAdmin), data)
-                )
-            )
-        );
-        console2.log("diamondProxy", address(diamondProxy));
+        // GNSMultiCollatDiamond diamondProxy = GNSMultiCollatDiamond(
+        //     payable(
+        //         address(
+        //             new TransparentUpgradeableProxy(address(new GNSMultiCollatDiamond()), address(proxyAdmin), data)
+        //         )
+        //     )
+        // );
+        // console2.log("diamondProxy", address(diamondProxy));
+
+        GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
+        IGNSDiamondLoupe.Facet[] memory facets = diamond.facets();
+
+        console2.log("facets", facets.length);
+
+        for (uint256 i = 0; i < facets.length; i++) {
+            console2.log("facets", i, facets[i].facetAddress);
+
+            for (uint256 j = 0; j < facets[i].functionSelectors.length; j++) {
+                console2.logBytes4(facets[i].functionSelectors[j]);
+            }
+        }
     }
 }
