@@ -30,7 +30,7 @@ Sei Devnet
 Sei Mainnet
 1. chainId         1329
 2. chain rpc       https://evm-rpc.sei-apis.com
-3. chain explorer  https://seistream.app/
+3. chain explorer  https://seistream.app/ https://seitrace.com/
 
 ---
 Refer
