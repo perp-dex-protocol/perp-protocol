@@ -2,5 +2,7 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-
+optimizer = true
+optimizer_runs = 800
 solc_version="0.8.23"
+libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0x01e8bde7cbb881aeca02ba2a9631d94d491798df"]
