@@ -15,8 +15,8 @@ contract TradingStorageScript is BaseScriptDeployer {
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0xf929cb41812e2FB358B5026d91f076ed27296907);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
+        _faceCut[0].facetAddress = address(0);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
         bytes4[] memory selectors = new bytes4[](35);
         selectors[0] = bytes4(0xc6783af1);
         selectors[1] = bytes4(0x4fb70bba);
@@ -64,8 +64,8 @@ contract TradingStorageScript is BaseScriptDeployer {
         console2.log("facets0 ", facets[0]);
         console2.log("facets1 ", facets[1]);
         console2.log("facets2 ", facets[2]);
-        console2.log("facets3 ", facets[3]);
-        console2.log("facets4 ", facets[4]);
+        // console2.log("facets3 ", facets[3]);
+        // console2.log("facets4 ", facets[4]);
 
         // 0xc6783af1,0x4fb70bba,0x8583909b,0x2d11445f,0xeb50287f,0xdffd8a1f,0xbb33a55b,0x5c3ed7c3,0x78b92636,0xa3e15d09,
         // 0x0212f0d6,0x6a0aff41,0xc6e729bb,0x4c73cb25,0x15878e07,0x75cd812d,0x0d1e3c94,0x067e84dd,0xbed8d2da,0x0e503724,

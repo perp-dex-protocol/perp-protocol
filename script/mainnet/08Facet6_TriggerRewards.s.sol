@@ -15,8 +15,8 @@ contract TriggerRewardsScript is BaseScriptDeployer {
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0xE814cddB960a618ed352F3532A18501061545071);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
+        _faceCut[0].facetAddress = address(0);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
 
         bytes4[] memory selectors = new bytes4[](7);
         selectors[0] = bytes4(0x63790a1b);
@@ -31,15 +31,15 @@ contract TriggerRewardsScript is BaseScriptDeployer {
         _faceCut[0].functionSelectors = selectors;
         address _init = address(0);
         bytes memory _calldata = new bytes(0);
-        // diamond.diamondCut(_faceCut, _init, _calldata);
+        diamond.diamondCut(_faceCut, _init, _calldata);
 
-        address[] memory facets = diamond.facetAddresses();
-        console2.log(facets.length);
-        console2.log("facets0 ", facets[0]);
-        console2.log("facets1 ", facets[1]);
-        console2.log("facets2 ", facets[2]);
-        console2.log("facets3 ", facets[3]);
-        console2.log("facets4 ", facets[4]);
-        console2.log("facets5 ", facets[5]);
+        // address[] memory facets = diamond.facetAddresses();
+        // console2.log(facets.length);
+        // console2.log("facets0 ", facets[0]);
+        // console2.log("facets1 ", facets[1]);
+        // console2.log("facets2 ", facets[2]);
+        // console2.log("facets3 ", facets[3]);
+        // console2.log("facets4 ", facets[4]);
+        // console2.log("facets5 ", facets[5]);
     }
 }

@@ -5,4 +5,4 @@ libs = ["lib"]
 optimizer = true
 optimizer_runs = 200
 solc_version="0.8.23"
-libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0xAddA3b8499613c20f3262f328cFC90761F291171"]
+libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0xAddA3b8499613c20f3262f328cFC90761F291171",   ]

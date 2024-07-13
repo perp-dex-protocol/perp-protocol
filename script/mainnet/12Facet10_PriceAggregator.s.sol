@@ -17,8 +17,8 @@ contract PriceAggregatorScript is BaseScriptDeployer {
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0xb697aa6488d5ed45379469C401dcA812913838Ba);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
+        _faceCut[0].facetAddress = address(0);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
 
         bytes4[] memory selectors = new bytes4[](36);
         selectors[0] = bytes4(0xdf5dd1a5);
@@ -65,18 +65,18 @@ contract PriceAggregatorScript is BaseScriptDeployer {
 
         diamond.diamondCut(_faceCut, _init, _calldata);
 
-        address[] memory facets = diamond.facetAddresses();
-        console2.log(facets.length);
-        console2.log("facets0 ", facets[0]);
-        console2.log("facets1 ", facets[1]);
-        console2.log("facets2 ", facets[2]);
-        console2.log("facets3 ", facets[3]);
-        console2.log("facets4 ", facets[4]);
-        console2.log("facets5 ", facets[5]);
-        console2.log("facets6 ", facets[6]);
-        console2.log("facets7 ", facets[7]);
-        console2.log("facets8 ", facets[8]);
-        console2.log("facets9 ", facets[9]);
+        // address[] memory facets = diamond.facetAddresses();
+        // console2.log(facets.length);
+        // console2.log("facets0 ", facets[0]);
+        // console2.log("facets1 ", facets[1]);
+        // console2.log("facets2 ", facets[2]);
+        // console2.log("facets3 ", facets[3]);
+        // console2.log("facets4 ", facets[4]);
+        // console2.log("facets5 ", facets[5]);
+        // console2.log("facets6 ", facets[6]);
+        // console2.log("facets7 ", facets[7]);
+        // console2.log("facets8 ", facets[8]);
+        // console2.log("facets9 ", facets[9]);
 
         // 0xdf5dd1a5,0x6f37d263,0x4357855e,0x165d35e1,0x36f6def7,0xbbb4e3f9,0x9641c1f5,0x1de109d2,0xa91fa361,0x6e27030b,
         // 0x891e656c,0xf4b0664d,0x9cf0cc0e,0xb144bbf0,0x8e667ac8,0x69b53230,0x10a9de60,0x40884c52,0x88b12d55,0xf51d0dc0,
