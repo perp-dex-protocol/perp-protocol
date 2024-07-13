@@ -9,14 +9,14 @@ import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract TradingCallbackScript is BaseScriptDeployer {
     function run() public {
-        // GNSTradingCallbacks tradingCallbacks = new GNSTradingCallbacks();
-        // console2.log("tradingCallbacks ", address(tradingCallbacks));
+        GNSTradingCallbacks tradingCallbacks = new GNSTradingCallbacks();
+        console2.log("tradingCallbacks ", address(tradingCallbacks));
 
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
+        _faceCut[0].facetAddress = address(tradingCallbacks);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
 
         bytes4[] memory selectors = new bytes4[](12);
         selectors[0] = bytes4(0x36c3dba2);
@@ -42,15 +42,15 @@ contract TradingCallbackScript is BaseScriptDeployer {
 
         diamond.diamondCut(_faceCut, _init, _calldata);
 
-        // address[] memory facets = diamond.facetAddresses();
-        // console2.log(facets.length);
-        // console2.log("facets0 ", facets[0]);
-        // console2.log("facets1 ", facets[1]);
-        // console2.log("facets2 ", facets[2]);
-        // console2.log("facets3 ", facets[3]);
-        // console2.log("facets4 ", facets[4]);
-        // console2.log("facets5 ", facets[5]);
-        // console2.log("facets6 ", facets[6]);
-        // console2.log("facets7 ", facets[7]);
+        address[] memory facets = diamond.facetAddresses();
+        console2.log(facets.length);
+        console2.log("facets0 ", facets[0]);
+        console2.log("facets1 ", facets[1]);
+        console2.log("facets2 ", facets[2]);
+        console2.log("facets3 ", facets[3]);
+        console2.log("facets4 ", facets[4]);
+        console2.log("facets5 ", facets[5]);
+        console2.log("facets6 ", facets[6]);
+        console2.log("facets7 ", facets[7]);
     }
 }

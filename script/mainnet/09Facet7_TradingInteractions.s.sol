@@ -9,14 +9,14 @@ import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract TriggerInteractionsScript is BaseScriptDeployer {
     function run() public {
-        // GNSTradingInteractions tradingInteractions = new GNSTradingInteractions();
-        // console2.log("tradingInteractions ", address(tradingInteractions));
+        GNSTradingInteractions tradingInteractions = new GNSTradingInteractions();
+        console2.log("tradingInteractions ", address(tradingInteractions));
 
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
+        _faceCut[0].facetAddress = address(tradingInteractions);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
 
         bytes4[] memory selectors = new bytes4[](23);
 
@@ -61,7 +61,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         console2.log("facets2 ", facets[2]);
         console2.log("facets3 ", facets[3]);
         console2.log("facets4 ", facets[4]);
-        // console2.log("facets5 ", facets[5]);
-        // console2.log("facets6 ", facets[6]);
+        console2.log("facets5 ", facets[5]);
+        console2.log("facets6 ", facets[6]);
     }
 }

@@ -9,14 +9,14 @@ import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract BorringFeesScript is BaseScriptDeployer {
     function run() public {
-        // GNSBorrowingFees borringFees = new GNSBorrowingFees();
-        // console2.log("borringFees ", address(borringFees));
+        GNSBorrowingFees borringFees = new GNSBorrowingFees();
+        console2.log("borringFees ", address(borringFees));
 
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
+        _faceCut[0].facetAddress = address(borringFees);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
 
         bytes4[] memory selectors = new bytes4[](24);
         selectors[0] = bytes4(0x48da5b38);
@@ -51,17 +51,17 @@ contract BorringFeesScript is BaseScriptDeployer {
 
         diamond.diamondCut(_faceCut, _init, _calldata);
 
-        // address[] memory facets = diamond.facetAddresses();
-        // console2.log(facets.length);
-        // console2.log("facets0 ", facets[0]);
-        // console2.log("facets1 ", facets[1]);
-        // console2.log("facets2 ", facets[2]);
-        // console2.log("facets3 ", facets[3]);
-        // console2.log("facets4 ", facets[4]);
-        // console2.log("facets5 ", facets[5]);
-        // console2.log("facets6 ", facets[6]);
-        // console2.log("facets7 ", facets[7]);
-        // console2.log("facets8 ", facets[8]);
+        address[] memory facets = diamond.facetAddresses();
+        console2.log(facets.length);
+        console2.log("facets0 ", facets[0]);
+        console2.log("facets1 ", facets[1]);
+        console2.log("facets2 ", facets[2]);
+        console2.log("facets3 ", facets[3]);
+        console2.log("facets4 ", facets[4]);
+        console2.log("facets5 ", facets[5]);
+        console2.log("facets6 ", facets[6]);
+        console2.log("facets7 ", facets[7]);
+        console2.log("facets8 ", facets[8]);
 
         // 0x48da5b38,0xfff24740,0x13a9baae,0xd2b9099a,0xfbbf9740,0xab6192ed,0x5d5bf24d,0xe6a6633f,0xfd03e048,0x0077b57e,
         // 0x0c7be6ca,0x5667b5c0,0x274d1278,0xeb2ea3a2,0xf6f7c948,0x0804db93,0xfc79e929,0x9fed9481,0x02c4e7c1,0x33b516cf,
