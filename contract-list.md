@@ -10,19 +10,28 @@
    
 5. Facet3 Fee Tier 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA
 
-0x69965744541C827cC01BF7125195B50557235B87
-6. Facet4 PriceImpact 0xBbceA45b8EFc6579772be09f69CA785b9640e2Fe
+6. Facet4 PriceImpact 0x9fe7f490cdc024d4446daf9b26ba3a1565deac6a
    
-7. Facet5 TradingStorage 0xf929cb41812e2fb358b5026d91f076ed27296907
+7. Facet5 TradingStorage 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af
 
-8. Facet6 TriggerRewards 0xE814cddB960a618ed352F3532A18501061545071
+8. Facet6 TriggerRewards 
 
-9. Facet7 TradingInteractions 0x11d151Fae95A8C4d2f14eD9c146E0b577Fa024B0
+9. Facet7 TradingInteractions 
     
-10. Facet8 TradingCallbacks   0x9E7804e1192A22C62e90a30FeFe4EF0fAe37C4c8
+10. Facet8 TradingCallbacks   
     
-11. Facet9 BorrowingFees 0xab8b877D14aF9C02241E47EfFDC90A2f1e762AE3
+11. Facet9 BorrowingFees 
     
-12. Facet10 PriceAggregator 0xb697aa6488d5ed45379469C401dcA812913838Ba
+12. Facet10 PriceAggregator 
 
  
+
+ ---
+forge create --rpc-url https://evm-rpc.sei-apis.com --private-key 0xda63348ff5d8dd3e9e5a248f35a6cf2912907f6dcd9e992e5a97d1136298f890  src/libraries/ArrayGetters.sol:ArrayGetters
+
+
+ linked libraries
+ 1, TradingCommonUtils  0xAddA3b8499613c20f3262f328cFC90761F291171
+ 2. ArrayGetters        0xeAcd6367A347862210eE4C6B6924697Ee9c78c06
+ 3. TradingStorageUtils 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0
+ 4. 

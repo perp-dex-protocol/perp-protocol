@@ -9,14 +9,14 @@ import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract PriceImpactScript is BaseScriptDeployer {
     function run() public {
-        // GNSPriceImpact priceImpact = new GNSPriceImpact();
-        // console2.log("priceImpact  ", address(priceImpact));
+        GNSPriceImpact priceImpact = new GNSPriceImpact();
+        console2.log("priceImpact  ", address(priceImpact));
 
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
-        _faceCut[0].facetAddress = address(0);
-        _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
+        _faceCut[0].facetAddress = address(priceImpact);
+        _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
         bytes4[] memory selectors = new bytes4[](15);
 
         selectors[0] = bytes4(0x823ef2ac);
@@ -39,7 +39,7 @@ contract PriceImpactScript is BaseScriptDeployer {
         _faceCut[0].functionSelectors = selectors;
         address _init = address(0);
         bytes memory _calldata = new bytes(0);
-        // diamond.diamondCut(_faceCut, _init, _calldata);
+        diamond.diamondCut(_faceCut, _init, _calldata);
 
         address[] memory facets = diamond.facetAddresses();
         console2.log("facets0 ", facets[0]);

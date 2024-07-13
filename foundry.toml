@@ -5,4 +5,6 @@ libs = ["lib"]
 optimizer = true
 optimizer_runs = 200
 solc_version="0.8.23"
-libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0xAddA3b8499613c20f3262f328cFC90761F291171",   ]
+libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0xAddA3b8499613c20f3262f328cFC90761F291171", 
+             "src/libraries/ArrayGetters.sol:ArrayGetters:0xeAcd6367A347862210eE4C6B6924697Ee9c78c06", 
+             "src/libraries/TradingStorageUtils.sol:TradingStorageUtils:0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0"  ]
