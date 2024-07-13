@@ -337,6 +337,29 @@ library TradingCommonUtils {
         }
     }
 
+    
+    /**
+     * @dev Transfers GNS to address
+     * @param _to receiving address
+     * @param _amountGns amount of GNS to transfer (1e18)
+     */
+    function transferGnsTo(address _to, uint256 _amountGns) internal {
+        if (_amountGns > 0) {
+            IERC20(AddressStoreUtils.getAddresses().gns).safeTransfer(_to, _amountGns);
+        }
+    }
+
+    /**
+     * @dev Transfers GNS from address
+     * @param _from sending address
+     * @param _amountGns amount of GNS to receive (1e18)
+     */
+    function transferGnsFrom(address _from, uint256 _amountGns) internal {
+        if (_amountGns > 0) {
+            IERC20(AddressStoreUtils.getAddresses().gns).safeTransferFrom(_from, address(this), _amountGns);
+        }
+    }
+
     /**
      * @dev Sends collateral to gToken vault for negative pnl
      * @param _collateralIndex collateral index
