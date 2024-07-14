@@ -337,7 +337,6 @@ library TradingCommonUtils {
         }
     }
 
-    
     /**
      * @dev Transfers GNS to address
      * @param _to receiving address

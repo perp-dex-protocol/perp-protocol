@@ -33,8 +33,9 @@ library OtcUtils {
     function updateOtcConfig(IOtc.OtcConfig memory _config) internal {
         if (_config.gnsTreasury == address(0)) revert IGeneralErrors.ZeroAddress();
 
-        if (_config.treasuryShareP + _config.stakingShareP + _config.burnShareP != 100 * ConstantsUtils.P_10)
+        if (_config.treasuryShareP + _config.stakingShareP + _config.burnShareP != 100 * ConstantsUtils.P_10) {
             revert IOtcUtils.InvalidShareSum();
+        }
 
         if (_config.premiumP > MAX_PREMIUM_P) revert IGeneralErrors.AboveMax();
 
@@ -79,9 +80,8 @@ library OtcUtils {
         emit IOtcUtils.OtcBalanceUpdated(_collateralIndex, newBalanceCollateral);
 
         // 4. Distribute GNS
-        (uint256 treasuryAmountGns, uint256 stakingAmountGns, uint256 burnAmountGns) = _calculateGnsDistribution(
-            gnsAmount
-        );
+        (uint256 treasuryAmountGns, uint256 stakingAmountGns, uint256 burnAmountGns) =
+            _calculateGnsDistribution(gnsAmount);
 
         if (treasuryAmountGns > 0) _distributeTreasuryGns(treasuryAmountGns);
         if (stakingAmountGns > 0) _distributeStakingGns(stakingAmountGns);
@@ -91,12 +91,7 @@ library OtcUtils {
         TradingCommonUtils.transferCollateralTo(_collateralIndex, msg.sender, _collateralAmount);
 
         emit IOtcUtils.OtcExecuted(
-            _collateralIndex,
-            _collateralAmount,
-            gnsPriceCollateral,
-            treasuryAmountGns,
-            stakingAmountGns,
-            burnAmountGns
+            _collateralIndex, _collateralAmount, gnsPriceCollateral, treasuryAmountGns, stakingAmountGns, burnAmountGns
         );
     }
 
@@ -154,26 +149,27 @@ library OtcUtils {
      * @param _collateralAmount amount of collateral (collateral precision)
      * @param _gnsPriceCollateral price of GNS in collateral (1e10)
      */
-    function _calculateGnsAmount(
-        uint8 _collateralIndex,
-        uint256 _collateralAmount,
-        uint256 _gnsPriceCollateral
-    ) internal view returns (uint256) {
-        return
-            TradingCommonUtils.convertCollateralToGns(
-                _collateralAmount,
-                _getMultiCollatDiamond().getCollateral(_collateralIndex).precisionDelta,
-                _gnsPriceCollateral
-            );
+    function _calculateGnsAmount(uint8 _collateralIndex, uint256 _collateralAmount, uint256 _gnsPriceCollateral)
+        internal
+        view
+        returns (uint256)
+    {
+        return TradingCommonUtils.convertCollateralToGns(
+            _collateralAmount,
+            _getMultiCollatDiamond().getCollateral(_collateralIndex).precisionDelta,
+            _gnsPriceCollateral
+        );
     }
 
     /**
      * @dev Calculate GNS distribution for treasury, GNS staking and burn
      * @param _gnsAmount amount of GNS tokens to distribute (1e18)
      */
-    function _calculateGnsDistribution(
-        uint256 _gnsAmount
-    ) internal view returns (uint256 treasuryAmountGns, uint256 stakingAmountGns, uint256 burnAmountGns) {
+    function _calculateGnsDistribution(uint256 _gnsAmount)
+        internal
+        view
+        returns (uint256 treasuryAmountGns, uint256 stakingAmountGns, uint256 burnAmountGns)
+    {
         IOtc.OtcConfig storage config = _getStorage().otcConfig;
 
         treasuryAmountGns = (_gnsAmount * config.treasuryShareP) / 100 / ConstantsUtils.P_10;

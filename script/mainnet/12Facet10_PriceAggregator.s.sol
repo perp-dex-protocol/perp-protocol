@@ -12,7 +12,6 @@ contract PriceAggregatorScript is BaseScriptDeployer {
         GNSPriceAggregator priceAggregator = new GNSPriceAggregator();
         console2.log("priceAggregator ", address(priceAggregator));
 
-
         GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);

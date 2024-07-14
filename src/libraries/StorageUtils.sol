@@ -22,5 +22,5 @@ library StorageUtils {
     uint256 internal constant GLOBAL_TRADING_CALLBACKS_SLOT = 451;
     uint256 internal constant GLOBAL_BORROWING_FEES_SLOT = 501;
     uint256 internal constant GLOBAL_PRICE_AGGREGATOR_SLOT = 551;
-     uint256 internal constant GLOBAL_OTC_SLOT = 601;
+    uint256 internal constant GLOBAL_OTC_SLOT = 601;
 }
