@@ -15,9 +15,7 @@ contract OpenTradingScript is BaseScriptDeployer {
     function run() public {
         // initializTrade();
 
-        // openTrade();
-
-
+        openTrade();
     }
 
     function initializTrade() public {
@@ -47,10 +45,22 @@ contract OpenTradingScript is BaseScriptDeployer {
     // }
 
     function openTrade() public {
-        // ITradingStorage.Trade memory trade = ITradingStorage.Trade({
-        //     tradeType: ITradingStorage.TradeType.TRADE,
-        //     trader: user_address,
-        //     collateral: 0x
-    }
+        ITradingStorage.Trade memory trade = ITradingStorage.Trade({
+            user: user_address,
+            index: 0,
+            pairIndex: 0,
+            leverage: 10000,
+            long: true,
+            isOpen: true,
+            collateralIndex: 1,
+            tradeType: ITradingStorage.TradeType.TRADE,
+            collateralAmount: 100000000000000000000,
+            openPrice: 10000000000,
+            tp: 10000000000,
+            sl: 10000000000,
+            __placeholder: 0
+        });
 
+        tradingInteraction.openTrade(trade, 1, address(0));
+    }
 }
