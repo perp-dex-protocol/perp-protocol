@@ -16,10 +16,9 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         console2.log(pairsStorage.groupsCount());
         console2.log(pairsStorage.pairsCount());
 
-        addFeeData();
+        // addFeeData();
         addGroupData();
-        addPair();
-
+        // addPair();
 
         console2.log(pairsStorage.feesCount());
         console2.log(pairsStorage.groupsCount());
@@ -30,10 +29,15 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
     function addFeeData() public {
         // {
         //   "name": "crypto",
+        // 1e10 -> 0.03%
         //   "openFeeP": "300000000",
+        // 1e10 -> 0.06%
         //   "closeFeeP": "600000000",
+        // 1e10 -> 0.004%
         //   "oracleFeeP": "40000000",
+        // 0.02%
         //   "triggerOrderFeeP": "200000000",
+        //5000U
         //   "minPositionSizeUsd": "5000000000000000000000"
         // }
         IPairsStorage.Fee[] memory fees = new IPairsStorage.Fee[](1);
