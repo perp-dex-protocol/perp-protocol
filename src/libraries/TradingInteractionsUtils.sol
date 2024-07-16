@@ -493,38 +493,43 @@ library TradingInteractionsUtils {
         _trade.user = sender;
         _trade.__placeholder = 0;
 
-        uint256 positionSizeCollateral =
-            TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
-        uint256 positionSizeUsd =
-            _getMultiCollatDiamond().getUsdNormalizedValue(_trade.collateralIndex, positionSizeCollateral);
-
+        // 1.  positionSize = collaterAmt * leverage
+        uint256 positionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
+        // 2. usd = value * price * delta
+        uint256 positionSizeUsd = _getMultiCollatDiamond().getUsdNormalizedValue(_trade.collateralIndex, positionSizeCollateral);
+        // 3. check pos size is in the correct size 
         if (
             !TradingCommonUtils.isWithinExposureLimits(
                 _trade.collateralIndex, _trade.pairIndex, _trade.long, positionSizeCollateral
             )
         ) revert ITradingInteractionsUtils.AboveExposureLimits();
 
-        // Trade collateral usd value needs to be >= 5x min trade fee usd (collateral left after trade opened >= 80%)
+        // 4.Trade collateral usd value needs to be >= 5x min trade fee usd (collateral left after trade opened >= 80%)
         if ((positionSizeUsd * 1e3) / _trade.leverage < 5 * _getMultiCollatDiamond().pairMinFeeUsd(_trade.pairIndex)) {
             revert ITradingInteractionsUtils.InsufficientCollateral();
         }
 
+        // 5. check the leverage
         if (
             _trade.leverage < _getMultiCollatDiamond().pairMinLeverage(_trade.pairIndex) * 1e3
                 || _trade.leverage > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3
         ) revert ITradingInteractionsUtils.WrongLeverage();
 
+        // 6. update price Impact 
         (uint256 priceImpactP,) =
             _getMultiCollatDiamond().getTradePriceImpact(0, _trade.pairIndex, _trade.long, positionSizeUsd);
 
+        // 7. check price 
         if ((priceImpactP * _trade.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P) {
             revert ITradingInteractionsUtils.PriceImpactTooHigh();
         }
-
+        // 8. if native token , transfer native token
         if (!_isNative) {
             TradingCommonUtils.transferCollateralFrom(_trade.collateralIndex, sender, _trade.collateralAmount);
         }
 
+        // 9. check trade type, 
+        // 9.1 check order type , if market order, store trade info
         if (_trade.tradeType != ITradingStorage.TradeType.TRADE) {
             ITradingStorage.TradeInfo memory tradeInfo;
             tradeInfo.maxSlippageP = _maxSlippageP;
@@ -533,6 +538,7 @@ library TradingInteractionsUtils {
 
             emit ITradingInteractionsUtils.OpenOrderPlaced(sender, _trade.pairIndex, _trade.index);
         } else {
+            // 9.2 else  store trade to pending order , and wait
             ITradingStorage.PendingOrder memory pendingOrder;
             pendingOrder.trade = _trade;
             pendingOrder.user = sender;
