@@ -5,14 +5,31 @@ import {Script, console2} from "forge-std/Script.sol";
 import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSTradingStorage} from "src/core/facets/GNSTradingStorage.sol";
 import {ITradingStorage} from "src/interfaces/types/ITradingStorage.sol";
+import {IAddressStore} from "src/interfaces/types/IAddressStore.sol";
 
 contract TradingStorageScript is BaseScriptDeployer {
+    GNSTradingStorage tradingStorage = GNSTradingStorage(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
-
-     GNSTradingStorage tradingStorage = GNSTradingStorage(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
-
+    address fore_token = 0x7b34E269c615Dd2842b7AA5C513f5ebcaea5b70d;
+    address seiStaking = 0x7f54BeCa8FA5908355a0B613C425484B70c58167;
 
     function run() public {
-        tradingStorage.updateTradingActivated(ITradingStorage.TradingActivated.ACTIVATED);
+        // 1. update trading storage activated status
+        // tradingStorage.updateTradingActivated(ITradingStorage.TradingActivated.ACTIVATED);
+
+        ITradingStorage.TradingActivated activated = tradingStorage.getTradingActivated();
+        console2.log("Trading activated status: {}", uint(activated));
+        // getCollateralsCount()
+        uint8 collateralsCount = tradingStorage.getCollateralsCount();
+        console2.log("Collaterals count: {}", collateralsCount);
+
+
+        // 2. initialize trading
+        tradingStorage.initializeTradingStorage(fore_token, seiStaking, new address[](0), new address[](0));
+        IAddressStore.Addresses memory addrs = tradingStorage.getAddresses();
+        console2.log("GNS address: {}", addrs.gns);
+        console2.log("GNS Staking address: {}", addrs.gnsStaking);
+
+
     }
 }

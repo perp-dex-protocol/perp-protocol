@@ -494,10 +494,12 @@ library TradingInteractionsUtils {
         _trade.__placeholder = 0;
 
         // 1.  positionSize = collaterAmt * leverage
-        uint256 positionSizeCollateral = TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
+        uint256 positionSizeCollateral =
+            TradingCommonUtils.getPositionSizeCollateral(_trade.collateralAmount, _trade.leverage);
         // 2. usd = value * price * delta
-        uint256 positionSizeUsd = _getMultiCollatDiamond().getUsdNormalizedValue(_trade.collateralIndex, positionSizeCollateral);
-        // 3. check pos size is in the correct size 
+        uint256 positionSizeUsd =
+            _getMultiCollatDiamond().getUsdNormalizedValue(_trade.collateralIndex, positionSizeCollateral);
+        // 3. check pos size is in the correct size
         if (
             !TradingCommonUtils.isWithinExposureLimits(
                 _trade.collateralIndex, _trade.pairIndex, _trade.long, positionSizeCollateral
@@ -515,11 +517,11 @@ library TradingInteractionsUtils {
                 || _trade.leverage > _getMultiCollatDiamond().pairMaxLeverage(_trade.pairIndex) * 1e3
         ) revert ITradingInteractionsUtils.WrongLeverage();
 
-        // 6. update price Impact 
+        // 6. update price Impact
         (uint256 priceImpactP,) =
             _getMultiCollatDiamond().getTradePriceImpact(0, _trade.pairIndex, _trade.long, positionSizeUsd);
 
-        // 7. check price 
+        // 7. check price
         if ((priceImpactP * _trade.leverage) / 1e3 > ConstantsUtils.MAX_OPEN_NEGATIVE_PNL_P) {
             revert ITradingInteractionsUtils.PriceImpactTooHigh();
         }
@@ -528,7 +530,7 @@ library TradingInteractionsUtils {
             TradingCommonUtils.transferCollateralFrom(_trade.collateralIndex, sender, _trade.collateralAmount);
         }
 
-        // 9. check trade type, 
+        // 9. check trade type,
         // 9.1 check order type , if market order, store trade info
         if (_trade.tradeType != ITradingStorage.TradeType.TRADE) {
             ITradingStorage.TradeInfo memory tradeInfo;
