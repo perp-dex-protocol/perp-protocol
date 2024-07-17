@@ -31,9 +31,9 @@ forge create --rpc-url https://evm-rpc.sei-apis.com --private-key 0xda63348ff5d8
 
 
  linked libraries
- 1, TradingCommonUtils              0xAddA3b8499613c20f3262f328cFC90761F291171
- 1. ArrayGetters                    0xeAcd6367A347862210eE4C6B6924697Ee9c78c06
- 2. TradingStorageUtils             0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0
- 3. PackingUtils                    0x53bA183CfDB5a753C622FC0C8F89eDa8eF69d65E
- 4. UpdateLeverageLifecycles        0xE86A86b0ACbf6953482282AEC51208Da2e23e9c7
- 5. UpdatePositionSizeLifecycles    0x2a8e75F89813e739c9991204538A7a79e25fC401
+ 1. TradingCommonUtils              0xAddA3b8499613c20f3262f328cFC90761F291171
+ 2. ArrayGetters                    0xeAcd6367A347862210eE4C6B6924697Ee9c78c06
+ 3. TradingStorageUtils             0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0
+ 4. PackingUtils                    0x53bA183CfDB5a753C622FC0C8F89eDa8eF69d65E
+ 5. UpdateLeverageLifecycles        0xE86A86b0ACbf6953482282AEC51208Da2e23e9c7
+ 6. UpdatePositionSizeLifecycles    0x2a8e75F89813e739c9991204538A7a79e25fC401
