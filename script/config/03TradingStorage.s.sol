@@ -24,9 +24,18 @@ contract TradingStorageScript is BaseScriptDeployer {
         console2.log("Collaterals count: {}", collateralsCount);
 
         // 2. initialize trading
-        tradingStorage.initializeTradingStorage(fore_token, seiStaking, new address[](0), new address[](0));
-        IAddressStore.Addresses memory addrs = tradingStorage.getAddresses();
-        console2.log("GNS address: {}", addrs.gns);
-        console2.log("GNS Staking address: {}", addrs.gnsStaking);
+        // tradingStorage.initializeTradingStorage(fore_token, seiStaking, new address[](0), new address[](0));
+        // IAddressStore.Addresses memory addrs = tradingStorage.getAddresses();
+        // console2.log("GNS address: {}", addrs.gns);
+        // console2.log("GNS Staking address: {}", addrs.gnsStaking);
+
+        // 3. add gtoken market
+        address wsei = 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7;
+        address fsei = 0x267Ff9020A31c7dece29407Abb0C17F8bF83485E;
+
+        // tradingStorage.addCollateral(wsei, fsei);
+
+        collateralsCount = tradingStorage.getCollateralsCount();
+        console2.log("Collaterals count: {}", collateralsCount);
     }
 }

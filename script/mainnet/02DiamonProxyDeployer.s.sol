@@ -7,7 +7,10 @@ import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {GNSAddressStore} from "src/core/abstract/GNSAddressStore.sol";
 import {IGNSDiamondLoupe} from "src/interfaces/IGNSDiamondLoupe.sol";
 
-import {TransparentUpgradeableProxy, ITransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
+import {
+    TransparentUpgradeableProxy,
+    ITransparentUpgradeableProxy
+} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 import {ProxyAdmin} from "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
 
 contract DiamondProxyDeployer is BaseScriptDeployer {
@@ -21,10 +24,10 @@ contract DiamondProxyDeployer is BaseScriptDeployer {
         GNSMultiCollatDiamond diamondProxyImpl = new GNSMultiCollatDiamond();
         console2.log("diamondProxyImpl", address(diamondProxyImpl));
 
-        // 2. upgrade Impl 
+        // 2. upgrade Impl
         ProxyAdmin(proxyAdmin).upgrade(ITransparentUpgradeableProxy(proxy_address), address(diamondProxyImpl));
 
-        // 3. execute remove logic 
+        // 3. execute remove logic
 
         // bytes memory data = abi.encodeWithSelector(GNSAddressStore.initialize.selector, user_address);
 

@@ -6,6 +6,7 @@ import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSPriceAggregator} from "src/core/facets/GNSPriceAggregator.sol";
 import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
+
 contract PriceAggregatorScript is BaseScriptDeployer {
     function run() public {
         GNSPriceAggregator priceAggregator = new GNSPriceAggregator();
