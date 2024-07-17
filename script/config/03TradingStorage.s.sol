@@ -18,18 +18,15 @@ contract TradingStorageScript is BaseScriptDeployer {
         // tradingStorage.updateTradingActivated(ITradingStorage.TradingActivated.ACTIVATED);
 
         ITradingStorage.TradingActivated activated = tradingStorage.getTradingActivated();
-        console2.log("Trading activated status: {}", uint(activated));
+        console2.log("Trading activated status: {}", uint256(activated));
         // getCollateralsCount()
         uint8 collateralsCount = tradingStorage.getCollateralsCount();
         console2.log("Collaterals count: {}", collateralsCount);
-
 
         // 2. initialize trading
         tradingStorage.initializeTradingStorage(fore_token, seiStaking, new address[](0), new address[](0));
         IAddressStore.Addresses memory addrs = tradingStorage.getAddresses();
         console2.log("GNS address: {}", addrs.gns);
         console2.log("GNS Staking address: {}", addrs.gnsStaking);
-
-
     }
 }
