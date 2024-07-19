@@ -54,10 +54,10 @@ contract OpenTradingScript is BaseScriptDeployer {
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 1e18,
+            collateralAmount: 100e18,
             openPrice: 10000000000,
             tp: 10000000000,
-            sl: 10000000000,
+            sl: 0,
             __placeholder: 0
         });
 

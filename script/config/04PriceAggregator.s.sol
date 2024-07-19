@@ -11,6 +11,6 @@ contract PriceAggregatorScript is BaseScriptDeployer {
 
     function run() public {
         // eth price
-        priceAggregator.updateCollateralUsdPriceFeed(1, IChainlinkFeed(0xEFc092F9D1Fd756D6788C5E8c1043Ed7a7F423Df));
+        priceAggregator.updateCollateralUsdPriceFeed(1, IChainlinkFeed(0x65bb746B987ccB004b004B6aC9Df18e9ccfca004));
     }
 }

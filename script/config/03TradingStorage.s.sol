@@ -37,5 +37,20 @@ contract TradingStorageScript is BaseScriptDeployer {
 
         collateralsCount = tradingStorage.getCollateralsCount();
         console2.log("Collaterals count: {}", collateralsCount);
+
+        //      struct Collateral {
+        //     // slot 1
+        //     address collateral; // 160 bits
+        //     bool isActive; // 8 bits
+        //     uint88 __placeholder; // 88 bits
+        //     // slot 2
+        //     uint128 precision;
+        //     uint128 precisionDelta;
+        // }
+        ITradingStorage.Collateral memory collateral1 = tradingStorage.getCollateral(1);
+        console2.log("Collateral 1: {}", collateral1.collateral);
+        console2.log("Collateral 1: {}", collateral1.isActive);
+        console2.log("Collateral 1: {}", collateral1.precision);
+        console2.log("Collateral 1: {}", collateral1.precisionDelta);
     }
 }

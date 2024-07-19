@@ -63,7 +63,7 @@ contract TradingInteractionsTest is BasicScriptTest {
             0
         );
         tradingContract.openTrade(trade, 1015, address(0));
-        // tp take profit 
+        // tp take profit
         // sl stop loss
     }
 }
