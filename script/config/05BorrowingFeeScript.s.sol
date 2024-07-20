@@ -9,7 +9,7 @@ contract BorrowingFeeScript is BaseScriptDeployer {
     GNSBorrowingFees borrowingFees = GNSBorrowingFees(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
     function run() public {
-        uint256 collateral =  borrowingFees.getPairMaxOiCollateral(1, 0);
+        uint256 collateral = borrowingFees.getPairMaxOiCollateral(1, 0);
         console2.logUint(collateral);
     }
 }
