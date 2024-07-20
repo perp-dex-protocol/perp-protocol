@@ -26,22 +26,23 @@ contract BorrowingFeeScript is BaseScriptDeployer {
     }
 
     function addBorrowPair() public {
-        // groupIndex 0 
+        // groupIndex 0
         // feePerBlock 30000, according arbitrum 100000
-        // feeExponent  1 
+        // feeExponent  1
         // maxOi    34511200000000000
-        IBorrowingFees.BorrowingPairParams memory pairParams = IBorrowingFees.BorrowingPairParams(0, 100000, 1, 0.07 ether);
+        IBorrowingFees.BorrowingPairParams memory pairParams =
+            IBorrowingFees.BorrowingPairParams(0, 100000, 1, 0.07 ether);
 
         borrowingFees.setBorrowingPairParams(1, 0, pairParams);
     }
 
     function addBorrowGroup() public {
-
         // 1. feePerblock 60000
         // 2. 0.5 e18
         // 3. feeExponent 1
 
-        IBorrowingFees.BorrowingGroupParams memory groupParams = IBorrowingFees.BorrowingGroupParams(60000, 0.5 ether, 1);
+        IBorrowingFees.BorrowingGroupParams memory groupParams =
+            IBorrowingFees.BorrowingGroupParams(60000, 0.5 ether, 1);
 
         borrowingFees.setBorrowingGroupParams(1, 1, groupParams);
     }
