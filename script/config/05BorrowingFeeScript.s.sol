@@ -17,8 +17,8 @@ contract BorrowingFeeScript is BaseScriptDeployer {
     // }
 
     function run() public {
-        addBorrowPair();
-
+        // addBorrowPair();
+        addBorrowGroup();
         uint256 pairOi = borrowingFees.getPairOiCollateral(1, 0, true);
         console2.log(pairOi);
         uint256 collateral = borrowingFees.getPairMaxOiCollateral(1, 0);
@@ -26,14 +26,23 @@ contract BorrowingFeeScript is BaseScriptDeployer {
     }
 
     function addBorrowPair() public {
-        IBorrowingFees.BorrowingPairParams memory pairParams = IBorrowingFees.BorrowingPairParams(0, 1, 1, 1000000);
+        // groupIndex 0 
+        // feePerBlock 30000, according arbitrum 100000
+        // feeExponent  1 
+        // maxOi    34511200000000000
+        IBorrowingFees.BorrowingPairParams memory pairParams = IBorrowingFees.BorrowingPairParams(0, 100000, 1, 0.07 ether);
 
         borrowingFees.setBorrowingPairParams(1, 0, pairParams);
     }
 
     function addBorrowGroup() public {
-        IBorrowingFees.BorrowingGroupParams memory groupParams = IBorrowingFees.BorrowingGroupParams(0, 1, 1000000);
 
-        borrowingFees.setBorrowingGroupParams(1, 0, groupParams);
+        // 1. feePerblock 60000
+        // 2. 0.5 e18
+        // 3. feeExponent 1
+
+        IBorrowingFees.BorrowingGroupParams memory groupParams = IBorrowingFees.BorrowingGroupParams(60000, 0.5 ether, 1);
+
+        borrowingFees.setBorrowingGroupParams(1, 1, groupParams);
     }
 }

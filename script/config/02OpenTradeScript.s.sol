@@ -6,6 +6,12 @@ import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSTradingInteractions} from "src/core/facets/GNSTradingInteractions.sol";
 import {ITradingStorage} from "src/interfaces/types/ITradingStorage.sol";
 
+
+interface IWSei{
+    function deposit() external payable;
+    function approve(address spender, uint256 amount) external returns (bool);
+}
+
 contract OpenTradingScript is BaseScriptDeployer {
     GNSTradingInteractions tradingInteraction =
         GNSTradingInteractions(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
@@ -15,6 +21,8 @@ contract OpenTradingScript is BaseScriptDeployer {
     function run() public {
         // initializTrade();
 
+        IWSei(0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7).deposit{value: 3e18}();
+        IWSei(0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7).approve(address(tradingInteraction), 100 ether);
         openTrade();
     }
 
@@ -49,14 +57,14 @@ contract OpenTradingScript is BaseScriptDeployer {
             user: user_address,
             index: 0,
             pairIndex: 0,
-            leverage: 10000,
+            leverage: 100000,
             long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 100e18,
-            openPrice: 10000000000,
-            tp: 10000000000,
+            collateralAmount: 3e18,
+            openPrice: 3508e8,
+            tp: 0,
             sl: 0,
             __placeholder: 0
         });
