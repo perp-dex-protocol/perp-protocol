@@ -204,28 +204,28 @@ contract PairStorageTest is BasicScriptTest {
 
         console2.log("==================================");
 
-        // IPairsStorage.Pair memory pair1 = pairsStorage.pairs(1);
+        IPairsStorage.Pair memory pair1 = pairsStorage.pairs(1);
 
-        // console2.log("Pair from: %s", pair1.from);
-        // console2.log("Pair to: %s", pair1.to);
-        // console2.log("Spread: %d", pair1.spreadP);
-        // console2.log("groupIndex: %d", pair1.groupIndex);
-        // console2.log("feeIndex: %d", pair1.feeIndex);
-        // console2.log("feed1 address: %s", pair1.feed.feed1);
-        // console2.log("feed2 address: %s", pair1.feed.feed2);
-        // console2.log("feedCalculation: %d", uint256(pair1.feed.feedCalculation));
-        // console2.log("maxDeviationP: %d", pair1.feed.maxDeviationP);
+        console2.log("Pair from: %s", pair1.from);
+        console2.log("Pair to: %s", pair1.to);
+        console2.log("spreadP: %d", pair1.spreadP);
+        console2.log("groupIndex: %d", pair1.groupIndex);
+        console2.log("feeIndex: %d", pair1.feeIndex);
+        console2.log("feed1 address: %s", pair1.feed.feed1);
+        console2.log("feed2 address: %s", pair1.feed.feed2);
+        console2.log("feedCalculation: %d", uint256(pair1.feed.feedCalculation));
+        console2.log("maxDeviationP: %d", pair1.feed.maxDeviationP);
 
         // console2.log("==================================");
-        IPairsStorage.Pair memory pair10 = pairsStorage.pairs(10);
-        console2.log("Pair from: %s", pair10.from);
-        console2.log("Pair to: %s", pair10.to);
-        console2.log("Spread: %d", pair10.spreadP);
-        console2.log("groupIndex: %d", pair10.groupIndex);
-        console2.log("feeIndex: %d", pair10.feeIndex);
-        console2.log("feed1 address: %s", pair10.feed.feed1);
-        console2.log("feed2 address: %s", pair10.feed.feed2);
-        console2.log("feedCalculation: %d", uint256(pair10.feed.feedCalculation));
-        console2.log("maxDeviationP: %d", pair10.feed.maxDeviationP);
+        // IPairsStorage.Pair memory pair10 = pairsStorage.pairs(10);
+        // console2.log("Pair from: %s", pair10.from);
+        // console2.log("Pair to: %s", pair10.to);
+        // console2.log("Spread: %d", pair10.spreadP);
+        // console2.log("groupIndex: %d", pair10.groupIndex);
+        // console2.log("feeIndex: %d", pair10.feeIndex);
+        // console2.log("feed1 address: %s", pair10.feed.feed1);
+        // console2.log("feed2 address: %s", pair10.feed.feed2);
+        // console2.log("feedCalculation: %d", uint256(pair10.feed.feedCalculation));
+        // console2.log("maxDeviationP: %d", pair10.feed.maxDeviationP);
     }
 }

@@ -17,8 +17,34 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         console2.log(pairsStorage.pairsCount());
 
         // addFeeData();
-        addGroupData();
-        // addPair();
+        // updateFeeData();
+        // addGroupData();
+        addPair();
+
+        // IPairsStorage.Fee memory fee0 = pairsStorage.fees(0);
+        // console2.log(fee0.name);
+        // console2.log(fee0.openFeeP);
+        // console2.log(fee0.closeFeeP);
+        // console2.log(fee0.oracleFeeP);
+        // console2.log(fee0.triggerOrderFeeP);
+        // console2.log(fee0.minPositionSizeUsd);
+
+        // IPairsStorage.Group memory group0 = pairsStorage.groups(0);
+        // console2.log(group0.name);
+        // console2.logBytes32(group0.job);
+        // console2.log(group0.minLeverage);
+        // console2.log(group0.maxLeverage);
+
+        IPairsStorage.Pair memory pair0 = pairsStorage.pairs(0);
+        console2.log("Pair from: %s", pair0.from);
+        console2.log("Pair to: %s", pair0.to);
+        console2.log("Spread: %d", pair0.spreadP);
+        console2.log("groupIndex: %d", pair0.groupIndex);
+        console2.log("feeIndex: %d", pair0.feeIndex);
+        console2.log("feed1 address: %s", pair0.feed.feed1);
+        console2.log("feed2 address: %s", pair0.feed.feed2);
+        console2.log("feedCalculation: %d", uint256(pair0.feed.feedCalculation));
+        console2.log("maxDeviationP: %d", pair0.feed.maxDeviationP);
 
         console2.log(pairsStorage.feesCount());
         console2.log(pairsStorage.groupsCount());
@@ -49,6 +75,20 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         pairsStorage.addFees(fees);
     }
 
+    function updateFeeData() public {
+        IPairsStorage.Fee[] memory fees = new IPairsStorage.Fee[](1);
+
+        IPairsStorage.Fee memory fee =
+            IPairsStorage.Fee("crypto", 300000000, 600000000, 40000000, 200000000, 100000000000000000000);
+
+        uint256[] memory _ids = new uint256[](1);
+        _ids[0] = 0;
+
+        fees[0] = fee;
+
+        pairsStorage.updateFees(_ids, fees);
+    }
+
     // 2.add group
     function addGroupData() public {
         // {
@@ -69,36 +109,22 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
 
     // 3. add pair
     function addPair() public {
-        //  {
-        //   "from": "BTC",
-        //   "to": "USD",
-        //   "feed": {
-        //     "feed1": "0x6ce185860a4963106506C203335A2910413708e9",
-        //     "feed2": "0x0000000000000000000000000000000000000000",
-        //     "feedCalculation": 0,
-        //     "maxDeviationP": "200000000000"
-        //   },
-        //   "spreadP": "0",
-        //   "groupIndex": "0",
-        //   "feeIndex": "0"
-        // }
-
         IPairsStorage.Pair[] memory pairs = new IPairsStorage.Pair[](1);
 
         IPairsStorage.Pair memory pair = IPairsStorage.Pair(
-            "BTC",
+            "ETH",
             "USD",
             IPairsStorage.Feed(
-                0x6ce185860a4963106506C203335A2910413708e9,
+                0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D,
                 0x0000000000000000000000000000000000000000,
-                IPairsStorage.FeedCalculation.COMBINE,
+                IPairsStorage.FeedCalculation.DEFAULT,
                 200000000000
             ),
             0,
             0,
             0
         );
-
+        pairs[0] = pair;
         pairsStorage.addPairs(pairs);
     }
 }

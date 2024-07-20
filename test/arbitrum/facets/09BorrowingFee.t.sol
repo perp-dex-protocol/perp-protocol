@@ -34,10 +34,9 @@ contract BorrowingFeeTest is BasicScriptTest {
 
         bool withinMaxBorrowingGroupOi = borrowingFee.withinMaxBorrowingGroupOi(collaterIndex, pairIndex, long, 100e18);
         console2.log(withinMaxBorrowingGroupOi);
-        
+
         // _setBorrowingPairParams
         // _updatePairOi
-
     }
 
     // collateral 1 DAI  0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1
