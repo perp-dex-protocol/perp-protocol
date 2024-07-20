@@ -38,6 +38,9 @@
   
 9. BorrowingFees
    * 借款的时候， 持续计息， callback 时计算borrowFee
-  
+   * setBorrowingPairParams(uint8 _collateralIndex, uint16 _pairIndex, BorrowingPairParams calldata _value)
+   
+   * setBorrowingGroupParams
+      feePerBlock  maxOi  feeExponent
 10. PriceAggregator
    *  获取价格 getPrice

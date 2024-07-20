@@ -630,6 +630,7 @@ library BorrowingFeesUtils {
         uint16 _pairIndex,
         IBorrowingFees.BorrowingPairParams calldata _value
     ) internal {
+        // 1. fee Expoent must be between 1 and 3
         if (_value.feeExponent < 1 || _value.feeExponent > 3) {
             revert IBorrowingFeesUtils.BorrowingWrongExponent();
         }
