@@ -31,9 +31,14 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 3. closeOrder
 
-        // 4. get Pending Order
+        // 4. decrease Pos
+        // decreasePos();
+
+        // 5. get Pending Order
         // getUserPendingOrders(user_address);
         // getAllPendingorder();
+
+        getTrade();
     }
 
     function initializTrade() public {
@@ -47,6 +52,9 @@ contract OpenTradingScript is BaseScriptDeployer {
         IWSei(0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7).deposit{value: 3e18}();
         IWSei(0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7).approve(address(tradingInteraction), 100 ether);
     }
+
+    // openprice decimal 1e10
+    // take profit decimal 1e10
 
     function openTrade() public {
         ITradingStorage.Trade memory trade = ITradingStorage.Trade({
@@ -93,6 +101,30 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function triggerOrder() public {}
+
+    function decreasePos() public {
+        tradingInteraction.decreasePositionSize(0, 1, 100);
+    }
+
+    function getTrade() public {
+        ITradingStorage.Trade memory trade = tradingStorage.getTrade(user_address, 0);
+
+        console2.log("====================================");
+
+        console2.log(" trade user ", trade.user);
+        console2.log(" trade index ", trade.index);
+        console2.log(" trade pairIndex ", trade.pairIndex);
+        console2.log(" trade leverage ", trade.leverage);
+        console2.log(" trade long ", trade.long);
+        console2.log(" trade isOpen ", trade.isOpen);
+        console2.log(" trade collateralIndex ", trade.collateralIndex);
+        console2.log(" trade tradeType ", uint256(trade.tradeType));
+        console2.log(" trade collateralAmount ", trade.collateralAmount);
+        console2.log(" trade openPrice ", trade.openPrice);
+        console2.log(" trade tp ", trade.tp);
+        console2.log(" trade sl ", trade.sl);
+        console2.log(" trade __placeholder ", trade.__placeholder);
+    }
 
     function getUserPendingOrders(address userAddress) public {
         ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getPendingOrders(userAddress);
