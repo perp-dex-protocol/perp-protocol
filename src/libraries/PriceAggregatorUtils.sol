@@ -224,6 +224,7 @@ library PriceAggregatorUtils {
 
         bytes32 job = isLookback ? s.jobIds[1] : s.jobIds[0];
 
+        // @audit 这里调用了call back 的方法
         Chainlink.Request memory linkRequest =
             ChainlinkClientUtils.buildChainlinkRequest(job, address(this), IPriceAggregatorUtils.fulfill.selector);
 

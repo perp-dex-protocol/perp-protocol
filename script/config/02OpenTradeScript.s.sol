@@ -29,7 +29,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 2. cancelOrder trade
         // cancelOrder(0);
 
-        // 3. closeOrder
+        // 3. close Pending order
+        // closePendingOrder(0);
 
         // 4. decrease Pos
         // decreasePos();
@@ -38,7 +39,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getUserPendingOrders(user_address);
         // getAllPendingorder();
 
-        getTrade();
+        // 6. get User Counters
+        getUserCounters();
     }
 
     function initializTrade() public {
@@ -101,6 +103,10 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function triggerOrder() public {}
+
+    function closePendingOrder(uint32 index) public {
+        tradingInteraction.cancelOrderAfterTimeout(index);
+    }
 
     function decreasePos() public {
         tradingInteraction.decreasePositionSize(0, 1, 100);
@@ -167,7 +173,7 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function getAllPendingorder() public {
-        ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getAllPendingOrders(0, 3);
+        ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getAllPendingOrders(0, 1);
 
         console2.log(pendingOrders.length);
         for (uint256 i = 0; i < pendingOrders.length; i++) {
@@ -193,6 +199,22 @@ contract OpenTradingScript is BaseScriptDeployer {
             console2.log(" createdBlock ", pendingOrders[i].createdBlock);
             console2.log(" maxSlippageP ", pendingOrders[i].maxSlippageP);
         }
+    }
+
+    function getUserCounters() public {
+        ITradingStorage.Counter memory pendingCount =
+            tradingStorage.getCounters(user_address, ITradingStorage.CounterType.PENDING_ORDER);
+
+        console2.log(" currentIndex ", pendingCount.currentIndex);
+        console2.log(" openCount ", pendingCount.openCount);
+        console2.log(" __placeholder ", pendingCount.__placeholder);
+        console2.log("====================================");
+
+        ITradingStorage.Counter memory tradeCount =
+            tradingStorage.getCounters(user_address, ITradingStorage.CounterType.TRADE);
+        console2.log(" currentIndex ", tradeCount.currentIndex);
+        console2.log(" openCount ", tradeCount.openCount);
+        console2.log(" __placeholder ", tradeCount.__placeholder);
     }
 
     function packTriggerOrder(uint8 orderType, address trader, uint32 index) external pure returns (uint256 packed) {
