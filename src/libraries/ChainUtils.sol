@@ -9,17 +9,10 @@ import "../interfaces/mock/IBlockManager_Mock.sol";
  */
 library ChainUtils {
     // Supported chains
-    uint256 internal constant ARBITRUM_MAINNET = 42161;
-    uint256 internal constant ARBITRUM_SEPOLIA = 421614;
-    uint256 internal constant POLYGON_MAINNET = 137;
-    uint256 internal constant TESTNET = 31337;
+    uint256 internal constant SEI_MAINNET = 1329;
 
     // Wrapped native tokens
-    address private constant ARBITRUM_MAINNET_WETH = 0x82aF49447D8a07e3bd95BD0d56f35241523fBab1;
-    address private constant ARBITRUM_SEPOLIA_WETH = 0x980B62Da83eFf3D4576C647993b0c1D7faf17c73;
-    address private constant POLYGON_MAINNET_WMATIC = 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270;
-
-    IArbSys private constant ARB_SYS = IArbSys(address(100));
+    address private constant SEI_MAINNET_WSEI = 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7;
 
     error Overflow();
 
@@ -27,14 +20,6 @@ library ChainUtils {
      * @dev Returns the current block number (l2 block for arbitrum)
      */
     function getBlockNumber() internal view returns (uint256) {
-        if (block.chainid == ARBITRUM_MAINNET || block.chainid == ARBITRUM_SEPOLIA) {
-            return ARB_SYS.arbBlockNumber();
-        }
-
-        if (block.chainid == TESTNET) {
-            return IBlockManager_Mock(address(420)).getBlockNumber();
-        }
-
         return block.number;
     }
 
@@ -50,31 +35,15 @@ library ChainUtils {
     /**
      * @dev Returns the wrapped native token address for the current chain
      */
-    function getWrappedNativeToken() internal view returns (address) {
-        if (block.chainid == ARBITRUM_MAINNET) {
-            return ARBITRUM_MAINNET_WETH;
-        }
-
-        if (block.chainid == POLYGON_MAINNET) {
-            return POLYGON_MAINNET_WMATIC;
-        }
-
-        if (block.chainid == ARBITRUM_SEPOLIA) {
-            return ARBITRUM_SEPOLIA_WETH;
-        }
-
-        if (block.chainid == TESTNET) {
-            return address(421);
-        }
-
-        return address(0);
+    function getWrappedNativeToken() internal pure returns (address) {
+        return SEI_MAINNET_WSEI;
     }
 
     /**
      * @dev Returns whether a token is the wrapped native token for the current chain
      * @param _token token address to check
      */
-    function isWrappedNativeToken(address _token) internal view returns (bool) {
+    function isWrappedNativeToken(address _token) internal pure returns (bool) {
         return _token != address(0) && _token == getWrappedNativeToken();
     }
 }

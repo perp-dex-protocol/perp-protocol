@@ -23,8 +23,11 @@ contract OpenTradingScript is BaseScriptDeployer {
         // initializTrade();
 
         // openTrade();
+        openNativeTrade();
 
         getUserPendingOrders(user_address);
+        // console2.log(block.number);
+        // console2.log(block.chainid);
     }
 
     function initializTrade() public {
@@ -59,11 +62,31 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.openTrade(trade, 1, address(0));
     }
 
+    function openNativeTrade() public {
+        ITradingStorage.Trade memory trade = ITradingStorage.Trade({
+            user: user_address,
+            index: 0,
+            pairIndex: 0,
+            leverage: 100000,
+            long: true,
+            isOpen: true,
+            collateralIndex: 1,
+            tradeType: ITradingStorage.TradeType.TRADE,
+            collateralAmount: 3e18,
+            openPrice: 3508e8,
+            tp: 0,
+            sl: 0,
+            __placeholder: 0
+        });
+
+        tradingInteraction.openTradeNative{value: 3 ether}(trade, 1, address(0));
+    }
+
     function getUserPendingOrders(address userAddress) public {
         ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getPendingOrders(userAddress);
 
         console2.log(pendingOrders.length);
-
+        console2.log("====================================");
         for (uint256 i = 0; i < pendingOrders.length; i++) {
             console2.log(" trade user ", pendingOrders[i].trade.user);
             console2.log(" trade index ", pendingOrders[i].trade.index);
