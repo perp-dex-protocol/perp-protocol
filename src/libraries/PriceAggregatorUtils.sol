@@ -219,8 +219,11 @@ library PriceAggregatorUtils {
         uint256 _positionSizeCollateral,
         uint256 _fromBlock
     ) internal validCollateralIndex(_collateralIndex) {
-        uint64 latestPrice = 123;
-        uint256 _priceData = latestPrice.pack64To256(0, 0, 0);
+        address pairFeed = _getMultiCollatDiamond().pairs(_pairIndex).feed.feed1;
+
+        (, int256 latestPrice,,,) = IChainlinkFeed(pairFeed).latestRoundData();
+
+        uint256 _priceData = uint64(uint256(latestPrice)).pack64To256(0, 0, 0);
 
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
         bool isLookback = !ConstantsUtils.isOrderTypeMarket(_orderType);
@@ -250,65 +253,37 @@ library PriceAggregatorUtils {
         IPriceAggregator.Order memory order = s.orders[_requestId];
         ITradingStorage.Id memory orderId = ITradingStorage.Id({user: order.user, index: order.index});
 
-        IPriceAggregator.OrderAnswer[] storage orderAnswers = s.orderAnswers[orderId.user][orderId.index];
-        uint8 minAnswers = s.minAnswers;
-        bool usedInMedian = orderAnswers.length < minAnswers;
+        IPriceAggregator.OrderAnswer memory newAnswer;
+        (newAnswer.open, newAnswer.high, newAnswer.low, newAnswer.ts) = _priceData.unpack256To64();
+        ITradingCallbacks.AggregatorAnswer memory finalAnswer;
 
-        if (usedInMedian) {
-            IPriceAggregator.OrderAnswer memory newAnswer;
-            (newAnswer.open, newAnswer.high, newAnswer.low, newAnswer.ts) = _priceData.unpack256To64();
-            if (
-                order.isLookback
-                    && (
-                        (newAnswer.high > 0 || newAnswer.low > 0)
-                            && (newAnswer.high < newAnswer.open || newAnswer.low > newAnswer.open || newAnswer.low == 0)
-                    )
-            ) revert IPriceAggregatorUtils.InvalidCandle();
+        finalAnswer.orderId = orderId;
+        finalAnswer.spreadP = _getMultiCollatDiamond().pairSpreadP(order.pairIndex);
 
-            orderAnswers.push(newAnswer);
-
-            if (orderAnswers.length == minAnswers) {
-                ITradingCallbacks.AggregatorAnswer memory finalAnswer;
-
-                finalAnswer.orderId = orderId;
-                finalAnswer.spreadP = _getMultiCollatDiamond().pairSpreadP(order.pairIndex);
-
-                if (order.isLookback) {
-                    (finalAnswer.open, finalAnswer.high, finalAnswer.low) = _medianLookbacks(orderAnswers);
-                } else {
-                    finalAnswer.price = _median(orderAnswers);
-                }
-
-                if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {
-                    _getMultiCollatDiamond().openTradeMarketCallback(finalAnswer);
-                } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_CLOSE) {
-                    _getMultiCollatDiamond().closeTradeMarketCallback(finalAnswer);
-                } else if (
-                    order.orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN
-                        || order.orderType == ITradingStorage.PendingOrderType.STOP_OPEN
-                ) {
-                    _getMultiCollatDiamond().executeTriggerOpenOrderCallback(finalAnswer);
-                } else if (
-                    order.orderType == ITradingStorage.PendingOrderType.TP_CLOSE
-                        || order.orderType == ITradingStorage.PendingOrderType.SL_CLOSE
-                        || order.orderType == ITradingStorage.PendingOrderType.LIQ_CLOSE
-                ) {
-                    _getMultiCollatDiamond().executeTriggerCloseOrderCallback(finalAnswer);
-                } else if (order.orderType == ITradingStorage.PendingOrderType.UPDATE_LEVERAGE) {
-                    _getMultiCollatDiamond().updateLeverageCallback(finalAnswer);
-                } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_PARTIAL_OPEN) {
-                    _getMultiCollatDiamond().increasePositionSizeMarketCallback(finalAnswer);
-                } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_PARTIAL_CLOSE) {
-                    _getMultiCollatDiamond().decreasePositionSizeMarketCallback(finalAnswer);
-                }
-
-                emit IPriceAggregatorUtils.TradingCallbackExecuted(finalAnswer, order.orderType);
-            }
+        if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {
+            _getMultiCollatDiamond().openTradeMarketCallback(finalAnswer);
+        } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_CLOSE) {
+            _getMultiCollatDiamond().closeTradeMarketCallback(finalAnswer);
+        } else if (
+            order.orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN
+                || order.orderType == ITradingStorage.PendingOrderType.STOP_OPEN
+        ) {
+            _getMultiCollatDiamond().executeTriggerOpenOrderCallback(finalAnswer);
+        } else if (
+            order.orderType == ITradingStorage.PendingOrderType.TP_CLOSE
+                || order.orderType == ITradingStorage.PendingOrderType.SL_CLOSE
+                || order.orderType == ITradingStorage.PendingOrderType.LIQ_CLOSE
+        ) {
+            _getMultiCollatDiamond().executeTriggerCloseOrderCallback(finalAnswer);
+        } else if (order.orderType == ITradingStorage.PendingOrderType.UPDATE_LEVERAGE) {
+            _getMultiCollatDiamond().updateLeverageCallback(finalAnswer);
+        } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_PARTIAL_OPEN) {
+            _getMultiCollatDiamond().increasePositionSizeMarketCallback(finalAnswer);
+        } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_PARTIAL_CLOSE) {
+            _getMultiCollatDiamond().decreasePositionSizeMarketCallback(finalAnswer);
         }
 
-        emit IPriceAggregatorUtils.PriceReceived(
-            orderId, order.pairIndex, _requestId, _priceData, order.isLookback, usedInMedian
-        );
+        emit IPriceAggregatorUtils.TradingCallbackExecuted(finalAnswer, order.orderType);
     }
 
     /**
