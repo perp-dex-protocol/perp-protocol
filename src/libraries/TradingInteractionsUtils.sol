@@ -551,14 +551,14 @@ library TradingInteractionsUtils {
 
             ITradingStorage.Id memory orderId = ITradingStorage.Id({user: pendingOrder.user, index: pendingOrder.index});
 
-            // _getMultiCollatDiamond().getPrice(
-            //     _trade.collateralIndex,
-            //     _trade.pairIndex,
-            //     orderId,
-            //     pendingOrder.orderType,
-            //     positionSizeCollateral,
-            //     ChainUtils.getBlockNumber()
-            // );
+            _getMultiCollatDiamond().getPrice(
+                _trade.collateralIndex,
+                _trade.pairIndex,
+                orderId,
+                pendingOrder.orderType,
+                positionSizeCollateral,
+                ChainUtils.getBlockNumber()
+            );
 
             emit ITradingInteractionsUtils.MarketOrderInitiated(orderId, sender, _trade.pairIndex, true);
         }
