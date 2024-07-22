@@ -62,6 +62,10 @@ library PackingUtils {
         d = uint64(_packed >> 192);
     }
 
+    function pack64To256(uint64 a, uint64 b, uint64 c, uint64 d) external pure returns (uint256 packed) {
+        packed = (uint256(a)) | (uint256(b) << 64) | (uint256(c) << 128) | (uint256(d) << 192);
+    }
+
     /**
      * @dev Unpacks trigger order calldata into 3 values
      * @param _packed packed value

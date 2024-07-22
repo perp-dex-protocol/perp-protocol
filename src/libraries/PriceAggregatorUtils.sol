@@ -22,6 +22,7 @@ import "./LiquidityPoolUtils.sol";
  */
 library PriceAggregatorUtils {
     using PackingUtils for uint256;
+    using PackingUtils for uint64;
     using SafeERC20 for IERC20;
     using Chainlink for Chainlink.Request;
     using LiquidityPoolUtils for IPriceAggregator.LiquidityPoolInput;
@@ -218,63 +219,24 @@ library PriceAggregatorUtils {
         uint256 _positionSizeCollateral,
         uint256 _fromBlock
     ) internal validCollateralIndex(_collateralIndex) {
+        uint64 latestPrice = 123;
+        uint256 _priceData = latestPrice.pack64To256(0, 0, 0);
 
-        bytes32 _requestId= 0x8c95e00c418b80a59fc1d4014f55b9cfbf502a8f568b4092572026665d7eb034;
-        uint256 _priceData = 12345678;
+        IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
+        bool isLookback = !ConstantsUtils.isOrderTypeMarket(_orderType);
+        IPriceAggregator.Order memory order = IPriceAggregator.Order({
+            user: _orderId.user,
+            index: _orderId.index,
+            orderType: _orderType,
+            pairIndex: uint16(_pairIndex),
+            isLookback: isLookback,
+            __placeholder: 0
+        });
 
-        fulfill(_requestId, _priceData);
-
-
-        // IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
-        // bool isLookback = !ConstantsUtils.isOrderTypeMarket(_orderType);
-        // bytes32 job = isLookback ? s.jobIds[1] : s.jobIds[0];
-
-        // @audit 这里调用了call back 的方法
-        // Chainlink.Request memory linkRequest =
-        //     ChainlinkClientUtils.buildChainlinkRequest(job, address(this), IPriceAggregatorUtils.fulfill.selector);
-
-        // {
-        //     (string memory from, string memory to) = _getMultiCollatDiamond().pairJob(_pairIndex);
-
-        //     linkRequest.add("from", from);
-        //     linkRequest.add("to", to);
-
-        //     if (isLookback) {
-        //         linkRequest.addUint("fromBlock", _fromBlock);
-        //     }
-
-        //     emit IPriceAggregatorUtils.LinkRequestCreated(linkRequest);
-        // }
-
-        // uint256 linkFeePerNode = getLinkFee(_collateralIndex, _pairIndex, _positionSizeCollateral) / s.oracles.length;
-        // {
-        //     IPriceAggregator.Order memory order = IPriceAggregator.Order({
-        //         user: _orderId.user,
-        //         index: _orderId.index,
-        //         orderType: _orderType,
-        //         pairIndex: uint16(_pairIndex),
-        //         isLookback: isLookback,
-        //         __placeholder: 0
-        //     });
-
-        //     for (uint256 i; i < s.oracles.length; ++i) {
-        //         bytes32 requestId =
-        //             ChainlinkClientUtils.sendChainlinkRequestTo(s.oracles[i], linkRequest, linkFeePerNode);
-        //         s.orders[requestId] = order;
-        //     }
-        // }
-
-        // emit IPriceAggregatorUtils.PriceRequested(
-        //     _collateralIndex,
-        //     _orderId,
-        //     _orderType,
-        //     _pairIndex,
-        //     job,
-        //     s.oracles.length,
-        //     linkFeePerNode,
-        //     _fromBlock,
-        //     isLookback
-        // );
+        uint256 nonce = s.requestCount;
+        bytes32 requestId = keccak256(abi.encodePacked(this, nonce));
+        s.orders[requestId] = order;
+        fulfill(requestId, _priceData);
     }
 
     /**
