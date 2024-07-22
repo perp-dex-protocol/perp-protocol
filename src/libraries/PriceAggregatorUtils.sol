@@ -246,8 +246,6 @@ library PriceAggregatorUtils {
      * @dev Check IPriceAggregatorUtils interface for documentation
      */
     function fulfill(bytes32 _requestId, uint256 _priceData) internal {
-        ChainlinkClientUtils.validateChainlinkCallback(_requestId);
-
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
 
         IPriceAggregator.Order memory order = s.orders[_requestId];

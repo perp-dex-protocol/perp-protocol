@@ -8,7 +8,7 @@ solc_version="0.8.23"
 libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0xAddA3b8499613c20f3262f328cFC90761F291171", 
              "src/libraries/ArrayGetters.sol:ArrayGetters:0xeAcd6367A347862210eE4C6B6924697Ee9c78c06", 
              "src/libraries/TradingStorageUtils.sol:TradingStorageUtils:0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0",
-             "src/libraries/PackingUtils.sol:PackingUtils:0x53bA183CfDB5a753C622FC0C8F89eDa8eF69d65E",
+             "src/libraries/PackingUtils.sol:PackingUtils:0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8",
              "src/libraries/updateLeverage/UpdateLeverageLifecycles.sol:UpdateLeverageLifecycles:0xE86A86b0ACbf6953482282AEC51208Da2e23e9c7",
              "src/libraries/updatePositionSize/UpdatePositionSizeLifecycles.sol:UpdatePositionSizeLifecycles:0x2a8e75F89813e739c9991204538A7a79e25fC401"
                ]

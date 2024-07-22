@@ -18,6 +18,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         _faceCut[0].facetAddress = address(tradingInteractions);
         // _faceCut[0].facetAddress = address(0);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
+        // _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
 
         bytes4[] memory selectors = new bytes4[](23);
 
