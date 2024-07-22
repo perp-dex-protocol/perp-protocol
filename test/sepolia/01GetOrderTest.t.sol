@@ -27,7 +27,7 @@ contract OrderStatusTest is Test {
     // 1. openTrade             https://sepolia.arbiscan.io/tx/0x05766a86d4adef0e8efed687e945650debcae52bc91f73602aa2cdfb1f581af8       65731120
     // 2. openTradeCallback     https://sepolia.arbiscan.io/tx/0xde00bf686e6dc6659775db00492e855542c12dcc819a8d7eac67ab5ab0dbb141       65731126
 
-    // Arbitrum 
+    // Arbitrum
     // 1. openTrade             https://app.blocksec.com/explorer/tx/arbitrum/0xdd9fa73788888fd8839a56d919139b2a78429be1407c8be913abe9e208dd86ca
     // 2. openTradeCallBack     https://app.blocksec.com/explorer/tx/arbitrum/0x56545447f5f12340d513b874ee7484d5d4ef83b706af1bc2d2e1efd847032063
     function getUserCounters() public {

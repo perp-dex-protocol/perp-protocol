@@ -26,11 +26,14 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openTrade();
         // openNativeTrade();
 
-        // 2. cancelOrder trade
-        // cancelOrder(0);
+        // 2. close Pending order
+        // closePendingOrder(1);
 
-        // 3. close Pending order
-        // closePendingOrder(0);
+        // 3. open limit order
+        // openLimitOrder();
+
+        // 4. close limit order
+        // closeLimitOrder();
 
         // 4. decrease Pos
         // decreasePos();
@@ -39,8 +42,11 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getUserPendingOrders(user_address);
         // getAllPendingorder();
 
-        // 6. get User Counters
-        getUserCounters();
+        // 6. get trades
+        // getUserAllTrades(user_address);
+
+        // 7. get User Counters
+        // getUserCounters();
     }
 
     function initializTrade() public {
@@ -96,6 +102,30 @@ contract OpenTradingScript is BaseScriptDeployer {
         });
 
         tradingInteraction.openTradeNative{value: 3 ether}(trade, 1, address(0));
+    }
+
+    function openLimitOrder() public {
+        ITradingStorage.Trade memory trade = ITradingStorage.Trade({
+            user: user_address,
+            index: 0,
+            pairIndex: 0,
+            leverage: 100000,
+            long: true,
+            isOpen: true,
+            collateralIndex: 1,
+            tradeType: ITradingStorage.TradeType.LIMIT,
+            collateralAmount: 3e18,
+            openPrice: 3800e10,
+            tp: 0,
+            sl: 0,
+            __placeholder: 0
+        });
+
+        tradingInteraction.openTrade(trade, 1, address(0));
+    }
+
+    function closeLimitOrder() public {
+        tradingInteraction.cancelOpenOrder(0);
     }
 
     function cancelOrder(uint32 index) public {
@@ -159,17 +189,6 @@ contract OpenTradingScript is BaseScriptDeployer {
             console2.log(" createdBlock ", pendingOrders[i].createdBlock);
             console2.log(" maxSlippageP ", pendingOrders[i].maxSlippageP);
         }
-
-        //  struct PendingOrder {
-        // // slots 1-3
-        // Trade trade;
-        // // slot 4
-        // address user; // 160 bits
-        // uint32 index; // max: 4,294,967,295
-        // bool isOpen; // 8 bits
-        // PendingOrderType orderType; // 8 bits
-        // uint32 createdBlock; // max: 4,294,967,295
-        // uint16 maxSlippageP; // 1e3 (%), max: 65.535%
     }
 
     function getAllPendingorder() public {
@@ -198,6 +217,22 @@ contract OpenTradingScript is BaseScriptDeployer {
             console2.log(" orderType ", uint256(pendingOrders[i].orderType));
             console2.log(" createdBlock ", pendingOrders[i].createdBlock);
             console2.log(" maxSlippageP ", pendingOrders[i].maxSlippageP);
+        }
+    }
+
+    function getUserAllTrades(address user) public {
+        ITradingStorage.Trade[] memory trades = tradingStorage.getTrades(user);
+        console2.log("all trades length", trades.length);
+
+        for (uint256 i = 0; i < trades.length; i++) {
+            console2.log("====================================");
+            console2.log(" trade user ", trades[i].user);
+            console2.log(" trade index ", trades[i].index);
+            console2.log(" trade pairIndex ", trades[i].pairIndex);
+            console2.log(" trade leverage ", trades[i].leverage);
+            console2.log(" trade long ", trades[i].long);
+            console2.log(" trade isOpen ", trades[i].isOpen);
+            console2.log(" trade collateralIndex ", trades[i].collateralIndex);
         }
     }
 
