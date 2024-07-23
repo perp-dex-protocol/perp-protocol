@@ -628,7 +628,7 @@ library TradingCommonUtils {
                 //     (values.triggerFeeCollateral * 2) / 10,
                 //     values.gnsPriceCollateral,
                 //     _getMultiCollatDiamond().getCollateral(_trade.collateralIndex).precisionDelta
-                // ); 
+                // );
             }
 
             values.collateralLeftInStorage -= values.reward3 + values.reward2;

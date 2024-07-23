@@ -8,13 +8,10 @@ import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract TradingCallbackScript is BaseScriptDeployer {
-
-     GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
-
+    GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
     function run() public {
-
-         removeOldFacet();
+        removeOldFacet();
 
         GNSTradingCallbacks tradingCallbacks = new GNSTradingCallbacks();
         console2.log("tradingCallbacks ", address(tradingCallbacks));
@@ -57,11 +54,9 @@ contract TradingCallbackScript is BaseScriptDeployer {
         bytes memory _calldata = new bytes(0);
 
         diamond.diamondCut(_faceCut, _init, _calldata);
-
     }
 
     function addNewFacet(address newFacet) public {
-         
         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
         _faceCut[0].facetAddress = address(newFacet);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
@@ -89,7 +84,5 @@ contract TradingCallbackScript is BaseScriptDeployer {
         bytes memory _calldata = new bytes(0);
 
         diamond.diamondCut(_faceCut, _init, _calldata);
-
     }
-
 }
