@@ -26,6 +26,9 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openTrade();
         // openNativeTrade();
 
+        // 2. close trade
+        closeOrder(1);
+        
         // 2. close Pending order
         // closePendingOrder(1);
 
@@ -95,7 +98,7 @@ contract OpenTradingScript is BaseScriptDeployer {
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 3e18,
-            openPrice: 3500e10,
+            openPrice: 4000e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
@@ -130,6 +133,10 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     function cancelOrder(uint32 index) public {
         tradingInteraction.cancelOpenOrder(0);
+    }
+
+    function closeOrder(uint32 index) public{
+        tradingInteraction.closeTradeMarket(index);
     }
 
     function triggerOrder() public {}
