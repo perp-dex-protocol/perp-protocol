@@ -20,7 +20,7 @@ contract GNSPriceImpact is GNSAddressStore, IPriceImpactUtils {
     }
 
     /// @inheritdoc IPriceImpactUtils
-    function initializePriceImpact(uint48 _windowsDuration, uint48 _windowsCount) external reinitializer(5) {
+    function initializePriceImpact(uint48 _windowsDuration, uint48 _windowsCount) external  {
         PriceImpactUtils.initializePriceImpact(_windowsDuration, _windowsCount);
     }
 

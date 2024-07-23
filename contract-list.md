@@ -10,7 +10,7 @@
    
 5. Facet3 Fee Tier              0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA
 
-6. Facet4 PriceImpact           0x9fe7f490cdc024d4446daf9b26ba3a1565deac6a
+6. Facet4 PriceImpact           0x8625c9c4087b603F1E1c8EBe3F7320a1297bFE34
    
 7. Facet5 TradingStorage        0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af
 
