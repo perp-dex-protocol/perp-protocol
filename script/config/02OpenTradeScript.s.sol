@@ -95,13 +95,13 @@ contract OpenTradingScript is BaseScriptDeployer {
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 3e18,
-            openPrice: 3508e8,
+            openPrice: 3500e10,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
-        tradingInteraction.openTradeNative{value: 3 ether}(trade, 1, address(0));
+        tradingInteraction.openTradeNative{value: 3 ether}(trade, 1003, address(0));
     }
 
     function openLimitOrder() public {

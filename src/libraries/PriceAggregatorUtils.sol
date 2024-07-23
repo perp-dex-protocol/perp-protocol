@@ -256,6 +256,7 @@ library PriceAggregatorUtils {
         ITradingCallbacks.AggregatorAnswer memory finalAnswer;
 
         finalAnswer.orderId = orderId;
+        finalAnswer.price = newAnswer.open;
         finalAnswer.spreadP = _getMultiCollatDiamond().pairSpreadP(order.pairIndex);
 
         if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {

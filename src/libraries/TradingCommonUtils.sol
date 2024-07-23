@@ -517,7 +517,8 @@ library TradingCommonUtils {
     ) external returns (uint120 totalFeesCollateral) {
         ITradingCallbacks.Values memory v;
         v.collateralPrecisionDelta = _getMultiCollatDiamond().getCollateral(_trade.collateralIndex).precisionDelta;
-        v.gnsPriceCollateral = _getMultiCollatDiamond().getGnsPriceCollateralIndex(_trade.collateralIndex);
+
+        // v.gnsPriceCollateral = _getMultiCollatDiamond().getGnsPriceCollateralIndex(_trade.collateralIndex);
         v.positionSizeCollateral =
             getPositionSizeCollateralBasis(_trade.collateralIndex, _trade.pairIndex, _positionSizeCollateral); // Charge fees on max(min position size, trade position size)
 
@@ -560,17 +561,17 @@ library TradingCommonUtils {
         totalFeesCollateral += 2 * uint120(govFeeCollateral) + uint120(v.reward2);
 
         // 6. Distribute Oracle fee and send collateral amount to vault if applicable
-        if (!ConstantsUtils.isOrderTypeMarket(_orderType)) {
-            v.reward3 = (v.reward2 * 2) / 10; // 20% of limit fees
-            sendCollateralToVault(_trade.collateralIndex, v.reward3, _trade.user);
+        // if (!ConstantsUtils.isOrderTypeMarket(_orderType)) {
+        //     v.reward3 = (v.reward2 * 2) / 10; // 20% of limit fees
+        //     sendCollateralToVault(_trade.collateralIndex, v.reward3, _trade.user);
 
-            distributeTriggerFeeGns(
-                _trade.user, _trade.collateralIndex, v.reward3, v.gnsPriceCollateral, v.collateralPrecisionDelta
-            );
-        }
+        //     distributeTriggerFeeGns(
+        //         _trade.user, _trade.collateralIndex, v.reward3, v.gnsPriceCollateral, v.collateralPrecisionDelta
+        //     );
+        // }
 
         // 7. Distribute GNS staking fee (previous dev fee + market/limit fee - oracle reward)
-        distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, govFeeCollateral + v.reward2 - v.reward3);
+        // distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, govFeeCollateral + v.reward2 - v.reward3);
     }
 
     /**
@@ -616,18 +617,18 @@ library TradingCommonUtils {
 
         if (values.collateralLeftInStorage >= values.reward3 + values.reward2) {
             distributeVaultFeeCollateral(_trade.collateralIndex, _trade.user, values.reward2);
-            distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, values.reward3);
+            // distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, values.reward3);
 
             if (!ConstantsUtils.isOrderTypeMarket(_orderType)) {
                 values.gnsPriceCollateral = _getMultiCollatDiamond().getGnsPriceCollateralIndex(_trade.collateralIndex);
 
-                distributeTriggerFeeGns(
-                    _trade.user,
-                    _trade.collateralIndex,
-                    (values.triggerFeeCollateral * 2) / 10,
-                    values.gnsPriceCollateral,
-                    _getMultiCollatDiamond().getCollateral(_trade.collateralIndex).precisionDelta
-                );
+                // distributeTriggerFeeGns(
+                //     _trade.user,
+                //     _trade.collateralIndex,
+                //     (values.triggerFeeCollateral * 2) / 10,
+                //     values.gnsPriceCollateral,
+                //     _getMultiCollatDiamond().getCollateral(_trade.collateralIndex).precisionDelta
+                // ); 
             }
 
             values.collateralLeftInStorage -= values.reward3 + values.reward2;

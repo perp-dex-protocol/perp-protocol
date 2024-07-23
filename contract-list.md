@@ -18,11 +18,11 @@
 
 9. Facet7 TradingInteractions   0x71C3a2f2e74a45E9fE1C782373B171B15302e6Ee
     
-10. Facet8 TradingCallbacks     0xFe041A2bb676B1eB1cea3d1d2725ac13D59747FD
+10. Facet8 TradingCallbacks     0x5D9D5C4544B784E4C6e1473F1D4b998D39839833
     
 11. Facet9 BorrowingFees        0x259aE08FD0199e9C94AbE2318c6094b301147b94
     
-12. Facet10 PriceAggregator     0x855a803Cd884eAA866506d9139B0aF1809f47CF0
+12. Facet10 PriceAggregator     0x3bC8F764c1853788f984E6eE40D20844c40458E8
 
  
 
@@ -31,7 +31,7 @@ forge create --rpc-url https://evm-rpc.sei-apis.com --private-key   src/librarie
 
 
  linked libraries
- 1. TradingCommonUtils              0xAddA3b8499613c20f3262f328cFC90761F291171
+ 1. TradingCommonUtils              0x71cDc82254BBe2135Ca9579c5634166c8a847F90
  2. ArrayGetters                    0xeAcd6367A347862210eE4C6B6924697Ee9c78c06
  3. TradingStorageUtils             0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0
  4. PackingUtils                    0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8
