@@ -24,10 +24,10 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 1. open order
         // openTrade();
-        // openNativeTrade();
+        openNativeTrade();
 
         // 2. close trade
-        closeOrder(1);
+        // closeOrder(2);
         
         // 2. close Pending order
         // closePendingOrder(1);
@@ -92,13 +92,13 @@ contract OpenTradingScript is BaseScriptDeployer {
             user: user_address,
             index: 0,
             pairIndex: 0,
-            leverage: 100000,
+            leverage: 140000,
             long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 3e18,
-            openPrice: 4000e8,
+            openPrice: 3500e10,
             tp: 0,
             sl: 0,
             __placeholder: 0
@@ -240,6 +240,12 @@ contract OpenTradingScript is BaseScriptDeployer {
             console2.log(" trade long ", trades[i].long);
             console2.log(" trade isOpen ", trades[i].isOpen);
             console2.log(" trade collateralIndex ", trades[i].collateralIndex);
+            console2.log(" trade tradeType ", uint256(trades[i].tradeType));
+            console2.log(" trade collateralAmount ", trades[i].collateralAmount);
+            console2.log(" trade openPrice ", trades[i].openPrice);
+            console2.log(" trade tp ", trades[i].tp);
+            console2.log(" trade sl ", trades[i].sl);
+            console2.log(" trade __placeholder ", trades[i].__placeholder);
         }
     }
 
