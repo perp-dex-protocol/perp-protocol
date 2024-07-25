@@ -24,10 +24,10 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 1. open order
         // openTrade();
-        openNativeTrade();
+        // openNativeTrade();
 
         // 2. close trade
-        // closeOrder(2);
+        closeOrder(4);
         
         // 2. close Pending order
         // closePendingOrder(1);
