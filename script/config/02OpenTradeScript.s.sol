@@ -27,13 +27,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openNativeTrade();
 
         // 2. close trade
-        closeOrder(4);
+        // closeOrder(4);
         
         // 2. close Pending order
         // closePendingOrder(1);
 
         // 3. open limit order
-        // openLimitOrder();
+        openLimitOrder();
 
         // 4. close limit order
         // closeLimitOrder();
@@ -49,7 +49,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         getUserAllTrades(user_address);
 
         // 7. get User Counters
-        // getUserCounters();
+        getUserCounters();
     }
 
     function initializTrade() public {
@@ -112,19 +112,19 @@ contract OpenTradingScript is BaseScriptDeployer {
             user: user_address,
             index: 0,
             pairIndex: 0,
-            leverage: 100000,
+            leverage: 130000,
             long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.LIMIT,
-            collateralAmount: 3e18,
-            openPrice: 3800e10,
+            collateralAmount: 3.5e18,
+            openPrice: 3100e10,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
-        tradingInteraction.openTrade(trade, 1, address(0));
+        tradingInteraction.openTrade(trade, 1005, address(0));
     }
 
     function closeLimitOrder() public {
