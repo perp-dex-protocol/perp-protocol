@@ -8,12 +8,9 @@ import {GNSMultiCollatDiamond} from "src/core/GNSMultiCollatDiamond.sol";
 import {IDiamondStorage} from "src/interfaces/types/IDiamondStorage.sol";
 
 contract PriceImpactScript is BaseScriptDeployer {
-
     GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
-
     function run() public {
-
         removeOldFacet();
         GNSPriceImpact priceImpact = new GNSPriceImpact();
         console2.log("priceImpact  ", address(priceImpact));
@@ -30,8 +27,8 @@ contract PriceImpactScript is BaseScriptDeployer {
         console2.log("facets3 ", facets[3]);
     }
 
-     function removeOldFacet() public {
-         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
+    function removeOldFacet() public {
+        IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
         _faceCut[0].facetAddress = address(0);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
         bytes4[] memory selectors = new bytes4[](15);
@@ -57,10 +54,10 @@ contract PriceImpactScript is BaseScriptDeployer {
         address _init = address(0);
         bytes memory _calldata = new bytes(0);
         diamond.diamondCut(_faceCut, _init, _calldata);
-     }
+    }
 
-     function addNewFacet(address newFacet) public {
-         IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
+    function addNewFacet(address newFacet) public {
+        IDiamondStorage.FacetCut[] memory _faceCut = new IDiamondStorage.FacetCut[](1);
         _faceCut[0].facetAddress = address(newFacet);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
         bytes4[] memory selectors = new bytes4[](15);
@@ -86,6 +83,5 @@ contract PriceImpactScript is BaseScriptDeployer {
         address _init = address(0);
         bytes memory _calldata = new bytes(0);
         diamond.diamondCut(_faceCut, _init, _calldata);
-     }
-
+    }
 }

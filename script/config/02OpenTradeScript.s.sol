@@ -28,7 +28,7 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 2. close trade
         // closeOrder(4);
-        
+
         // 2. close Pending order
         // closePendingOrder(1);
 
@@ -135,7 +135,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.cancelOpenOrder(0);
     }
 
-    function closeOrder(uint32 index) public{
+    function closeOrder(uint32 index) public {
         tradingInteraction.closeTradeMarket(index);
     }
 
