@@ -19,7 +19,7 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         // addFeeData();
         // updateFeeData();
         // addGroupData();
-        addPair();
+        // addPair();
 
         // IPairsStorage.Fee memory fee0 = pairsStorage.fees(0);
         // console2.log(fee0.name);
@@ -29,26 +29,26 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         // console2.log(fee0.triggerOrderFeeP);
         // console2.log(fee0.minPositionSizeUsd);
 
-        // IPairsStorage.Group memory group0 = pairsStorage.groups(0);
-        // console2.log(group0.name);
-        // console2.logBytes32(group0.job);
-        // console2.log(group0.minLeverage);
-        // console2.log(group0.maxLeverage);
+        IPairsStorage.Group memory group0 = pairsStorage.groups(0);
+        console2.log(group0.name);
+        console2.logBytes32(group0.job);
+        console2.log(group0.minLeverage);
+        console2.log(group0.maxLeverage);
 
-        IPairsStorage.Pair memory pair0 = pairsStorage.pairs(0);
-        console2.log("Pair from: %s", pair0.from);
-        console2.log("Pair to: %s", pair0.to);
-        console2.log("Spread: %d", pair0.spreadP);
-        console2.log("groupIndex: %d", pair0.groupIndex);
-        console2.log("feeIndex: %d", pair0.feeIndex);
-        console2.log("feed1 address: %s", pair0.feed.feed1);
-        console2.log("feed2 address: %s", pair0.feed.feed2);
-        console2.log("feedCalculation: %d", uint256(pair0.feed.feedCalculation));
-        console2.log("maxDeviationP: %d", pair0.feed.maxDeviationP);
+        // IPairsStorage.Pair memory pair0 = pairsStorage.pairs(0);
+        // console2.log("Pair from: %s", pair0.from);
+        // console2.log("Pair to: %s", pair0.to);
+        // console2.log("Spread: %d", pair0.spreadP);
+        // console2.log("groupIndex: %d", pair0.groupIndex);
+        // console2.log("feeIndex: %d", pair0.feeIndex);
+        // console2.log("feed1 address: %s", pair0.feed.feed1);
+        // console2.log("feed2 address: %s", pair0.feed.feed2);
+        // console2.log("feedCalculation: %d", uint256(pair0.feed.feedCalculation));
+        // console2.log("maxDeviationP: %d", pair0.feed.maxDeviationP);
 
-        console2.log(pairsStorage.feesCount());
-        console2.log(pairsStorage.groupsCount());
-        console2.log(pairsStorage.pairsCount());
+        // console2.log(pairsStorage.feesCount());
+        // console2.log(pairsStorage.groupsCount());
+        // console2.log(pairsStorage.pairsCount());
     }
 
     // 1. add fee

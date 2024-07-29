@@ -22,34 +22,40 @@ contract OpenTradingScript is BaseScriptDeployer {
     function run() public {
         // initializTrade();
 
-        // 1. open order
+        // 1. open market order
         // openTrade();
         // openNativeTrade();
 
-        // 2. close trade
-        // closeOrder(3);
-
-        // 2. close Pending order
-        // closePendingOrder(0);
-
+        // 2. close market trade
+        // closeOrder(8);
+       
         // 3. open limit order
-        openLimitOrder();
+        // openLimitOrder();
 
         // 4. close limit order
-        // closeLimitOrder();
+        // closeLimitOrder(8);
 
-        // 4. decrease Pos
+        // 5. trigger order
+        // uint256 packed = packTriggerOrder(2, user_address, 8);
+        // triggerOrder(packed);
+
+
+        // 6. decrease Pos
         // decreasePos();
 
-        // 5. get Pending Order
+        // 6. get Pending Order
         // getUserPendingOrders(user_address);
         // getAllPendingorder();
+
+        // 8. close Pending order
+        // closePendingOrder(0);
+
 
         // 6. get trades
         getUserAllTrades(user_address);
 
         // 7. get User Counters
-        // getUserCounters();
+        // getUserCounters();   
     }
 
     function initializTrade() public {
@@ -127,8 +133,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.openTrade(trade, 1005, address(0));
     }
 
-    function closeLimitOrder() public {
-        tradingInteraction.cancelOpenOrder(6);
+    function closeLimitOrder(uint32 id) public {
+        tradingInteraction.cancelOpenOrder(id);
     }
 
     function cancelOrder(uint32 index) public {
@@ -139,7 +145,9 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.closeTradeMarket(index);
     }
 
-    function triggerOrder() public {}
+    function triggerOrder(uint256 packdata) public {
+        tradingInteraction.triggerOrder(packdata);
+    }
 
     function closePendingOrder(uint32 index) public {
         tradingInteraction.cancelOrderAfterTimeout(index);
@@ -265,7 +273,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log(" __placeholder ", tradeCount.__placeholder);
     }
 
-    function packTriggerOrder(uint8 orderType, address trader, uint32 index) external pure returns (uint256 packed) {
+    function packTriggerOrder(uint8 orderType, address trader, uint32 index) internal pure returns (uint256 packed) {
         packed = uint256(orderType) | (uint256(uint160(trader)) << 8) | (uint256(index) << 168);
     }
 }

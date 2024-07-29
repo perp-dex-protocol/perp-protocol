@@ -1,0 +1,150 @@
+Compiling 1 files with Solc 0.8.23
+Solc 0.8.23 finished in 3.80s
+Compiler run successful with warnings:
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> src/libraries/TradingCommonUtils.sol:517:9:
+    |
+517 |         ITradingStorage.PendingOrderType _orderType
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> script/config/02OpenTradeScript.s.sol:142:26:
+    |
+142 |     function cancelOrder(uint32 index) public {
+    |                          ^^^^^^^^^^^^
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> src/libraries/TradingInteractionsUtils.sol:426:5:
+    |
+426 |     function getWrappedNativeToken() internal view returns (address) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> src/libraries/TradingInteractionsUtils.sol:433:5:
+    |
+433 |     function isWrappedNativeToken(address _token) internal view returns (bool) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> script/config/02OpenTradeScript.s.sol:162:5:
+    |
+162 |     function getTrade() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> script/config/02OpenTradeScript.s.sol:182:5:
+    |
+182 |     function getUserPendingOrders(address userAddress) public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> script/config/02OpenTradeScript.s.sol:211:5:
+    |
+211 |     function getAllPendingorder() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> script/config/02OpenTradeScript.s.sol:240:5:
+    |
+240 |     function getUserAllTrades(address user) public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> script/config/02OpenTradeScript.s.sol:262:5:
+    |
+262 |     function getUserCounters() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Traces:
+  [3856] OpenTradingScript::setUp()
+    ├─ [0] VM::createSelectFork("https://evm-rpc.sei-apis.com")
+    │   └─ ← [Return] 0
+    ├─ [0] VM::envUint("PRI_KEY") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+  [211347] OpenTradingScript::run()
+    ├─ [129616] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::cancelOpenOrder(8)
+    │   ├─ [122480] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::cancelOpenOrder(8) [delegatecall]
+    │   │   ├─ [117349] 0x71C3a2f2e74a45E9fE1C782373B171B15302e6Ee::cancelOpenOrder(8) [delegatecall]
+    │   │   │   ├─ [11488] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradingActivated() [staticcall]
+    │   │   │   │   ├─ [10852] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradingActivated() [delegatecall]
+    │   │   │   │   │   ├─ [5721] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   ├─ [2479] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   ├─ [16140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 8) [staticcall]
+    │   │   │   │   ├─ [15432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 8) [delegatecall]
+    │   │   │   │   │   ├─ [12729] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 8) [delegatecall]
+    │   │   │   │   │   │   ├─ [8882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 8) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8, pairIndex: 0, leverage: 130000 [1.3e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 1, collateralAmount: 3500000000000000000 [3.5e18], openPrice: 33730000000000 [3.373e13], tp: 36065153846153 [3.606e13], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8, pairIndex: 0, leverage: 130000 [1.3e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 1, collateralAmount: 3500000000000000000 [3.5e18], openPrice: 33730000000000 [3.373e13], tp: 36065153846153 [3.606e13], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8, pairIndex: 0, leverage: 130000 [1.3e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 1, collateralAmount: 3500000000000000000 [3.5e18], openPrice: 33730000000000 [3.373e13], tp: 36065153846153 [3.606e13], sl: 0, __placeholder: 0 })
+    │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8, pairIndex: 0, leverage: 130000 [1.3e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 1, collateralAmount: 3500000000000000000 [3.5e18], openPrice: 33730000000000 [3.373e13], tp: 36065153846153 [3.606e13], sl: 0, __placeholder: 0 })
+    │   │   │   ├─ [7889] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradePendingOrderBlock(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 }), 2) [staticcall]
+    │   │   │   │   ├─ [7241] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradePendingOrderBlock(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 }), 2) [delegatecall]
+    │   │   │   │   │   ├─ [4598] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::getTradePendingOrderBlock(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 }), 2) [delegatecall]
+    │   │   │   │   │   │   ├─ [3267] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::90a888fd(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000002) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   ├─ [8548] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::hasActiveOrder(0) [staticcall]
+    │   │   │   │   ├─ [7909] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::hasActiveOrder(0) [delegatecall]
+    │   │   │   │   │   ├─ [2775] 0xacf8AB5fD9f2FAcD9796E6Ef2b6CD2301BbDcD59::hasActiveOrder(0) [delegatecall]
+    │   │   │   │   │   │   └─ ← [Return] false
+    │   │   │   │   │   └─ ← [Return] false
+    │   │   │   │   └─ ← [Return] false
+    │   │   │   ├─ [15639] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 }))
+    │   │   │   │   ├─ [15000] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 })) [delegatecall]
+    │   │   │   │   │   ├─ [12366] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 })) [delegatecall]
+    │   │   │   │   │   │   ├─ [11177] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::7c820ea6(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000008) [delegatecall]
+    │   │   │   │   │   │   │   ├─ emit TradeClosed(tradeId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 8 }))
+    │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   └─ ← [Return] 
+    │   │   │   ├─ [45602] 0xAddA3b8499613c20f3262f328cFC90761F291171::a41f2b55(00000000000000000000000000000000000000000000000000000000000000010000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce00000000000000000000000000000000000000000000000030927f74c9de0000) [delegatecall]
+    │   │   │   │   ├─ [10487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   ├─ [9830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   ├─ [7157] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [5394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   ├─ [29701] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transfer(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 3500000000000000000 [3.5e18])
+    │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, value: 3500000000000000000 [3.5e18])
+    │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   ├─ emit OpenLimitCanceled(trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 8)
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Return] 
+    │   └─ ← [Return] 
+    ├─ [68187] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [staticcall]
+    │   ├─ [67545] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   ├─ [64908] 0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   ├─ [60992] 0xeAcd6367A347862210eE4C6B6924697Ee9c78c06::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   │   └─ ← [Return] []
+    │   │   │   └─ ← [Return] []
+    │   │   └─ ← [Return] []
+    │   └─ ← [Return] []
+    ├─ [0] console::log("all trades length", 0) [staticcall]
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
+
+
+Script ran successfully.
+Gas used: 232411
+
+== Logs ==
+  all trades length 0
+
+## Setting up 1 EVM.
+==========================
+Simulated On-chain Traces:
+
