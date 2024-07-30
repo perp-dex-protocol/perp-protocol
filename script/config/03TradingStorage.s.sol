@@ -31,9 +31,11 @@ contract TradingStorageScript is BaseScriptDeployer {
 
         // 3. add gtoken market
         address wsei = 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7;
-        address fsei = 0x267Ff9020A31c7dece29407Abb0C17F8bF83485E;
+        address fsei = 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3;
 
         // tradingStorage.addCollateral(wsei, fsei);
+
+        tradingStorage.updateGToken(wsei, fsei);
 
         collateralsCount = tradingStorage.getCollateralsCount();
         console2.log("Collaterals count: {}", collateralsCount);
