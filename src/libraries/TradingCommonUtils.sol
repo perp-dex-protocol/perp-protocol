@@ -431,7 +431,6 @@ library TradingCommonUtils {
      * @param _valueCollateral fee in collateral tokens (collateral precision)
      */
     function distributeVaultFeeCollateral(uint8 _collateralIndex, address _trader, uint256 _valueCollateral) public {
-        // @audit 分发手续费  更新逻辑
         getGToken(_collateralIndex).distributeReward(_valueCollateral);
         emit ITradingCommonUtils.GTokenFeeCharged(_trader, _collateralIndex, _valueCollateral);
     }
@@ -617,7 +616,7 @@ library TradingCommonUtils {
         values.collateralLeftInStorage = _trade.collateralAmount;
 
         if (values.collateralLeftInStorage >= values.reward3 + values.reward2) {
-            // distributeVaultFeeCollateral(_trade.collateralIndex, _trade.user, values.reward2);
+            distributeVaultFeeCollateral(_trade.collateralIndex, _trade.user, values.reward2);
             // distributeGnsStakingFeeCollateral(_trade.collateralIndex, _trade.user, values.reward3);
 
             if (!ConstantsUtils.isOrderTypeMarket(_orderType)) {

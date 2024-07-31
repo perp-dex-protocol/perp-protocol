@@ -31,7 +31,7 @@ forge create --rpc-url https://evm-rpc.sei-apis.com --private-key   src/librarie
 
 
  linked libraries
- 1. TradingCommonUtils              0x785EC8dba5637dD2AF7b772A43d18588A8F8e359
+ 1. TradingCommonUtils              0x0A1aC2D3202FA270f884C4862088Cd0F285e4678
  2. ArrayGetters                    0xeAcd6367A347862210eE4C6B6924697Ee9c78c06
  3. TradingStorageUtils             0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0
  4. PackingUtils                    0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8

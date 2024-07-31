@@ -27,7 +27,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openNativeTrade();
 
         // 2. close market trade
-        closeOrder(9);
+        closeOrder(10);
        
         // 3. open limit order
         // openLimitOrder();
