@@ -5,6 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {BaseScriptDeployer} from "../BaseScript.s.sol";
 import {GNSTradingInteractions} from "src/core/facets/GNSTradingInteractions.sol";
 import {GNSTradingStorage} from "src/core/facets/GNSTradingStorage.sol";
+import {GNSBorrowingFees} from "src/core/facets/GNSBorrowingFees.sol";
 import {ITradingStorage} from "src/interfaces/types/ITradingStorage.sol";
 
 interface IWSei {
@@ -17,6 +18,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         GNSTradingInteractions(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
     GNSTradingStorage tradingStorage = GNSTradingStorage(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
+    GNSBorrowingFees borrowingFees = GNSBorrowingFees(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
+
     address user_address = 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE;
 
     function run() public {
@@ -27,8 +30,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openNativeTrade();
 
         // 2. close market trade
-        closeOrder(13);
-       
+        // closeOrder(13);
+
         // 3. open limit order
         // openLimitOrder();
 
@@ -38,7 +41,6 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 5. trigger order
         // uint256 packed = packTriggerOrder(2, user_address, 8);
         // triggerOrder(packed);
-
 
         // 6. decrease Pos
         // decreasePos();
@@ -50,12 +52,16 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 8. close Pending order
         // closePendingOrder(0);
 
-
         // 6. get trades
-        getUserAllTrades(user_address);
+        // getUserAllTrades(user_address);
 
         // 7. get User Counters
-        // getUserCounters();   
+        // getUserCounters();
+
+        // 8. get Oi info
+        getPairOi();
+
+        getPairOis();
     }
 
     function initializTrade() public {
@@ -271,6 +277,17 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log(" currentIndex ", tradeCount.currentIndex);
         console2.log(" openCount ", tradeCount.openCount);
         console2.log(" __placeholder ", tradeCount.__placeholder);
+    }
+
+    function getPairOi() public {
+        uint256 pairoi = borrowingFees.getPairOiCollateral(1, 0, true);
+        console2.log("ETH pairor ", pairoi);
+    }
+
+    function getPairOis() public{
+        (uint256 longOi, uint256 shortOi) = borrowingFees.getPairOisCollateral(1, 0);
+        console2.log("ETH longOi ", longOi);
+        console2.log("ETH shortOi ", shortOi);
     }
 
     function packTriggerOrder(uint8 orderType, address trader, uint32 index) internal pure returns (uint256 packed) {
