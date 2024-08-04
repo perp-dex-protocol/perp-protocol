@@ -57,13 +57,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         // updateLeverage();
 
 
-        getUserAllTrades(user_address);
+        // getUserAllTrades(user_address);
 
         // 10. increase pos data
-        increasePosData();
+        // increasePosData();
 
         // 11. decreasePos
-        // decreasePos() ;
+        decreasePos() ;
 
         // 6. get trades
         getUserAllTrades(user_address);
