@@ -7,6 +7,7 @@ import {BaseScriptDeployer} from "../BaseScript.s.sol";
 interface IWSEI {
     function withdraw(uint256 wad) external;
     function balanceOf(address account) external view returns (uint256);
+    function deposit() external payable;
 }
 
 contract WSeiWithdrawScript is BaseScriptDeployer {
@@ -14,6 +15,9 @@ contract WSeiWithdrawScript is BaseScriptDeployer {
     address user_address = 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE;
 
     function run() public {
-        wsei.withdraw(wsei.balanceOf(user_address));
+        IWSEI(wsei).deposit{value: 5 ether}();
+
+
+        // wsei.withdraw(wsei.balanceOf(user_address));
     }
 }

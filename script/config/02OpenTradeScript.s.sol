@@ -30,7 +30,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openNativeTrade();
 
         // 2. close market trade
-        // closeOrder(13);
+        // closeOrder(14);
 
         // 3. open limit order
         // openLimitOrder();
@@ -52,16 +52,27 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 8. close Pending order
         // closePendingOrder(0);
 
+
+        // 9. updateLeverage
+        // updateLeverage();
+
+
+        // 10. increase pos data
+        increasePosData();
+
+        // 11. decreasePos
+        // decreasePos() ;
+
         // 6. get trades
-        // getUserAllTrades(user_address);
+        getUserAllTrades(user_address);
 
         // 7. get User Counters
         // getUserCounters();
 
         // 8. get Oi info
-        getPairOi();
+        // getPairOi();
 
-        getPairOis();
+        // getPairOis();
     }
 
     function initializTrade() public {
@@ -104,19 +115,19 @@ contract OpenTradingScript is BaseScriptDeployer {
             user: user_address,
             index: 0,
             pairIndex: 0,
-            leverage: 142000,
+            leverage: 130000,
             long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 4e18,
-            openPrice: 2978e10,
+            collateralAmount: 3e18,
+            openPrice: 2900e10,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
-        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1003, address(0));
+        tradingInteraction.openTradeNative{value: 3 ether}(trade, 1003, address(0));
     }
 
     function openLimitOrder() public {
@@ -159,8 +170,17 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.cancelOrderAfterTimeout(index);
     }
 
+    function increasePosData() public {
+        tradingInteraction.increasePositionSize(14, 1e18, 135000, 2910e8, 1005);
+    }
+
     function decreasePos() public {
-        tradingInteraction.decreasePositionSize(0, 1, 100);
+        tradingInteraction.decreasePositionSize(14, 1e18, 0);
+    }
+
+
+    function updateLeverage() public {
+        tradingInteraction.updateLeverage(14, 135000);
     }
 
     function getTrade() public {
