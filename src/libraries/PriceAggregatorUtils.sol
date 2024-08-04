@@ -257,7 +257,9 @@ library PriceAggregatorUtils {
 
         finalAnswer.orderId = orderId;
         finalAnswer.price = newAnswer.open;
-        finalAnswer.open = uint64(block.timestamp);
+        finalAnswer.open = newAnswer.open;
+        finalAnswer.high = newAnswer.open;
+        finalAnswer.low = newAnswer.open;
         finalAnswer.spreadP = _getMultiCollatDiamond().pairSpreadP(order.pairIndex);
 
         if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {

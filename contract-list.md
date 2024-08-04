@@ -18,11 +18,11 @@
 
 9. Facet7 TradingInteractions   0x71C3a2f2e74a45E9fE1C782373B171B15302e6Ee
     
-10. Facet8 TradingCallbacks     0x2345a1Bc758808643e413B766025a9fCBCa1E03A
+10. Facet8 TradingCallbacks     0xd6a89681DB1dc01cd937eE14A89CDcE88f400eaD
     
 11. Facet9 BorrowingFees        0x259aE08FD0199e9C94AbE2318c6094b301147b94
     
-12. Facet10 PriceAggregator     0x34C64d369a0A55aCA46e6EF0Cc31995577D5E37A
+12. Facet10 PriceAggregator     0x53fd0A5B1fB22f2304f180A913026D2FfcE7F023
 
  
 

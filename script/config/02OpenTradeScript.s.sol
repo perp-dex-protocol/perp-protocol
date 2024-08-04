@@ -39,7 +39,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeLimitOrder(8);
 
         // 5. trigger order
-        uint256 packed = packTriggerOrder(4, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
+        uint256 packed = packTriggerOrder(6, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
         triggerOrder(packed);
 
         // 6. decrease Pos
@@ -67,7 +67,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getUserAllTrades(user_address);
 
         // getAllTrade()
-        // getAllTrade();
+        getAllTrade();
 
         // 7. get User Counters
         // getUserCounters();
@@ -77,7 +77,7 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // getPairOis();
 
-        // (uint64 a, uint64 b, uint64 c, uint64 d) = unpack256To64(31779456852601596094134077728);
+        // (uint64 a, uint64 b, uint64 c, uint64 d) = unpack256To64(31779579080728436155908185344);
         // console2.log("a ", a);
         // console2.log("b ", b);
         // console2.log("c ", c);
