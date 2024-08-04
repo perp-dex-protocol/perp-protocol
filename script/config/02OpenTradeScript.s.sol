@@ -39,8 +39,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeLimitOrder(8);
 
         // 5. trigger order
-        // uint256 packed = packTriggerOrder(2, user_address, 8);
-        // triggerOrder(packed);
+        uint256 packed = packTriggerOrder(4, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
+        triggerOrder(packed);
 
         // 6. decrease Pos
         // decreasePos();
@@ -52,10 +52,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 8. close Pending order
         // closePendingOrder(0);
 
-
         // 9. updateLeverage
         // updateLeverage();
-
 
         // getUserAllTrades(user_address);
 
@@ -63,10 +61,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         // increasePosData();
 
         // 11. decreasePos
-        decreasePos() ;
+        // decreasePos() ;
 
         // 6. get trades
-        getUserAllTrades(user_address);
+        // getUserAllTrades(user_address);
+
+        // getAllTrade()
+        // getAllTrade();
 
         // 7. get User Counters
         // getUserCounters();
@@ -75,6 +76,12 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getPairOi();
 
         // getPairOis();
+
+        // (uint64 a, uint64 b, uint64 c, uint64 d) = unpack256To64(31779456852601596094134077728);
+        // console2.log("a ", a);
+        // console2.log("b ", b);
+        // console2.log("c ", c);
+        // console2.log("d ", d);
     }
 
     function initializTrade() public {
@@ -180,7 +187,6 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.decreasePositionSize(14, 1e18, 0);
     }
 
-
     function updateLeverage() public {
         tradingInteraction.updateLeverage(14, 135000);
     }
@@ -263,6 +269,29 @@ contract OpenTradingScript is BaseScriptDeployer {
         }
     }
 
+    function getAllTrade() public {
+        ITradingStorage.Trade[] memory trades = tradingStorage.getAllTrades(0, 1);
+
+        console2.log(trades.length);
+        for (uint256 i = 0; i < trades.length; i++) {
+            console2.log("====================================");
+
+            console2.log(" trade user ", trades[i].user);
+            console2.log(" trade index ", trades[i].index);
+            console2.log(" trade pairIndex ", trades[i].pairIndex);
+            console2.log(" trade leverage ", trades[i].leverage);
+            console2.log(" trade long ", trades[i].long);
+            console2.log(" trade isOpen ", trades[i].isOpen);
+            console2.log(" trade collateralIndex ", trades[i].collateralIndex);
+            console2.log(" trade tradeType ", uint256(trades[i].tradeType));
+            console2.log(" trade collateralAmount ", trades[i].collateralAmount);
+            console2.log(" trade openPrice ", trades[i].openPrice);
+            console2.log(" trade tp ", trades[i].tp);
+            console2.log(" trade sl ", trades[i].sl);
+            console2.log(" trade __placeholder ", trades[i].__placeholder);
+        }
+    }
+
     function getUserAllTrades(address user) public {
         ITradingStorage.Trade[] memory trades = tradingStorage.getTrades(user);
         console2.log("user all trades length", trades.length);
@@ -306,7 +335,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log("ETH pairor ", pairoi);
     }
 
-    function getPairOis() public{
+    function getPairOis() public {
         (uint256 longOi, uint256 shortOi) = borrowingFees.getPairOisCollateral(1, 0);
         console2.log("ETH longOi ", longOi);
         console2.log("ETH shortOi ", shortOi);
@@ -314,5 +343,12 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     function packTriggerOrder(uint8 orderType, address trader, uint32 index) internal pure returns (uint256 packed) {
         packed = uint256(orderType) | (uint256(uint160(trader)) << 8) | (uint256(index) << 168);
+    }
+
+    function unpack256To64(uint256 _packed) public pure returns (uint64 a, uint64 b, uint64 c, uint64 d) {
+        a = uint64(_packed);
+        b = uint64(_packed >> 64);
+        c = uint64(_packed >> 128);
+        d = uint64(_packed >> 192);
     }
 }

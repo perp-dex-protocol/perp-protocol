@@ -223,7 +223,7 @@ library PriceAggregatorUtils {
 
         (, int256 latestPrice,,,) = IChainlinkFeed(pairFeed).latestRoundData();
 
-        uint256 _priceData = uint64(uint256(latestPrice)).pack64To256(0, 0, 0);
+        uint256 _priceData = uint64(uint256(latestPrice)).pack64To256(uint64(block.timestamp), 0, 0);
 
         IPriceAggregator.PriceAggregatorStorage storage s = _getStorage();
         bool isLookback = !ConstantsUtils.isOrderTypeMarket(_orderType);
@@ -257,6 +257,7 @@ library PriceAggregatorUtils {
 
         finalAnswer.orderId = orderId;
         finalAnswer.price = newAnswer.open;
+        finalAnswer.open = uint64(block.timestamp);
         finalAnswer.spreadP = _getMultiCollatDiamond().pairSpreadP(order.pairIndex);
 
         if (order.orderType == ITradingStorage.PendingOrderType.MARKET_OPEN) {
