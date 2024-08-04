@@ -37,3 +37,8 @@ Refer
 1. https://github.com/mudgen/diamond-1-hardhat
 2. https://github.com/mudgen/diamond-3
 3. https://medium.com/@MarqyMarq/how-to-implement-the-diamond-standard-69e87dae44e6
+
+
+// todo
+1. update updatePosSizeLifeCycles 's trading common utils contracts
+2. update updatePosSizeLifeCycles's address in 

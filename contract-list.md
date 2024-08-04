@@ -18,7 +18,7 @@
 
 9. Facet7 TradingInteractions   0x71C3a2f2e74a45E9fE1C782373B171B15302e6Ee
     
-10. Facet8 TradingCallbacks     0xD0aA2fEfa0031a544A0a383D019e6FC0c310b978
+10. Facet8 TradingCallbacks     0x6f6677CdA791005eF27B5fB3582dd7105FDcB40e
     
 11. Facet9 BorrowingFees        0x259aE08FD0199e9C94AbE2318c6094b301147b94
     
