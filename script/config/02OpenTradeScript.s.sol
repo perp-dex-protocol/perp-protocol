@@ -39,8 +39,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeLimitOrder(8);
 
         // 5. trigger order
-        uint256 packed = packTriggerOrder(6, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
-        triggerOrder(packed);
+        // uint256 packed = packTriggerOrder(6, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
+        // triggerOrder(packed);
 
         // 6. decrease Pos
         // decreasePos();
@@ -64,10 +64,10 @@ contract OpenTradingScript is BaseScriptDeployer {
         // decreasePos() ;
 
         // 6. get trades
-        // getUserAllTrades(user_address);
+        getUserAllTrades(user_address);
 
         // getAllTrade()
-        getAllTrade();
+        // getAllTrade();
 
         // 7. get User Counters
         // getUserCounters();
@@ -110,7 +110,7 @@ contract OpenTradingScript is BaseScriptDeployer {
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 3e18,
-            openPrice: 3508e8,
+            openPrice: 3508e10,
             tp: 0,
             sl: 0,
             __placeholder: 0
@@ -124,19 +124,19 @@ contract OpenTradingScript is BaseScriptDeployer {
             user: user_address,
             index: 0,
             pairIndex: 0,
-            leverage: 130000,
-            long: true,
+            leverage: 135000,
+            long: false,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 3e18,
-            openPrice: 2900e10,
+            collateralAmount: 5e18,
+            openPrice: 2503e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
-        tradingInteraction.openTradeNative{value: 3 ether}(trade, 1003, address(0));
+        tradingInteraction.openTradeNative{value: 5 ether}(trade, 1007, address(0));
     }
 
     function openLimitOrder() public {
