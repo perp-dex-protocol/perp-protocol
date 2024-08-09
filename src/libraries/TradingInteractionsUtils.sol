@@ -158,6 +158,22 @@ library TradingInteractionsUtils {
         _openTrade(_trade, _maxSlippageP, _referrer, true);
     }
 
+    function batchOpenTradeNative(ITradingStorage.Trade[] memory _trades, uint16 _maxSlippageP, address _referrer)
+        internal
+        tradingActivated
+        notDelegatedAction
+    {
+        uint120 totalCollateralAmt = _wrapNativeToken(_trades[0].collateralIndex);
+        uint120 totalOpenAmt = 0;
+        for (uint8 i = 1; i < _trades.length; i++) {
+            totalOpenAmt += _trades[i].collateralAmount;
+        }
+        require(totalCollateralAmt >= totalOpenAmt, "Insufficient collateral amount");
+        for (uint8 i = 1; i < _trades.length; i++) {
+            _openTrade(_trades[i], _maxSlippageP, _referrer, true);
+        }
+    }
+
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */

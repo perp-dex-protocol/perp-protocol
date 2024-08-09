@@ -59,9 +59,22 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
         return TradingInteractionsUtils.delegatedTradingAction(_trader, _callData);
     }
 
+    function batchOpenTrade(ITradingStorage.Trade[] memory _trades, uint16 _maxSlippageP, address _referrer) external {
+        for (uint256 i = 0; i < _trades.length; i++) {
+            TradingInteractionsUtils.openTrade(_trades[i], _maxSlippageP, _referrer);
+        }
+    }
+
     /// @inheritdoc ITradingInteractionsUtils
     function openTrade(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer) external {
         TradingInteractionsUtils.openTrade(_trade, _maxSlippageP, _referrer);
+    }
+
+    function batchOpenTradeNative(ITradingStorage.Trade[] memory _trades, uint16 _maxSlippageP, address _referrer)
+        external
+        payable
+    {
+        TradingInteractionsUtils.batchOpenTradeNative(_trades, _maxSlippageP, _referrer);
     }
 
     /// @inheritdoc ITradingInteractionsUtils

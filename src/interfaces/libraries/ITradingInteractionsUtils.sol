@@ -47,6 +47,8 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      */
     function delegatedTradingAction(address _trader, bytes calldata _callData) external returns (bytes memory);
 
+    function batchOpenTrade(ITradingStorage.Trade[] memory _trades, uint16 _maxSlippageP, address _referrer) external;
+
     /**
      * @dev Opens a new trade/limit order/stop order
      * @param _trade the trade to be opened
@@ -55,6 +57,9 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      */
     function openTrade(ITradingStorage.Trade memory _trade, uint16 _maxSlippageP, address _referrer) external;
 
+    function batchOpenTradeNative(ITradingStorage.Trade[] memory _trades, uint16 _maxSlippageP, address _referrer)
+        external
+        payable;
     /**
      * @dev Wraps native token and opens a new trade/limit order/stop order
      * @param _trade the trade to be opened
