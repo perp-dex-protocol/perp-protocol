@@ -65,6 +65,8 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
         external
         payable;
 
+    function batchCloseTradeMarket(uint32[] memory _indexList) external;
+
     /**
      * @dev Closes an open trade (market order) for caller
      * @param _index the index of the trade of caller

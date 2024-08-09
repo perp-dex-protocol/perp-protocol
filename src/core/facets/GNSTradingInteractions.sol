@@ -73,6 +73,13 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
+    function batchCloseTradeMarket(uint32[] memory _indexList) external {
+        for (uint256 i = 0; i < _indexList.length; i++) {
+            TradingInteractionsUtils.closeTradeMarket(_indexList[i]);
+        }
+    }
+
+    /// @inheritdoc ITradingInteractionsUtils
     function closeTradeMarket(uint32 _index) external {
         TradingInteractionsUtils.closeTradeMarket(_index);
     }

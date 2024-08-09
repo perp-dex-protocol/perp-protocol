@@ -30,7 +30,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openNativeTrade();
 
         // 2. close market trade
-        closeOrder(18);
+        // closeOrder(16);
+
+        // 3. batch close trade
+        uint32[] memory indexes = new uint32[](2);
+        indexes[0] = 16;
+        indexes[1] = 17;
+        batchClose(indexes);
 
         // 3. open limit order
         // openLimitOrder();
@@ -171,6 +177,10 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.closeTradeMarket(index);
     }
 
+    function batchClose(uint32[] memory indexes) public {
+        tradingInteraction.batchCloseTradeMarket(indexes);
+    }
+
     function triggerOrder(uint256 packdata) public {
         tradingInteraction.triggerOrder(packdata);
     }
@@ -191,7 +201,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.updateLeverage(14, 135000);
     }
 
-    function getTrade() public view{
+    function getTrade() public view {
         ITradingStorage.Trade memory trade = tradingStorage.getTrade(user_address, 0);
 
         console2.log("====================================");
@@ -211,7 +221,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log(" trade __placeholder ", trade.__placeholder);
     }
 
-    function getUserPendingOrders(address userAddress) public view{
+    function getUserPendingOrders(address userAddress) public view {
         ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getPendingOrders(userAddress);
 
         console2.log(pendingOrders.length);
@@ -240,7 +250,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         }
     }
 
-    function getAllPendingorder() public view{
+    function getAllPendingorder() public view {
         ITradingStorage.PendingOrder[] memory pendingOrders = tradingStorage.getAllPendingOrders(0, 1);
 
         console2.log(pendingOrders.length);
@@ -269,7 +279,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         }
     }
 
-    function getAllTrade() public view{
+    function getAllTrade() public view {
         ITradingStorage.Trade[] memory trades = tradingStorage.getAllTrades(0, 1);
 
         console2.log(trades.length);
@@ -314,7 +324,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         }
     }
 
-    function getUserCounters() public view{
+    function getUserCounters() public view {
         ITradingStorage.Counter memory pendingCount =
             tradingStorage.getCounters(user_address, ITradingStorage.CounterType.PENDING_ORDER);
 
@@ -335,7 +345,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log("ETH pairor ", pairoi);
     }
 
-    function getPairOis() public view{
+    function getPairOis() public view {
         (uint256 longOi, uint256 shortOi) = borrowingFees.getPairOisCollateral(1, 0);
         console2.log("ETH longOi ", longOi);
         console2.log("ETH shortOi ", shortOi);
