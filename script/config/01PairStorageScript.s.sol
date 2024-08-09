@@ -21,13 +21,13 @@ contract PairStorageAddRemoveScript is BaseScriptDeployer {
         // addGroupData();
         // addPair();
 
-        // IPairsStorage.Fee memory fee0 = pairsStorage.fees(0);
-        // console2.log(fee0.name);
-        // console2.log(fee0.openFeeP);
-        // console2.log(fee0.closeFeeP);
-        // console2.log(fee0.oracleFeeP);
-        // console2.log(fee0.triggerOrderFeeP);
-        // console2.log(fee0.minPositionSizeUsd);
+        IPairsStorage.Fee memory fee0 = pairsStorage.fees(0);
+        console2.log(fee0.name);
+        console2.log(fee0.openFeeP); // 300000000
+        console2.log(fee0.closeFeeP); // 600000000
+        console2.log(fee0.oracleFeeP);
+        console2.log(fee0.triggerOrderFeeP); // 200000000
+        console2.log(fee0.minPositionSizeUsd); // 100000000000000000000
 
         IPairsStorage.Group memory group0 = pairsStorage.groups(0);
         console2.log(group0.name);
