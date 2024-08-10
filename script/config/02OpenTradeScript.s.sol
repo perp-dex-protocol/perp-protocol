@@ -33,10 +33,10 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeOrder(16);
 
         // 3. batch close trade
-        uint32[] memory indexes = new uint32[](2);
-        indexes[0] = 16;
-        indexes[1] = 17;
-        batchClose(indexes);
+        // uint32[] memory indexes = new uint32[](2);
+        // indexes[0] = 16;
+        // indexes[1] = 17;
+        // batchClose(indexes);
 
         // 3. open limit order
         // openLimitOrder();
@@ -70,10 +70,10 @@ contract OpenTradingScript is BaseScriptDeployer {
         // decreasePos() ;
 
         // 6. get trades
-        getUserAllTrades(user_address);
+        // getUserAllTrades(user_address);
 
         // getAllTrade()
-        // getAllTrade();
+        getAllTrade();
 
         // 7. get User Counters
         // getUserCounters();
@@ -280,7 +280,7 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function getAllTrade() public view {
-        ITradingStorage.Trade[] memory trades = tradingStorage.getAllTrades(0, 1);
+        ITradingStorage.Trade[] memory trades = tradingStorage.getAllTrades(0, 5);
 
         console2.log(trades.length);
         for (uint256 i = 0; i < trades.length; i++) {
