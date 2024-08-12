@@ -1,0 +1,1790 @@
+[
+        {
+            "type": "constructor",
+            "inputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "getAddresses",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IAddressStore.Addresses",
+                    "components": [
+                        {
+                            "name": "gns",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "gnsStaking",
+                            "type": "address",
+                            "internalType": "address"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAllBorrowingPairs",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.BorrowingData[]",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "accFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accLastUpdatedBlock",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                },
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.OpenInterest[]",
+                    "components": [
+                        {
+                            "name": "long",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "short",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "max",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint40",
+                            "internalType": "uint40"
+                        }
+                    ]
+                },
+                {
+                    "name": "",
+                    "type": "tuple[][]",
+                    "internalType": "struct IBorrowingFees.BorrowingPairGroup[][]",
+                    "components": [
+                        {
+                            "name": "groupIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "block",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "initialAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "initialAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "prevGroupAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "prevGroupAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "pairAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "pairAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingGroup",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_groupIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingData",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "accFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accLastUpdatedBlock",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingGroupOi",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_groupIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.OpenInterest",
+                    "components": [
+                        {
+                            "name": "long",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "short",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "max",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint40",
+                            "internalType": "uint40"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingGroupPendingAccFees",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_groupIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_currentBlock",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "accFeeLong",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "accFeeShort",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "groupAccFeeDelta",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingGroups",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_indices",
+                    "type": "uint16[]",
+                    "internalType": "uint16[]"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.BorrowingData[]",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "accFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accLastUpdatedBlock",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                },
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.OpenInterest[]",
+                    "components": [
+                        {
+                            "name": "long",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "short",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "max",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint40",
+                            "internalType": "uint40"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingInitialAccFees",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_trader",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_index",
+                    "type": "uint32",
+                    "internalType": "uint32"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingInitialAccFees",
+                    "components": [
+                        {
+                            "name": "accPairFee",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accGroupFee",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "block",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint80",
+                            "internalType": "uint80"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingPair",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingData",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "accFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "accLastUpdatedBlock",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingPairGroupIndex",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "groupIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingPairGroups",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.BorrowingPairGroup[]",
+                    "components": [
+                        {
+                            "name": "groupIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "block",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "initialAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "initialAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "prevGroupAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "prevGroupAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "pairAccFeeLong",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "pairAccFeeShort",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingPairOi",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.OpenInterest",
+                    "components": [
+                        {
+                            "name": "long",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "short",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "max",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "__placeholder",
+                            "type": "uint40",
+                            "internalType": "uint40"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBorrowingPairPendingAccFees",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_currentBlock",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "accFeeLong",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "accFeeShort",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "pairAccFeeDelta",
+                    "type": "uint64",
+                    "internalType": "uint64"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getPairMaxOi",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getPairMaxOiCollateral",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getPairOiCollateral",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_long",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getPairOisCollateral",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "longOi",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "shortOi",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getTradeBorrowingFee",
+            "inputs": [
+                {
+                    "name": "_input",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingFeeInput",
+                    "components": [
+                        {
+                            "name": "collateralIndex",
+                            "type": "uint8",
+                            "internalType": "uint8"
+                        },
+                        {
+                            "name": "trader",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "pairIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "index",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "long",
+                            "type": "bool",
+                            "internalType": "bool"
+                        },
+                        {
+                            "name": "collateral",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "leverage",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "feeAmountCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getTradeLiquidationPrice",
+            "inputs": [
+                {
+                    "name": "_input",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.LiqPriceInput",
+                    "components": [
+                        {
+                            "name": "collateralIndex",
+                            "type": "uint8",
+                            "internalType": "uint8"
+                        },
+                        {
+                            "name": "trader",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "pairIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "index",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "openPrice",
+                            "type": "uint64",
+                            "internalType": "uint64"
+                        },
+                        {
+                            "name": "long",
+                            "type": "bool",
+                            "internalType": "bool"
+                        },
+                        {
+                            "name": "collateral",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "leverage",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "useBorrowingFees",
+                            "type": "bool",
+                            "internalType": "bool"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "handleTradeBorrowingCallback",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_trader",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_index",
+                    "type": "uint32",
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "_positionSizeCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_open",
+                    "type": "bool",
+                    "internalType": "bool"
+                },
+                {
+                    "name": "_long",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "hasRole",
+            "inputs": [
+                {
+                    "name": "_account",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_role",
+                    "type": "uint8",
+                    "internalType": "enum IAddressStore.Role"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "initialize",
+            "inputs": [
+                {
+                    "name": "_rolesManager",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "resetTradeBorrowingFees",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_trader",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_index",
+                    "type": "uint32",
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "_long",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "setBorrowingGroupParams",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_groupIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_value",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingGroupParams",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "maxOi",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "setBorrowingGroupParamsArray",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_indices",
+                    "type": "uint16[]",
+                    "internalType": "uint16[]"
+                },
+                {
+                    "name": "_values",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.BorrowingGroupParams[]",
+                    "components": [
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "maxOi",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "setBorrowingPairParams",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_value",
+                    "type": "tuple",
+                    "internalType": "struct IBorrowingFees.BorrowingPairParams",
+                    "components": [
+                        {
+                            "name": "groupIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "maxOi",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "setBorrowingPairParamsArray",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_indices",
+                    "type": "uint16[]",
+                    "internalType": "uint16[]"
+                },
+                {
+                    "name": "_values",
+                    "type": "tuple[]",
+                    "internalType": "struct IBorrowingFees.BorrowingPairParams[]",
+                    "components": [
+                        {
+                            "name": "groupIndex",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "feePerBlock",
+                            "type": "uint32",
+                            "internalType": "uint32"
+                        },
+                        {
+                            "name": "feeExponent",
+                            "type": "uint48",
+                            "internalType": "uint48"
+                        },
+                        {
+                            "name": "maxOi",
+                            "type": "uint72",
+                            "internalType": "uint72"
+                        }
+                    ]
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "setRoles",
+            "inputs": [
+                {
+                    "name": "_accounts",
+                    "type": "address[]",
+                    "internalType": "address[]"
+                },
+                {
+                    "name": "_roles",
+                    "type": "uint8[]",
+                    "internalType": "enum IAddressStore.Role[]"
+                },
+                {
+                    "name": "_values",
+                    "type": "bool[]",
+                    "internalType": "bool[]"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "withinMaxBorrowingGroupOi",
+            "inputs": [
+                {
+                    "name": "_collateralIndex",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_pairIndex",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_long",
+                    "type": "bool",
+                    "internalType": "bool"
+                },
+                {
+                    "name": "_positionSizeCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "event",
+            "name": "AccessControlUpdated",
+            "inputs": [
+                {
+                    "name": "target",
+                    "type": "address",
+                    "indexed": false,
+                    "internalType": "address"
+                },
+                {
+                    "name": "role",
+                    "type": "uint8",
+                    "indexed": false,
+                    "internalType": "enum IAddressStore.Role"
+                },
+                {
+                    "name": "access",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "AddressesUpdated",
+            "inputs": [
+                {
+                    "name": "addresses",
+                    "type": "tuple",
+                    "indexed": false,
+                    "internalType": "struct IAddressStore.Addresses",
+                    "components": [
+                        {
+                            "name": "gns",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "gnsStaking",
+                            "type": "address",
+                            "internalType": "address"
+                        }
+                    ]
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingGroupAccFeesUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "groupIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "currentBlock",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "accFeeLong",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "accFeeShort",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingGroupOiUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "groupIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "long",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "increase",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "delta",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                },
+                {
+                    "name": "newOiLong",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                },
+                {
+                    "name": "newOiShort",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingGroupUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "groupIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "feePerBlock",
+                    "type": "uint32",
+                    "indexed": false,
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "maxOi",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                },
+                {
+                    "name": "feeExponent",
+                    "type": "uint48",
+                    "indexed": false,
+                    "internalType": "uint48"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingInitialAccFeesStored",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "trader",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "index",
+                    "type": "uint32",
+                    "indexed": false,
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "long",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "initialPairAccFee",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "initialGroupAccFee",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingPairAccFeesUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "currentBlock",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "accFeeLong",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                },
+                {
+                    "name": "accFeeShort",
+                    "type": "uint64",
+                    "indexed": false,
+                    "internalType": "uint64"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingPairGroupUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "prevGroupIndex",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "newGroupIndex",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingPairOiUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "long",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "increase",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "delta",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                },
+                {
+                    "name": "newOiLong",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                },
+                {
+                    "name": "newOiShort",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BorrowingPairParamsUpdated",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "groupIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "feePerBlock",
+                    "type": "uint32",
+                    "indexed": false,
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "feeExponent",
+                    "type": "uint48",
+                    "indexed": false,
+                    "internalType": "uint48"
+                },
+                {
+                    "name": "maxOi",
+                    "type": "uint72",
+                    "indexed": false,
+                    "internalType": "uint72"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "Initialized",
+            "inputs": [
+                {
+                    "name": "version",
+                    "type": "uint8",
+                    "indexed": false,
+                    "internalType": "uint8"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "TradeBorrowingCallbackHandled",
+            "inputs": [
+                {
+                    "name": "collateralIndex",
+                    "type": "uint8",
+                    "indexed": true,
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "trader",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "pairIndex",
+                    "type": "uint16",
+                    "indexed": true,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "index",
+                    "type": "uint32",
+                    "indexed": false,
+                    "internalType": "uint32"
+                },
+                {
+                    "name": "open",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "long",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                },
+                {
+                    "name": "positionSizeCollateral",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "error",
+            "name": "AboveMax",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "AlreadyExists",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "BelowMin",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "BlockOrder",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "BorrowingWrongExponent",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "BorrowingZeroGroup",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "DoesntExist",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "InitError",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "InsufficientBalance",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "InvalidAddresses",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "InvalidCollateralIndex",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "InvalidInputLength",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "NotAllowed",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "NotAuthorized",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "Overflow",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "Overflow",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "Paused",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongAccess",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongIndex",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongLength",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongOrder",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongParams",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "WrongTradeType",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "ZeroAddress",
+            "inputs": []
+        },
+        {
+            "type": "error",
+            "name": "ZeroValue",
+            "inputs": []
+        }
+    ]

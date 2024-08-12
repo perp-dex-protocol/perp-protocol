@@ -15,8 +15,8 @@ contract WSeiWithdrawScript is BaseScriptDeployer {
     address user_address = 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE;
 
     function run() public {
-        IWSEI(wsei).deposit{value: 2 ether}();
+        // IWSEI(wsei).deposit{value: 2 ether}();
 
-        // wsei.withdraw(wsei.balanceOf(user_address));
+        wsei.withdraw(wsei.balanceOf(user_address));
     }
 }

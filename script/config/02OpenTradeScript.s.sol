@@ -7,6 +7,7 @@ import {GNSTradingInteractions} from "src/core/facets/GNSTradingInteractions.sol
 import {GNSTradingStorage} from "src/core/facets/GNSTradingStorage.sol";
 import {GNSBorrowingFees} from "src/core/facets/GNSBorrowingFees.sol";
 import {ITradingStorage} from "src/interfaces/types/ITradingStorage.sol";
+import {IBorrowingFees} from "src/interfaces/types/IBorrowingFees.sol";
 
 interface IWSei {
     function deposit() external payable;
@@ -28,6 +29,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 1. open market order
         // openTrade();
         // openNativeTrade();
+
+        batNativeTrade();
 
         // 2. close market trade
         // closeOrder(16);
@@ -61,7 +64,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 9. updateLeverage
         // updateLeverage();
 
-        // getUserAllTrades(user_address);
+        getUserAllTrades(user_address);
 
         // 10. increase pos data
         // increasePosData();
@@ -73,7 +76,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getUserAllTrades(user_address);
 
         // getAllTrade()
-        getAllTrade();
+        // getAllTrade();
 
         // 7. get User Counters
         // getUserCounters();
@@ -82,6 +85,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // getPairOi();
 
         // getPairOis();
+
+        // getBorrowingFees();
 
         // (uint64 a, uint64 b, uint64 c, uint64 d) = unpack256To64(31779579080728436155908185344);
         // console2.log("a ", a);
@@ -136,13 +141,39 @@ contract OpenTradingScript is BaseScriptDeployer {
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 4.2e18,
-            openPrice: 2434e8,
+            openPrice: 2633e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
         tradingInteraction.openTradeNative{value: 4.2 ether}(trade, 1007, address(0));
+    }
+
+    function batNativeTrade() public  {
+        ITradingStorage.Trade[] memory _trades = new ITradingStorage.Trade[](3);
+
+        ITradingStorage.Trade memory trade = ITradingStorage.Trade({
+            user: user_address,
+            index: 0,
+            pairIndex: 0,
+            leverage: 145000,
+            long: true,
+            isOpen: true,
+            collateralIndex: 1,
+            tradeType: ITradingStorage.TradeType.TRADE,
+            collateralAmount: 4.2e18,
+            openPrice: 2567e8,
+            tp: 0,
+            sl: 0,
+            __placeholder: 0
+        });
+
+        _trades[0] = trade;
+        _trades[1] = trade;
+        _trades[2] = trade;
+
+        tradingInteraction.batchOpenTradeNative{value: 13 ether}(_trades, 1007, address(0));
     }
 
     function openLimitOrder() public {
@@ -350,6 +381,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log("ETH longOi ", longOi);
         console2.log("ETH shortOi ", shortOi);
     }
+
+    function getBorrowingFees() public view{
+        IBorrowingFees.BorrowingData memory borrowData = borrowingFees.getBorrowingPair(1, 0);
+        console2.log("borrowData accFeeLong ", borrowData.accFeeLong);
+        console2.log("borrowData accFeeShort ", borrowData.accFeeShort);
+    }
+
 
     function packTriggerOrder(uint8 orderType, address trader, uint32 index) internal pure returns (uint256 packed) {
         packed = uint256(orderType) | (uint256(uint160(trader)) << 8) | (uint256(index) << 168);
