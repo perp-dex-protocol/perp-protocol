@@ -22,7 +22,7 @@
     
 11. Facet9 BorrowingFees        0x259aE08FD0199e9C94AbE2318c6094b301147b94
     
-12. Facet10 PriceAggregator     0x53fd0A5B1fB22f2304f180A913026D2FfcE7F023
+12. Facet10 PriceAggregator     0xa6468410F12b2aC95adF84249F49Ed07f386e91D
 
  
 

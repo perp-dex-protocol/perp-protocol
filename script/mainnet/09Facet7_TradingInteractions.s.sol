@@ -11,25 +11,25 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
     GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
     function run() public {
-        removeOldFacet();
+        // removeOldFacet();
 
         GNSTradingInteractions tradingInteractions = new GNSTradingInteractions();
         console2.log("tradingInteractions ", address(tradingInteractions));
 
-        addNewFacet(address(tradingInteractions));
+        // addNewFacet(address(tradingInteractions));
 
-        address[] memory facets = diamond.facetAddresses();
-        console2.log(facets.length);
-        console2.log("facets0 ", facets[0]);
-        console2.log("facets1 ", facets[1]);
-        console2.log("facets2 ", facets[2]);
-        console2.log("facets3 ", facets[3]);
-        console2.log("facets4 ", facets[4]);
-        console2.log("facets5 ", facets[5]);
-        console2.log("facets6 ", facets[6]);
-        console2.log("facets7 ", facets[7]);
-        console2.log("facets8 ", facets[8]);
-        console2.log("facets9 ", facets[9]);
+        // address[] memory facets = diamond.facetAddresses();
+        // console2.log(facets.length);
+        // console2.log("facets0 ", facets[0]);
+        // console2.log("facets1 ", facets[1]);
+        // console2.log("facets2 ", facets[2]);
+        // console2.log("facets3 ", facets[3]);
+        // console2.log("facets4 ", facets[4]);
+        // console2.log("facets5 ", facets[5]);
+        // console2.log("facets6 ", facets[6]);
+        // console2.log("facets7 ", facets[7]);
+        // console2.log("facets8 ", facets[8]);
+        // console2.log("facets9 ", facets[9]);
     }
 
     function removeOldFacet() public {
@@ -79,7 +79,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         _faceCut[0].facetAddress = address(newFacet);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
 
-        bytes4[] memory selectors = new bytes4[](26);
+        bytes4[] memory selectors = new bytes4[](28);
 
         selectors[0] = bytes4(0x85886333);
         selectors[1] = bytes4(0xbdb340cd);
@@ -107,6 +107,8 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         selectors[23] = bytes4(0x24d7d89a);
         selectors[24] = bytes4(0x567cf24e);
         selectors[25] = bytes4(0xfda4e0b5);
+        selectors[26] = bytes4(0x43b11bcc);
+        selectors[27] = bytes4(0xabc02464);
 
         // 0x85886333,0xbdb340cd,0x737b84cd,0x85898e08,0xa4bdee80,0x4aac6480,0x1d9478b6,0x5179cecf,0x84e93347,0x4465c3e4,
         // 0x080e83e1,0x031c722b,0x604755cf,0xeb9359aa,0x9bf1584e,0x52d029d2,0xa4bb127e,0xb5d9e9d0,0xf401f2bb,0xb6919540,

@@ -79,6 +79,14 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
     function closeTradeMarket(uint32 _index) external;
 
     /**
+     * @dev Reverses an open limit/stop order for caller
+     * @param _index index of limit/stop order of caller
+     */
+    function reverseOrder(uint32 _index) external;
+
+    function batchReverseOrder(uint32[] memory _indexList) external;
+
+    /**
      * @dev Updates an existing limit/stop order for caller
      * @param _index index of limit/stop order of caller
      * @param _triggerPrice new trigger price of limit/stop order (1e10 precision)

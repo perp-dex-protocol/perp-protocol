@@ -26,7 +26,6 @@ interface ITradingStorage {
     enum PendingOrderType {
         MARKET_OPEN,
         MARKET_CLOSE,
-        MARKET_REVERSE,
         LIMIT_OPEN,
         STOP_OPEN,
         TP_CLOSE,
@@ -34,7 +33,8 @@ interface ITradingStorage {
         LIQ_CLOSE,
         UPDATE_LEVERAGE,
         MARKET_PARTIAL_OPEN,
-        MARKET_PARTIAL_CLOSE
+        MARKET_PARTIAL_CLOSE,
+        MARKET_REVERSE
     }
 
     enum CounterType {

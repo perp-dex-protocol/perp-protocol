@@ -223,6 +223,7 @@ library TradingCallbacksUtils {
 
         _getMultiCollatDiamond().closePendingOrder(_a.orderId);
 
+        // start a new order
         t.collateralAmount = uint120(v.amountSentToTrader);
         (uint256 priceImpactP, uint256 priceAfterImpact, ITradingCallbacks.CancelReason cancelReasonOfOpen) =
             _openTradePrep(t, _a.price, _a.price, _a.spreadP, o.maxSlippageP);

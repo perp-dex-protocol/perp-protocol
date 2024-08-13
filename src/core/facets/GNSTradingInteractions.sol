@@ -85,12 +85,14 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
         TradingInteractionsUtils.openTradeNative(_trade, _maxSlippageP, _referrer);
     }
 
+    /// @inheritdoc ITradingInteractionsUtils
     function batchReverseOrder(uint32[] memory _indexList) external {
         for (uint256 i = 0; i < _indexList.length; i++) {
             TradingInteractionsUtils.reverseOrder(_indexList[i]);
         }
     }
 
+    /// @inheritdoc ITradingInteractionsUtils
     function reverseOrder(uint32 _index) external {
         TradingInteractionsUtils.reverseOrder(_index);
     }
