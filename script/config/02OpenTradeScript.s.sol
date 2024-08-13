@@ -213,7 +213,9 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function reverseOrder() public {
-        tradingInteraction.reverseOrder(22);
+        uint32[] memory indexes = new uint32[](1);
+        indexes[0] = 22;
+        tradingInteraction.batchReverseOrder(indexes);
     }
 
     function batReverseOrder(uint32[] memory indexes) public {

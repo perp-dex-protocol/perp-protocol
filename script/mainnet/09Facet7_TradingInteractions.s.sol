@@ -11,25 +11,25 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
     GNSMultiCollatDiamond diamond = GNSMultiCollatDiamond(payable(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6));
 
     function run() public {
-        // removeOldFacet();
+        removeOldFacet();
 
         GNSTradingInteractions tradingInteractions = new GNSTradingInteractions();
         console2.log("tradingInteractions ", address(tradingInteractions));
 
-        // addNewFacet(address(tradingInteractions));
+        addNewFacet(address(tradingInteractions));
 
-        // address[] memory facets = diamond.facetAddresses();
-        // console2.log(facets.length);
-        // console2.log("facets0 ", facets[0]);
-        // console2.log("facets1 ", facets[1]);
-        // console2.log("facets2 ", facets[2]);
-        // console2.log("facets3 ", facets[3]);
-        // console2.log("facets4 ", facets[4]);
-        // console2.log("facets5 ", facets[5]);
-        // console2.log("facets6 ", facets[6]);
-        // console2.log("facets7 ", facets[7]);
-        // console2.log("facets8 ", facets[8]);
-        // console2.log("facets9 ", facets[9]);
+        address[] memory facets = diamond.facetAddresses();
+        console2.log(facets.length);
+        console2.log("facets0 ", facets[0]);
+        console2.log("facets1 ", facets[1]);
+        console2.log("facets2 ", facets[2]);
+        console2.log("facets3 ", facets[3]);
+        console2.log("facets4 ", facets[4]);
+        console2.log("facets5 ", facets[5]);
+        console2.log("facets6 ", facets[6]);
+        console2.log("facets7 ", facets[7]);
+        console2.log("facets8 ", facets[8]);
+        console2.log("facets9 ", facets[9]);
     }
 
     function removeOldFacet() public {

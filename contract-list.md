@@ -12,11 +12,11 @@
 
 6. Facet4 PriceImpact           0x8625c9c4087b603F1E1c8EBe3F7320a1297bFE34
    
-7. Facet5 TradingStorage        0x0393EfEDfc0d54A188B6Eb84D201b8E1D26Bd7af
+7. Facet5 TradingStorage        0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133
 
 8. Facet6 TriggerRewards        0xacf8AB5fD9f2FAcD9796E6Ef2b6CD2301BbDcD59
 
-9. Facet7 TradingInteractions   0xd85501734781174Ad73Fba61879083DD84f58bfc
+9. Facet7 TradingInteractions   0x9195C3D706e4DA76E13662Bd1FDF484a5dEfd1BB
     
 10. Facet8 TradingCallbacks     0xd6a89681DB1dc01cd937eE14A89CDcE88f400eaD
     

@@ -93,7 +93,7 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
     }
 
     /// @inheritdoc ITradingInteractionsUtils
-    function reverseOrder(uint32 _index) external {
+    function reverseOrderMarket(uint32 _index) external {
         TradingInteractionsUtils.reverseOrder(_index);
     }
 

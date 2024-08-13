@@ -174,7 +174,7 @@ library TradingInteractionsUtils {
         }
     }
 
-    function reverseOrder(uint32 _index) external {
+    function reverseOrder(uint32 _index) internal tradingActivatedOrCloseOnly {
         address sender = _msgSender();
         ITradingStorage.Trade memory t = _getMultiCollatDiamond().getTrade(sender, _index);
         ITradingStorage.PendingOrder memory pendingOrder;
@@ -182,7 +182,7 @@ library TradingInteractionsUtils {
         pendingOrder.trade.index = t.index;
         pendingOrder.trade.pairIndex = t.pairIndex;
         pendingOrder.user = sender;
-        pendingOrder.orderType = ITradingStorage.PendingOrderType.MARKET_REVERSE;
+        pendingOrder.orderType = ITradingStorage.PendingOrderType.MARKET_CLOSE;
 
         pendingOrder = _getMultiCollatDiamond().storePendingOrder(pendingOrder);
         ITradingStorage.Id memory orderId = ITradingStorage.Id({user: pendingOrder.user, index: pendingOrder.index});
