@@ -30,16 +30,18 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openTrade();
         // openNativeTrade();
 
-        batNativeTrade();
+        // batNativeTrade();
 
         // 2. close market trade
         // closeOrder(16);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
-        // indexes[0] = 16;
-        // indexes[1] = 17;
+        // indexes[0] = 20;
+        // indexes[1] = 21;
         // batchClose(indexes);
+
+        reverseOrder();
 
         // 3. open limit order
         // openLimitOrder();
@@ -64,8 +66,6 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 9. updateLeverage
         // updateLeverage();
 
-        getUserAllTrades(user_address);
-
         // 10. increase pos data
         // increasePosData();
 
@@ -73,7 +73,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // decreasePos() ;
 
         // 6. get trades
-        // getUserAllTrades(user_address);
+        getUserAllTrades(user_address);
 
         // getAllTrade()
         // getAllTrade();
@@ -150,7 +150,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.openTradeNative{value: 4.2 ether}(trade, 1007, address(0));
     }
 
-    function batNativeTrade() public  {
+    function batNativeTrade() public {
         ITradingStorage.Trade[] memory _trades = new ITradingStorage.Trade[](3);
 
         ITradingStorage.Trade memory trade = ITradingStorage.Trade({
@@ -210,6 +210,14 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     function batchClose(uint32[] memory indexes) public {
         tradingInteraction.batchCloseTradeMarket(indexes);
+    }
+
+    function reverseOrder() public {
+        tradingInteraction.reverseOrder(22);
+    }
+
+    function batReverseOrder(uint32[] memory indexes) public {
+        tradingInteraction.batchReverseOrder(indexes);
     }
 
     function triggerOrder(uint256 packdata) public {
@@ -382,12 +390,11 @@ contract OpenTradingScript is BaseScriptDeployer {
         console2.log("ETH shortOi ", shortOi);
     }
 
-    function getBorrowingFees() public view{
+    function getBorrowingFees() public view {
         IBorrowingFees.BorrowingData memory borrowData = borrowingFees.getBorrowingPair(1, 0);
         console2.log("borrowData accFeeLong ", borrowData.accFeeLong);
         console2.log("borrowData accFeeShort ", borrowData.accFeeShort);
     }
-
 
     function packTriggerOrder(uint8 orderType, address trader, uint32 index) internal pure returns (uint256 packed) {
         packed = uint256(orderType) | (uint256(uint160(trader)) << 8) | (uint256(index) << 168);

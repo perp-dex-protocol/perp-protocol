@@ -174,6 +174,28 @@ library TradingInteractionsUtils {
         }
     }
 
+    function reverseOrder(uint32 _index) external {
+        address sender = _msgSender();
+        ITradingStorage.Trade memory t = _getMultiCollatDiamond().getTrade(sender, _index);
+        ITradingStorage.PendingOrder memory pendingOrder;
+        pendingOrder.trade.user = t.user;
+        pendingOrder.trade.index = t.index;
+        pendingOrder.trade.pairIndex = t.pairIndex;
+        pendingOrder.user = sender;
+        pendingOrder.orderType = ITradingStorage.PendingOrderType.MARKET_REVERSE;
+
+        pendingOrder = _getMultiCollatDiamond().storePendingOrder(pendingOrder);
+        ITradingStorage.Id memory orderId = ITradingStorage.Id({user: pendingOrder.user, index: pendingOrder.index});
+        _getMultiCollatDiamond().getPrice(
+            t.collateralIndex,
+            t.pairIndex,
+            orderId,
+            pendingOrder.orderType,
+            TradingCommonUtils.getPositionSizeCollateral(t.collateralAmount, t.leverage),
+            ChainUtils.getBlockNumber()
+        );
+    }
+
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */

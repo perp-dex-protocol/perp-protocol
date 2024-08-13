@@ -44,6 +44,8 @@ interface ITradingCallbacksUtils is
      */
     function closeTradeMarketCallback(AggregatorAnswer memory _a) external;
 
+    function reverseTradeMarketCallback(AggregatorAnswer memory _a) external;
+
     /**
      * @dev Executes a pending open trigger order (for limit/stop orders)
      * @param _a the price aggregator answer (order id, price, etc.)

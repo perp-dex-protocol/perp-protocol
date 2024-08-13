@@ -266,6 +266,8 @@ library PriceAggregatorUtils {
             _getMultiCollatDiamond().openTradeMarketCallback(finalAnswer);
         } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_CLOSE) {
             _getMultiCollatDiamond().closeTradeMarketCallback(finalAnswer);
+        } else if (order.orderType == ITradingStorage.PendingOrderType.MARKET_REVERSE) {
+            _getMultiCollatDiamond().reverseTradeMarketCallback(finalAnswer);
         } else if (
             order.orderType == ITradingStorage.PendingOrderType.LIMIT_OPEN
                 || order.orderType == ITradingStorage.PendingOrderType.STOP_OPEN

@@ -171,6 +171,86 @@ library TradingCallbacksUtils {
         _getMultiCollatDiamond().closePendingOrder(_a.orderId);
     }
 
+    function reverseTradeMarketCallback(ITradingCallbacks.AggregatorAnswer memory _a) internal tradingActivated {
+        ITradingStorage.PendingOrder memory o = _getPendingOrder(_a.orderId);
+
+        if (!o.isOpen) return;
+
+        ITradingStorage.Trade memory t = _getTrade(o.trade.user, o.trade.index);
+
+        ITradingCallbacks.CancelReason cancelReason = !t.isOpen
+            ? ITradingCallbacks.CancelReason.NO_TRADE
+            : (_a.price == 0 ? ITradingCallbacks.CancelReason.MARKET_CLOSED : ITradingCallbacks.CancelReason.NONE);
+
+        ITradingCallbacks.Values memory v;
+        if (cancelReason != ITradingCallbacks.CancelReason.NO_TRADE) {
+            if (cancelReason == ITradingCallbacks.CancelReason.NONE) {
+                v.profitP = TradingCommonUtils.getPnlPercent(t.openPrice, _a.price, t.long, t.leverage);
+
+                v.amountSentToTrader = _unregisterTrade(t, v.profitP, o.orderType);
+
+                emit ITradingCallbacksUtils.MarketExecuted(
+                    _a.orderId,
+                    t,
+                    false,
+                    _a.price,
+                    0,
+                    v.profitP,
+                    v.amountSentToTrader,
+                    _getCollateralPriceUsd(t.collateralIndex)
+                );
+            } else {
+                // Charge gov fee
+                TradingCommonUtils.updateFeeTierPoints(t.collateralIndex, t.user, t.pairIndex, 0);
+                uint256 govFee = TradingCommonUtils.distributeGovFeeCollateral(
+                    t.collateralIndex,
+                    t.user,
+                    t.pairIndex,
+                    TradingCommonUtils.getMinPositionSizeCollateral(t.collateralIndex, t.pairIndex) / 2, // use min fee / 2
+                    0
+                );
+
+                // Deduct from trade collateral
+                _getMultiCollatDiamond().updateTradeCollateralAmount(
+                    ITradingStorage.Id({user: t.user, index: t.index}), t.collateralAmount - uint120(govFee)
+                );
+            }
+        }
+
+        if (cancelReason != ITradingCallbacks.CancelReason.NONE) {
+            emit ITradingCallbacksUtils.MarketCloseCanceled(_a.orderId, t.user, t.pairIndex, t.index, cancelReason);
+        }
+
+        _getMultiCollatDiamond().closePendingOrder(_a.orderId);
+
+        t.collateralAmount = uint120(v.amountSentToTrader);
+        (uint256 priceImpactP, uint256 priceAfterImpact, ITradingCallbacks.CancelReason cancelReasonOfOpen) =
+            _openTradePrep(t, _a.price, _a.price, _a.spreadP, o.maxSlippageP);
+
+        t.openPrice = uint64(priceAfterImpact);
+
+        if (cancelReason == ITradingCallbacks.CancelReason.NONE) {
+            t = _registerTrade(t, o);
+
+            emit ITradingCallbacksUtils.MarketExecuted(
+                _a.orderId, t, true, t.openPrice, priceImpactP, 0, 0, _getCollateralPriceUsd(t.collateralIndex)
+            );
+        } else {
+            // Gov fee to pay for oracle cost
+            TradingCommonUtils.updateFeeTierPoints(t.collateralIndex, t.user, t.pairIndex, 0);
+            uint256 govFees = TradingCommonUtils.distributeGovFeeCollateral(
+                t.collateralIndex,
+                t.user,
+                t.pairIndex,
+                TradingCommonUtils.getMinPositionSizeCollateral(t.collateralIndex, t.pairIndex) / 2, // use min fee / 2
+                0
+            );
+            TradingCommonUtils.transferCollateralTo(t.collateralIndex, t.user, t.collateralAmount - govFees);
+
+            emit ITradingCallbacksUtils.MarketOpenCanceled(_a.orderId, t.user, t.pairIndex, cancelReason);
+        }
+    }
+
     /**
      * @dev Check ITradingCallbacksUtils interface for documentation
      */

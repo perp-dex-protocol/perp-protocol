@@ -7,7 +7,7 @@ import "../libraries/IUpdateLeverageUtils.sol";
 import "../libraries/IUpdatePositionSizeUtils.sol";
 
 /**
- * @dev Interface for GNSTradingInteractions facet (inherits types and also contains functions, events, and custom errors)
+ * @dev Interface for TradingInteractions facet (inherits types and also contains functions, events, and custom errors)
  */
 interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtils, IUpdatePositionSizeUtils {
     /**

@@ -48,6 +48,10 @@ contract GNSTradingCallbacks is GNSAddressStore, ITradingCallbacksUtils {
         TradingCallbacksUtils.closeTradeMarketCallback(_a);
     }
 
+    function reverseTradeMarketCallback(AggregatorAnswer memory _a) external virtual onlySelf {
+        TradingCallbacksUtils.reverseTradeMarketCallback(_a);
+    }
+
     /// @inheritdoc ITradingCallbacksUtils
     function executeTriggerOpenOrderCallback(AggregatorAnswer memory _a) external virtual onlySelf {
         TradingCallbacksUtils.executeTriggerOpenOrderCallback(_a);
