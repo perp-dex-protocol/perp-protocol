@@ -84,7 +84,7 @@ interface ITradingInteractionsUtils is ITradingInteractions, IUpdateLeverageUtil
      */
     function reverseOrderMarket(uint32 _index) external;
 
-    function batchReverseOrder(uint32[] memory _indexList) external;
+    function batchReverseOrderMarket(uint32[] memory _indexList) external;
 
     /**
      * @dev Updates an existing limit/stop order for caller

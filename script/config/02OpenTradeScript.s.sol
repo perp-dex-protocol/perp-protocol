@@ -33,7 +33,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // batNativeTrade();
 
         // 2. close market trade
-        // closeOrder(16);
+        closeOrder(22);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
@@ -41,7 +41,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // indexes[1] = 21;
         // batchClose(indexes);
 
-        reverseOrder();
+        // reverseOrder();
 
         // 3. open limit order
         // openLimitOrder();
@@ -50,7 +50,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeLimitOrder(8);
 
         // 5. trigger order
-        // uint256 packed = packTriggerOrder(6, 0xB883052a380F0c13958cbE309d702060D76Df2EF, 0);
+        // uint256 packed = packTriggerOrder(4, user_address, 22);
         // triggerOrder(packed);
 
         // 6. decrease Pos
@@ -213,13 +213,11 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function reverseOrder() public {
-        uint32[] memory indexes = new uint32[](1);
-        indexes[0] = 22;
-        tradingInteraction.batchReverseOrder(indexes);
+        tradingInteraction.reverseOrderMarket(22);
     }
 
     function batReverseOrder(uint32[] memory indexes) public {
-        tradingInteraction.batchReverseOrder(indexes);
+        tradingInteraction.batchReverseOrderMarket(indexes);
     }
 
     function triggerOrder(uint256 packdata) public {

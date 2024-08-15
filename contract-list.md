@@ -16,7 +16,7 @@
 
 8. Facet6 TriggerRewards        0xacf8AB5fD9f2FAcD9796E6Ef2b6CD2301BbDcD59
 
-9. Facet7 TradingInteractions   0x9195C3D706e4DA76E13662Bd1FDF484a5dEfd1BB
+9. Facet7 TradingInteractions   0x143e964749DBB908D6f84F926B1D6Cb0d57B7def
     
 10. Facet8 TradingCallbacks     0xd6a89681DB1dc01cd937eE14A89CDcE88f400eaD
     
