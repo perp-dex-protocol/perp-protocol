@@ -1,0 +1,849 @@
+No files changed, compilation skipped
+Traces:
+  [3856] OpenTradingScript::setUp()
+    ├─ [0] VM::createSelectFork("https://evm-rpc.sei-apis.com")
+    │   └─ ← [Return] 0
+    ├─ [0] VM::envUint("PRI_KEY") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+  [943769] OpenTradingScript::run()
+    ├─ [774234] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::reverseOrderMarket(24)
+    │   ├─ [767098] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::reverseOrderMarket(24) [delegatecall]
+    │   │   ├─ [761946] 0x143e964749DBB908D6f84F926B1D6Cb0d57B7def::reverseOrderMarket(24) [delegatecall]
+    │   │   │   ├─ [11488] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradingActivated() [staticcall]
+    │   │   │   │   ├─ [10852] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradingActivated() [delegatecall]
+    │   │   │   │   │   ├─ [5721] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   ├─ [2479] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   ├─ [16140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   ├─ [15432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   ├─ [12729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   ├─ [8882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   ├─ [105611] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 }))
+    │   │   │   │   ├─ [104813] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 })) [delegatecall]
+    │   │   │   │   │   ├─ [102020] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 })) [delegatecall]
+    │   │   │   │   │   │   ├─ [93437] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::f9d68f5f(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   │   │   │   │   │   ├─ emit PendingOrderStored(pendingOrder: PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 }))
+    │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000005b938d70000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   ├─ [751] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPositionSizeCollateral(3729600000000000000 [3.729e18], 140000 [1.4e5]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 522144000000000000000 [5.221e20]
+    │   │   │   ├─ [614217] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7])
+    │   │   │   │   ├─ [613548] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7]) [delegatecall]
+    │   │   │   │   │   ├─ [608363] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7]) [delegatecall]
+    │   │   │   │   │   │   ├─ [6881] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::isCollateralListed(1) [staticcall]
+    │   │   │   │   │   │   │   ├─ [6242] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [3608] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [2697] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   ├─ [26473] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairs(0) [staticcall]
+    │   │   │   │   │   │   │   ├─ [25762] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairs(0) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [20535] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairs(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   │   ├─ [15958] 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   ├─ [8042] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace) [staticcall]
+    │   │   │   │   │   │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000000009578571fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf5831
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000000009578571fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf5831
+    │   │   │   │   │   │   │   └─ ← [Return] 1723815985 [1.723e9], 260563383863 [2.605e11], 1723815985 [1.723e9], 1723815985 [1.723e9], 1723815985 [1.723e9]
+    │   │   │   │   │   │   ├─ [721] 0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8::pack64To256(260563383863 [2.605e11], 1723818303 [1.723e9], 0, 0) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 31798835065017306442147411511 [3.179e28]
+    │   │   │   │   │   │   ├─ [457] 0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8::unpack256To64(31798835065017306442147411511 [3.179e28]) [delegatecall]
+    │   │   │   │   │   │   │   └─ ← [Return] 260563383863 [2.605e11], 1723818303 [1.723e9], 0, 0
+    │   │   │   │   │   │   ├─ [6662] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairSpreadP(0) [staticcall]
+    │   │   │   │   │   │   │   ├─ [6023] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairSpreadP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [3368] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairSpreadP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   ├─ [525770] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] }))
+    │   │   │   │   │   │   │   ├─ [525101] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] })) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [519937] 0xd6a89681DB1dc01cd937eE14A89CDcE88f400eaD::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [2488] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradingActivated() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [1852] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [1221] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [479] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   ├─ [13134] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [12390] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [9630] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4170] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::f79a485f(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000005b938d70000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   ├─ [1818] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPnlPercent(260563383863 [2.605e11], 260563383863 [2.605e11], true, 140000 [1.4e5]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   ├─ [751] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPositionSizeCollateral(3729600000000000000 [3.729e18], 140000 [1.4e5]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 522144000000000000000 [5.221e20]
+    │   │   │   │   │   │   │   │   │   ├─ [163688] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::91d1378a(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b870000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c4e342190019000000000000000000000000000000000000000000000000000000000000000000001) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [20408] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairMinPositionSizeUsd(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [19769] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairMinPositionSizeUsd(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [17135] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairMinPositionSizeUsd(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   │   ├─ [27824] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [27182] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [24545] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   │   ├─ [8364] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairCloseFeeP(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [7725] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairCloseFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5091] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairCloseFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   │   ├─ [8405] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairTriggerOrderFeeP(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [7766] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairTriggerOrderFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5111] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairTriggerOrderFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   │   ├─ [13378] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [12736] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [10078] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   ├─ [11681] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0)
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [11036] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5875] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   ├─ [6379] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [5737] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3100] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   │   ├─ [2379] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [1737] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1100] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   │   ├─ [6853] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getGToken(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [6214] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3580] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2731] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   ├─ [41560] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::distributeReward(0)
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [34424] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::distributeReward(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [9264] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transferFrom(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, value: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit ShareToAssetsPriceUpdated(newValue: 1220750551876379690 [1.22e18])
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit RewardDistributed(token: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, amount: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   ├─ emit GTokenFeeCharged(trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, collateralIndex: 1, amountCollateral: 0)
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000001c4e34219001900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005cc05c2e14800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000459045228f6000000000000000000000000000000000000000000000000000001730170b85200000000000000000000000000000000000000000000000000002df62dadb1040000
+    │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   ├─ [36730] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::4892e674(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b8700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005cc05c2e148000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [32166] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [31494] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [26327] 0x259aE08FD0199e9C94AbE2318c6094b301147b94::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3222150624000 [3.222e12]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3222150624000 [3.222e12]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3222150624000 [3.222e12]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000002df62abf79df4d00000000000000000000000000000000000000000000000000000002ee3724b300
+    │   │   │   │   │   │   │   │   │   ├─ [98735] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::5473397e(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b87000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002df62abf79df4d000000000000000000000000000000000000000000000000002df62dadb1040000000000000000000000000000000000000000000000000000000002ee3724b300) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [2853] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getGToken(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [2214] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1580] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [731] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   ├─ [76271] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::receiveAssets(3222150624000 [3.222e12], 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE)
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [75632] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::receiveAssets(3222150624000 [3.222e12], 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8864] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transferFrom(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, 3222150624000 [3.222e12])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, value: 3222150624000 [3.222e12])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit DailyAccPnlDeltaReset()
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [18184] 0x558747B9A4cb80a9E97C4AF7F75f1c08798e438a::newOpenPnlRequestOrEpoch()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3032] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::currentEpochStart() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2396] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::currentEpochStart() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1722355068 [1.722e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1722355068 [1.722e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [0] 0x0000000000000000000000000000000000000000::balanceOf(0x558747B9A4cb80a9E97C4AF7F75f1c08798e438a) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Revert] EvmError: Revert
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit OpenTradesPnlFeedCallFailed()
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit CurrentMaxSupplyUpdated(newValue: 106921689873417721598 [1.069e20])
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit AssetsReceived(sender: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, assets: 3222150624000 [3.222e12], assetsLessDeplete: 3222150624000 [3.222e12])
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   ├─ [7801] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transfer(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 3311881577849376000 [3.311e18])
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, value: 3311881577849376000 [3.311e18])
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingFeeCharged(trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, collateralIndex: 1, amountCollateral: 3222150624000 [3.222e12])
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   │   │   │   ├─ [150071] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 }))
+    │   │   │   │   │   │   │   │   │   │   ├─ [149432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [146798] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [145609] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::7c820ea6(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [130676] 0xAddA3b8499613c20f3262f328cFC90761F291171::db83b876(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b8700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [63293] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [62624] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [59939] 0x259aE08FD0199e9C94AbE2318c6094b301147b94::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2881] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::isCollateralListed(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2242] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1608] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [697] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingPairAccFeesUpdated(collateralIndex: 1, pairIndex: 0, currentBlock: 96024791 [9.602e7], accFeeLong: 34699006 [3.469e7], accFeeShort: 5659)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingGroupAccFeesUpdated(collateralIndex: 1, groupIndex: 0, currentBlock: 96024791 [9.602e7], accFeeLong: 0, accFeeShort: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingPairOiUpdated(collateralIndex: 1, pairIndex: 0, long: true, increase: false, delta: 5221440000000 [5.221e12], newOiLong: 3215949237290 [3.215e12], newOiShort: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit TradeBorrowingCallbackHandled(collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, open: false, long: true, positionSizeCollateral: 522144000000000000000 [5.221e20])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [64328] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [63683] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [58543] 0x8625c9c4087b603F1E1c8EBe3F7320a1297bFE34::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [9123] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8451] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5784] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3623] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [752] 0x71cDc82254BBe2135Ca9579c5634166c8a847F90::convertCollateralToUsd(522144000000000000000 [5.221e20], 1, 26990143 [2.699e7]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit PriceImpactOpenInterestRemoved(oiWindowUpdate: OiWindowUpdate({ trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, windowsDuration: 7200, pairIndex: 0, windowId: 289, long: true, openInterestUsd: 140927412265920000000 [1.409e20] }), notOutdated: true)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit TradeClosed(tradeId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 }))
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   ├─ [7637] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateralPriceUsd(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [6998] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateralPriceUsd(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [4343] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getCollateralPriceUsd(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   │   ├─ emit MarketExecuted(orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), t: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 }), open: false, price: 260563383863 [2.605e11], priceImpactP: 0, percentProfit: 0, amountSentToTrader: 3311881577849376000 [3.311e18], collateralPriceUsd: 26990143 [2.699e7])
+    │   │   │   │   │   │   │   │   │   ├─ [8695] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }))
+    │   │   │   │   │   │   │   │   │   │   ├─ [8056] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [5422] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4300] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::2e81ea1d(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit PendingOrderClosed(orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }))
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   ├─ emit TradingCallbackExecuted(a: AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] }), orderType: 1)
+    │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   └─ ← [Return] 
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Return] 
+    │   └─ ← [Return] 
+    ├─ [185479] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [staticcall]
+    │   ├─ [184837] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   ├─ [182200] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   ├─ [178284] 0xeAcd6367A347862210eE4C6B6924697Ee9c78c06::getTrades(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   │   └─ ← [Return] []
+    │   │   │   └─ ← [Return] []
+    │   │   └─ ← [Return] []
+    │   └─ ← [Return] []
+    ├─ [0] console::log("user all trades length", 0) [staticcall]
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
+
+
+Script ran successfully.
+Gas used: 964833
+
+== Logs ==
+  user all trades length 0
+
+## Setting up 1 EVM.
+==========================
+Simulated On-chain Traces:
+
+  [744734] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::reverseOrderMarket(24)
+    ├─ [767098] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::reverseOrderMarket(24) [delegatecall]
+    │   ├─ [761946] 0x143e964749DBB908D6f84F926B1D6Cb0d57B7def::reverseOrderMarket(24) [delegatecall]
+    │   │   ├─ [11488] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradingActivated() [staticcall]
+    │   │   │   ├─ [10852] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradingActivated() [delegatecall]
+    │   │   │   │   ├─ [5721] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradingActivated() [delegatecall]
+    │   │   │   │   │   ├─ [2479] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [16140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   ├─ [15432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   ├─ [12729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   ├─ [8882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   ├─ [105611] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 }))
+    │   │   │   ├─ [104813] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 })) [delegatecall]
+    │   │   │   │   ├─ [102020] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::storePendingOrder(PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 0, isOpen: false, orderType: 1, createdBlock: 0, maxSlippageP: 0 })) [delegatecall]
+    │   │   │   │   │   ├─ [93437] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::f9d68f5f(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   │   │   │   │   ├─ emit PendingOrderStored(pendingOrder: PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 }))
+    │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000005b9394a0000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   ├─ [751] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPositionSizeCollateral(3729600000000000000 [3.729e18], 140000 [1.4e5]) [delegatecall]
+    │   │   │   └─ ← [Return] 522144000000000000000 [5.221e20]
+    │   │   ├─ [614217] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024906 [9.602e7])
+    │   │   │   ├─ [613548] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024906 [9.602e7]) [delegatecall]
+    │   │   │   │   ├─ [608363] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024906 [9.602e7]) [delegatecall]
+    │   │   │   │   │   ├─ [6881] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::isCollateralListed(1) [staticcall]
+    │   │   │   │   │   │   ├─ [6242] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [3608] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [2697] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   ├─ [26473] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairs(0) [staticcall]
+    │   │   │   │   │   │   ├─ [25762] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairs(0) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [20535] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairs(0) [delegatecall]
+    │   │   │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   │   └─ ← [Return] Pair({ from: "ETH", to: "USD", feed: Feed({ feed1: 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D, feed2: 0x0000000000000000000000000000000000000000, feedCalculation: 0, maxDeviationP: 200000000000 [2e11] }), spreadP: 0, groupIndex: 0, feeIndex: 0 })
+    │   │   │   │   │   ├─ [15958] 0x5046Bf1ccf10Ff4C0Dd7780c8AddEAbfa9a85E1D::latestRoundData() [staticcall]
+    │   │   │   │   │   │   ├─ [8042] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace) [staticcall]
+    │   │   │   │   │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace) [delegatecall]
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000000009578571fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf5831
+    │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000000009578571fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf5831
+    │   │   │   │   │   │   └─ ← [Return] 1723815985 [1.723e9], 260563383863 [2.605e11], 1723815985 [1.723e9], 1723815985 [1.723e9], 1723815985 [1.723e9]
+    │   │   │   │   │   ├─ [721] 0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8::pack64To256(260563383863 [2.605e11], 1723818351 [1.723e9], 0, 0) [delegatecall]
+    │   │   │   │   │   │   └─ ← [Return] 31798835950461021980205889079 [3.179e28]
+    │   │   │   │   │   ├─ [457] 0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8::unpack256To64(31798835950461021980205889079 [3.179e28]) [delegatecall]
+    │   │   │   │   │   │   └─ ← [Return] 260563383863 [2.605e11], 1723818351 [1.723e9], 0, 0
+    │   │   │   │   │   ├─ [6662] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairSpreadP(0) [staticcall]
+    │   │   │   │   │   │   ├─ [6023] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairSpreadP(0) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [3368] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairSpreadP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   ├─ [525770] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] }))
+    │   │   │   │   │   │   ├─ [525101] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] })) [delegatecall]
+    │   │   │   │   │   │   │   ├─ [519937] 0xd6a89681DB1dc01cd937eE14A89CDcE88f400eaD::closeTradeMarketCallback(AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] })) [delegatecall]
+    │   │   │   │   │   │   │   │   ├─ [2488] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradingActivated() [staticcall]
+    │   │   │   │   │   │   │   │   │   ├─ [1852] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [1221] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [479] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradingActivated() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   ├─ [13134] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [staticcall]
+    │   │   │   │   │   │   │   │   │   ├─ [12390] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [9630] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getPendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [4170] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::f79a485f(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000005b9394a0000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024906 [9.602e7], maxSlippageP: 0 })
+    │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   ├─ [1818] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPnlPercent(260563383863 [2.605e11], 260563383863 [2.605e11], true, 140000 [1.4e5]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0
+    │   │   │   │   │   │   │   │   ├─ [751] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPositionSizeCollateral(3729600000000000000 [3.729e18], 140000 [1.4e5]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 522144000000000000000 [5.221e20]
+    │   │   │   │   │   │   │   │   ├─ [163688] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::91d1378a(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b870000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c4e342190019000000000000000000000000000000000000000000000000000000000000000000001) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [20408] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairMinPositionSizeUsd(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [19769] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairMinPositionSizeUsd(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [17135] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairMinPositionSizeUsd(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   │   │   │   │   ├─ [27824] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [27182] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [24545] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getCollateralFromUsdNormalizedValue(1, 100000000000000000000 [1e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 370505632371047459807 [3.705e20]
+    │   │   │   │   │   │   │   │   │   ├─ [8364] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairCloseFeeP(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [7725] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairCloseFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [5091] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairCloseFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 600000000 [6e8]
+    │   │   │   │   │   │   │   │   │   ├─ [8405] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::pairTriggerOrderFeeP(0) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [7766] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::pairTriggerOrderFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [5111] 0xDFB881D25c9716AB4Ea7C721136D11E71c4F0028::pairTriggerOrderFeeP(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 200000000 [2e8]
+    │   │   │   │   │   │   │   │   │   ├─ [13378] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [12736] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [10078] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getUsdNormalizedValue(1, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   ├─ [11681] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0)
+    │   │   │   │   │   │   │   │   │   │   ├─ [11036] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [5875] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::updateTraderPoints(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 140927412265920000000 [1.409e20], 0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   ├─ [6379] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [5737] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [3100] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 313286400000000000 [3.132e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 313286400000000000 [3.132e17]
+    │   │   │   │   │   │   │   │   │   ├─ [2379] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [1737] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [1100] 0x98DBa8fAd06b6ba8c14Cd0eb63D5c3244E8fB6BA::calculateFeeAmount(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 104428800000000000 [1.044e17]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 104428800000000000 [1.044e17]
+    │   │   │   │   │   │   │   │   │   ├─ [6853] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getGToken(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [6214] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [3580] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2731] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   ├─ [41560] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::distributeReward(0)
+    │   │   │   │   │   │   │   │   │   │   ├─ [34424] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::distributeReward(0) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [9264] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transferFrom(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, value: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit ShareToAssetsPriceUpdated(newValue: 1220750551876379690 [1.22e18])
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit RewardDistributed(token: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, amount: 0)
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   ├─ emit GTokenFeeCharged(trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, collateralIndex: 1, amountCollateral: 0)
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000001c4e34219001900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005cc05c2e14800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000459045228f6000000000000000000000000000000000000000000000000000001730170b85200000000000000000000000000000000000000000000000000002df62dadb1040000
+    │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   ├─ [36730] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::4892e674(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b8700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005cc05c2e148000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [32166] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [31494] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [26327] 0x259aE08FD0199e9C94AbE2318c6094b301147b94::getTradeBorrowingFee(BorrowingFeeInput({ collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, long: true, collateral: 3729600000000000000 [3.729e18], leverage: 140000 [1.4e5] })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3945842208000 [3.945e12]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3945842208000 [3.945e12]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 3945842208000 [3.945e12]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000002df62a16fa7e130000000000000000000000000000000000000000000000000000000396b685ed00
+    │   │   │   │   │   │   │   │   ├─ [98735] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::5473397e(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b87000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002df62a16fa7e13000000000000000000000000000000000000000000000000002df62dadb104000000000000000000000000000000000000000000000000000000000396b685ed00) [delegatecall]
+    │   │   │   │   │   │   │   │   │   ├─ [2853] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getGToken(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [2214] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [1580] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [731] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getGToken(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3
+    │   │   │   │   │   │   │   │   │   ├─ [76271] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::receiveAssets(3945842208000 [3.945e12], 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE)
+    │   │   │   │   │   │   │   │   │   │   ├─ [75632] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::receiveAssets(3945842208000 [3.945e12], 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [8864] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transferFrom(0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, 3945842208000 [3.945e12])
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3, value: 3945842208000 [3.945e12])
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit DailyAccPnlDeltaReset()
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [18184] 0x558747B9A4cb80a9E97C4AF7F75f1c08798e438a::newOpenPnlRequestOrEpoch()
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3032] 0x9bF68fd1e088D65970b9D7EA95285b584092dEb3::currentEpochStart() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2396] 0x020a0Fd8824484E01F1E1Dc7710e70aeEdD5F906::currentEpochStart() [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1722355068 [1.722e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1722355068 [1.722e9]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [0] 0x0000000000000000000000000000000000000000::balanceOf(0x558747B9A4cb80a9E97C4AF7F75f1c08798e438a) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Revert] EvmError: Revert
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit OpenTradesPnlFeedCallFailed()
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit CurrentMaxSupplyUpdated(newValue: 106921689873417721598 [1.069e20])
+    │   │   │   │   │   │   │   │   │   │   │   ├─ emit AssetsReceived(sender: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, assets: 3945842208000 [3.945e12], assetsLessDeplete: 3945842208000 [3.945e12])
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   ├─ [7801] 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7::transfer(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 3311880854157792000 [3.311e18])
+    │   │   │   │   │   │   │   │   │   │   ├─ emit Transfer(from: 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6, to: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, value: 3311880854157792000 [3.311e18])
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   ├─ emit BorrowingFeeCharged(trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, collateralIndex: 1, amountCollateral: 3945842208000 [3.945e12])
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000000000000000
+    │   │   │   │   │   │   │   │   ├─ [150071] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 }))
+    │   │   │   │   │   │   │   │   │   ├─ [149432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [146798] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::closeTrade(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [145609] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::7c820ea6(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [130676] 0xAddA3b8499613c20f3262f328cFC90761F291171::db83b876(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033c23370924c00000000000000000000000000000000000000000000000000000000003caac9b6370000000000000000000000000000000000000000000000000000004091321b8700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [63293] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [62624] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [59939] 0x259aE08FD0199e9C94AbE2318c6094b301147b94::handleTradeBorrowingCallback(1, 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 0, 24, 522144000000000000000 [5.221e20], false, true) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2881] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::isCollateralListed(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2242] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1608] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [697] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::isCollateralListed(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingPairAccFeesUpdated(collateralIndex: 1, pairIndex: 0, currentBlock: 96024906 [9.602e7], accFeeLong: 34700392 [3.47e7], accFeeShort: 5659)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingGroupAccFeesUpdated(collateralIndex: 1, groupIndex: 0, currentBlock: 96024906 [9.602e7], accFeeLong: 0, accFeeShort: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit BorrowingPairOiUpdated(collateralIndex: 1, pairIndex: 0, long: true, increase: false, delta: 5221440000000 [5.221e12], newOiLong: 3215949237290 [3.215e12], newOiShort: 0)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit TradeBorrowingCallbackHandled(collateralIndex: 1, trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, pairIndex: 0, index: 24, open: false, long: true, positionSizeCollateral: 522144000000000000000 [5.221e20])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [64328] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20])
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [63683] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [58543] 0x8625c9c4087b603F1E1c8EBe3F7320a1297bFE34::removePriceImpactOpenInterest(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24, 522144000000000000000 [5.221e20]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [9123] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8451] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [5784] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3623] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTradeInfo(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] TradeInfo({ createdBlock: 96024279 [9.602e7], tpLastUpdatedBlock: 96024279 [9.602e7], slLastUpdatedBlock: 96024279 [9.602e7], maxSlippageP: 0, lastOiUpdateTs: 1723818091 [1.723e9], collateralPriceUsd: 26990143 [2.699e7], __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [4487] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateral(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3830] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [3157] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1394] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getCollateral(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Collateral({ collateral: 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7, isActive: true, __placeholder: 0, precision: 1000000000000000000 [1e18], precisionDelta: 1 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [752] 0x71cDc82254BBe2135Ca9579c5634166c8a847F90::convertCollateralToUsd(522144000000000000000 [5.221e20], 1, 26990143 [2.699e7]) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 140927412265920000000 [1.409e20]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8140] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7432] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [6729] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [2882] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::getTrade(0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, 24) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: false, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 })
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit PriceImpactOpenInterestRemoved(oiWindowUpdate: OiWindowUpdate({ trader: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, windowsDuration: 7200, pairIndex: 0, windowId: 289, long: true, openInterestUsd: 140927412265920000000 [1.409e20] }), notOutdated: true)
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit TradeClosed(tradeId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24 }))
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   ├─ [7637] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getCollateralPriceUsd(1) [staticcall]
+    │   │   │   │   │   │   │   │   │   ├─ [6998] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getCollateralPriceUsd(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [4343] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getCollateralPriceUsd(1) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [2958] 0x65bb746B987ccB004b004B6aC9Df18e9ccfca004::latestRoundData() [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1542] 0x2880aB155794e7179c9eE2e38200202908C17B43::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [staticcall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [1132] 0xA2aa501b19aff244D90cc15a4Cf739D2725B5729::getPriceUnsafe(0x53614f1cb0c031d4af66c04cb9c756234adad0e1cee85303795091499a4084eb) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000019bd63f000000000000000000000000000000000000000000000000000000000000ac1efffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80000000000000000000000000000000000000000000000000000000066bf57ba
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 1723815866 [1.723e9], 26990143 [2.699e7], 1723815866 [1.723e9], 1723815866 [1.723e9], 1723815866 [1.723e9]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 26990143 [2.699e7]
+    │   │   │   │   │   │   │   │   ├─ emit MarketExecuted(orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), t: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 140000 [1.4e5], long: true, isOpen: true, collateralIndex: 1, tradeType: 0, collateralAmount: 3729600000000000000 [3.729e18], openPrice: 260563383863 [2.605e11], tp: 277313887111 [2.773e11], sl: 0, __placeholder: 0 }), open: false, price: 260563383863 [2.605e11], priceImpactP: 0, percentProfit: 0, amountSentToTrader: 3311880854157792000 [3.311e18], collateralPriceUsd: 26990143 [2.699e7])
+    │   │   │   │   │   │   │   │   ├─ [8695] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }))
+    │   │   │   │   │   │   │   │   │   ├─ [8056] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   ├─ [5422] 0xeEaA9d9273D44b66f0d0d58c7Fd51Ad4097d0133::closePendingOrder(Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 })) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [4300] 0xbBe7986f0E5fb9f84d3Df9a28904B6F44F5b4cd0::2e81ea1d(0000000000000000000000005557bc35b36f3d92af1a1224b1e090f6dd5b00ce0000000000000000000000000000000000000000000000000000000000000037) [delegatecall]
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ emit PendingOrderClosed(orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }))
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   │   ├─ emit TradingCallbackExecuted(a: AggregatorAnswer({ orderId: Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), spreadP: 0, price: 260563383863 [2.605e11], open: 260563383863 [2.605e11], high: 260563383863 [2.605e11], low: 260563383863 [2.605e11] }), orderType: 1)
+    │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   └─ ← [Return] 
+    │   │   │   └─ ← [Return] 
+    │   │   └─ ← [Stop] 
+    │   └─ ← [Return] 
+    └─ ← [Return] 
+
+
+==========================
+
+Chain 1329
+
+Estimated gas price: 100 gwei
+
+Estimated total gas used for script: 1120184
+
+Estimated amount required: 0.1120184 ETH
+
+==========================
+
+SIMULATION COMPLETE. To broadcast these transactions, add --broadcast and wallet configuration(s) to the previous command. See forge script --help for more.
+
+Transactions saved to: /Users/baice/auditor/projects/foretoken/foretoken-contracts/broadcast/02OpenTradeScript.s.sol/1329/dry-run/run-latest.json
+
+Sensitive values saved to: /Users/baice/auditor/projects/foretoken/foretoken-contracts/cache/02OpenTradeScript.s.sol/1329/dry-run/run-latest.json
+
