@@ -34,7 +34,7 @@ contract TradingCallbackScript is BaseScriptDeployer {
         _faceCut[0].facetAddress = address(0);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
 
-        bytes4[] memory selectors = new bytes4[](12);
+        bytes4[] memory selectors = new bytes4[](13);
         selectors[0] = bytes4(0x36c3dba2);
         selectors[1] = bytes4(0x4b0b5629);
         selectors[2] = bytes4(0xc61a7ad4);
@@ -47,6 +47,7 @@ contract TradingCallbackScript is BaseScriptDeployer {
         selectors[9] = bytes4(0xe1d88718);
         selectors[10] = bytes4(0x10d8e754);
         selectors[11] = bytes4(0x92dd2940);
+        selectors[12] = bytes4(0x9491d6f7);
 
         _faceCut[0].functionSelectors = selectors;
 
