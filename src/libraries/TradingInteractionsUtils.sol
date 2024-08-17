@@ -182,7 +182,7 @@ library TradingInteractionsUtils {
         pendingOrder.trade.index = t.index;
         pendingOrder.trade.pairIndex = t.pairIndex;
         pendingOrder.user = sender;
-        pendingOrder.orderType = ITradingStorage.PendingOrderType.MARKET_CLOSE;
+        pendingOrder.orderType = ITradingStorage.PendingOrderType.MARKET_REVERSE;
 
         pendingOrder = _getMultiCollatDiamond().storePendingOrder(pendingOrder);
         ITradingStorage.Id memory orderId = ITradingStorage.Id({user: pendingOrder.user, index: pendingOrder.index});

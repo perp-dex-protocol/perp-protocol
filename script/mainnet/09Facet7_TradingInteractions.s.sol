@@ -65,8 +65,8 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         selectors[23] = bytes4(0x24d7d89a);
         selectors[24] = bytes4(0x567cf24e);
         selectors[25] = bytes4(0xfda4e0b5);
-        selectors[26] = bytes4(0x43b11bcc);
-        selectors[27] = bytes4(0xabc02464);
+        selectors[26] = bytes4(0xd7362cc8);
+        selectors[27] = bytes4(0x51ffadba);
 
         _faceCut[0].functionSelectors = selectors;
 

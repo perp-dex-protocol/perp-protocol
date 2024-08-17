@@ -1,14 +1,3 @@
-No files changed, compilation skipped
-Traces:
-  [3856] OpenTradingScript::setUp()
-    ├─ [0] VM::createSelectFork("https://evm-rpc.sei-apis.com")
-    │   └─ ← [Return] 0
-    ├─ [0] VM::envUint("PRI_KEY") [staticcall]
-    │   └─ ← [Return] <env var value>
-    ├─ [0] VM::startBroadcast(<pk>)
-    │   └─ ← [Return] 
-    └─ ← [Stop] 
-
   [943769] OpenTradingScript::run()
     ├─ [774234] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::reverseOrderMarket(24)
     │   ├─ [767098] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::reverseOrderMarket(24) [delegatecall]
@@ -40,6 +29,9 @@ Traces:
     │   │   │   │   └─ ← [Return] PendingOrder({ trade: Trade({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 24, pairIndex: 0, leverage: 0, long: false, isOpen: false, collateralIndex: 0, tradeType: 0, collateralAmount: 0, openPrice: 0, tp: 0, sl: 0, __placeholder: 0 }), user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55, isOpen: true, orderType: 1, createdBlock: 96024791 [9.602e7], maxSlippageP: 0 })
     │   │   │   ├─ [751] 0x0A1aC2D3202FA270f884C4862088Cd0F285e4678::getPositionSizeCollateral(3729600000000000000 [3.729e18], 140000 [1.4e5]) [delegatecall]
     │   │   │   │   └─ ← [Return] 522144000000000000000 [5.221e20]
+
+
+    
     │   │   │   ├─ [614217] 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7])
     │   │   │   │   ├─ [613548] 0x9c9fA46403A79073a098a840D7C8EAE95860b80B::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7]) [delegatecall]
     │   │   │   │   │   ├─ [608363] 0xa6468410F12b2aC95adF84249F49Ed07f386e91D::getPrice(1, 0, Id({ user: 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE, index: 55 }), 1, 522144000000000000000 [5.221e20], 96024791 [9.602e7]) [delegatecall]
