@@ -34,15 +34,15 @@ contract OpenTradingScript is BaseScriptDeployer {
         // batNativeTrade();
 
         // 2. close market trade
-        // closeOrder(23);
+        // closeOrder(24);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
         // indexes[0] = 20;
         // indexes[1] = 21;
         // batchClose(indexes);
-
-        reverseOrder();
+        getUserAllTrades(user_address);
+        reverseOrder(26);
 
         // 3. open limit order
         // openLimitOrder();
@@ -141,14 +141,14 @@ contract OpenTradingScript is BaseScriptDeployer {
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 5e18,
-            openPrice: 2585e8,
+            collateralAmount: 4e18,
+            openPrice: 2668e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
 
-        tradingInteraction.openTradeNative{value: 4.2 ether}(trade, 1007, address(0));
+        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1007, address(0));
     }
 
     function batNativeTrade() public {
@@ -213,8 +213,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         tradingInteraction.batchCloseTradeMarket(indexes);
     }
 
-    function reverseOrder() public {
-        tradingInteraction.reverseOrderMarket(24);
+    function reverseOrder(uint32 index) public {
+        tradingInteraction.reverseOrderMarket(index);
     }
 
     function batReverseOrder(uint32[] memory indexes) public {

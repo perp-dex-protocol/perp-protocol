@@ -225,6 +225,9 @@ library TradingCallbacksUtils {
 
         // start a new order
         t.collateralAmount = uint120(v.amountSentToTrader);
+        t.long = !t.long;
+        t.tp = 0;
+        t.sl = 0;
         (uint256 priceImpactP, uint256 priceAfterImpact, ITradingCallbacks.CancelReason cancelReasonOfOpen) =
             _openTradePrep(t, _a.price, _a.price, _a.spreadP, o.maxSlippageP);
 
