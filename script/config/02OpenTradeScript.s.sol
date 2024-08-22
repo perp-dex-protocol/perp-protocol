@@ -29,20 +29,20 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 1. open market order
         // openTrade();
 
-        // openNativeTrade();
+        openNativeTrade();
 
         // batNativeTrade();
 
         // 2. close market trade
-        // closeOrder(24);
+        // closeOrder(29);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
         // indexes[0] = 20;
         // indexes[1] = 21;
         // batchClose(indexes);
-        getUserAllTrades(user_address);
-        reverseOrder(26);
+        // getUserAllTrades(user_address);
+        // reverseOrder(28);
 
         // 3. open limit order
         // openLimitOrder();
@@ -51,7 +51,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // closeLimitOrder(8);
 
         // 5. trigger order
-        // uint256 packed = packTriggerOrder(4, user_address, 22);
+        // uint256 packed = packTriggerOrder(6, user_address, 30);
         // triggerOrder(packed);
 
         // 6. decrease Pos
@@ -137,18 +137,18 @@ contract OpenTradingScript is BaseScriptDeployer {
             index: 0,
             pairIndex: 0,
             leverage: 140000,
-            long: true,
+            long: false,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 4e18,
-            openPrice: 2668e8,
+            openPrice: 2605e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
-
-        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1007, address(0));
+        address referral_address = address(1);
+        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1007, referral_address);
     }
 
     function batNativeTrade() public {
