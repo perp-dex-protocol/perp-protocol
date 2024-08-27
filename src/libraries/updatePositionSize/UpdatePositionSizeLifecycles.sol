@@ -172,9 +172,9 @@ library UpdatePositionSizeLifecycles {
                 DecreasePositionSizeUtils.updateTradeSuccess(existingTrade, values);
 
                 // 5.2 Distribute closing fees
-                TradingCommonUtils.distributeGnsStakingFeeCollateral(
-                    existingTrade.collateralIndex, existingTrade.user, values.gnsStakingFeeCollateral
-                );
+                // TradingCommonUtils.distributeGnsStakingFeeCollateral(
+                //     existingTrade.collateralIndex, existingTrade.user, values.gnsStakingFeeCollateral
+                // );
                 TradingCommonUtils.distributeVaultFeeCollateral(
                     existingTrade.collateralIndex, existingTrade.user, values.vaultFeeCollateral
                 );

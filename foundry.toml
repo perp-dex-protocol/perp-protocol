@@ -10,5 +10,5 @@ libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0x6707C802
              "src/libraries/TradingStorageUtils.sol:TradingStorageUtils:0x5AA3B76Cd681A7fc891b4B320466970B9D1856F6",
              "src/libraries/PackingUtils.sol:PackingUtils:0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8",
              "src/libraries/updateLeverage/UpdateLeverageLifecycles.sol:UpdateLeverageLifecycles:0xE86A86b0ACbf6953482282AEC51208Da2e23e9c7",
-             "src/libraries/updatePositionSize/UpdatePositionSizeLifecycles.sol:UpdatePositionSizeLifecycles:0xF516c20F249E475126e1F34bb6eEAF55Fb553dd7"
+             "src/libraries/updatePositionSize/UpdatePositionSizeLifecycles.sol:UpdatePositionSizeLifecycles:0x368DAbAf2f55e2552F09149dE5bdbe42df52d7a6"
                ]

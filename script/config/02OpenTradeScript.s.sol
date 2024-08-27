@@ -23,26 +23,28 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     address user_address = 0x5557bc35b36f3d92Af1A1224b1e090f6Dd5b00CE;
 
+    address webgis_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
+
     function run() public {
         // initializTrade();
 
         // 1. open market order
         // openTrade();
 
-        openNativeTrade();
+        // openNativeTrade();
 
         // batNativeTrade();
 
         // 2. close market trade
-        // closeOrder(29);
+        // closeOrder(33);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
-        // indexes[0] = 20;
-        // indexes[1] = 21;
+        // indexes[0] = 32;
+        // indexes[1] = 33;
         // batchClose(indexes);
         // getUserAllTrades(user_address);
-        // reverseOrder(28);
+        // reverseOrder(33);
 
         // 3. open limit order
         // openLimitOrder();
@@ -71,10 +73,25 @@ contract OpenTradingScript is BaseScriptDeployer {
         // increasePosData();
 
         // 11. decreasePos
-        // decreasePos() ;
+        decreasePos() ;
 
         // 6. get trades
+        // vm.startPrank(webgis_address);
         getUserAllTrades(user_address);
+
+        //  trade user  0xB883052a380F0c13958cbE309d702060D76Df2EF
+        //    trade index  12
+        //    trade pairIndex  0
+        //    trade leverage  100000
+        //    trade long  true
+        //    trade isOpen  true
+        //    trade collateralIndex  1
+        //    trade tradeType  0
+        //    trade collateralAmount  3215949237288195776
+        //    trade openPrice  255073168728
+        //    trade tp  278029753913
+        //    trade sl  0
+        //    trade __placeholder  0
 
         // getAllTrade()
         // getAllTrade();
@@ -137,18 +154,18 @@ contract OpenTradingScript is BaseScriptDeployer {
             index: 0,
             pairIndex: 0,
             leverage: 140000,
-            long: false,
+            long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 4e18,
-            openPrice: 2605e8,
+            collateralAmount: 5e18,
+            openPrice: 2875e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
         address referral_address = address(1);
-        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1007, referral_address);
+        tradingInteraction.openTradeNative{value: 5 ether}(trade, 1007, referral_address);
     }
 
     function batNativeTrade() public {
@@ -230,11 +247,11 @@ contract OpenTradingScript is BaseScriptDeployer {
     }
 
     function increasePosData() public {
-        tradingInteraction.increasePositionSize(14, 1e18, 135000, 2910e8, 1005);
+        tradingInteraction.increasePositionSize(34, 1e18, 140000, 268675000000, 1005);
     }
 
     function decreasePos() public {
-        tradingInteraction.decreasePositionSize(14, 1e18, 0);
+        tradingInteraction.decreasePositionSize(34, 2e18, 0);
     }
 
     function updateLeverage() public {
