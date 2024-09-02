@@ -73,7 +73,8 @@ contract OpenTradingScript is BaseScriptDeployer {
         // increasePosData();
 
         // 11. decreasePos
-        decreasePos() ;
+        // decreasePos() ;
+        
 
         // 6. get trades
         // vm.startPrank(webgis_address);
@@ -164,7 +165,7 @@ contract OpenTradingScript is BaseScriptDeployer {
             sl: 0,
             __placeholder: 0
         });
-        address referral_address = address(1);
+        address referral_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
         tradingInteraction.openTradeNative{value: 5 ether}(trade, 1007, referral_address);
     }
 
