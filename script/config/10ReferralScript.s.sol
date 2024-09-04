@@ -16,9 +16,10 @@ contract GNSReferralsScript is BaseScriptDeployer {
 
         // whiteListReferral();
 
-        IReferrals.ReferrerDetails memory referrerDetails = referral.getReferrerDetails(0xB883052a380F0c13958cbE309d702060D76Df2EF);
+        IReferrals.ReferrerDetails memory referrerDetails =
+            referral.getReferrerDetails(0xB883052a380F0c13958cbE309d702060D76Df2EF);
         // console2.log(referrerDetails.ally);
-        // console2.log(referrerDetails.volumeReferredUsd);
+        console2.log(referrerDetails.volumeReferredUsd);
         for (uint256 i = 0; i < referrerDetails.tradersReferred.length; i++) {
             console2.log(referrerDetails.tradersReferred[i]);
         }
@@ -49,15 +50,12 @@ contract GNSReferralsScript is BaseScriptDeployer {
         console2.log(targetVolumeUsd);
     }
 
-
-    function whiteListReferral() public{
-
+    function whiteListReferral() public {
         address[] memory referrals = new address[](1);
-        referrals[0] = 0xB883052a380F0c13958cbE309d702060D76Df2EF; 
+        referrals[0] = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
 
         address[] memory allies = new address[](1);
         allies[0] = address(0);
         referral.whitelistReferrers(referrals, allies);
     }
-
 }

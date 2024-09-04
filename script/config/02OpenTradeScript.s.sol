@@ -74,7 +74,6 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 11. decreasePos
         // decreasePos() ;
-        
 
         // 6. get trades
         // vm.startPrank(webgis_address);
