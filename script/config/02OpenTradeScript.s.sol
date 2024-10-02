@@ -31,7 +31,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 1. open market order
         // openTrade();
 
-        // openNativeTrade();
+        openNativeTrade();
 
         // batNativeTrade();
 
@@ -77,7 +77,7 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 6. get trades
         // vm.startPrank(webgis_address);
-        getUserAllTrades(user_address);
+        // getUserAllTrades(user_address);
 
         //  trade user  0xB883052a380F0c13958cbE309d702060D76Df2EF
         //    trade index  12
@@ -158,14 +158,14 @@ contract OpenTradingScript is BaseScriptDeployer {
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
-            collateralAmount: 5e18,
+            collateralAmount: 4e18,
             openPrice: 2875e8,
             tp: 0,
             sl: 0,
             __placeholder: 0
         });
-        address referral_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
-        tradingInteraction.openTradeNative{value: 5 ether}(trade, 1007, referral_address);
+        // address referral_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
+        tradingInteraction.openTradeNative{value: 4 ether}(trade, 1007, address(0));
     }
 
     function batNativeTrade() public {
