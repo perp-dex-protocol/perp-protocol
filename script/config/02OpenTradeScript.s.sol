@@ -31,12 +31,13 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 1. open market order
         // openTrade();
 
-        openNativeTrade();
+        // openNativeTrade();
 
         // batNativeTrade();
 
         // 2. close market trade
-        // closeOrder(33);
+        // vm.startPrank(webgis_address);
+        closeOrder(39);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
@@ -50,7 +51,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // openLimitOrder();
 
         // 4. close limit order
-        // closeLimitOrder(8);
+        // closeLimitOrder(15);
 
         // 5. trigger order
         // uint256 packed = packTriggerOrder(6, user_address, 30);
@@ -76,7 +77,7 @@ contract OpenTradingScript is BaseScriptDeployer {
         // decreasePos() ;
 
         // 6. get trades
-        // vm.startPrank(webgis_address);
+
         // getUserAllTrades(user_address);
 
         //  trade user  0xB883052a380F0c13958cbE309d702060D76Df2EF
@@ -154,14 +155,14 @@ contract OpenTradingScript is BaseScriptDeployer {
             index: 0,
             pairIndex: 0,
             leverage: 140000,
-            long: true,
+            long: false,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.TRADE,
             collateralAmount: 4e18,
-            openPrice: 2875e8,
-            tp: 0,
-            sl: 0,
+            openPrice: 2378e8,
+            tp: 2200e8,
+            sl: 2500e8,
             __placeholder: 0
         });
         // address referral_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
@@ -200,14 +201,14 @@ contract OpenTradingScript is BaseScriptDeployer {
             index: 0,
             pairIndex: 0,
             leverage: 130000,
-            long: false,
+            long: true,
             isOpen: true,
             collateralIndex: 1,
             tradeType: ITradingStorage.TradeType.LIMIT,
             collateralAmount: 3.5e18,
-            openPrice: 3379e10,
-            tp: 0,
-            sl: 0,
+            openPrice: 2481e10,
+            tp: 2600e10,
+            sl: 2300e10,
             __placeholder: 0
         });
 

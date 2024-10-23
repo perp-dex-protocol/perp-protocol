@@ -323,6 +323,21 @@ library TradingInteractionsUtils {
         );
     }
 
+    function increasePositionSizePayable(
+        uint32 _index,
+        uint120 _collateralDelta,
+        uint24 _leverageDelta,
+        uint64 _expectedPrice,
+        uint16 _maxSlippageP
+    ) internal tradingActivated {
+        _collateralDelta = _wrapNativeToken(0);
+        UpdatePositionSizeLifecycles.requestIncreasePositionSizePayable(
+            IUpdatePositionSize.IncreasePositionSizeInput(
+                _msgSender(), _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP
+            )
+        );
+    }
+
     /**
      * @dev Check ITradingInteractionsUtils interface for documentation
      */

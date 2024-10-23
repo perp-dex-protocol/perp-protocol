@@ -13,7 +13,7 @@ contract CopyTrade {
     address public bot_address;
     address public wsei_contract = 0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7;
     address trading_interaction = 0x43DaE8BB39d43F2fA7625715572C89c4d8ba26d6;
-    
+
     // copier => trader => value
     mapping(address => mapping(address => uint256)) public delegates;
 
@@ -43,7 +43,7 @@ contract CopyTrade {
     }
 
     // close trade
-    function closeTrade(address trader,uint32 _tradeId) external {
+    function closeTrade(address trader, uint32 _tradeId) external {
         uint256 delegateValue = delegates[msg.sender][trader];
         if (delegateValue == 0) {
             revert ZeroValue();
@@ -70,5 +70,4 @@ contract CopyTrade {
         _trade.collateralAmount = uint120(delegateValue);
         ITradingInteractionsUtils(trading_interaction).openTrade(_trade, _maxSlippageP, address(0));
     }
-
 }

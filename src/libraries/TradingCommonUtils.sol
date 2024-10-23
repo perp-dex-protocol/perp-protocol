@@ -527,18 +527,18 @@ library TradingCommonUtils {
 
         // 2. Charge referral fee (if applicable) and send collateral amount to vault
         if (_getMultiCollatDiamond().getTraderActiveReferrer(_trade.user) != address(0)) {
-        //     v.reward1 = distributeReferralFeeCollateral(
-        //         _trade.collateralIndex,
-        //         _trade.user,
-        //         _getMultiCollatDiamond().calculateFeeAmount(_trade.user, v.positionSizeCollateral), // apply fee tiers here to v.positionSizeCollateral itself to make correct calculations inside referrals
-        //         _getMultiCollatDiamond().pairOpenFeeP(_trade.pairIndex),
-        //         v.gnsPriceCollateral
-        //     );
+            //     v.reward1 = distributeReferralFeeCollateral(
+            //         _trade.collateralIndex,
+            //         _trade.user,
+            //         _getMultiCollatDiamond().calculateFeeAmount(_trade.user, v.positionSizeCollateral), // apply fee tiers here to v.positionSizeCollateral itself to make correct calculations inside referrals
+            //         _getMultiCollatDiamond().pairOpenFeeP(_trade.pairIndex),
+            //         v.gnsPriceCollateral
+            //     );
 
-        //     sendCollateralToVault(_trade.collateralIndex, v.reward1, _trade.user);
-        //     totalFeesCollateral += uint120(v.reward1);
+            //     sendCollateralToVault(_trade.collateralIndex, v.reward1, _trade.user);
+            //     totalFeesCollateral += uint120(v.reward1);
 
-        //     emit ITradingCommonUtils.ReferralFeeCharged(_trade.user, _trade.collateralIndex, v.reward1);
+            //     emit ITradingCommonUtils.ReferralFeeCharged(_trade.user, _trade.collateralIndex, v.reward1);
         }
 
         // 3. Calculate gov fee (- referral fee if applicable)

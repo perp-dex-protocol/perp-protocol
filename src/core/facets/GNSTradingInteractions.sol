@@ -149,6 +149,18 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
         );
     }
 
+    function increasePositionSizePayable(
+        uint32 _index,
+        uint120 _collateralDelta,
+        uint24 _leverageDelta,
+        uint64 _expectedPrice,
+        uint16 _maxSlippageP
+    ) external payable {
+        TradingInteractionsUtils.increasePositionSize(
+            _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP
+        );
+    }
+
     /// @inheritdoc ITradingInteractionsUtils
     function decreasePositionSize(uint32 _index, uint120 _collateralDelta, uint24 _leverageDelta) external {
         TradingInteractionsUtils.decreasePositionSize(_index, _collateralDelta, _leverageDelta);

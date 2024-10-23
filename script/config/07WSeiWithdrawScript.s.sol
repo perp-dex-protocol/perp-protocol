@@ -17,6 +17,6 @@ contract WSeiWithdrawScript is BaseScriptDeployer {
     function run() public {
         // IWSEI(wsei).deposit{value: 2 ether}();
         // wsei.balanceOf(user_address)
-        wsei.withdraw(10 ether);
+        wsei.withdraw(40 ether);
     }
 }

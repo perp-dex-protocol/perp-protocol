@@ -46,6 +46,30 @@ library UpdatePositionSizeLifecycles {
         );
     }
 
+    function requestIncreasePositionSizePayable(IUpdatePositionSizeUtils.IncreasePositionSizeInput memory _input)
+        external
+    {
+        // 1. Base validation
+        ITradingStorage.Trade memory trade = _baseValidateRequest(_input.user, _input.index);
+
+        // 2. Increase position size validation
+        uint256 positionSizeCollateralDelta = IncreasePositionSizeUtils.validateRequest(trade, _input);
+
+        ITradingStorage.Id memory orderId = _initiateRequest(
+            trade,
+            true,
+            _input.collateralDelta,
+            _input.leverageDelta,
+            positionSizeCollateralDelta,
+            _input.expectedPrice,
+            _input.maxSlippageP
+        );
+
+        emit IUpdatePositionSizeUtils.PositionSizeUpdateInitiated(
+            orderId, trade.user, trade.pairIndex, trade.index, true, _input.collateralDelta, _input.leverageDelta
+        );
+    }
+
     /**
      * @dev Initiate decrease position size order, done in 2 steps because position size changes
      * @param _input request decrease position size input struct
