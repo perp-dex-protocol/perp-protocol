@@ -330,7 +330,7 @@ library TradingInteractionsUtils {
         uint64 _expectedPrice,
         uint16 _maxSlippageP
     ) internal tradingActivated {
-        _collateralDelta = _wrapNativeToken(0);
+        _collateralDelta = _wrapNativeToken(1);
         UpdatePositionSizeLifecycles.requestIncreasePositionSizePayable(
             IUpdatePositionSize.IncreasePositionSizeInput(
                 _msgSender(), _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP

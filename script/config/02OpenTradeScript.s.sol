@@ -25,6 +25,8 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     address webgis_address = 0xB883052a380F0c13958cbE309d702060D76Df2EF;
 
+    address jack_address = 0x71C306531d3c3e136f7Be389C17dbfD706F5df1B;
+
     function run() public {
         // initializTrade();
 
@@ -37,7 +39,7 @@ contract OpenTradingScript is BaseScriptDeployer {
 
         // 2. close market trade
         // vm.startPrank(webgis_address);
-        closeOrder(39);
+        // closeOrder(39);
 
         // 3. batch close trade
         // uint32[] memory indexes = new uint32[](2);
@@ -73,12 +75,15 @@ contract OpenTradingScript is BaseScriptDeployer {
         // 10. increase pos data
         // increasePosData();
 
+        // 11. increase pos data payable
+        increasePosPayable();
+
         // 11. decreasePos
         // decreasePos() ;
 
         // 6. get trades
 
-        // getUserAllTrades(user_address);
+        getUserAllTrades(user_address);
 
         //  trade user  0xB883052a380F0c13958cbE309d702060D76Df2EF
         //    trade index  12
@@ -249,6 +254,10 @@ contract OpenTradingScript is BaseScriptDeployer {
 
     function increasePosData() public {
         tradingInteraction.increasePositionSize(34, 1e18, 140000, 268675000000, 1005);
+    }
+
+    function increasePosPayable() public {
+        tradingInteraction.increasePositionSizePayable{value: 1 ether}(41, 1e18, 90e3, 254805028639, 1005);
     }
 
     function decreasePos() public {

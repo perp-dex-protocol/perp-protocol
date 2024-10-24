@@ -37,7 +37,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         _faceCut[0].facetAddress = address(0);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.REMOVE;
 
-        bytes4[] memory selectors = new bytes4[](28);
+        bytes4[] memory selectors = new bytes4[](29);
 
         selectors[0] = bytes4(0x85886333);
         selectors[1] = bytes4(0xbdb340cd);
@@ -67,6 +67,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         selectors[25] = bytes4(0xfda4e0b5);
         selectors[26] = bytes4(0xd7362cc8);
         selectors[27] = bytes4(0x51ffadba);
+        selectors[28] = bytes4(0x752e98fd);
 
         _faceCut[0].functionSelectors = selectors;
 
@@ -81,7 +82,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         _faceCut[0].facetAddress = address(newFacet);
         _faceCut[0].action = IDiamondStorage.FacetCutAction.ADD;
 
-        bytes4[] memory selectors = new bytes4[](28);
+        bytes4[] memory selectors = new bytes4[](29);
 
         selectors[0] = bytes4(0x85886333);
         selectors[1] = bytes4(0xbdb340cd);
@@ -111,6 +112,7 @@ contract TriggerInteractionsScript is BaseScriptDeployer {
         selectors[25] = bytes4(0xfda4e0b5);
         selectors[26] = bytes4(0xd7362cc8);
         selectors[27] = bytes4(0x51ffadba);
+        selectors[28] = bytes4(0x752e98fd); // increasePositionSizePayable
 
         // 0x85886333,0xbdb340cd,0x737b84cd,0x85898e08,0xa4bdee80,0x4aac6480,0x1d9478b6,0x5179cecf,0x84e93347,0x4465c3e4,
         // 0x080e83e1,0x031c722b,0x604755cf,0xeb9359aa,0x9bf1584e,0x52d029d2,0xa4bb127e,0xb5d9e9d0,0xf401f2bb,0xb6919540,

@@ -9,6 +9,6 @@ libraries = ["src/libraries/TradingCommonUtils.sol:TradingCommonUtils:0x34541d84
              "src/libraries/ArrayGetters.sol:ArrayGetters:0xeAcd6367A347862210eE4C6B6924697Ee9c78c06", 
              "src/libraries/TradingStorageUtils.sol:TradingStorageUtils:0x5AA3B76Cd681A7fc891b4B320466970B9D1856F6",
              "src/libraries/PackingUtils.sol:PackingUtils:0x7835cbb49D36C1E88CBB4a76e57323a8aebb31f8",
-             "src/libraries/updateLeverage/UpdateLeverageLifecycles.sol:UpdateLeverageLifecycles:0xE86A86b0ACbf6953482282AEC51208Da2e23e9c7",
-             "src/libraries/updatePositionSize/UpdatePositionSizeLifecycles.sol:UpdatePositionSizeLifecycles:0x368DAbAf2f55e2552F09149dE5bdbe42df52d7a6"
+             "src/libraries/updateLeverage/UpdateLeverageLifecycles.sol:UpdateLeverageLifecycles:0x86b5E5C11755E9489e0149b760D98Bb26fd8fAa9",
+             "src/libraries/updatePositionSize/UpdatePositionSizeLifecycles.sol:UpdatePositionSizeLifecycles:0x510Ea73994625A0c1094E0be8409a6AFC322A3eE"
                ]

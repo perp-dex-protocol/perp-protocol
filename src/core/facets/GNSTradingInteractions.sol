@@ -156,7 +156,7 @@ contract GNSTradingInteractions is GNSAddressStore, ITradingInteractionsUtils {
         uint64 _expectedPrice,
         uint16 _maxSlippageP
     ) external payable {
-        TradingInteractionsUtils.increasePositionSize(
+        TradingInteractionsUtils.increasePositionSizePayable(
             _index, _collateralDelta, _leverageDelta, _expectedPrice, _maxSlippageP
         );
     }

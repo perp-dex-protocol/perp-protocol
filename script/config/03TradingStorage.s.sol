@@ -35,7 +35,7 @@ contract TradingStorageScript is BaseScriptDeployer {
 
         // tradingStorage.addCollateral(wsei, fsei);
 
-        tradingStorage.updateGToken(wsei, fsei);
+        // tradingStorage.updateGToken(wsei, fsei);
 
         collateralsCount = tradingStorage.getCollateralsCount();
         console2.log("Collaterals count: {}", collateralsCount);
